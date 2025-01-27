@@ -1,0 +1,839 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.bingo_face_list &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/bingo_face_list';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.bingo_face_list</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rn</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">matrix</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">.full_bingo_face</span> <span class="kn">import</span> <span class="n">FullBingoFace</span>
+
+
+<div class="viewcode-block" id="BingoFaceList">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList">[docs]</a>
+<span class="k">class</span> <span class="nc">BingoFaceList</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class holds the available bingo faces imported from an industry-standardized list.</span>
+<span class="sd">    The list contains instances of the FullBingoFace class, which itself contains the verification</span>
+<span class="sd">    (face) number and its associated winning bingo lines. There are two different files available:</span>
+<span class="sd">    the standard file containing 9,000 faces, and an extended file that contains an additional</span>
+<span class="sd">    18,000 faces. (The csvs may appear incomplete on inspection, but there were duplicate lines</span>
+<span class="sd">    and faces throughout, and I was obliged to remove them.)</span>
+
+<span class="sd">    All list-based methods are implemented in this class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extended</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">import_usable_faces</span><span class="p">(</span><span class="n">extended</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path_replacements</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">populate_path_replacements</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d_discards</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="BingoFaceList.import_usable_faces">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.import_usable_faces">[docs]</a>
+    <span class="k">def</span> <span class="nf">import_usable_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extended</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reset_paths_taken</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Import the usable bingo faces from a file and place them into a list. The data</span>
+<span class="sd">        includes the verification (face id) number and available bingo paths.</span>
+
+<span class="sd">        :param extended: use extended (27,000) instead of the standard (9,000) face csv file</span>
+<span class="sd">        :type extended: bool</span>
+<span class="sd">        :param reset_paths_taken: Should the paths-taken set be cleared?</span>
+<span class="sd">        :type reset_paths_taken: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;usable9000.csv&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">extended</span> <span class="k">else</span> <span class="s1">&#39;usable27000.csv&#39;</span>
+        <span class="c1"># Open usable quotes file for reading</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./ticketing/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+        <span class="n">temp_face</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="n">previous_line_id</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># Cycle through each line of the file</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
+            <span class="c1"># Split the line into a list. The first element contains the face id plus the</span>
+            <span class="c1"># location of the line on that face (i.e., 10.1 represents face 10, line 1).</span>
+            <span class="c1"># The face id is the only value we care about. The remaining elements represent</span>
+            <span class="c1"># the five bingo spots.</span>
+            <span class="n">temp_array</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="n">temp_id</span> <span class="o">=</span> <span class="n">temp_array</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="c1"># Check if this bingo line belongs to the same face as the previous line.</span>
+            <span class="c1"># If it does, add the line to the current face. Otherwise, create a new</span>
+            <span class="c1"># face with the new id and current line.</span>
+            <span class="k">if</span> <span class="n">temp_id</span> <span class="o">!=</span> <span class="n">previous_line_id</span><span class="p">:</span>
+                <span class="c1"># Update the previous line id to the new id</span>
+                <span class="n">previous_line_id</span> <span class="o">=</span> <span class="n">temp_id</span>
+                <span class="c1"># If this isn&#39;t the very first iteration and there are more than two</span>
+                <span class="c1"># lines on the previous face, append it to the list of usable faces.</span>
+                <span class="k">if</span> <span class="n">temp_face</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">number_of_paths</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">temp_face</span><span class="o">.</span><span class="n">shuffle_paths</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_face</span><span class="p">)</span>
+                <span class="c1"># This is a whole new face, so create it already.</span>
+                <span class="n">temp_face</span> <span class="o">=</span> <span class="n">FullBingoFace</span><span class="p">(</span><span class="n">temp_id</span><span class="p">,</span> <span class="n">temp_array</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">temp_face</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">temp_array</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reset_paths_taken</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.import_usable_faces_csv">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.import_usable_faces_csv">[docs]</a>
+    <span class="k">def</span> <span class="nf">import_usable_faces_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extended</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">reset_paths_taken</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Import the usable bingo faces from a file and place them into a list. The data</span>
+<span class="sd">        includes the verification (face id) number and available bingo paths. Use the</span>
+<span class="sd">        csv library for code clarity.</span>
+
+<span class="sd">        :param extended: use extended (27,000) instead of the standard (9,000) face csv file</span>
+<span class="sd">        :type extended: bool</span>
+<span class="sd">        :param reset_paths_taken: Should the paths-taken set be cleared?</span>
+<span class="sd">        :type reset_paths_taken: bool</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;usable9000.csv&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">extended</span> <span class="k">else</span> <span class="s1">&#39;usable27000.csv&#39;</span>
+
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;./ticketing/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+            <span class="n">temp_face</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="n">previous_line_id</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+                <span class="n">temp_id</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>  <span class="c1"># Extract face id</span>
+
+                <span class="k">if</span> <span class="n">temp_id</span> <span class="o">!=</span> <span class="n">previous_line_id</span><span class="p">:</span>
+                    <span class="n">previous_line_id</span> <span class="o">=</span> <span class="n">temp_id</span>
+                    <span class="k">if</span> <span class="n">temp_face</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">number_of_paths</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+                        <span class="n">temp_face</span><span class="o">.</span><span class="n">shuffle_paths</span><span class="p">()</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp_face</span><span class="p">)</span>
+                    <span class="n">temp_face</span> <span class="o">=</span> <span class="n">FullBingoFace</span><span class="p">(</span><span class="n">temp_id</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>  <span class="c1"># Pass remaining elements as bingo spots</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">temp_face</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+        <span class="k">if</span> <span class="n">reset_paths_taken</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.shuffle_usable_faces">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.shuffle_usable_faces">[docs]</a>
+    <span class="k">def</span> <span class="nf">shuffle_usable_faces</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shuffle the usable face list between 4 and 25 times.</span>
+<span class="sd">        :return None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">shuffles</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shuffles</span><span class="p">):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.populate_path_replacements">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.populate_path_replacements">[docs]</a>
+    <span class="k">def</span> <span class="nf">populate_path_replacements</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fill the path replacements list with five lists of bingo numbers that encompass every possible</span>
+<span class="sd">        value on a bingo card:\n</span>
+<span class="sd">         [[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;, &#39;11&#39;, &#39;12&#39;, &#39;13&#39;, &#39;14&#39;, &#39;15&#39;], \n</span>
+<span class="sd">         [&#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;, &#39;24&#39;, &#39;25&#39;, &#39;26&#39;, &#39;27&#39;, &#39;28&#39;, &#39;29&#39;, &#39;30&#39;], \n</span>
+<span class="sd">         [&#39;31&#39;, &#39;32&#39;, &#39;33&#39;, &#39;34&#39;, &#39;35&#39;, &#39;36&#39;, &#39;37&#39;, &#39;38&#39;, &#39;39&#39;, &#39;40&#39;, &#39;41&#39;, &#39;42&#39;, &#39;43&#39;, &#39;44&#39;, &#39;45&#39;], \n</span>
+<span class="sd">         [&#39;46&#39;, &#39;47&#39;, &#39;48&#39;, &#39;49&#39;, &#39;50&#39;, &#39;51&#39;, &#39;52&#39;, &#39;53&#39;, &#39;54&#39;, &#39;55&#39;, &#39;56&#39;, &#39;57&#39;, &#39;58&#39;, &#39;59&#39;, &#39;60&#39;], \n</span>
+<span class="sd">         [&#39;61&#39;, &#39;62&#39;, &#39;63&#39;, &#39;64&#39;, &#39;65&#39;, &#39;66&#39;, &#39;67&#39;, &#39;68&#39;, &#39;69&#39;, &#39;70&#39;, &#39;71&#39;, &#39;72&#39;, &#39;73&#39;, &#39;74&#39;, &#39;75&#39;]]</span>
+
+<span class="sd">        :return None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">((</span><span class="n">index</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">path_replacements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.paths_collision_free">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.paths_collision_free">[docs]</a>
+    <span class="k">def</span> <span class="nf">paths_collision_free</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combos</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check if the passed bingo paths contain any collisions with previously used paths.</span>
+
+<span class="sd">        :param combos: set of all paths to be checked</span>
+<span class="sd">        :type combos: set[list[str]] or set[tuple[str]]</span>
+<span class="sd">        :return: True if no collisions are found; false if one is found.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Cycle through the passed paths</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combos</span><span class="p">:</span>
+            <span class="c1"># If a path is already present in the paths-taken set, return False.</span>
+            <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># Didn&#39;t find a collision, so return True.</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.add_combos_to_paths_taken">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.add_combos_to_paths_taken">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_combos_to_paths_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combos</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add the passed winning paths to the bingo paths taken. This is kind</span>
+<span class="sd">        of excessive, but whatever.</span>
+
+<span class="sd">        :param combos: set of bingo paths to be added to the bingo paths taken</span>
+<span class="sd">        :type combos: set[list[str]]</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combos</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.get_two_unique_paths_with_verification">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_two_unique_paths_with_verification">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_two_unique_paths_with_verification</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Grabs two rows from a face and makes sure that it doesn&#39;t contain two of the</span>
+<span class="sd">        same numbers. It should never happen, but for some reason I&#39;m checking anyway.</span>
+
+<span class="sd">        :return: [verification, path1, path2]</span>
+<span class="sd">        :rtype: list[str | list[str]] | None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">go_again</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="c1"># Set these here so PyCharm will shut the hell up.</span>
+        <span class="n">temp_face</span><span class="p">,</span> <span class="n">temp_path1</span><span class="p">,</span> <span class="n">temp_path2</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">while</span> <span class="n">go_again</span><span class="p">:</span>
+            <span class="c1"># shuffle_usable_faces()</span>
+            <span class="n">go_again</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">temp_face</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;!!!!! ERROR: WE&#39;VE RUN OUT OF BINGO FACES! !!!!!&quot;</span><span class="p">]</span>
+                <span class="c1"># If this face has fewer than two paths, it&#39;s of no use.</span>
+            <span class="c1"># Go on to the next one.</span>
+            <span class="k">if</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">number_of_paths</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">go_again</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">d_discards</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Gotta shuffle them paths</span>
+                <span class="n">temp_face</span><span class="o">.</span><span class="n">shuffle_paths</span><span class="p">()</span>
+                <span class="c1"># Grab the last two paths in the face&#39;s paths&#39; list</span>
+                <span class="n">temp_path1</span> <span class="o">=</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">temp_path2</span> <span class="o">=</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="c1"># Check the uniqueness of the spaces. This should</span>
+                <span class="c1"># never be true, but there are a lot of things that</span>
+                <span class="c1"># shouldn&#39;t be true about the master face list yet</span>
+                <span class="c1"># somehow are. If there are any matches, reshuffle</span>
+                <span class="c1"># the faces array and try again. I&#39;m not deleting it</span>
+                <span class="c1"># outright because it could have other rows that work.</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains_common_item</span><span class="p">(</span><span class="n">temp_path1</span><span class="p">,</span> <span class="n">temp_path2</span><span class="p">):</span>
+                    <span class="c1"># ADDING THESE BACK IS NEW!!! IF A PROBLEM SHOWS UP,</span>
+                    <span class="c1"># THIS SHOULD BE THE FIRST PLACE TO CHECK. THE NEXT</span>
+                    <span class="c1"># THREE LINES CAN BE REMOVED IF NECESSARY.</span>
+                    <span class="n">temp_face</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">temp_path1</span><span class="p">)</span>
+                    <span class="n">temp_face</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">temp_path2</span><span class="p">)</span>
+                    <span class="n">temp_face</span><span class="o">.</span><span class="n">shuffle_paths</span><span class="p">()</span>
+                    <span class="n">go_again</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="n">temp_face</span><span class="o">.</span><span class="n">number_of_paths</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">temp_face</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">temp_face</span><span class="o">.</span><span class="n">verification</span><span class="p">(),</span> <span class="n">temp_path1</span><span class="p">,</span> <span class="n">temp_path2</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.create_verification_lists">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.create_verification_lists">[docs]</a>
+    <span class="k">def</span> <span class="nf">create_verification_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudo_face</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Take a pseudo-bingo face and transpose the paths from a one or two dimension</span>
+<span class="sd">        array into five dimensions. Replace any paths that contain an empty member</span>
+<span class="sd">        with the full complement of numbers associated with that position. So, the</span>
+<span class="sd">        pseudo-face \n</span>
+<span class="sd">         [&#39;1111&#39;, [&#39;1&#39;, &#39;16&#39;, &#39;31&#39;, &#39;46&#39;, &#39;61&#39;], [&#39;2&#39;, &#39;17&#39;, &#39;32&#39;, &#39;47&#39;, &#39;62&#39;]] \n</span>
+<span class="sd">        would return \n</span>
+<span class="sd">         [[&#39;1&#39;, &#39;2&#39;], \n</span>
+<span class="sd">         [&#39;16&#39;, &#39;17&#39;], \n</span>
+<span class="sd">         [&#39;31&#39;, &#39;32&#39;], \n</span>
+<span class="sd">         [&#39;46&#39;, &#39;47&#39;], \n</span>
+<span class="sd">         [&#39;61&#39;, &#39;62&#39;]]. \n</span>
+<span class="sd">        A pseudo-face with free spaces like this: \n</span>
+<span class="sd">         [&#39;1111&#39;, [&#39;1&#39;, &#39;&#39;, &#39;31&#39;, &#39;46&#39;, &#39;&#39;], [&#39;2&#39;, &#39;&#39;, &#39;32&#39;, &#39;47&#39;, &#39;&#39;]]\n</span>
+<span class="sd">        would return\n</span>
+<span class="sd">         [[&#39;1&#39;, &#39;2&#39;], \n</span>
+<span class="sd">         [&#39;16&#39;, &#39;17&#39;, &#39;18&#39;, &#39;19&#39;, &#39;20&#39;, &#39;21&#39;, &#39;22&#39;, &#39;23&#39;, &#39;24&#39;, &#39;25&#39;, &#39;26&#39;, &#39;27&#39;, &#39;28&#39;, &#39;29&#39;, &#39;30&#39;], \n</span>
+<span class="sd">         [&#39;31&#39;, &#39;32&#39;], \n</span>
+<span class="sd">         [&#39;46&#39;, &#39;47&#39;], \n</span>
+<span class="sd">         [&#39;61&#39;, &#39;62&#39;, &#39;63&#39;, &#39;64&#39;, &#39;65&#39;, &#39;66&#39;, &#39;67&#39;, &#39;68&#39;, &#39;69&#39;, &#39;70&#39;, &#39;71&#39;, &#39;72&#39;, &#39;73&#39;, &#39;74&#39;, &#39;75&#39;]\n</span>
+<span class="sd">        Staggered spots clear out the entire row as well. The staggered, two-line pseudo-face \n</span>
+<span class="sd">         [&#39;1111&#39;, [&#39;1&#39;, &#39;&#39;, &#39;31&#39;, &#39;46&#39;, &#39;61&#39;], [&#39;2&#39;, &#39;17&#39;, &#39;32&#39;, &#39;47&#39;, &#39;&#39;]]\n</span>
+<span class="sd">        would produce exactly the same list as the one above.</span>
+
+<span class="sd">        :param pseudo_face: pseudo bingo ticket with one or two paths</span>
+<span class="sd">        :type pseudo_face: list[list[str] | str]</span>
+<span class="sd">        :return: list containing all possible numbers for each column</span>
+<span class="sd">        :rtype: list[list[str]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check for the number of paths on this face, then transpose the paths to five lists.</span>
+        <span class="c1"># A length of two means there&#39;s only one path on this face.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">pseudo_face</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="c1"># THE FOLLOWING AREN&#39;T USED RIGHT NOW, BUT THEY MAY BE IN THE FUTURE.</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">pseudo_face</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">3</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">pseudo_face</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">4</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="c1"># THIS SITUATION ISN&#39;T EVEN POSSIBLE GIVEN THE NATURE OF THE BINGO FACES (there are only four usable</span>
+        <span class="c1"># lines per face (the center face is missing a number (free space))), BUT I&#39;M JUST KEEPING MY OPTIONS OPEN.</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">pseudo_face</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">([</span><span class="n">pseudo_face</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                                 <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">pseudo_face</span><span class="p">[</span><span class="mi">5</span><span class="p">]])</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">spots_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Replace any free spaces with the full range of values for the associated columns.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">spots_list</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="s1">&#39;&#39;</span> <span class="ow">in</span> <span class="n">spots_list</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">spots_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">path_replacements</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">spots_list</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.calculate_remaining_bingo_lines">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.calculate_remaining_bingo_lines">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate_remaining_bingo_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Cycle through the usable faces, add the number of remaining bingo lines together, and return the total.</span>
+
+<span class="sd">        :return: total number of remaining bingo lines</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">remaining_lines</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">face</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">:</span>
+            <span class="n">remaining_lines</span> <span class="o">+=</span> <span class="n">face</span><span class="o">.</span><span class="n">number_of_paths</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">remaining_lines</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.number_of_paths_taken">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.number_of_paths_taken">[docs]</a>
+    <span class="k">def</span> <span class="nf">number_of_paths_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of possible winning paths that have already been reserved.</span>
+
+<span class="sd">        :return: number of paths taken</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.get_usable_faces_size">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_usable_faces_size">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_usable_faces_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the total number of usable faces that still contain bingo paths.</span>
+
+<span class="sd">        :return: usable faces in list</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.length">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.length">[docs]</a>
+    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The same as &#39;get_usable_faces_size&#39; with a different name.</span>
+<span class="sd">        No idea why I have it here. Probably makes code more readable</span>
+<span class="sd">        somewhere else.</span>
+
+<span class="sd">        :return: usable faces in list</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.get_first_face">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_first_face">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_first_face</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FullBingoFace</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove the first face from the usable faces list and return it to the caller.</span>
+
+<span class="sd">        :return: the first FullBingoFace object</span>
+<span class="sd">        :rtype: FullBingoFace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.get_random_face">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_random_face">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_random_face</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FullBingoFace</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Remove a random face from the usable faces list and return it to the caller.</span>
+
+<span class="sd">        :return: a random FullBingoFace object</span>
+<span class="sd">        :rtype: FullBingoFace</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> \
+            <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_usable_faces_size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.insert_face_randomly">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.insert_face_randomly">[docs]</a>
+    <span class="k">def</span> <span class="nf">insert_face_randomly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">face</span><span class="p">:</span> <span class="n">FullBingoFace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Insert a FullBingoFace into the usable faces list at a random location.</span>
+
+<span class="sd">        :param face: FullBingoFace to insert</span>
+<span class="sd">        :type face: FullBingoFace</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_usable_faces_size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">face</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.append_face">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.append_face">[docs]</a>
+    <span class="k">def</span> <span class="nf">append_face</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">face</span><span class="p">:</span> <span class="n">FullBingoFace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append a FullBingoFace to the usable faces list.</span>
+
+<span class="sd">        :param face: FullBingoFace to append</span>
+<span class="sd">        :type face: FullBingoFace</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">usable_faces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">face</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.reset_paths_taken">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.reset_paths_taken">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_paths_taken</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clear all elements from the paths taken set.</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">paths_taken</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.contains_common_item">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.contains_common_item">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">contains_common_item</span><span class="p">(</span><span class="n">path1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">path2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Check each spot in both paths to see if they are the same number. This should</span>
+<span class="sd">        never happen, but the master bingo list has proven itself to be unreliable.</span>
+
+<span class="sd">        :param path1: list of integers as strings</span>
+<span class="sd">        :type path1: list[str]</span>
+<span class="sd">        :param path2: list of integers as strings</span>
+<span class="sd">        :type path2: list[str]</span>
+<span class="sd">        :return: True if there are common numbers in the list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Cycle through the bingo spots and compare their values. Seems almost</span>
+        <span class="c1"># impossible for this to ever be true, but weirder things have happened</span>
+        <span class="c1"># with this stupid list.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">path1</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">path1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">path2</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.create_winning_combinations">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.create_winning_combinations">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">create_winning_combinations</span><span class="p">(</span><span class="n">paths</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create every possible five-number combination from the passed list(s).</span>
+
+<span class="sd">        :param paths: Five arrays of bingo space numbers</span>
+<span class="sd">        :type paths: list[list[str]]</span>
+<span class="sd">        :return: possible winning combinations using the provided numbers</span>
+<span class="sd">        :type paths: set[tuple[str]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="BingoFaceList.add_free_spaces">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_face_list.BingoFaceList.add_free_spaces">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_free_spaces</span><span class="p">(</span><span class="n">face</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">frees</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">staggered</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Insert the correct number of free spots into the passed face at random locations.</span>
+<span class="sd">        Also, stagger the free spaces when necessary: if there are two lines, the free</span>
+<span class="sd">        spaces apply to EITHER the top OR the bottom. The free spots are not connected to</span>
+<span class="sd">        one another. A two-free spot face with two lines would look something like this:\n</span>
+<span class="sd">         [[&#39;1&#39;, &#39;16&#39;, &#39;31&#39;, &#39;&#39;, &#39;61&#39;],\n</span>
+<span class="sd">         [&#39;2&#39;, &#39;&#39;, &#39;36&#39;, &#39;54&#39;, &#39;65&#39;]]\n</span>
+<span class="sd">        whereas a nonstaggered, two-line, two-free-spot face would look something like:\n</span>
+<span class="sd">         [[&#39;1&#39;, &#39;&#39;, &#39;31&#39;, &#39;&#39;, &#39;61&#39;],\n</span>
+<span class="sd">         [&#39;2&#39;, &#39;&#39;, &#39;36&#39;, &#39;&#39;, &#39;65&#39;]]\n</span>
+<span class="sd">        Ultimately, there number of paths is the same, it just presents differently.</span>
+
+<span class="sd">        :param face: pseudo-bingo face with verification and one or two bingo lines</span>
+<span class="sd">        :type face: list[str | list[str]]</span>
+<span class="sd">        :param frees: frees number of free spots</span>
+<span class="sd">        :type frees: int</span>
+<span class="sd">        :param staggered: True if free spots are in different columns</span>
+<span class="sd">        :type staggered: bool</span>
+<span class="sd">        :return: pseudo-bingo face with free spaces added</span>
+<span class="sd">        :rtype: list[str | list[str]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">free_marker</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="c1"># spots array represents the columns</span>
+        <span class="n">spots</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+        <span class="c1"># Shuffle the columns and use the first and second</span>
+        <span class="c1"># positions to randomize the placement of free spaces.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">spots</span><span class="p">)</span>
+        <span class="c1"># Figure out how many paths there are and act accordingly</span>
+        <span class="k">match</span> <span class="nb">len</span><span class="p">(</span><span class="n">face</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># A single path will be handled the same way, regardless of</span>
+                <span class="c1"># its staggered status.</span>
+                <span class="c1"># Add the desired number of free spaces</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frees</span><span class="p">):</span>
+                    <span class="c1"># Use the shuffled spots array to ascertain which space will</span>
+                    <span class="c1"># receive the free space marker</span>
+                    <span class="n">face</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">spots</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">free_marker</span>
+            <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="c1"># If the spots are staggered, treat the two lines separately.</span>
+                <span class="c1"># Otherwise, put free spaces in the same spots on both lines.</span>
+                <span class="k">if</span> <span class="n">staggered</span><span class="p">:</span>
+                    <span class="c1"># If there are two paths, choose how to handle 1 or 2 free spots.</span>
+                    <span class="k">match</span> <span class="n">frees</span><span class="p">:</span>
+                        <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                            <span class="c1"># For one free spot, pick a random row then set the first random column to empty.</span>
+                            <span class="n">row</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                            <span class="n">face</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">spots</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">free_marker</span>
+                        <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                            <span class="c1"># For two spots, cycle through the rows and use the first two positions to assign empties.</span>
+                            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+                                <span class="n">face</span><span class="p">[</span><span class="n">row</span><span class="p">][</span><span class="n">spots</span><span class="p">[</span><span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">free_marker</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># For non-staggered free spaces, blank out the spots on both paths.</span>
+                    <span class="k">for</span> <span class="n">free</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">frees</span><span class="p">):</span>
+                        <span class="n">face</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">spots</span><span class="p">[</span><span class="n">free</span><span class="p">]]</span> <span class="o">=</span> <span class="n">free_marker</span>
+                        <span class="n">face</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="n">spots</span><span class="p">[</span><span class="n">free</span><span class="p">]]</span> <span class="o">=</span> <span class="n">free_marker</span>
+        <span class="k">return</span> <span class="n">face</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

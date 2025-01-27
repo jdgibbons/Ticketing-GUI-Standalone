@@ -1,0 +1,584 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>ticketing &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/modules';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/docs/modules.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ticketing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="ticketing">
+<h1>ticketing<a class="headerlink" href="#ticketing" title="Link to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ticketing.html">ticketing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.bingo_ticket">ticketing.bingo_ticket module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket"><code class="docutils literal notranslate"><span class="pre">BingoTicket</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.csv_line"><code class="docutils literal notranslate"><span class="pre">BingoTicket.csv_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.get_bingo_type"><code class="docutils literal notranslate"><span class="pre">BingoTicket.get_bingo_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.get_numbers_length"><code class="docutils literal notranslate"><span class="pre">BingoTicket.get_numbers_length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.insert_free_text"><code class="docutils literal notranslate"><span class="pre">BingoTicket.insert_free_text()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.set_free_type"><code class="docutils literal notranslate"><span class="pre">BingoTicket.set_free_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.BingoTicket.set_staggered"><code class="docutils literal notranslate"><span class="pre">BingoTicket.set_staggered()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.bingo_ticket.check_list_lengths"><code class="docutils literal notranslate"><span class="pre">check_list_lengths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.conf">ticketing.conf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#ticketing-bingo-face-list-module">ticketing.bingo_face_list module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList"><code class="docutils literal notranslate"><span class="pre">BingoFaceList</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.add_combos_to_paths_taken"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.add_combos_to_paths_taken()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.add_free_spaces"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.add_free_spaces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.append_face"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.append_face()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.calculate_remaining_bingo_lines"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.calculate_remaining_bingo_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.contains_common_item"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.contains_common_item()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.create_verification_lists"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.create_verification_lists()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.create_winning_combinations"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.create_winning_combinations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_first_face"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.get_first_face()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_random_face"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.get_random_face()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_two_unique_paths_with_verification"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.get_two_unique_paths_with_verification()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.get_usable_faces_size"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.get_usable_faces_size()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.import_usable_faces"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.import_usable_faces()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.import_usable_faces_csv"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.import_usable_faces_csv()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.insert_face_randomly"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.insert_face_randomly()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.length"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.number_of_paths_taken"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.number_of_paths_taken()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.paths_collision_free"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.paths_collision_free()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.populate_path_replacements"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.populate_path_replacements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.reset_paths_taken"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.reset_paths_taken()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.bingo_face_list.BingoFaceList.shuffle_usable_faces"><code class="docutils literal notranslate"><span class="pre">BingoFaceList.shuffle_usable_faces()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.full_bingo_face">ticketing.full_bingo_face module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace"><code class="docutils literal notranslate"><span class="pre">FullBingoFace</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace.add_path"><code class="docutils literal notranslate"><span class="pre">FullBingoFace.add_path()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace.line"><code class="docutils literal notranslate"><span class="pre">FullBingoFace.line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace.number_of_paths"><code class="docutils literal notranslate"><span class="pre">FullBingoFace.number_of_paths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace.shuffle_paths"><code class="docutils literal notranslate"><span class="pre">FullBingoFace.shuffle_paths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.full_bingo_face.FullBingoFace.verification"><code class="docutils literal notranslate"><span class="pre">FullBingoFace.verification()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.game_info">ticketing.game_info module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages"><code class="docutils literal notranslate"><span class="pre">AddImages</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.NoneAdded"><code class="docutils literal notranslate"><span class="pre">AddImages.NoneAdded</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostBase"><code class="docutils literal notranslate"><span class="pre">AddImages.PostBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostEight"><code class="docutils literal notranslate"><span class="pre">AddImages.PostEight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostFive"><code class="docutils literal notranslate"><span class="pre">AddImages.PostFive</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostFour"><code class="docutils literal notranslate"><span class="pre">AddImages.PostFour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostNine"><code class="docutils literal notranslate"><span class="pre">AddImages.PostNine</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostOne"><code class="docutils literal notranslate"><span class="pre">AddImages.PostOne</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostSeven"><code class="docutils literal notranslate"><span class="pre">AddImages.PostSeven</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostSix"><code class="docutils literal notranslate"><span class="pre">AddImages.PostSix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostThree"><code class="docutils literal notranslate"><span class="pre">AddImages.PostThree</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PostTwo"><code class="docutils literal notranslate"><span class="pre">AddImages.PostTwo</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreBase"><code class="docutils literal notranslate"><span class="pre">AddImages.PreBase</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreEight"><code class="docutils literal notranslate"><span class="pre">AddImages.PreEight</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreFive"><code class="docutils literal notranslate"><span class="pre">AddImages.PreFive</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreFour"><code class="docutils literal notranslate"><span class="pre">AddImages.PreFour</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreNine"><code class="docutils literal notranslate"><span class="pre">AddImages.PreNine</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreOne"><code class="docutils literal notranslate"><span class="pre">AddImages.PreOne</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreSeven"><code class="docutils literal notranslate"><span class="pre">AddImages.PreSeven</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreSix"><code class="docutils literal notranslate"><span class="pre">AddImages.PreSix</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreThree"><code class="docutils literal notranslate"><span class="pre">AddImages.PreThree</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.AddImages.PreTwo"><code class="docutils literal notranslate"><span class="pre">AddImages.PreTwo</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum"><code class="docutils literal notranslate"><span class="pre">HoldEnum</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum.BINGO"><code class="docutils literal notranslate"><span class="pre">HoldEnum.BINGO</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum.SINGLE"><code class="docutils literal notranslate"><span class="pre">HoldEnum.SINGLE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum.SINGLE_SPOTS"><code class="docutils literal notranslate"><span class="pre">HoldEnum.SINGLE_SPOTS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum.SUFFIXED"><code class="docutils literal notranslate"><span class="pre">HoldEnum.SUFFIXED</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.game_info.HoldEnum.ZERO"><code class="docutils literal notranslate"><span class="pre">HoldEnum.ZERO</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.apply_sheet_capacity"><code class="docutils literal notranslate"><span class="pre">apply_sheet_capacity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.check_for_exit"><code class="docutils literal notranslate"><span class="pre">check_for_exit()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.check_game_parameters"><code class="docutils literal notranslate"><span class="pre">check_game_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_bingo_number_parameters"><code class="docutils literal notranslate"><span class="pre">get_bingo_number_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_game_parameters"><code class="docutils literal notranslate"><span class="pre">get_game_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_instant_winner_info"><code class="docutils literal notranslate"><span class="pre">get_instant_winner_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_integer_list"><code class="docutils literal notranslate"><span class="pre">get_integer_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_nonwinner_image_info"><code class="docutils literal notranslate"><span class="pre">get_nonwinner_image_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_part_and_file_names"><code class="docutils literal notranslate"><span class="pre">get_part_and_file_names()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_pick_tickets_info"><code class="docutils literal notranslate"><span class="pre">get_pick_tickets_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_single_integer"><code class="docutils literal notranslate"><span class="pre">get_single_integer()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_single_window_hold_info"><code class="docutils literal notranslate"><span class="pre">get_single_window_hold_info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_suffix_hold_information"><code class="docutils literal notranslate"><span class="pre">get_suffix_hold_information()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_suffix_hold_information_enhanced"><code class="docutils literal notranslate"><span class="pre">get_suffix_hold_information_enhanced()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.get_up_sheet_ticket_perms"><code class="docutils literal notranslate"><span class="pre">get_up_sheet_ticket_perms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.parse_suffix_entries"><code class="docutils literal notranslate"><span class="pre">parse_suffix_entries()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.game_info.parse_suffixes"><code class="docutils literal notranslate"><span class="pre">parse_suffixes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.generic_calls">ticketing.generic_calls module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_hold_tickets"><code class="docutils literal notranslate"><span class="pre">create_hold_tickets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_instant_winners"><code class="docutils literal notranslate"><span class="pre">create_instant_winners()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_nonwinner_tickets"><code class="docutils literal notranslate"><span class="pre">create_nonwinner_tickets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_pick_winners"><code class="docutils literal notranslate"><span class="pre">create_pick_winners()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_single_nonwinner_tickets"><code class="docutils literal notranslate"><span class="pre">create_single_nonwinner_tickets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.create_tictactoe_holds"><code class="docutils literal notranslate"><span class="pre">create_tictactoe_holds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.input_game_parameters"><code class="docutils literal notranslate"><span class="pre">input_game_parameters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.generic_calls.set_game_parameters"><code class="docutils literal notranslate"><span class="pre">set_game_parameters()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.image_gen">ticketing.image_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.add_additional_image_slots"><code class="docutils literal notranslate"><span class="pre">add_additional_image_slots()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_image_lists_from_pool"><code class="docutils literal notranslate"><span class="pre">create_image_lists_from_pool()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_image_lists_from_pool_perms"><code class="docutils literal notranslate"><span class="pre">create_image_lists_from_pool_perms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_image_pool"><code class="docutils literal notranslate"><span class="pre">create_image_pool()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_image_pool_permutations"><code class="docutils literal notranslate"><span class="pre">create_image_pool_permutations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_prefixed_images"><code class="docutils literal notranslate"><span class="pre">create_prefixed_images()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_tictactoe_instants"><code class="docutils literal notranslate"><span class="pre">create_tictactoe_instants()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_tictactoe_one_row_image"><code class="docutils literal notranslate"><span class="pre">create_tictactoe_one_row_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_tiered_image_list"><code class="docutils literal notranslate"><span class="pre">create_tiered_image_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.image_gen.create_winning_tictactoe_paths"><code class="docutils literal notranslate"><span class="pre">create_winning_tictactoe_paths()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.number_gen">ticketing.number_gen module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.check_winning_bingo_paths"><code class="docutils literal notranslate"><span class="pre">check_winning_bingo_paths()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.count_remaining_numbers"><code class="docutils literal notranslate"><span class="pre">count_remaining_numbers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_basic_number_pool"><code class="docutils literal notranslate"><span class="pre">create_basic_number_pool()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_bingo_downlines"><code class="docutils literal notranslate"><span class="pre">create_bingo_downlines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_bingo_lines_from_full_list"><code class="docutils literal notranslate"><span class="pre">create_bingo_lines_from_full_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_bingo_numbers"><code class="docutils literal notranslate"><span class="pre">create_bingo_numbers()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_bingo_positions"><code class="docutils literal notranslate"><span class="pre">create_bingo_positions()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_full_bingo_line_permutations"><code class="docutils literal notranslate"><span class="pre">create_full_bingo_line_permutations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_full_bingo_line_permutations_from_full_list"><code class="docutils literal notranslate"><span class="pre">create_full_bingo_line_permutations_from_full_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_multi_suffixed_number_pools"><code class="docutils literal notranslate"><span class="pre">create_multi_suffixed_number_pools()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_nonwinner_number_tickets"><code class="docutils literal notranslate"><span class="pre">create_nonwinner_number_tickets()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_number_pools"><code class="docutils literal notranslate"><span class="pre">create_number_pools()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_number_pools_multi"><code class="docutils literal notranslate"><span class="pre">create_number_pools_multi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_numbered_holds"><code class="docutils literal notranslate"><span class="pre">create_numbered_holds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_numbered_holds_multi"><code class="docutils literal notranslate"><span class="pre">create_numbered_holds_multi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_potential_bingos_letters"><code class="docutils literal notranslate"><span class="pre">create_potential_bingos_letters()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_ten_column_spread"><code class="docutils literal notranslate"><span class="pre">create_ten_column_spread()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_unique_bingo_line_permutations"><code class="docutils literal notranslate"><span class="pre">create_unique_bingo_line_permutations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_unique_bingo_lines"><code class="docutils literal notranslate"><span class="pre">create_unique_bingo_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_unique_lines_with_bingo_spots"><code class="docutils literal notranslate"><span class="pre">create_unique_lines_with_bingo_spots()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_varied_numbered_holds"><code class="docutils literal notranslate"><span class="pre">create_varied_numbered_holds()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_winning_number_pool"><code class="docutils literal notranslate"><span class="pre">create_winning_number_pool()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.number_gen.create_winning_pools"><code class="docutils literal notranslate"><span class="pre">create_winning_pools()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.ticket">ticketing.ticket module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket"><code class="docutils literal notranslate"><span class="pre">Ticket</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.add_subflat_to_csv_fields"><code class="docutils literal notranslate"><span class="pre">Ticket.add_subflat_to_csv_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.csv_fields"><code class="docutils literal notranslate"><span class="pre">Ticket.csv_fields</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.csv_line"><code class="docutils literal notranslate"><span class="pre">Ticket.csv_line()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_cd_tier"><code class="docutils literal notranslate"><span class="pre">Ticket.get_cd_tier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_cd_type"><code class="docutils literal notranslate"><span class="pre">Ticket.get_cd_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_csv_fields"><code class="docutils literal notranslate"><span class="pre">Ticket.get_csv_fields()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_part_suffix"><code class="docutils literal notranslate"><span class="pre">Ticket.get_part_suffix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_permutation"><code class="docutils literal notranslate"><span class="pre">Ticket.get_permutation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_position_on_sheet"><code class="docutils literal notranslate"><span class="pre">Ticket.get_position_on_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_position_on_ticket"><code class="docutils literal notranslate"><span class="pre">Ticket.get_position_on_ticket()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_sheet_number"><code class="docutils literal notranslate"><span class="pre">Ticket.get_sheet_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_subflat"><code class="docutils literal notranslate"><span class="pre">Ticket.get_subflat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.get_up"><code class="docutils literal notranslate"><span class="pre">Ticket.get_up()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_cd_tier"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_cd_tier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_cd_type"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_cd_type()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_lotto"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_lotto()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_part_suffix"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_part_suffix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_permutation"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_permutation()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_position_on_sheet"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_position_on_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_position_on_ticket"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_position_on_ticket()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_sheet_number"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_sheet_number()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_subflat"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_subflat()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.reset_up"><code class="docutils literal notranslate"><span class="pre">Ticket.reset_up()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.ticket.Ticket.set_lotto"><code class="docutils literal notranslate"><span class="pre">Ticket.set_lotto()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.ticket_io">ticketing.ticket_io module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.apportion_and_randomize_stack"><code class="docutils literal notranslate"><span class="pre">apportion_and_randomize_stack()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.apportion_and_randomize_subflat_stacks"><code class="docutils literal notranslate"><span class="pre">apportion_and_randomize_subflat_stacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.apportion_game_stacks"><code class="docutils literal notranslate"><span class="pre">apportion_game_stacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.apportion_subflat_stacks"><code class="docutils literal notranslate"><span class="pre">apportion_subflat_stacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.create_game_stacks"><code class="docutils literal notranslate"><span class="pre">create_game_stacks()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.create_game_stacks_from_permutations"><code class="docutils literal notranslate"><span class="pre">create_game_stacks_from_permutations()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.write_cd_positions_to_file"><code class="docutils literal notranslate"><span class="pre">write_cd_positions_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.write_game_stacks_to_file"><code class="docutils literal notranslate"><span class="pre">write_game_stacks_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.write_multi_spot_cd_positions_to_file"><code class="docutils literal notranslate"><span class="pre">write_multi_spot_cd_positions_to_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.write_permutations_to_files"><code class="docutils literal notranslate"><span class="pre">write_permutations_to_files()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.ticket_io.write_tickets_to_file"><code class="docutils literal notranslate"><span class="pre">write_tickets_to_file()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing.universal_ticket">ticketing.universal_ticket module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ticketing.html#ticketing.universal_ticket.UniversalTicket"><code class="docutils literal notranslate"><span class="pre">UniversalTicket</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ticketing.html#ticketing.universal_ticket.UniversalTicket.csv_line"><code class="docutils literal notranslate"><span class="pre">UniversalTicket.csv_line()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ticketing.html#module-ticketing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

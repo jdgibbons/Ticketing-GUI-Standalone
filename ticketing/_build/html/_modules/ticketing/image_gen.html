@@ -1,0 +1,643 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.image_gen &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/image_gen';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.image_gen</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rn</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span><span class="p">,</span> <span class="n">permutations</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">permutations</span> <span class="k">as</span> <span class="n">permits</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">ticketing.game_info</span> <span class="kn">import</span> <span class="n">AddImages</span>
+
+
+<div class="viewcode-block" id="create_tiered_image_list">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_tiered_image_list">[docs]</a>
+<span class="k">def</span> <span class="nf">create_tiered_image_list</span><span class="p">(</span><span class="n">amt_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">add_subimages</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of images that reflect the number needed for each tier. Normally, this would</span>
+<span class="sd">    entail creating a bunch of images that only reflect the tier level: i.e., all instant winner</span>
+<span class="sd">    images in tier one would be called &#39;winner01.ai,&#39; tier two would be &#39;winner02.ai,&#39; etc. If</span>
+<span class="sd">    there are subimages, however, each ticket in a tier will have a discrete name: e.g., tier one</span>
+<span class="sd">    images would be &#39;winner01-01.ai,&#39; &#39;winner01-02.ai,&#39; &#39;winner01-03.ai,&#39; etc. If a mixture of types</span>
+<span class="sd">    is needed, break up the array and call the method multiple times. If tier one has subimages but</span>
+<span class="sd">    the remaining tiers don&#39;t, call the method like so:\n</span>
+<span class="sd">     create_tiered_image_list([50], &#39;winner&#39;, True)\n</span>
+<span class="sd">    then\n</span>
+<span class="sd">     create_tiered_image_list([0, 5, 10, 20], False)\n</span>
+<span class="sd">    which would result in tier one containing 50 subimages (&#39;winner01-01.ai&#39; . . . &#39;winner01-50.ai&#39;)</span>
+<span class="sd">    and tiers two through four containing five &#39;winner02.ai,&#39; ten &#39;winner03.ai,&#39; and 20 &#39;winner04.ai&#39;)</span>
+
+<span class="sd">    :param amt_list: list of ticket totals for each tier</span>
+<span class="sd">    :param prefix: String to add at the front of each ticket name</span>
+<span class="sd">    :param add_subimages: Does each ticket in a tier have a discrete image?</span>
+<span class="sd">    :return: list of ticket names for each tier along with its corresponding tier \</span>
+<span class="sd">    (so it doesn&#39;t need to be extracted by the caller).</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a list to hold the images</span>
+    <span class="n">image_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the list of image counts</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amt_list</span><span class="p">)):</span>
+        <span class="c1"># Count used for subimage names</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Cycle through the image-name creation process</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt_list</span><span class="p">[</span><span class="n">index</span><span class="p">]):</span>
+            <span class="c1"># If there are subimages for this group, add the count number to the image name.</span>
+            <span class="k">if</span> <span class="n">add_subimages</span><span class="p">:</span>
+                <span class="n">imagine</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+            <span class="c1"># Otherwise, just use the index position (plus one) to create the image name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">imagine</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+            <span class="c1"># Add the image name to the list and increment the image count.</span>
+            <span class="n">image_list</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">imagine</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># Send the image list to whoever ordered it.</span>
+    <span class="k">return</span> <span class="n">image_list</span></div>
+
+
+
+<div class="viewcode-block" id="create_image_pool">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_image_pool">[docs]</a>
+<span class="k">def</span> <span class="nf">create_image_pool</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a pool of images to be used to randomly generate image spreads on tickets.</span>
+<span class="sd">    The images will be added then shuffled a few times. This method is called</span>
+<span class="sd">    whenever there are not enough images in the list to fill a ticket. Return the</span>
+<span class="sd">    list of images.</span>
+
+<span class="sd">    :param first: beginning of the range of image numbers</span>
+<span class="sd">    :param last: end of the range of image numbers</span>
+<span class="sd">    :param prefix: String to add at the front of each image name</span>
+<span class="sd">    :return: list containing strings of image names for the pool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Create a list of images using the index + 1 to refer to the correct one.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span><span class="p">)</span>
+    <span class="c1"># Shuffle the list between 4 and 25 times</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nw_image_pool</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nw_image_pool</span></div>
+
+
+
+<div class="viewcode-block" id="create_image_pool_permutations">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_image_pool_permutations">[docs]</a>
+<span class="k">def</span> <span class="nf">create_image_pool_permutations</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span><span class="p">)</span>
+    <span class="n">image_pool</span> <span class="o">=</span> <span class="n">permutations</span><span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">spots</span><span class="p">)</span>
+    <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">imgs</span> <span class="ow">in</span> <span class="n">image_pool</span><span class="p">:</span>
+        <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">imgs</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">25</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nw_image_pool</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nw_image_pool</span></div>
+
+
+
+<div class="viewcode-block" id="create_image_lists_from_pool">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_image_lists_from_pool">[docs]</a>
+<span class="k">def</span> <span class="nf">create_image_lists_from_pool</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pics_per_tick</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing image names gathered from a pool of shuffled and scattered images.</span>
+
+<span class="sd">    :param first: number of the first image in the pool</span>
+<span class="sd">    :param last: number of the last image in the pool</span>
+<span class="sd">    :param prefix: string to add at the front of each image name</span>
+<span class="sd">    :param amt: total number of image lists needed by the caller</span>
+<span class="sd">    :param pics_per_tick: number of images per ticket</span>
+<span class="sd">    :return: list of lists containing images gathered from the pool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a list to hold the lists of images</span>
+    <span class="n">image_lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Create the initial pool of images to be used to create the image lists</span>
+    <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="n">create_image_pool</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+    <span class="c1"># Loop until there are enough lists</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+        <span class="c1"># Create a list to hold the images</span>
+        <span class="n">image_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># If there aren&#39;t enough images to create the list, grab a new</span>
+        <span class="c1"># list, append the images that aren&#39;t already in the list, and</span>
+        <span class="c1"># keep going until we have a full list.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nw_image_pool</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">pics_per_tick</span><span class="p">:</span>
+            <span class="n">temp_pool</span> <span class="o">=</span> <span class="n">create_image_pool</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">tempo</span> <span class="ow">in</span> <span class="n">temp_pool</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">tempo</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">nw_image_pool</span><span class="p">:</span>
+                    <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempo</span><span class="p">)</span>
+        <span class="c1"># Cycle through the pool and pop off images from the front</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pics_per_tick</span><span class="p">):</span>
+            <span class="c1"># Pop off the first image and append it to the new list</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">image_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="c1"># Add the image this to the main list</span>
+        <span class="n">image_lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_list</span><span class="p">)</span>
+    <span class="c1"># Get the lists back the caller, STAT!</span>
+    <span class="k">return</span> <span class="n">image_lists</span></div>
+
+
+
+<div class="viewcode-block" id="create_image_lists_from_pool_perms">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_image_lists_from_pool_perms">[docs]</a>
+<span class="k">def</span> <span class="nf">create_image_lists_from_pool_perms</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                       <span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">pics_per_tick</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="n">images_lists</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nw_image_perms</span> <span class="o">=</span> <span class="n">create_image_pool_permutations</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">pics_per_tick</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nw_image_perms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nw_image_perms</span> <span class="o">=</span> <span class="n">create_image_pool_permutations</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">pics_per_tick</span><span class="p">)</span>
+        <span class="n">images_lists</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_image_perms</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">images_lists</span></div>
+
+
+
+<div class="viewcode-block" id="create_prefixed_images">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_prefixed_images">[docs]</a>
+<span class="k">def</span> <span class="nf">create_prefixed_images</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uniq</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of images that uses the prefix and numbers in the range</span>
+<span class="sd">    from first to last to create the file names. The &#39;uniq&#39; flag indicates whether the</span>
+<span class="sd">    images will all have the same name or not: true means they will be sequentially</span>
+<span class="sd">    named, false means they will all be named &#39;xxx01.ai&#39;.</span>
+
+<span class="sd">    :param first: the number of the first image in the pool</span>
+<span class="sd">    :type first: int</span>
+<span class="sd">    :param last: the number of the last image in the pool</span>
+<span class="sd">    :type last: int</span>
+<span class="sd">    :param prefix: the string to add at the front of each image name</span>
+<span class="sd">    :type prefix: str</span>
+<span class="sd">    :param uniq: Is the name of each file unique?</span>
+<span class="sd">    :type uniq: bool</span>
+<span class="sd">    :return: list of strings comprising image names for the pool</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">uniq</span><span class="p">:</span>
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">img</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s2">01.ai&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">images</span></div>
+
+
+
+<div class="viewcode-block" id="add_additional_image_slots">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.add_additional_image_slots">[docs]</a>
+<span class="k">def</span> <span class="nf">add_additional_image_slots</span><span class="p">(</span><span class="n">addl_imgs</span><span class="p">:</span> <span class="n">AddImages</span><span class="p">,</span> <span class="n">line</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">addl_imgs</span> <span class="o">!=</span> <span class="n">AddImages</span><span class="o">.</span><span class="n">NoneAdded</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">addl_imgs</span> <span class="o">==</span> <span class="n">AddImages</span><span class="o">.</span><span class="n">PreBase</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;base.ai&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">addl_imgs</span> <span class="o">==</span> <span class="n">AddImages</span><span class="o">.</span><span class="n">PostBase</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;base.ai&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">addl_imgs</span><span class="o">.</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">addl_imgs</span><span class="o">.</span><span class="n">value</span><span class="p">)):</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">addl_imgs</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">addl_imgs</span><span class="o">.</span><span class="n">value</span><span class="p">)):</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">line</span></div>
+
+
+
+<div class="viewcode-block" id="create_winning_tictactoe_paths">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_winning_tictactoe_paths">[docs]</a>
+<span class="k">def</span> <span class="nf">create_winning_tictactoe_paths</span><span class="p">():</span>
+    <span class="c1"># The list elements are comprised of:</span>
+    <span class="c1">#       ((winning path), &#39;winner letter for image type&#39;, position for dollar amount, cd cutout row)</span>
+    <span class="c1">#       So, for the first element:</span>
+    <span class="c1">#           winning path = (0, 1, 2),   ##### Positions of the tic-tac-toe</span>
+    <span class="c1">#           winning letter = &#39;a&#39;,       ##### This refers to the letter in the cross-out images needed to align</span>
+    <span class="c1">#                                       ##### the red lines to create a tic-tac-toe</span>
+    <span class="c1">#           dollar amount position = 3, ##### the spot in the winning line to place the winner image</span>
+    <span class="c1">#           cd cutout row = 2)          ##### which of the three rows to place the cd number on</span>
+
+    <span class="n">winning_paths</span> <span class="o">=</span> <span class="p">[((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                     <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                     <span class="p">((</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+    <span class="c1"># Shuffle the winning</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">winning_paths</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">winning_paths</span></div>
+
+
+
+<div class="viewcode-block" id="create_tictactoe_instants">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_tictactoe_instants">[docs]</a>
+<span class="k">def</span> <span class="nf">create_tictactoe_instants</span><span class="p">(</span><span class="n">amts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">q_nw_image_pool</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">default_winner</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of images for winning tic-tac-toe lines. This is for a 3x3, nine-space game.\n</span>
+<span class="sd">    The winning lines are generated and shuffled in another method and passed back with additional</span>
+<span class="sd">    information:\n</span>
+
+<span class="sd">    -    [winning line (e.g., (0, 1, 2), representing the spots where the winning images (tier, base, base),</span>
+<span class="sd">    -    cross out image letter (images with the cross-out &#39;bar&#39; pointing in the correct direction (/, \\, -)),</span>
+<span class="sd">    -    dollar amount position (which spot the dollar amount image needs to go on based on the winning line),</span>
+<span class="sd">    -    cd cutout row (row in which the dollar amount resides)]:\n</span>
+
+<span class="sd">    to create a balanced spread of winning lines. The</span>
+
+<span class="sd">    :param amts: list of integers representing the number of tickets in each tier</span>
+<span class="sd">    :param q_nw_image_pool: number of images in the nonwinner image pool</span>
+<span class="sd">    :param default_winner: integer representing the default image used in winners</span>
+<span class="sd">    :return: [images, cd_tier, position on ticket]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get a list of paths representing winning lines, the image variety for that line,</span>
+    <span class="c1"># the spot on which to place the winning dollar amount, and the row for the cd cutout.</span>
+    <span class="c1"># Create a cycle of the list to allow even distribution of winning lines.</span>
+    <span class="n">winning_paths</span> <span class="o">=</span> <span class="n">create_winning_tictactoe_paths</span><span class="p">()</span>
+    <span class="n">paths_cycle</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">winning_paths</span><span class="p">)</span>
+    <span class="c1"># &#39;images_plus&#39; is a list of lists containing the images in the grid,</span>
+    <span class="c1"># the tier level, and the cd slot position.</span>
+    <span class="n">images_plus</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># This is filled within the loop, where it is refilled when the number of</span>
+    <span class="c1"># images falls below the number required to populate the nonwinning spaces.</span>
+    <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the amts list. The index + 1 is equal to the current cd</span>
+    <span class="c1"># tier level. The value is the number of tickets needed for this tier.</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">amts</span><span class="p">):</span>
+        <span class="c1"># Cycle through once for each ticket.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+            <span class="c1"># Replenish the nonwinner image pool if there are fewer than the number</span>
+            <span class="c1"># of nonwinner spaces required to fill out the grid.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nw_image_pool</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="n">create_image_pool</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_nw_image_pool</span><span class="p">,</span> <span class="s1">&#39;nonwinner&#39;</span><span class="p">)</span>
+            <span class="c1"># Create the list so the indexes can be used to fill the spots.</span>
+            <span class="n">spots</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">9</span>
+            <span class="c1"># Get the next winning path . . . plus</span>
+            <span class="n">current_path</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">paths_cycle</span><span class="p">)</span>
+            <span class="c1"># The list elements are comprised of:</span>
+            <span class="c1">#       ((winning path), &#39;winner letter for image type&#39;, position for dollar amount, cd cutout row)</span>
+
+            <span class="c1"># First spot is filled with tier-specific winner image (letter = image &#39;spin&#39; (/, \\, or --)</span>
+            <span class="n">spots</span><span class="p">[</span><span class="n">current_path</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;winner</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}{</span><span class="n">current_path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+
+            <span class="c1"># Next two spots are filled with the generic winner image (letter represents image &#39;spin&#39;)</span>
+            <span class="n">spots</span><span class="p">[</span><span class="n">current_path</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;winner</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">default_winner</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}{</span><span class="n">current_path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+            <span class="n">spots</span><span class="p">[</span><span class="n">current_path</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;winner</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">default_winner</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}{</span><span class="n">current_path</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+
+            <span class="c1"># This spot is filled with the dollar amount image</span>
+            <span class="n">spots</span><span class="p">[</span><span class="n">current_path</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ap</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.ai&quot;</span>
+
+            <span class="c1"># Cycle through the spots. If an empty spot is encountered, fill</span>
+            <span class="c1"># it with the next nonwinner image.</span>
+            <span class="k">for</span> <span class="n">indy</span><span class="p">,</span> <span class="n">spot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">spots</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">spot</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">spots</span><span class="p">[</span><span class="n">indy</span><span class="p">]</span> <span class="o">=</span> <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># Add the images, the cd tier, and the position cd slot position</span>
+            <span class="n">images_plus</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">spots</span><span class="p">,</span> <span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current_path</span><span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+    <span class="c1"># return list[[images, cd tier, cd slot position]]</span>
+    <span class="k">return</span> <span class="n">images_plus</span></div>
+
+
+
+<div class="viewcode-block" id="create_tictactoe_one_row_image">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.image_gen.create_tictactoe_one_row_image">[docs]</a>
+<span class="k">def</span> <span class="nf">create_tictactoe_one_row_image</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">q_nw_image_pool</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">use_img_index</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param amt:</span>
+<span class="sd">    :param q_nw_image_pool:</span>
+<span class="sd">    :param prefix:</span>
+<span class="sd">    :param use_img_index:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pick_rows</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]</span>
+    <span class="n">rowers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+    <span class="n">winning_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">q_pick</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+        <span class="n">imgs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">9</span>
+        <span class="n">picks</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="k">if</span> <span class="n">use_img_index</span><span class="p">:</span>
+            <span class="n">picks</span><span class="p">[</span><span class="n">winning_row</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="nb">str</span><span class="p">(</span><span class="n">q_pick</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">.ai&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">picks</span><span class="p">[</span><span class="n">winning_row</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">prefix</span><span class="si">}</span><span class="s1">01.ai&#39;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rowers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">winning_row</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">rowdy</span> <span class="ow">in</span> <span class="n">pick_rows</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nw_image_pool</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">nw_image_pool</span> <span class="o">=</span> <span class="n">create_image_pool</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">q_nw_image_pool</span><span class="p">,</span> <span class="s1">&#39;nonwinner&#39;</span><span class="p">)</span>
+                    <span class="n">imgs</span><span class="p">[</span><span class="n">rowdy</span><span class="p">]</span> <span class="o">=</span> <span class="n">nw_image_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">images</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">imgs</span><span class="p">,</span> <span class="n">picks</span><span class="p">,</span> <span class="n">winning_row</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">winning_row</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">winning_row</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">winning_row</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">images</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

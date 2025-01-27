@@ -1,0 +1,542 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.bingo_ticket &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/bingo_ticket';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.bingo_ticket</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span> <span class="nn">.ticket</span> <span class="kn">import</span> <span class="n">Ticket</span>
+
+
+<div class="viewcode-block" id="BingoTicket">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket">[docs]</a>
+<span class="k">class</span> <span class="nc">BingoTicket</span><span class="p">(</span><span class="n">Ticket</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This ticket should be able to handle a wide variety of bingo-styles. It can accept up to five separate number</span>
+<span class="sd">    lists (and maybe more, someday). It automatically creates a csv field list to match the quantity of number lines</span>
+<span class="sd">    and places the row positions contiguously on the line. For example, if there are three bingo lines, the csv numbers</span>
+<span class="sd">    fields would be in the format:\n</span>
+<span class="sd">    &#39;N1A&#39;,&#39;N1B&#39;,&#39;N1C&#39;,&#39;N2A&#39;,&#39;N2B&#39;,&#39;N2C&#39;,&#39;N3A&#39;,&#39;N3B&#39;,&#39;N3C&#39;,&#39;N4A&#39;,&#39;N4B&#39;,&#39;N4C&#39;,&#39;N5A&#39;,&#39;N5B&#39;,&#39;N5C&#39;\n</span>
+<span class="sd">    Number fields should be passed as a list of lists, with each list representing an individual bingo line.</span>
+<span class="sd">    IMPORTANT: is_first must be set to true for at least one ticket. The best/easiest way is to set the is_first</span>
+<span class="sd">    member to True with the first ticket, then false for every other.</span>
+<span class="sd">    ticket</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick_no</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ver</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">numbers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">imgs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+                 <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">lottos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create a generic bingo ticket that can use (or not) any of the data</span>
+<span class="sd">        structures to allow for maximum flexibility. Bingo numbers and images</span>
+<span class="sd">        are both optional, but can also handle five separate arrays each. The</span>
+<span class="sd">        csv fields are created based on the number and size of the arrays.</span>
+<span class="sd">        Permutations and ups aren&#39;t really set here at the moment. Maybe later.</span>
+
+<span class="sd">        :param tick_no: ticket number (can be an empty string or an integer)</span>
+<span class="sd">        :type tick_no: str | int</span>
+<span class="sd">        :param numbers: list containing lists of bingo numbers</span>
+<span class="sd">        :type numbers: list[list[str | int]]</span>
+<span class="sd">        :param imgs: lists of images</span>
+<span class="sd">        :type imgs: list[str]</span>
+<span class="sd">        :param zeroes: do bingo numbers have leading zeroes</span>
+<span class="sd">        :type zeroes: bool</span>
+<span class="sd">        :param p: permutation: all of them are set to one during creation for now (they&#39;re changed later, if necessary).</span>
+<span class="sd">        :type p: int</span>
+<span class="sd">        :param u: current up: this is set to one during creation for now (they&#39;re changed later, if necessary)</span>
+<span class="sd">        :type u: int</span>
+<span class="sd">        :param is_first: is this the first ticket to be created?</span>
+<span class="sd">        :type is_first: bool</span>
+<span class="sd">        :param lottos: number of lotto slots--this will almost always be zero</span>
+<span class="sd">        :type lottos: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ticket number, permutation, and up are part of the superclass</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">tick_no</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verification</span> <span class="o">=</span> <span class="n">ver</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numbers</span> <span class="o">=</span> <span class="n">numbers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">images</span> <span class="o">=</span> <span class="n">imgs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zeroes</span> <span class="o">=</span> <span class="n">zeroes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">free_type</span> <span class="o">=</span> <span class="s1">&#39;I&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bingo_type</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="c1"># Only set the csv_fields on the first pass. It is a static variable, so there is</span>
+        <span class="c1"># no need to repeatedly set it. One and done.</span>
+        <span class="k">if</span> <span class="n">is_first</span><span class="p">:</span>
+            <span class="c1"># Create the csv field headings, starting with ticket number</span>
+            <span class="n">slots</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TKT&#39;</span><span class="p">,</span> <span class="s1">&#39;VER&#39;</span><span class="p">]</span>
+            <span class="c1"># Verify that the number lists are all the same length.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">check_list_lengths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">,</span> <span class="s1">&#39;numbers&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span><span class="p">):</span>
+                <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># Use letters to specify disparate lists in the csv by cycling through the spots and appending</span>
+            <span class="c1"># the letter associated with each list. For example, if there were three different number lists,</span>
+            <span class="c1"># the headings for the columns would look like:</span>
+            <span class="c1"># &#39;N1A&#39;, &#39;N1B&#39;, &#39;N1C&#39;, &#39;N2A&#39;, &#39;N2B&#39;, &#39;N2C&#39;, &#39;N3A&#39;, &#39;N3B&#39;, &#39;N3C&#39;, etc.</span>
+            <span class="n">endings</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+                <span class="c1"># Add the corresponding letter for each location to the column header.</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">numbs</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">):</span>
+                    <span class="n">slots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;N</span><span class="si">{</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}{</span><span class="n">endings</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># Add the necessary number of csv columns for images and lottos</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">)):</span>
+                <span class="n">slots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;I</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lottos</span><span class="p">):</span>
+                <span class="n">slots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;L</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="c1"># Add &#39;P&#39; and &#39;U&#39; for permutation and up, respectively.</span>
+            <span class="n">slots</span> <span class="o">+=</span> <span class="p">[</span><span class="s1">&#39;P&#39;</span><span class="p">,</span> <span class="s1">&#39;U&#39;</span><span class="p">]</span>
+            <span class="c1"># Set the superclass&#39;s static csv_fields variable to the list we just created.</span>
+            <span class="n">Ticket</span><span class="o">.</span><span class="n">csv_fields</span> <span class="o">=</span> <span class="n">slots</span>
+
+<div class="viewcode-block" id="BingoTicket.csv_line">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.csv_line">[docs]</a>
+    <span class="k">def</span> <span class="nf">csv_line</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Gather all the information associated with this ticket and send it back to the caller as a</span>
+<span class="sd">        comma-delimited string. Ticket number, all images, all numbers, permutation, up</span>
+<span class="sd">        :return: comma-delimited string representing the ticket&#39;s values</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">numbs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Cycle through each bingo path and place it in its proper position for the csv file.</span>
+        <span class="c1"># If the position is blank and free_type requires text, set the value to &#39;FREE&#39;.</span>
+        <span class="c1"># Add a check to account for leading zeroes and add them to the front of the number</span>
+        <span class="c1"># if necessary.</span>
+        <span class="n">img_count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">indies</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">):</span>
+                <span class="c1"># THIS NOW WORKS FOR NONSTAGGERED BINGO LINES, BUT IT STILL NEEDS TO</span>
+                <span class="c1"># BE MODIFIED TO CHECK FOR STAGGERED. I&#39;VE ADDED A STAGGERED FLAG TO</span>
+                <span class="c1"># THE TICKET</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_type</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span> <span class="ow">and</span> <span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;base&#39;</span><span class="p">):</span>
+                        <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;FREE&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_type</span> <span class="o">==</span> <span class="s1">&#39;B&#39;</span> <span class="ow">and</span> <span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;FREE&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;base&#39;</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">img_count</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;free</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">.ai&#39;</span>
+                        <span class="n">img_count</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_type</span> <span class="o">==</span> <span class="s1">&#39;I&#39;</span> <span class="ow">and</span> <span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">and</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;base&#39;</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">[</span><span class="n">img_count</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;free</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">.ai&#39;</span>
+                        <span class="n">img_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="c1"># THIS COMMENT&#39;S HERE ONLY TO EMPHASIZE THE NEED TO PAY ATTENTION TO</span>
+                <span class="c1"># THE PREVIOUS COMMENT.</span>
+
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeroes</span> <span class="ow">and</span> <span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+                    <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">indies</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="c1"># Return a string containing all values to the caller. Add lotto numbers if necessary.</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lotto</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">)</span><span class="si">}</span><span class="s2">,&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lotto</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">permutation</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">verification</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">images</span><span class="p">)</span><span class="si">}</span><span class="s2">,&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">permutation</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">up</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoTicket.set_free_type">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.set_free_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_free_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">free_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">free_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">]:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">free_type</span> <span class="o">=</span> <span class="n">free_type</span></div>
+
+
+<div class="viewcode-block" id="BingoTicket.insert_free_text">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.insert_free_text">[docs]</a>
+    <span class="k">def</span> <span class="nf">insert_free_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">)):</span>
+            <span class="n">free_the_text</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">val</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                    <span class="n">free_the_text</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">free_the_text</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">indy</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">indy</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;FREE&#39;</span></div>
+
+
+<div class="viewcode-block" id="BingoTicket.get_numbers_length">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.get_numbers_length">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_numbers_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the number of bingo rows</span>
+<span class="sd">        :return: the number of bingo rows</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numbers</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="BingoTicket.get_bingo_type">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.get_bingo_type">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_bingo_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the flag denoting which type of bingo ticket this is: (N)onstaggered, (S)taggered,</span>
+<span class="sd">        or (E)ither/Or.</span>
+
+<span class="sd">        :return: True if free spaces are staggered, False otherwise.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bingo_type</span></div>
+
+
+<div class="viewcode-block" id="BingoTicket.set_staggered">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.BingoTicket.set_staggered">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_staggered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bingo_type</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the flag indicating if free spaces in the bingo number lists are staggered or not.</span>
+
+<span class="sd">        :param bingo_type: True to indicate staggered free spaces, False for non-staggered.</span>
+<span class="sd">        :type bingo_type: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bingo_type</span> <span class="o">=</span> <span class="n">bingo_type</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="check_list_lengths">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.bingo_ticket.check_list_lengths">[docs]</a>
+<span class="k">def</span> <span class="nf">check_list_lengths</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tkt</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cycle through the passed lists and verify that each contains the same number of items.</span>
+<span class="sd">    If there is a discrepancy, there must be some issue in the code that created the bingo</span>
+<span class="sd">    ticket and called this function.</span>
+<span class="sd">    :param items: list of lists containing values for a bingo ticket</span>
+<span class="sd">    :type items: list[list[str | int]]</span>
+<span class="sd">    :param name: name of the item types (numbers or images)</span>
+<span class="sd">    :type name: str</span>
+<span class="sd">    :param tkt: this ticket&#39;s number</span>
+<span class="sd">    :type tkt: int</span>
+<span class="sd">    :return: True if all lists have the same number of items, False otherwise</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+    <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="n">size</span> <span class="k">for</span> <span class="n">items</span> <span class="ow">in</span> <span class="n">it</span><span class="p">):</span>
+        <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">success</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The number of columns in the </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> list is not consistent for ticket </span><span class="si">{</span><span class="n">tkt</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">success</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

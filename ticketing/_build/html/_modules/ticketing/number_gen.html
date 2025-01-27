@@ -1,0 +1,1145 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.number_gen &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/number_gen';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.number_gen</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rn</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">itty</span>
+
+
+<div class="viewcode-block" id="create_number_pools">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_number_pools">[docs]</a>
+<span class="k">def</span> <span class="nf">create_number_pools</span><span class="p">(</span><span class="n">first_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">winner_suffix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">smallest_nw</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                        <span class="n">biggest_winner</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dm_tag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color_all_letters</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a pool of numbers between p_first and p_last. Place the results in two lists</span>
+<span class="sd">    (winners and nonwinners) and return them to the caller. Winners are determined by</span>
+<span class="sd">    a numeric string compared against the ending numbers for each integer. Any number</span>
+<span class="sd">    that has the string as a suffix is placed in the winners&#39; list if it falls between</span>
+<span class="sd">    the smallest and biggest winning numbers. Any number of suffixes can be used, with</span>
+<span class="sd">    each discrete string&#39;s associated numbers placed in their own lists. All other numbers</span>
+<span class="sd">    containing the strings are discarded to avoid confusion.</span>
+
+<span class="sd">    :param first_number: lowest number in pool</span>
+<span class="sd">    :type first_number: int</span>
+<span class="sd">    :param last_number: the highest number in pool</span>
+<span class="sd">    :type last_number: int</span>
+<span class="sd">    :param winner_suffix: number endings to set aside for winning tickets</span>
+<span class="sd">    :type winner_suffix: list[str]</span>
+<span class="sd">    :param biggest_winner: the highest possible winning number</span>
+<span class="sd">    :type biggest_winner: int</span>
+<span class="sd">    :param smallest_nw: lowest nonwinning number (allows a winning number to be smaller than least nonwinner)</span>
+<span class="sd">    :type smallest_nw: int</span>
+<span class="sd">    :param dm_tag_name: tag to be used in DesignMerge to change font</span>
+<span class="sd">    :type dm_tag_name: str</span>
+<span class="sd">    :param color_all_letters: are all digits in a winner to be changed to a new font or just the suffix?</span>
+<span class="sd">    :type color_all_letters: bool</span>
+<span class="sd">    :return: two lists: one for winners and another for nonwinners, i.e. [winners, nonwinners]</span>
+<span class="sd">    :rtype: list[list[str] | list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating number pools with the range </span><span class="si">{</span><span class="n">first_number</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">last_number</span><span class="si">}</span><span class="s2">, with the suffix(es)&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">winner_suffix</span><span class="si">}</span><span class="s2"> below </span><span class="si">{</span><span class="n">biggest_winner</span><span class="si">}</span><span class="s2"> being set aside for the winners, and </span><span class="si">{</span><span class="n">smallest_nw</span><span class="si">}</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; as the smallest possible nonwinner.&quot;</span><span class="p">)</span>
+    <span class="c1"># Create winning and losing number lists</span>
+    <span class="n">win_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nw_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the numbers from the lowest to the highest to be used</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_number</span><span class="p">,</span> <span class="n">last_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Convert each to a string for easy comparison goodness</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># If the last two numerals match the passed suffix, check if it should be added to the winner list</span>
+        <span class="k">if</span> <span class="n">num</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span> <span class="ow">in</span> <span class="n">winner_suffix</span><span class="p">:</span>
+            <span class="c1"># We only care about winners up to the biggest value. If this falls below the threshold, add it</span>
+            <span class="c1"># to the winner list. Otherwise, discard it. We don&#39;t want any values that match the suffix</span>
+            <span class="c1"># to become part of the nonwinner list and create confusion with end users.</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">biggest_winner</span><span class="p">:</span>
+                <span class="c1"># If we need to use the DM tag to change the entire string, place it at the front</span>
+                <span class="c1"># of the string. Otherwise, insert the tag the suffix and the rest of the string.</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">color_all_letters</span><span class="p">:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">dm_tag_name</span><span class="si">}</span><span class="s1">&gt;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">dm_tag_name</span><span class="si">}</span><span class="s1">&gt;&#39;</span> <span class="o">+</span> <span class="n">num</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:]</span>
+                <span class="n">win_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="c1"># If this nonwinning number is greater than or equal to the lower limit, add it to the list of nonwinners</span>
+        <span class="c1"># JUST MADE THIS REJECT TWO-DIGIT NUMBERS--CHECK THIS IF YOU WANT TO INCLUDE THEM</span>
+        <span class="c1"># elif i &gt;= smallest_nw and i &gt; 100:</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">smallest_nw</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">nw_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="c1"># Shuffle both lists 5 to 10 times</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+        <span class="c1"># rn.shuffle(win_numbers)</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nw_numbers</span><span class="p">)</span>
+    <span class="c1"># return [list[str], list[int]]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">win_numbers</span><span class="p">,</span> <span class="n">nw_numbers</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_ten_column_spread">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_ten_column_spread">[docs]</a>
+<span class="k">def</span> <span class="nf">create_ten_column_spread</span><span class="p">(</span><span class="n">first_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fill_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                             <span class="n">shuffle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of ten elements that each contain numbers in the specified range whose</span>
+<span class="sd">    first number corresponds to the zero-filled first numeral.</span>
+<span class="sd">    :param first_number:</span>
+<span class="sd">    :param last_number:</span>
+<span class="sd">    :param fill_size:</span>
+<span class="sd">    :param shuffle:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">last_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">last_number</span><span class="p">))</span>
+    <span class="n">bundle_divisor</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">fill_size</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_number</span><span class="p">,</span> <span class="n">last_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">//</span> <span class="n">bundle_divisor</span>
+        <span class="n">columns</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">if</span> <span class="n">fill_size</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">columns</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">last_length</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">shuffle</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">columns</span></div>
+
+
+
+<div class="viewcode-block" id="create_number_pools_multi">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_number_pools_multi">[docs]</a>
+<span class="k">def</span> <span class="nf">create_number_pools_multi</span><span class="p">(</span><span class="n">first_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">winner_suffix</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">smallest_nw</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                              <span class="n">biggest_winner</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">dm_tag_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">color_all_letters</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
+        <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    I&#39;M NOT SURE WHY THIS WAS CREATED. NOTHING CALLS THIS METHOD. I MAY HAVE INITIALLY HAD A SEPARATE METHOD FOR</span>
+<span class="sd">    MULTIPLE WINNING STRINGS, BUT REALIZED IT WASN&#39;T NECESSARY. I&#39;M KEEPING THIS AROUND UNTIL I&#39;M SURE ABOUT IT.</span>
+<span class="sd">    Create a pool of numbers between p_first and p_last. Place the results in two lists (winners and nonwinners)</span>
+<span class="sd">    and return them to the caller. Winners are determined by a list of numeric strings being compared against the</span>
+<span class="sd">    ending numbers for each integer. Any number that has the string as a suffix is placed in a winners&#39; list if</span>
+<span class="sd">    it falls between the smallest and biggest winning numbers. Any number of suffixes can be used, with</span>
+<span class="sd">    each discrete string&#39;s associated numbers placed in their own lists. All other numbers</span>
+<span class="sd">    containing the strings are discarded to avoid confusion.</span>
+
+<span class="sd">    :param first_number: lowest number in pool</span>
+<span class="sd">    :type first_number: int</span>
+<span class="sd">    :param last_number: highest number in pool</span>
+<span class="sd">    :type last_number: int</span>
+<span class="sd">    :param winner_suffix: number endings to set aside for winning tickets</span>
+<span class="sd">    :type winner_suffix: list[str]</span>
+<span class="sd">    :param biggest_winner: highest possible winning number</span>
+<span class="sd">    :type biggest_winner: int</span>
+<span class="sd">    :param smallest_nw: lowest nonwinning number (allows a winning number to be smaller than least nonwinner)</span>
+<span class="sd">    :type smallest_nw: int</span>
+<span class="sd">    :param dm_tag_name: tag to be used in DesignMerge to change font</span>
+<span class="sd">    :type dm_tag_name: str</span>
+<span class="sd">    :param color_all_letters: are all digits in a winner to be changed to a new font or just the suffix?</span>
+<span class="sd">    :type color_all_letters: bool</span>
+<span class="sd">    :return: two lists: one for winners and another for nonwinners, i.e. [winners, nonwinners]</span>
+<span class="sd">    :rtype: list[list[str] | list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating number pools with the range </span><span class="si">{</span><span class="n">first_number</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">last_number</span><span class="si">}</span><span class="s2">, with the suffix(es)&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">winner_suffix</span><span class="si">}</span><span class="s2"> below </span><span class="si">{</span><span class="n">biggest_winner</span><span class="si">}</span><span class="s2"> being set aside for the winners, and </span><span class="si">{</span><span class="n">smallest_nw</span><span class="si">}</span><span class="s2">&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; as the smallest possible nonwinner.&quot;</span><span class="p">)</span>
+    <span class="c1"># Create winning and losing number lists</span>
+    <span class="n">nw_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">win_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">winner_suffix</span><span class="p">)):</span>
+        <span class="n">win_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="c1"># Cycle through the numbers from the lowest to the highest to be used</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_number</span><span class="p">,</span> <span class="n">last_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Convert each to a string for easy comparison goodness</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="c1"># If the last two numerals match the passed suffix, check if it should be added to the winner list</span>
+        <span class="k">if</span> <span class="n">num</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span> <span class="ow">in</span> <span class="n">winner_suffix</span><span class="p">:</span>
+            <span class="c1"># We only care about winners up to the biggest value. If this falls below the threshold, add it</span>
+            <span class="c1"># to the winner list. Otherwise, discard it. We don&#39;t want any values that match the suffix</span>
+            <span class="c1"># to become part of the nonwinner list and create confusion with end users.</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">biggest_winner</span><span class="p">:</span>
+                <span class="c1"># If we need to use the DM tag to change the entire string, place it at the front</span>
+                <span class="c1"># of the string. Otherwise, insert the tag the suffix and the rest of the string.</span>
+                <span class="k">if</span> <span class="n">color_all_letters</span><span class="p">:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">dm_tag_name</span><span class="si">}</span><span class="s1">&gt;</span><span class="si">{</span><span class="n">num</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">dm_tag_name</span><span class="si">}</span><span class="s1">&gt;&#39;</span> <span class="o">+</span> <span class="n">num</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:]</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">suffer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">winner_suffix</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">num</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">num</span><span class="p">)]</span> <span class="o">==</span> <span class="n">suffer</span><span class="p">:</span>
+                        <span class="n">win_numbers</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="c1"># If this nonwinning number is greater than or equal to the lower limit, add it to the list of nonwinners</span>
+        <span class="k">elif</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">smallest_nw</span><span class="p">:</span>
+            <span class="n">nw_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+    <span class="c1"># Shuffle both lists 5 to 10 times</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">win_numbers</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">win_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">nw_numbers</span><span class="p">)</span>
+    <span class="c1"># return [list[str], list[int]]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">win_numbers</span><span class="p">,</span> <span class="n">nw_numbers</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_multi_suffixed_number_pools">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_multi_suffixed_number_pools">[docs]</a>
+<span class="k">def</span> <span class="nf">create_multi_suffixed_number_pools</span><span class="p">(</span><span class="n">first_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]],</span>
+                                       <span class="n">smallest_nw</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">biggest_nw</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a pool of numbers between first_number and last_number and add them to winning and nonwinning lists.</span>
+<span class="sd">    The nonwinners will fall between smallest_nw and biggest_nw, excluding integers that contain any of the</span>
+<span class="sd">    specified suffixes. Suffix parameters are contained within a dictionary, with each suffix being used as</span>
+<span class="sd">    its index. Its value consists of a list containing the first and last winners, DesignMerge tag, and tag</span>
+<span class="sd">    placement flag. Each suffix&#39;s winning numbers will appear as its own list in the returned winners&#39; list.</span>
+
+<span class="sd">    :param first_number: lowest number in pool</span>
+<span class="sd">    :type first_number: int</span>
+<span class="sd">    :param last_number: the highest number in pool</span>
+<span class="sd">    :type last_number: int</span>
+<span class="sd">    :param suffixes: dictionary containing suffixes and their associated information</span>
+<span class="sd">    :type suffixes: dict[str, list[str | int| bool]]</span>
+<span class="sd">    :param smallest_nw: lowest nonwinning number (allows a winning number to be smaller than least nonwinner)</span>
+<span class="sd">    :type smallest_nw: int</span>
+<span class="sd">    :param biggest_nw: highest nonwinning number</span>
+<span class="sd">    :type biggest_nw: int</span>
+<span class="sd">    :return: two lists: one for winners and another for nonwinners, i.e. [winners, nonwinners]</span>
+<span class="sd">    :rtype: list[list[str] | list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create a list containing zfilled (2) strings of every integer between first_number and last_number.</span>
+    <span class="n">big_pool</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first_number</span><span class="p">,</span> <span class="n">last_number</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># Create a list of the suffixes</span>
+    <span class="n">endings</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">suffixes</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating number pools within the range </span><span class="si">{</span><span class="n">first_number</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">last_number</span><span class="si">}</span><span class="s2">. The suffix(es)&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">suffixes</span><span class="si">}</span><span class="s2"> are being placed in their own list(s) for the winners, and the nonwinners&quot;</span>
+          <span class="sa">f</span><span class="s2">&quot; will contain the remaining numbers between </span><span class="si">{</span><span class="n">smallest_nw</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">biggest_nw</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="c1"># Create lists to contain the winning and nonwinning numbers</span>
+    <span class="n">nw_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">win_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">endings</span><span class="p">)):</span>
+        <span class="n">win_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="c1"># Cycle through the range of integers and add them to the appropriate list.</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">big_pool</span><span class="p">:</span>
+        <span class="c1"># Check if the final two digits of this integer are in the list of suffixes.</span>
+        <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> <span class="ow">in</span> <span class="n">endings</span><span class="p">:</span>
+            <span class="c1"># Get the position of this suffix in the list of suffixes and use it to add this suffix</span>
+            <span class="c1"># to the correct winner&#39;s list if it falls within the first and last parameter.</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">endings</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)])</span>
+            <span class="n">bottom</span> <span class="o">=</span> <span class="n">suffixes</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">top</span> <span class="o">=</span> <span class="n">suffixes</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]][</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Add the string to the appropriate list</span>
+            <span class="k">if</span> <span class="n">bottom</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">suffixes</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]][</span><span class="mi">3</span><span class="p">]:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">suffixes</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]][</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&gt;</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">num</span> <span class="o">=</span> <span class="n">i</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">suffixes</span><span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)]][</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">&gt;&#39;</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:]</span>
+                <span class="n">win_numbers</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">smallest_nw</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">biggest_nw</span><span class="p">:</span>
+                <span class="n">nw_numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">win_numbers</span><span class="p">,</span> <span class="n">nw_numbers</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_nonwinner_number_tickets">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_nonwinner_number_tickets">[docs]</a>
+<span class="k">def</span> <span class="nf">create_nonwinner_number_tickets</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">nw_pool</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing nonwinning number combinations of a specified length</span>
+<span class="sd">    from an existing pool of numbers.</span>
+
+<span class="sd">    :param amt: number of lists needed</span>
+<span class="sd">    :type amt: int</span>
+<span class="sd">    :param spots: number of integers in each list</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param nw_pool: pool of numbers used to create the lists</span>
+<span class="sd">    :type nw_pool: list[str]</span>
+<span class="sd">    :return: list of lists containing nonwinning number combinations</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create the top-level list to contain number lists</span>
+    <span class="n">nw_tickets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Repeat for the number of tickets needed</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+        <span class="c1"># List to hold nonwinners</span>
+        <span class="n">nw_tick</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Add the number of nonwinners needed per ticket</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span><span class="p">):</span>
+            <span class="n">nw_tick</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># add the ticket to the top-level list</span>
+        <span class="n">nw_tickets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_tick</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nw_tickets</span></div>
+
+
+
+<div class="viewcode-block" id="create_numbered_holds">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_numbered_holds">[docs]</a>
+<span class="k">def</span> <span class="nf">create_numbered_holds</span><span class="p">(</span><span class="n">win_numbs</span><span class="p">,</span> <span class="n">nw_numbs</span><span class="p">,</span> <span class="n">spots</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing a winning number plus an indeterminate number of nonwinning numbers.</span>
+
+<span class="sd">    :param win_numbs: list of winning numbers</span>
+<span class="sd">    :type win_numbs: list[str]</span>
+<span class="sd">    :param nw_numbs: list of nonwinning numbers</span>
+<span class="sd">    :type nw_numbs: list[str]</span>
+<span class="sd">    :param spots: number of numbers per ticket</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :return: A list of lists containing a winning number and filler nonwinning numbers</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the list of winning numbers</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">win_numbs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Pop off the winning number in the first position of the list</span>
+        <span class="c1"># and use it to create a new list.</span>
+        <span class="n">numbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">win_numbs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+        <span class="c1"># Append nonwinning numbers until the ticket contains the required number.</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_numbs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="c1"># Shuffle &#39;em up.</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+        <span class="c1"># Add the list to the list of winners</span>
+        <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">winners</span></div>
+
+
+
+<div class="viewcode-block" id="create_varied_numbered_holds">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_varied_numbered_holds">[docs]</a>
+<span class="k">def</span> <span class="nf">create_varied_numbered_holds</span><span class="p">(</span><span class="n">win_numbs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">nw_numbs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">win_amts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of hold tickets that contain varying numbers of winners. The amounts are</span>
+<span class="sd">    passed in a list that functions like the free spot lists in other hold tickets.</span>
+
+<span class="sd">    :param win_numbs: list of winning numbers</span>
+<span class="sd">    :type win_numbs: list[str]</span>
+<span class="sd">    :param nw_numbs: list of nonwinning numbers</span>
+<span class="sd">    :type nw_numbs: list[str]</span>
+<span class="sd">    :param spots: number of spots on each ticket</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param win_amts: list where the indexes indicate the number of winning spots and the value is the number of tickets</span>
+<span class="sd">    :type win_amts: list[int]</span>
+<span class="sd">    :return: A list of lists containing winning numbers and filler nonwinning numbers</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">win_amts</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">amt</span><span class="p">):</span>
+            <span class="n">tick</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">win_numbs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">tick</span><span class="p">)):</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_numbs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+            <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">winners</span></div>
+
+
+
+<div class="viewcode-block" id="create_numbered_holds_multi">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_numbered_holds_multi">[docs]</a>
+<span class="k">def</span> <span class="nf">create_numbered_holds_multi</span><span class="p">(</span><span class="n">win_numbs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">nw_numbs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">spots</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing a winning number plus an indeterminate number of</span>
+<span class="sd">    nonwinning numbers. The sublists contain all the numbers associated with a particular</span>
+<span class="sd">    suffix. The returned list contains all the tickets generated for each sublist.</span>
+
+<span class="sd">    :param win_numbs: list of lists containing winning numbers</span>
+<span class="sd">    :type win_numbs: list[list[str]]</span>
+<span class="sd">    :param nw_numbs: list of nonwinning numbers</span>
+<span class="sd">    :type nw_numbs: list[str]</span>
+<span class="sd">    :param spots: number of spots per ticket</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :return: A list of lists containing a winning number and filler nonwinning numbers</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">wins</span> <span class="ow">in</span> <span class="n">win_numbs</span><span class="p">:</span>
+        <span class="n">win</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">wins</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">numbs</span> <span class="o">=</span> <span class="p">[</span><span class="n">wins</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nw_numbs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+            <span class="n">win</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+        <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">winners</span></div>
+
+
+
+<div class="viewcode-block" id="create_basic_number_pool">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_basic_number_pool">[docs]</a>
+<span class="k">def</span> <span class="nf">create_basic_number_pool</span><span class="p">(</span><span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take a beginning and ending number and create a list</span>
+<span class="sd">    containing string representations of the numbers.</span>
+
+<span class="sd">    :param first: beginning number</span>
+<span class="sd">    :type first: int</span>
+<span class="sd">    :param last: ending number</span>
+<span class="sd">    :return: a list of strings ranging from first to last number</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Take all numbers in the first/last range, convert them to strings, and add them to a list</span>
+    <span class="n">numbs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="c1"># Shuffle the list</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numbs</span></div>
+
+
+
+<div class="viewcode-block" id="create_winning_pools">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_winning_pools">[docs]</a>
+<span class="k">def</span> <span class="nf">create_winning_pools</span><span class="p">(</span><span class="n">pools</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">suffixes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+    <span class="c1"># Go to the input for suffixes and add functionality for specifying</span>
+    <span class="c1"># first and last for each suffix</span>
+
+    <span class="k">pass</span></div>
+
+
+
+<div class="viewcode-block" id="create_winning_number_pool">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_winning_number_pool">[docs]</a>
+<span class="k">def</span> <span class="nf">create_winning_number_pool</span><span class="p">(</span><span class="n">pool</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">first</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">last</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                               <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">all_numbers</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="c1"># Create a list to hold the winning numbers</span>
+    <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pool</span><span class="p">))):</span>
+        <span class="k">if</span> <span class="n">pool</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">pool</span><span class="p">[</span><span class="n">index</span><span class="p">])]</span> <span class="o">==</span> <span class="n">suffix</span><span class="p">:</span>
+            <span class="n">whiner</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">first</span> <span class="o">&lt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">whiner</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">last</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">all_numbers</span><span class="p">:</span>
+                    <span class="n">whiner</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s1">&gt;</span><span class="si">{</span><span class="n">whiner</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">whiner</span> <span class="o">=</span> <span class="n">whiner</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">whiner</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&lt;@</span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s1">&gt;&#39;</span> <span class="o">+</span> <span class="n">whiner</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">whiner</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:]</span>
+                <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">whiner</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">winners</span></div>
+
+
+
+<div class="viewcode-block" id="create_bingo_downlines">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_bingo_downlines">[docs]</a>
+<span class="k">def</span> <span class="nf">create_bingo_downlines</span><span class="p">(</span><span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">mixers</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates bingo downlines of given number of spots.</span>
+
+<span class="sd">    :param spots: number of spots in the downline</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param letters: include bingo letters?</span>
+<span class="sd">    :type letters: bool</span>
+<span class="sd">    :param hyphen: include a hyphen in the downline spots? (ignored if letters is False)</span>
+<span class="sd">    :type hyphen: bool</span>
+<span class="sd">    :param zeroes: include leading zeroes?</span>
+<span class="sd">    :type zeroes: bool</span>
+<span class="sd">    :param mixers: shuffle the downlines?</span>
+<span class="sd">    :type mixers: bool</span>
+<span class="sd">    :return: list of bingo downlines</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create the bingo positions and DO NOT have them shuffled!</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="n">create_bingo_positions</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">downers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bingos</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+        <span class="n">bingo</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">bins</span> <span class="ow">in</span> <span class="n">bingos</span><span class="p">:</span>
+            <span class="n">bingo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bins</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="n">combos</span> <span class="o">=</span> <span class="n">itty</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">bingo</span><span class="p">,</span> <span class="n">spots</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">combo</span> <span class="ow">in</span> <span class="n">combos</span><span class="p">:</span>
+            <span class="n">downers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">combo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mixers</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">11</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">downers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">downers</span></div>
+
+
+
+<div class="viewcode-block" id="create_bingo_numbers">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_bingo_numbers">[docs]</a>
+<span class="k">def</span> <span class="nf">create_bingo_numbers</span><span class="p">(</span><span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">mixers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">]</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)):</span>
+        <span class="n">bingo</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+            <span class="n">spot</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">if</span> <span class="n">letters</span><span class="p">:</span>
+                <span class="n">spot</span> <span class="o">+=</span> <span class="n">alphabet</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">hyphen</span><span class="p">:</span>
+                <span class="n">spot</span> <span class="o">+=</span> <span class="s1">&#39;-&#39;</span>
+            <span class="n">spot</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">zeroes</span> <span class="k">else</span> <span class="nb">str</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+            <span class="c1"># spot += str((i * 15) + j)</span>
+            <span class="n">bingo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span>
+        <span class="n">bingos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bingo</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mixers</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bingos</span><span class="p">)):</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">bingos</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bingos</span></div>
+
+
+
+<div class="viewcode-block" id="create_bingo_positions">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_bingo_positions">[docs]</a>
+<span class="k">def</span> <span class="nf">create_bingo_positions</span><span class="p">(</span><span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                           <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">mix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list (or a list of lists) of bingo numbers based on the traditional positions:\n</span>
+<span class="sd">     B-1 — B-15, I-16 — I-30, N-31 — N-45, G-46 — G-60, O-61 — 0-75\n</span>
+<span class="sd">    The positions can contain (or not) the letters, a hyphen between letter and number, and leading</span>
+<span class="sd">    zeroes on single digits. The resulting strings can be returned as a single list of strings containing</span>
+<span class="sd">    all 75 spots, or a list of five lists, each containing all the values corresponding to a particular</span>
+<span class="sd">    letter.</span>
+
+<span class="sd">    :param letters: If True, a letter corresponding to the column is prepended to the numerical value</span>
+<span class="sd">    :type letters: bool</span>
+<span class="sd">    :param hyphen: If True, a hyphen will divide the number and letter. Only significant if letters is true.</span>
+<span class="sd">    :type hyphen: bool</span>
+<span class="sd">    :param zeroes: If True, zeroes will be added to those letters contain only one digit</span>
+<span class="sd">    :type zeroes: bool</span>
+<span class="sd">    :param multi: If True, values are contained in five lists. If False, values are contained in one large list.</span>
+<span class="sd">    :type multi: bool</span>
+<span class="sd">    :param mix: If True, values are shuffled.</span>
+<span class="sd">    :type mix: bool</span>
+<span class="sd">    :return: 75 spots, as either five, 15-spot lists, or one, 75-spot list.</span>
+<span class="sd">    :rtype: list[str | list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Letters for each column, if needed</span>
+    <span class="n">alphabet</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">]</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the bingo columns</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alphabet</span><span class="p">)):</span>
+        <span class="c1"># Create a list and fill it with the numbers for this column, plus any desired decoration</span>
+        <span class="n">bingo</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">16</span><span class="p">):</span>
+            <span class="c1"># Create a string and populate it with all the desired pieces</span>
+            <span class="n">spot</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="c1"># Add the letter to the string and the hyphen if indicated</span>
+            <span class="k">if</span> <span class="n">letters</span><span class="p">:</span>
+                <span class="n">spot</span> <span class="o">+=</span> <span class="n">alphabet</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="c1"># Hyphen is only checked if letters are added</span>
+                <span class="k">if</span> <span class="n">hyphen</span><span class="p">:</span>
+                    <span class="n">spot</span> <span class="o">+=</span> <span class="s1">&#39;-&#39;</span>
+            <span class="c1"># Add this spot&#39;s numerical value and zero-fill if necessary</span>
+            <span class="n">spot</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">if</span> <span class="n">zeroes</span> <span class="k">else</span> <span class="nb">str</span><span class="p">((</span><span class="n">i</span> <span class="o">*</span> <span class="mi">15</span><span class="p">)</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+            <span class="n">bingo</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span>
+        <span class="n">bingos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bingo</span><span class="p">)</span>
+    <span class="c1"># If this needs to be one big list, create a temp list, cycle through every spot in</span>
+    <span class="c1"># bingos, add them to the temp list, then assign the list to bingos.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">multi</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">bingo</span> <span class="ow">in</span> <span class="n">bingos</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">spot</span> <span class="ow">in</span> <span class="n">bingo</span><span class="p">:</span>
+                <span class="n">temp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spot</span><span class="p">)</span>
+        <span class="n">bingos</span> <span class="o">=</span> <span class="n">temp</span>
+    <span class="c1"># Shuffle either version of list</span>
+    <span class="k">if</span> <span class="n">mix</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
+            <span class="c1"># If we&#39;re dealing with five lists, cycle through each list, shuffle it,</span>
+            <span class="c1"># then shuffle the list that contains them.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">bingo</span> <span class="ow">in</span> <span class="n">bingos</span><span class="p">:</span>
+                    <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">bingo</span><span class="p">)</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span>
+            <span class="c1"># Otherwise, just shuffle the one list</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span>
+    <span class="c1"># Return the randomized list</span>
+    <span class="k">return</span> <span class="n">bingos</span></div>
+
+
+
+<div class="viewcode-block" id="count_remaining_numbers">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.count_remaining_numbers">[docs]</a>
+<span class="k">def</span> <span class="nf">count_remaining_numbers</span><span class="p">(</span><span class="n">bingos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param bingos:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bingos</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_potential_bingos_letters">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_potential_bingos_letters">[docs]</a>
+<span class="k">def</span> <span class="nf">create_potential_bingos_letters</span><span class="p">(</span><span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">multi</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                    <span class="n">mix</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing bingo spots with no more than two from any</span>
+<span class="sd">    given column. Bail if it looks like there isn&#39;t a varied enough set</span>
+<span class="sd">    of spots to generate the whole list.</span>
+
+<span class="sd">    :return: list of lists containing bingo numbers</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Grab a single list of all seventy-five bingo numbers</span>
+    <span class="n">pool</span> <span class="o">=</span> <span class="n">create_bingo_positions</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="n">multi</span><span class="p">,</span> <span class="n">mix</span><span class="p">)</span>
+    <span class="n">cards</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Attempt to create 15 bingo lists</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Use this dictionary to prevent more than 2 of any column from being used.</span>
+        <span class="n">totals</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;I&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;O&#39;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">card</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">candy</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">totals</span><span class="p">[</span><span class="n">candy</span><span class="p">[:</span><span class="mi">1</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">pool</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candy</span><span class="p">)</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">pool</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">card</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">candy</span><span class="p">)</span>
+                <span class="n">totals</span><span class="p">[</span><span class="n">candy</span><span class="p">[:</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">25</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">cards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cards</span></div>
+
+
+
+<div class="viewcode-block" id="create_unique_lines_with_bingo_spots">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_unique_lines_with_bingo_spots">[docs]</a>
+<span class="k">def</span> <span class="nf">create_unique_lines_with_bingo_spots</span><span class="p">(</span><span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">dm_tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                                         <span class="n">taken</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]],</span> <span class="nb">set</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param letters:</span>
+<span class="sd">    :param hyphen:</span>
+<span class="sd">    :param zeroes:</span>
+<span class="sd">    :param dm_tag:</span>
+<span class="sd">    :param taken:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">taken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">undented</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">potentials</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">undented</span><span class="p">:</span>
+        <span class="n">potentials</span> <span class="o">=</span> <span class="n">create_potential_bingos_letters</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">potentials</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">undented</span><span class="p">,</span> <span class="n">taken</span> <span class="o">=</span> <span class="n">check_winning_bingo_paths</span><span class="p">(</span><span class="n">potentials</span><span class="p">,</span> <span class="n">taken</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">dots</span> <span class="ow">in</span> <span class="n">potentials</span><span class="p">:</span>
+        <span class="n">spotters</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">dot</span> <span class="ow">in</span> <span class="n">dots</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dm_tag</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">dm_tag</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">dot</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">dm_tag</span><span class="si">}{</span><span class="n">dot</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">spotters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dot</span><span class="p">)</span>
+        <span class="n">bingos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spotters</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">bingos</span><span class="p">,</span> <span class="n">taken</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_full_bingo_line_permutations">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_full_bingo_line_permutations">[docs]</a>
+<span class="k">def</span> <span class="nf">create_full_bingo_line_permutations</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">dm_tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">perms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">amt</span><span class="p">:</span>
+        <span class="n">numbers</span><span class="p">,</span> <span class="n">taken</span> <span class="o">=</span> <span class="n">create_unique_lines_with_bingo_spots</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="n">dm_tag</span><span class="p">,</span> <span class="n">taken</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">numbers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">perms</span></div>
+
+
+
+<div class="viewcode-block" id="check_winning_bingo_paths">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.check_winning_bingo_paths">[docs]</a>
+<span class="k">def</span> <span class="nf">check_winning_bingo_paths</span><span class="p">(</span><span class="n">bingos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">taken</span><span class="p">:</span> <span class="nb">set</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">set</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check a list of potential winning bingo paths against the set of those already taken.</span>
+
+<span class="sd">    :param bingos: list of potential winning bingo paths</span>
+<span class="sd">    :type bingos: list[list[str | int]]</span>
+<span class="sd">    :param taken: set of tuples containing previously taken winning bingo paths</span>
+<span class="sd">    :type taken: set[tuple[str | int]]</span>
+<span class="sd">    :return: success (true or false) and set of taken winning bingo paths</span>
+<span class="sd">    :rtype: tuple[bool, set[list[str | int]]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c_lists</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span>
+    <span class="n">dd</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">c_list</span> <span class="ow">in</span> <span class="n">c_lists</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c_list before sorting: </span><span class="si">{</span><span class="n">c_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">c_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">dd</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c_list after sorting: </span><span class="si">{</span><span class="n">c_list</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">c_list</span><span class="p">)</span> <span class="ow">in</span> <span class="n">taken</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dd</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">!!!!!!!!!!!! Houston? Problem. COLLISION. Meteor! !!!!!!!!!!!&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="n">taken</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">c_list</span> <span class="ow">in</span> <span class="n">c_lists</span><span class="p">:</span>
+        <span class="n">taken</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">c_list</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">taken</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="create_unique_bingo_line_permutations">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_unique_bingo_line_permutations">[docs]</a>
+<span class="k">def</span> <span class="nf">create_unique_bingo_line_permutations</span><span class="p">(</span><span class="n">q_perms</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                          <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of list of lists containing unique bingo paths that have the required number of spots</span>
+<span class="sd">    and any decoration the numbers need: leading zeroes, column letters, and hyphens.</span>
+
+<span class="sd">    :param q_perms: the number of perms needed</span>
+<span class="sd">    :type q_perms: int</span>
+<span class="sd">    :param amt: number of bingo paths in each perm</span>
+<span class="sd">    :type amt: int</span>
+<span class="sd">    :param spots: number of spots in each bingo path</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param zeroes: Are leading zeroes needed?</span>
+<span class="sd">    :type zeroes: bool</span>
+<span class="sd">    :param letters: Are the column letters (BINGO) needed?</span>
+<span class="sd">    :type letters: bool</span>
+<span class="sd">    :param hyphen: Is a hyphen needed between the letters and numbers (only relevant when &#39;letters&#39; is True).</span>
+<span class="sd">    :type hyphen: bool</span>
+<span class="sd">    :return: a list of lists containing lists of bingo paths</span>
+<span class="sd">    :rtype: list[list[list[str | int]]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">perms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">q_perms</span><span class="p">:</span>
+        <span class="n">potential</span> <span class="o">=</span> <span class="n">create_unique_bingo_lines</span><span class="p">(</span><span class="n">amt</span><span class="p">,</span> <span class="n">spots</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">taken</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">potential</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">potential</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">perms</span></div>
+
+
+
+<div class="viewcode-block" id="create_unique_bingo_lines">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_unique_bingo_lines">[docs]</a>
+<span class="k">def</span> <span class="nf">create_unique_bingo_lines</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                              <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">taken</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of unique bingo paths containing the number required and any</span>
+<span class="sd">    decoration the numbers need: leading zeroes, column letters, and hyphens.</span>
+
+<span class="sd">    :param amt: number of bingo lines needed</span>
+<span class="sd">    :type amt: int</span>
+<span class="sd">    :param spots: number of spots in each bingo line</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param zeroes: Are leading zeroes needed?</span>
+<span class="sd">    :type zeroes: bool</span>
+<span class="sd">    :param letters: Are the column letters (BINGO) needed?</span>
+<span class="sd">    :type letters: bool</span>
+<span class="sd">    :param hyphen: Is a hyphen needed between the letters and numbers (only relevant when &#39;letters&#39; is True).</span>
+<span class="sd">    :type hyphen: bool</span>
+<span class="sd">    :param taken: set of tuples containing previously taken bingo paths</span>
+<span class="sd">    :type taken: set[tuple[str | int]]</span>
+<span class="sd">    :return: a list of lists containing bingo lines</span>
+<span class="sd">    :rtype: list[list[str | int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Create a new set for winning paths if one doesn&#39;t already exist</span>
+    <span class="k">if</span> <span class="n">taken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">paths_taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">paths_taken</span> <span class="o">=</span> <span class="n">taken</span>
+    <span class="c1"># Cycle through until we get the number we came for.</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">amt</span><span class="p">:</span>
+        <span class="n">numbs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># If there aren&#39;t enough numbers remaining in the master list,</span>
+        <span class="c1"># create a new list.</span>
+        <span class="k">if</span> <span class="n">count_remaining_numbers</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spots</span><span class="p">:</span>
+            <span class="n">numbers</span> <span class="o">=</span> <span class="n">create_bingo_numbers</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">)</span>
+        <span class="c1"># Add the required number of spots and sort them by value.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span><span class="p">):</span>
+            <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">numbs</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1"># Make sure the path isn&#39;t already taken and add it if it isn&#39;t.</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">paths_taken</span><span class="p">:</span>
+            <span class="n">paths_taken</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">numbs</span><span class="p">))</span>
+            <span class="n">bingos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Apparently we&#39;re bailing if this</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rejected: </span><span class="si">{</span><span class="n">numbs</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+        <span class="n">numbers</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">bingos</span></div>
+
+
+
+<div class="viewcode-block" id="create_full_bingo_line_permutations_from_full_list">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_full_bingo_line_permutations_from_full_list">[docs]</a>
+<span class="k">def</span> <span class="nf">create_full_bingo_line_permutations_from_full_list</span><span class="p">(</span><span class="n">tkt_amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">perm_qty</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                                       <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="n">taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">perms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">perm_qty</span><span class="p">:</span>
+        <span class="n">numbers</span><span class="p">,</span> <span class="n">taken</span> <span class="o">=</span> <span class="n">create_bingo_lines_from_full_list</span><span class="p">(</span><span class="n">tkt_amt</span><span class="p">,</span> <span class="n">spots</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">taken</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">numbers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">perms</span></div>
+
+
+
+<div class="viewcode-block" id="create_bingo_lines_from_full_list">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.number_gen.create_bingo_lines_from_full_list">[docs]</a>
+<span class="k">def</span> <span class="nf">create_bingo_lines_from_full_list</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+                                      <span class="n">letters</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">taken</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a list of lists containing bingo numbers that span the entire 1-75 range. Unlike</span>
+<span class="sd">    traditional bingos, the members of these lists do not need to contain numbers from disparate</span>
+<span class="sd">    columns--they can be spread across the 75 numbers however the random generator sees fit.</span>
+
+<span class="sd">    :param amt: number of bingo lines needed</span>
+<span class="sd">    :type amt: int</span>
+<span class="sd">    :param spots: number of spots in each bingo line</span>
+<span class="sd">    :type spots: int</span>
+<span class="sd">    :param zeroes: Include leading zeroes?</span>
+<span class="sd">    :type zeroes: bool</span>
+<span class="sd">    :param letters: Include column letters?</span>
+<span class="sd">    :type letters: bool</span>
+<span class="sd">    :param hyphen: Include a hyphen in between letter and number?</span>
+<span class="sd">    :type hyphen: bool</span>
+<span class="sd">    :param taken: Set containing winning bingo lines already taken</span>
+<span class="sd">    :type taken: set[tuple[str]]</span>
+<span class="sd">    :return: List of lists containing bingo numbers that span the entire 1-75 range</span>
+<span class="sd">    :rtype: list[list[str]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">taken</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">taken</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">paths_taken</span> <span class="o">=</span> <span class="n">taken</span>
+    <span class="n">bingos</span> <span class="o">=</span> <span class="n">create_bingo_positions</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">amt</span><span class="p">:</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bingos</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spots</span><span class="p">:</span>
+            <span class="n">bingos</span> <span class="o">=</span> <span class="n">create_bingo_positions</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="n">hyphen</span><span class="p">,</span> <span class="n">zeroes</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">spots</span><span class="p">):</span>
+            <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bingos</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">sort_line</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="n">sort_line</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">sort_line</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">paths_taken</span><span class="p">:</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+            <span class="n">paths_taken</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">sort_line</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Duplicate: </span><span class="si">{</span><span class="n">sort_line</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">lines</span><span class="p">,</span> <span class="n">paths_taken</span><span class="p">]</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

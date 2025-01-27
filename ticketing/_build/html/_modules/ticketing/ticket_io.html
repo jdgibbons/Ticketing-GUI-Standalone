@@ -1,0 +1,892 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.ticket_io &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/ticket_io';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.ticket_io</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">import</span> <span class="nn">random</span> <span class="k">as</span> <span class="nn">rn</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
+
+<span class="kn">from</span> <span class="nn">.ticket</span> <span class="kn">import</span> <span class="n">Ticket</span>
+
+
+<div class="viewcode-block" id="write_tickets_to_file">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.write_tickets_to_file">[docs]</a>
+<span class="k">def</span> <span class="nf">write_tickets_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tickets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write the tickets out to a file in the order they were created. This file can help</span>
+<span class="sd">    in verifying the ups have all the expected tickets.</span>
+
+<span class="sd">    :param filename: base name part of the file to be created</span>
+<span class="sd">    :param tickets: list of tickets</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check if a &#39;results&#39; directory exists in the project directory and creat it if it doesn&#39;t.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="c1"># Create a file in the &#39;results&#39; directory to hold the tickets&#39; information</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./results/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">_tickets.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="c1"># Write the field names to the first lines.</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Ticket</span><span class="o">.</span><span class="n">csv_fields</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Loop through the tickets list, write out their information, then close the file.</span>
+    <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">tickets</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tick</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="write_permutations_to_files">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.write_permutations_to_files">[docs]</a>
+<span class="k">def</span> <span class="nf">write_permutations_to_files</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">perms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param filename:</span>
+<span class="sd">    :param perms:</span>
+<span class="sd">    :param verbose:</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Writing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span><span class="si">}</span><span class="s2"> permutations to files . . .&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    Perm: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">perm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">perms</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./results/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">_perm</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Ticket</span><span class="o">.</span><span class="n">csv_fields</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ticket</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="write_game_stacks_to_file">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.write_game_stacks_to_file">[docs]</a>
+<span class="k">def</span> <span class="nf">write_game_stacks_to_file</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">game_stacks</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]],</span> <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                              <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Write all tickets to a file according to the number of ups required.</span>
+
+<span class="sd">    :param filename: the base name for this game</span>
+<span class="sd">    :type filename: str</span>
+<span class="sd">    :param game_stacks: list of lists of tickets representing all the ups for the game</span>
+<span class="sd">    :type game_stacks: list[list[Ticket]]</span>
+<span class="sd">    :param q_sheet_capacity: number of tickets per sheet</span>
+<span class="sd">    :type q_sheet_capacity: int</span>
+<span class="sd">    :param q_sheets: number of sheets in the flat</span>
+<span class="sd">    :type q_sheets: int</span>
+<span class="sd">    :param q_ups: number of ups in this flat</span>
+<span class="sd">    :type q_ups: int</span>
+<span class="sd">    :return: list of tickets containing cds, all tickets grouped by sheet</span>
+<span class="sd">    :rtype: list[list[Ticket]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Create two lists to contain tickets: cd_tickets will contain only those tickets</span>
+    <span class="c1"># that have cds attached to them. sheets will have all the tickets for a sheet in</span>
+    <span class="c1"># the order they will be placed. I don&#39;t remember why I wanted this information,</span>
+    <span class="c1"># but I don&#39;t use it right now. I&#39;ll probably get rid of it in the future.</span>
+    <span class="n">cd_tickets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sheets</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Open csv file for tickets</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./results/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="c1"># Write out csv fields</span>
+    <span class="c1"># file.write(f&quot;{&#39;,&#39;.join(game_stacks[0][0].csv_fields)}\n&quot;)</span>
+    <span class="c1"># file.write(f&quot;{game_stacks[0][1].fielders()}\n&quot;)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">Ticket</span><span class="o">.</span><span class="n">csv_fields</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Start loop at the sheet level</span>
+    <span class="k">for</span> <span class="n">sheet</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_sheets</span><span class="p">):</span>
+        <span class="n">new_sheet</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">sheet_position</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c1"># Cycle through game stacks</span>
+        <span class="k">for</span> <span class="n">stack</span> <span class="ow">in</span> <span class="n">game_stacks</span><span class="p">:</span>
+            <span class="c1"># Calculate tickets per up per sheet and pop that</span>
+            <span class="c1"># number of tickets off the list and into the file.</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">((</span><span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span> <span class="o">/</span> <span class="n">q_ups</span><span class="p">))):</span>
+                <span class="n">tick</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">tick</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                <span class="c1"># Add sheet number and position to the ticket</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">reset_sheet_number</span><span class="p">(</span><span class="n">sheet</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="c1"># If this ticket falls within the cd parameter, add it the list</span>
+                <span class="k">if</span> <span class="n">tick</span><span class="o">.</span><span class="n">get_cd_tier</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="c1"># tick.reset_position(cd_grid[sheet_position])</span>
+                    <span class="n">tick</span><span class="o">.</span><span class="n">reset_position_on_sheet</span><span class="p">(</span><span class="n">sheet_position</span><span class="p">)</span>
+                    <span class="n">cd_tickets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tick</span><span class="p">))</span>
+                <span class="c1"># Add the ticket to the current sheet and increment the sheet position</span>
+                <span class="n">new_sheet</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+                <span class="n">sheet_position</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1"># Add current sheet to the sheets list and increase the page number</span>
+        <span class="n">sheets</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_sheet</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">cd_tickets</span><span class="p">,</span> <span class="n">sheets</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="write_cd_positions_to_file">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.write_cd_positions_to_file">[docs]</a>
+<span class="k">def</span> <span class="nf">write_cd_positions_to_file</span><span class="p">(</span><span class="n">part</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cd_tickets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">cd_tier</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take a list of cd tickets and write out the pertinent information to a csv file</span>
+<span class="sd">    for tickets with only one possible cd placement.</span>
+
+<span class="sd">    :param part: The Bonanza part prefix for this game</span>
+<span class="sd">    :type part: str</span>
+<span class="sd">    :param filename: The base file name for the csv file</span>
+<span class="sd">    :type filename: str</span>
+<span class="sd">    :param cd_tickets: tickets containing cds</span>
+<span class="sd">    :type cd_tickets: list[Ticket]</span>
+<span class="sd">    :param cd_tier: the highest tier for cds</span>
+<span class="sd">    :type cd_tier: int</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If the cd tier is 0, I don&#39;t know why I&#39;m here in the first place.</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cd_tickets</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1"># Open the file and write out the field names</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./results/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">_cds.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;part,up,tier,position,type</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># Cycle through the tickets and write out the pertinent information for each cd</span>
+    <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">cd_tickets</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">tick</span><span class="o">.</span><span class="n">get_sheet_number</span><span class="p">())</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_up</span><span class="p">()</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_cd_tier</span><span class="p">()</span><span class="si">}</span><span class="s2">,&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_position_on_sheet</span><span class="p">()</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_cd_type</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="write_multi_spot_cd_positions_to_file">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.write_multi_spot_cd_positions_to_file">[docs]</a>
+<span class="k">def</span> <span class="nf">write_multi_spot_cd_positions_to_file</span><span class="p">(</span><span class="n">part</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">cd_tickets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span>
+                                          <span class="n">cd_tier_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">spots_per_ticket</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take a list of cd tickets and write out the pertinent information to a csv file</span>
+<span class="sd">    specifically for tickets with more than one possible cd placement.</span>
+
+<span class="sd">    :param part: The Bonanza part prefix for this game</span>
+<span class="sd">    :type part: str</span>
+<span class="sd">    :param filename: The base file name for the csv file</span>
+<span class="sd">    :type filename: str</span>
+<span class="sd">    :param cd_tickets: tickets containing cds</span>
+<span class="sd">    :type cd_tickets: list[Ticket]</span>
+<span class="sd">    :param cd_tier_level: the highest tier for cds</span>
+<span class="sd">    :type cd_tier_level: int</span>
+<span class="sd">    :param spots_per_ticket: number of possible cd spots on each ticket</span>
+<span class="sd">    :type spots_per_ticket: int</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># If the cd tier level is 0, I don&#39;t know why we&#39;re here in the first place</span>
+    <span class="k">if</span> <span class="n">cd_tier_level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="c1"># Open the file and write out the field names</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">&#39;./results&#39;</span><span class="p">)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./results/</span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s2">_cds.csv&quot;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;part,up,tier,position,type</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="c1"># Cycle through the tickets</span>
+    <span class="k">for</span> <span class="n">tick</span> <span class="ow">in</span> <span class="n">cd_tickets</span><span class="p">:</span>
+        <span class="c1"># Because the 3 window has multiple (3) cd positions per ticket,</span>
+        <span class="c1"># we must multiply the ticket number (-1) by 3 and add the position</span>
+        <span class="c1"># on ticket to the total to refer to the correct field name.</span>
+        <span class="n">t_position</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">get_position_on_sheet</span><span class="p">()</span>
+        <span class="n">t_slot</span> <span class="o">=</span> <span class="n">tick</span><span class="o">.</span><span class="n">get_position_on_ticket</span><span class="p">()</span>
+        <span class="n">sheet</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tick</span><span class="o">.</span><span class="n">get_sheet_number</span><span class="p">())</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="p">((</span><span class="n">t_position</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">spots_per_ticket</span><span class="p">)</span> <span class="o">+</span> <span class="n">t_slot</span>
+        <span class="c1"># Write out values to the file</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">part</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">sheet</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_up</span><span class="p">()</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_cd_tier</span><span class="p">()</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">tick</span><span class="o">.</span><span class="n">get_cd_type</span><span class="p">()</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="create_game_stacks">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.create_game_stacks">[docs]</a>
+<span class="k">def</span> <span class="nf">create_game_stacks</span><span class="p">(</span><span class="n">tickets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                       <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mixer</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">q_subflats</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create the required number of ticket variations for each up. The total number of ups</span>
+<span class="sd">    divided by the number of permutations gives the necessary number of copies of each perm.</span>
+<span class="sd">    Call the randomize method to evenly spread each type of ticket across the sheet faces.</span>
+
+<span class="sd">    :param q_ups: the number of ups in this flat</span>
+<span class="sd">    :type q_ups: int</span>
+<span class="sd">    :param tickets: list of tickets for this flat</span>
+<span class="sd">    :type tickets: list[Ticket]</span>
+<span class="sd">    :param q_sheets: number of sheets in the flat</span>
+<span class="sd">    :type q_sheets: int</span>
+<span class="sd">    :param q_sheet_capacity: the number of tickets per sheet</span>
+<span class="sd">    :type q_sheet_capacity: int</span>
+<span class="sd">    :param mixer: Should these tickets be randomized?</span>
+<span class="sd">    :type mixer: bool</span>
+<span class="sd">    :param q_subflats: number of subflats in this flat (should either be 0 or greater than 1 (never 1))</span>
+<span class="sd">    :type q_subflats: int</span>
+<span class="sd">    :return: list of lists of tickets for each up</span>
+<span class="sd">    :rtype: list[list[Ticket]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">game_stacks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">reset_csv_fields</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">up</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_ups</span><span class="p">):</span>
+        <span class="n">stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Randomize evenly across up columns on sheet. Choose the appropriate method based on the</span>
+        <span class="c1"># presence of subflats.</span>
+        <span class="k">if</span> <span class="n">q_subflats</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Update the ticket csv field to include the subflat column</span>
+            <span class="k">if</span> <span class="n">reset_csv_fields</span><span class="p">:</span>
+                <span class="n">tickets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">add_subflat_to_csv_fields</span><span class="p">()</span>
+                <span class="n">reset_csv_fields</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">mixer</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_and_randomize_subflat_stacks</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tickets</span><span class="p">),</span> <span class="n">up</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span>
+                                                               <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">,</span> <span class="n">q_subflats</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_subflat_stacks</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tickets</span><span class="p">),</span> <span class="n">up</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span>
+                                                 <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">,</span> <span class="n">q_subflats</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mixer</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_and_randomize_stack</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tickets</span><span class="p">),</span> <span class="n">up</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_game_stacks</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">tickets</span><span class="p">),</span> <span class="n">up</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">)</span>
+        <span class="n">game_stacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">game_stacks</span></div>
+
+
+
+<div class="viewcode-block" id="create_game_stacks_from_permutations">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.create_game_stacks_from_permutations">[docs]</a>
+<span class="k">def</span> <span class="nf">create_game_stacks_from_permutations</span><span class="p">(</span><span class="n">perms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]],</span> <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                         <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">q_subflats</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take a list of permutations and create the required number of ups from it.</span>
+
+<span class="sd">    :param perms: list of lists containing tickets, each list being a permutation</span>
+<span class="sd">    :type perms: list[list[Ticket]]</span>
+<span class="sd">    :param q_ups: number of ups in this flat</span>
+<span class="sd">    :type q_ups: int</span>
+<span class="sd">    :param q_sheets: number of sheets in the flat</span>
+<span class="sd">    :type q_sheets: int</span>
+<span class="sd">    :param q_sheet_capacity: number of the tickets per sheet</span>
+<span class="sd">    :type q_sheet_capacity: int</span>
+<span class="sd">    :param verbose: whether to print debug/tracking information to the screen</span>
+<span class="sd">    :type verbose: bool</span>
+<span class="sd">    :param q_subflats: number of subflats in this flat (should either be 0 or greater than 1 (never 1))</span>
+<span class="sd">    :type q_subflats: int</span>
+<span class="sd">    :return: list of lists containing tickets for each up</span>
+<span class="sd">    :rtype: list[list[Ticket]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the number of ups per permutation</span>
+    <span class="n">q_permutations</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+    <span class="n">q_ups_per_perm</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_ups</span> <span class="o">/</span> <span class="n">q_permutations</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Creating </span><span class="si">{</span><span class="n">q_ups_per_perm</span><span class="si">}</span><span class="s2"> iterations of each of the </span><span class="si">{</span><span class="n">q_permutations</span><span class="si">}</span><span class="s2">&quot;</span>
+              <span class="sa">f</span><span class="s2">&quot; permutations for a total of </span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="s2"> ups.&quot;</span><span class="p">)</span>
+    <span class="n">game_stacks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through the permutations and create the required number of shuffled copies for each</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">perm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">perms</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;    Processing perm </span><span class="si">{</span><span class="n">idx</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;        Up: &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="c1"># Produce single up</span>
+        <span class="k">for</span> <span class="n">up</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_ups_per_perm</span><span class="p">):</span>
+            <span class="c1"># Calculate the up number according to permutation number plus up number for this permutation</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span> <span class="o">*</span> <span class="n">q_ups_per_perm</span><span class="p">)</span> <span class="o">+</span> <span class="n">up</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+            <span class="c1"># If there are subflats, use the new subflat-friendly apportion and randomize method.</span>
+            <span class="k">if</span> <span class="n">q_subflats</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_and_randomize_subflat_stacks</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">perm</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span>
+                                                               <span class="n">verbose</span><span class="p">,</span> <span class="n">q_subflats</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stack</span> <span class="o">=</span> <span class="n">apportion_and_randomize_stack</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">perm</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">)</span>
+            <span class="n">game_stacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stack</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">game_stacks</span></div>
+
+
+
+<div class="viewcode-block" id="apportion_and_randomize_stack">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.apportion_and_randomize_stack">[docs]</a>
+<span class="k">def</span> <span class="nf">apportion_and_randomize_stack</span><span class="p">(</span><span class="n">stack</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">up</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                  <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a randomized stack of tickets that uniformly spreads the ticket</span>
+<span class="sd">    types across the number of substacks needed (equal to the number of tickets</span>
+<span class="sd">    per up on a sheet).</span>
+
+<span class="sd">    :param q_sheets: number of sheets in the flat</span>
+<span class="sd">    :type q_sheets: int</span>
+<span class="sd">    :param q_ups: number of ups in each flat</span>
+<span class="sd">    :type q_ups: int</span>
+<span class="sd">    :param q_sheet_capacity: number of tickets per sheet</span>
+<span class="sd">    :type q_sheet_capacity: int</span>
+<span class="sd">    :param stack: a list of all the tickets used in one up of a game</span>
+<span class="sd">    :type stack: list[Ticket]</span>
+<span class="sd">    :param up: number associated with this up</span>
+<span class="sd">    :type up: int</span>
+<span class="sd">    :return: reordered list of tickets</span>
+<span class="sd">    :rtype: list[Ticket]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># print(f&quot;up = {up}&quot;)</span>
+    <span class="c1"># global q_sheet_capacity, q_ups, q_sheets</span>
+    <span class="c1"># Calculate the number of tickets appearing on each sheet for each up</span>
+    <span class="n">tickets_per_sheet</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span> <span class="o">/</span> <span class="n">q_ups</span><span class="p">)</span>
+    <span class="n">mixed_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Create a list for each stack and one containing the index numbers</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tickets_per_sheet</span><span class="p">):</span>
+        <span class="n">mixed_stack</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="c1"># Create an iterator for the randomized indexes, then</span>
+    <span class="c1"># cycle through the tickets and add one to the list</span>
+    <span class="c1"># at the current index</span>
+    <span class="n">cyclindex</span><span class="p">:</span> <span class="n">cycle</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ticket</span> <span class="ow">in</span> <span class="n">stack</span><span class="p">:</span>
+        <span class="n">new_up</span> <span class="o">=</span> <span class="n">up</span>
+        <span class="n">ticket</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">new_up</span><span class="p">)</span>
+        <span class="n">mixed_stack</span><span class="p">[</span><span class="nb">next</span><span class="p">(</span><span class="n">cyclindex</span><span class="p">)]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+
+    <span class="c1"># Shuffle the ticket positions in each substack</span>
+    <span class="k">for</span> <span class="n">substack</span> <span class="ow">in</span> <span class="n">mixed_stack</span><span class="p">:</span>
+        <span class="n">shuffles</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shuffles</span><span class="p">):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">substack</span><span class="p">)</span>
+
+    <span class="c1"># Shuffle the substack positions on the sheet</span>
+    <span class="n">shuffles</span> <span class="o">=</span> <span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shuffles</span><span class="p">):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">mixed_stack</span><span class="p">)</span>
+
+    <span class="c1"># Combine substacks into a single list and return it</span>
+    <span class="n">grand_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_sheets</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">substack</span> <span class="ow">in</span> <span class="n">mixed_stack</span><span class="p">:</span>
+            <span class="n">grand_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">substack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">grand_stack</span></div>
+
+
+
+<div class="viewcode-block" id="apportion_game_stacks">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.apportion_game_stacks">[docs]</a>
+<span class="k">def</span> <span class="nf">apportion_game_stacks</span><span class="p">(</span><span class="n">stack</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">up</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                          <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]:</span>
+    <span class="n">tickets_per_sheet</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span> <span class="o">/</span> <span class="n">q_ups</span><span class="p">)</span>
+    <span class="n">sub_stacks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Create the lists to hold the tickets for each spot of the up</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tickets_per_sheet</span><span class="p">):</span>
+        <span class="n">sub_stacks</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+    <span class="c1"># Create three pages worth of nonwinners to avoid crimping on the winning tickets</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">sub_stacks</span><span class="p">:</span>
+            <span class="n">ticket</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="n">ticket</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+            <span class="n">ss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+    <span class="c1"># Cycle through the remaining sheets and layout the tickets in order of their appearance</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_sheets</span> <span class="o">-</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">sub_stacks</span><span class="p">:</span>
+            <span class="n">ticket</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">ticket</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+            <span class="n">ss</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+    <span class="c1"># Create a single stack and cycle through each column of each sheet to</span>
+    <span class="c1"># properly order the tickets for csv export.</span>
+    <span class="n">grand_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_sheets</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">ss</span> <span class="ow">in</span> <span class="n">sub_stacks</span><span class="p">:</span>
+            <span class="n">grand_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ss</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">grand_stack</span></div>
+
+
+
+<div class="viewcode-block" id="apportion_and_randomize_subflat_stacks">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.apportion_and_randomize_subflat_stacks">[docs]</a>
+<span class="k">def</span> <span class="nf">apportion_and_randomize_subflat_stacks</span><span class="p">(</span><span class="n">stack</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">up</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                                           <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_subflats</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a randomized stack of tickets that uniformly spreads the ticket types</span>
+<span class="sd">    across the number of substacks needed (equal to the number of tickets per up</span>
+<span class="sd">    on a sheet) AS WELL AS evenly distributing them among the subflats.</span>
+
+<span class="sd">    :param stack: a list of all the tickets used in one up of a game</span>
+<span class="sd">    :type stack: list[Ticket]</span>
+<span class="sd">    :param up: number associated with this up</span>
+<span class="sd">    :type up: int</span>
+<span class="sd">    :param q_sheets: number of sheets in the flat</span>
+<span class="sd">    :type q_sheets: int</span>
+<span class="sd">    :param q_sheet_capacity: number of tickets per sheet</span>
+<span class="sd">    :type q_sheet_capacity: int</span>
+<span class="sd">    :param q_ups: number of ups in each flat</span>
+<span class="sd">    :type q_ups: int</span>
+<span class="sd">    :param q_subflats: number of subflats in this flat</span>
+<span class="sd">    :type q_subflats: int</span>
+<span class="sd">    :return: reordered list of tickets</span>
+<span class="sd">    :rtype: list[Ticket]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the number of tickets on each sheet for this up as</span>
+    <span class="c1"># well as how many tickets are in each subflat.</span>
+    <span class="n">ticks_per_sheet</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span> <span class="o">/</span> <span class="n">q_ups</span><span class="p">)</span>
+    <span class="n">sheets_per_subflat</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheets</span> <span class="o">/</span> <span class="n">q_subflats</span><span class="p">)</span>
+
+    <span class="c1"># Create a list containing subflats, each comprised of a list of columns in this</span>
+    <span class="c1"># up, which will all contain a list of tickets for their associated subflat.</span>
+    <span class="c1"># Create the subflat list</span>
+    <span class="n">subflat_stacks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="c1"># Create the column list for this flat</span>
+        <span class="n">column_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Add a list to each column to hold the tickets</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+            <span class="n">column_stack</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="c1"># Add each column to the subflat</span>
+        <span class="n">subflat_stacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column_stack</span><span class="p">)</span>
+
+    <span class="c1"># Create a list of integers for each subflat that represents the</span>
+    <span class="c1"># positions of the tickets on a given sheet for this up and use it to</span>
+    <span class="c1"># randomize the placement of tickets. This will reduce the chance</span>
+    <span class="c1"># of winners clumping together in one area of the flat.</span>
+    <span class="n">stack_orders</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="n">stack_orders</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ticks_per_sheet</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stack_orders</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">stack_orders</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="c1"># Cycle through the sheets for each subflat and add a ticket to every</span>
+    <span class="c1"># column for this up in order of the shuffled positions.</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheets_per_subflat</span><span class="p">):</span>
+        <span class="c1"># Shuffle the column order for each subflat</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stack_orders</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">stack_orders</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+        <span class="c1"># Iterate through the number of tickets needed a single sheet</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+            <span class="c1"># Add one ticket to a column in each subflat</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+                <span class="c1"># Pop a ticket off the ticket list, reset the up and subflat</span>
+                <span class="c1"># values, and add it to the next column.</span>
+                <span class="n">tick</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">reset_subflat</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">subflat_stacks</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">stack_orders</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">c</span><span class="p">]]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+
+    <span class="c1"># There&#39;s a whole lotta shufflin&#39; goin&#39; on.</span>
+    <span class="c1"># Cycle through the subflats</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="c1"># Cycle through the columns</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+            <span class="c1"># Shuffle the tickets in each column</span>
+            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+                <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">subflat_stacks</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">c</span><span class="p">])</span>
+        <span class="c1"># Shuffle the columns in each subflat</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+            <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">subflat_stacks</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+    <span class="c1"># Shuffle the subflat positions</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rn</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+        <span class="n">rn</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">subflat_stacks</span><span class="p">)</span>
+
+    <span class="c1"># Create a single list with tickets in the order they&#39;ll be</span>
+    <span class="c1"># sent to the csv file.</span>
+    <span class="n">final_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through each subflat</span>
+    <span class="k">for</span> <span class="n">subby</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="c1"># Cycle through each sheet in the subflat</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheets_per_subflat</span><span class="p">):</span>
+            <span class="c1"># Cycle through the columns for each sheet</span>
+            <span class="k">for</span> <span class="n">uptick</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+                <span class="c1"># Pop a ticket off at the next flat position and reset</span>
+                <span class="c1"># its subflat, then add it to the final stack.</span>
+                <span class="n">tick</span> <span class="o">=</span> <span class="n">subflat_stacks</span><span class="p">[</span><span class="n">subby</span><span class="p">][</span><span class="n">uptick</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">reset_subflat</span><span class="p">(</span><span class="n">subby</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">final_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final_stack</span></div>
+
+
+
+<div class="viewcode-block" id="apportion_subflat_stacks">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.ticket_io.apportion_subflat_stacks">[docs]</a>
+<span class="k">def</span> <span class="nf">apportion_subflat_stacks</span><span class="p">(</span><span class="n">stack</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">],</span> <span class="n">up</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                             <span class="n">q_ups</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q_subflats</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Ticket</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="c1"># Calculate the number of tickets on each sheet for this up as</span>
+    <span class="c1"># well as how many tickets are in each subflat.</span>
+    <span class="n">ticks_per_sheet</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span> <span class="o">/</span> <span class="n">q_ups</span><span class="p">)</span>
+    <span class="n">sheets_per_subflat</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">q_sheets</span> <span class="o">/</span> <span class="n">q_subflats</span><span class="p">)</span>
+
+    <span class="c1"># Create a list containing subflats, each comprised of a list of columns in this</span>
+    <span class="c1"># up, which will all contain a list of tickets for their associated subflat.</span>
+    <span class="c1"># Create the subflat list</span>
+    <span class="n">subflat_stacks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="c1"># Create the column list for this flat</span>
+        <span class="n">column_stack</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Add a list to each column to hold the tickets</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+            <span class="n">column_stack</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="c1"># Add each column to the subflat</span>
+        <span class="n">subflat_stacks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">column_stack</span><span class="p">)</span>
+
+    <span class="c1"># Cycle through the first three pages of subflats and add</span>
+    <span class="c1"># nonwinners to each spot.</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">subflat_stacks</span><span class="p">[</span><span class="n">s</span><span class="p">]:</span>
+                <span class="n">ticket</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">ticket</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+                <span class="n">ticket</span><span class="o">.</span><span class="n">reset_subflat</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+
+    <span class="c1"># Cycle through the remaining sheets and</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheets_per_subflat</span> <span class="o">-</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+                <span class="n">ticket</span> <span class="o">=</span> <span class="n">stack</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">ticket</span><span class="o">.</span><span class="n">reset_up</span><span class="p">(</span><span class="n">up</span><span class="p">)</span>
+                <span class="n">ticket</span><span class="o">.</span><span class="n">reset_subflat</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">subflat_stacks</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ticket</span><span class="p">)</span>
+
+    <span class="c1"># for s in range(q_subflats):</span>
+    <span class="c1">#     for c in subflat_stacks[s]:</span>
+    <span class="c1">#         ticket = stack.pop(0)</span>
+    <span class="c1">#         ticket.reset_up(up)</span>
+    <span class="c1">#         ticket.reset_subflat(s + 1)</span>
+    <span class="c1">#         c.append(ticket)</span>
+
+    <span class="c1"># Create a single list with tickets in the order they&#39;ll be</span>
+    <span class="c1"># sent to the csv file.</span>
+    <span class="n">final_stack</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Cycle through each subflat</span>
+    <span class="k">for</span> <span class="n">subby</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q_subflats</span><span class="p">):</span>
+        <span class="c1"># Cycle through each sheet in the subflat</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sheets_per_subflat</span><span class="p">):</span>
+            <span class="c1"># Cycle through the columns for each sheet</span>
+            <span class="k">for</span> <span class="n">uptick</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ticks_per_sheet</span><span class="p">):</span>
+                <span class="c1"># Pop a ticket off at the next flat position and reset</span>
+                <span class="c1"># its subflat, then add it to the final stack.</span>
+                <span class="n">tick</span> <span class="o">=</span> <span class="n">subflat_stacks</span><span class="p">[</span><span class="n">subby</span><span class="p">][</span><span class="n">uptick</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">tick</span><span class="o">.</span><span class="n">reset_subflat</span><span class="p">(</span><span class="n">subby</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">final_stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tick</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">final_stack</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

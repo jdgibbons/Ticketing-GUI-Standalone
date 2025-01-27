@@ -1,0 +1,1331 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ticketing.game_info &#8212; Bonanza Ticketing  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/ticketing/game_info';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Bonanza Ticketing  documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for ticketing.game_info</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+
+<div class="viewcode-block" id="HoldEnum">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.HoldEnum">[docs]</a>
+<span class="k">class</span> <span class="nc">HoldEnum</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class sole raison d&#39;être is to contain the option values for hold inquiries.</span>
+<span class="sd">    Apparently classes are the best fit in Python, which seems downright silly to me.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">SINGLE</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">SINGLE_SPOTS</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">SUFFIXED</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">ZERO</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">BINGO</span> <span class="o">=</span> <span class="mi">10</span></div>
+
+
+
+<div class="viewcode-block" id="AddImages">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.AddImages">[docs]</a>
+<span class="k">class</span> <span class="nc">AddImages</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class holds the option values for adding blank-space elements to image lists</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Insert &#39;base.ai&#39; at the front of the provided image list</span>
+    <span class="n">PreBase</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="c1"># Append &#39;base.ai&#39; to the list of provided images</span>
+    <span class="n">PostBase</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="c1"># Don&#39;t add anything to the image list</span>
+    <span class="n">NoneAdded</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1"># Add the number of spaces equal to the associated</span>
+    <span class="c1"># absolute value the front of the image list.</span>
+    <span class="n">PreOne</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">PreTwo</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">PreThree</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">PreFour</span> <span class="o">=</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span>
+    <span class="n">PreFive</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">PreSix</span> <span class="o">=</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">PreSeven</span> <span class="o">=</span> <span class="o">-</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">PreEight</span> <span class="o">=</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span>
+    <span class="n">PreNine</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9</span>
+    <span class="c1"># Append the number of spaces equal to the associated</span>
+    <span class="c1"># value the front of the image list.</span>
+    <span class="n">PostOne</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">PostTwo</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">PostThree</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">PostFour</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="n">PostFive</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">PostSix</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span>
+    <span class="n">PostSeven</span> <span class="o">=</span> <span class="mi">7</span><span class="p">,</span>
+    <span class="n">PostEight</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">PostNine</span> <span class="o">=</span> <span class="mi">9</span></div>
+
+
+
+<div class="viewcode-block" id="get_game_parameters">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_game_parameters">[docs]</a>
+<span class="k">def</span> <span class="nf">get_game_parameters</span><span class="p">(</span><span class="n">sheets</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">no_win</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">inst</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">pick</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">holders</span><span class="p">:</span> <span class="n">HoldEnum</span><span class="p">,</span>
+                        <span class="n">names</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">new_size</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">do_perm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Provides a generic function that collects the most commonly used game parameters and returns</span>
+<span class="sd">    them in a consistent and predictable format.</span>
+<span class="sd">    :param sheets: gather sheet information? [Ups, Perms, Sheets, [BI Capacity, BO Capacity]]</span>
+<span class="sd">    :type sheets: bool</span>
+<span class="sd">    :param no_win: gather nonwinner information? [Count, Pool Size, Images/Ticket]</span>
+<span class="sd">    :type no_win: bool</span>
+<span class="sd">    :param inst: gather instant winner information? [[tickets/tier], CD Tier, Subimages?]</span>
+<span class="sd">    :type inst: bool</span>
+<span class="sd">    :param pick: gather pick ticket information?</span>
+<span class="sd">    :type pick: bool</span>
+<span class="sd">    :param holders: gather hold information and type</span>
+<span class="sd">    :type holders: HoldEnum</span>
+<span class="sd">    :param names: gather part and file name information?</span>
+<span class="sd">    :type names: str</span>
+<span class="sd">    :param new_size: does this game use the new, larger sheet size?</span>
+<span class="sd">    :type new_size: bool</span>
+<span class="sd">    :param do_perm: gather parameter information?</span>
+<span class="sd">    :type do_perm: bool</span>
+<span class="sd">    :return: [sheet_specs, nw_specs, instant_specs, pick_specs, hold_specs, names_specs]</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Sheet specs returns [Ups, Permutations, Sheets, [Bottom-In CD Capacity, Bottom-Out Ticket Count]]</span>
+    <span class="k">if</span> <span class="n">sheets</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_up_sheet_ticket_perms</span><span class="p">(</span><span class="n">new_size</span><span class="p">,</span> <span class="n">do_perm</span><span class="p">))</span>
+    <span class="c1"># Nonwinner specs returns [Count, Image Pool Size, Images per Ticket]</span>
+    <span class="k">if</span> <span class="n">no_win</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_nonwinner_image_info</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Create a list with zero values to indicate there are no nonwinners in this game.</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="c1"># Instant winners returns [[Tickets per Tier], CD Tier Level, Are Subimages Used?]</span>
+    <span class="k">if</span> <span class="n">inst</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_instant_winner_info</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Create a list that indicates there are no instant winners in this game.</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+    <span class="c1"># Pick specs returns [[Tickets per Tier], (I)mage or (N)umber]</span>
+    <span class="k">if</span> <span class="n">pick</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_pick_tickets_info</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Create a list that indicates there are no pick tickets in this game.</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">False</span><span class="p">])</span>
+    <span class="c1"># Hold specs returns various lists based on need.</span>
+    <span class="k">if</span> <span class="n">holders</span> <span class="o">!=</span> <span class="n">HoldEnum</span><span class="o">.</span><span class="n">ZERO</span><span class="p">:</span>
+        <span class="c1"># Get a single integer</span>
+        <span class="k">if</span> <span class="n">holders</span> <span class="o">==</span> <span class="n">HoldEnum</span><span class="o">.</span><span class="n">SINGLE</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_single_integer</span><span class="p">(</span><span class="s1">&#39;holds&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
+        <span class="c1"># Get the number of holds and the number of spots on the ticket</span>
+        <span class="k">elif</span> <span class="n">holders</span> <span class="o">==</span> <span class="n">HoldEnum</span><span class="o">.</span><span class="n">SINGLE_SPOTS</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">get_single_integer</span><span class="p">(</span><span class="s1">&#39;holds&#39;</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+                           <span class="n">get_single_integer</span><span class="p">(</span><span class="s1">&#39;spots&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="n">holders</span> <span class="o">==</span> <span class="n">HoldEnum</span><span class="o">.</span><span class="n">SUFFIXED</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_single_window_hold_info</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="n">holders</span> <span class="o">==</span> <span class="n">HoldEnum</span><span class="o">.</span><span class="n">BINGO</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_bingo_number_parameters</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">names</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">get_part_and_file_names</span><span class="p">())</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">params</span></div>
+
+
+
+<div class="viewcode-block" id="get_up_sheet_ticket_perms">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_up_sheet_ticket_perms">[docs]</a>
+<span class="k">def</span> <span class="nf">get_up_sheet_ticket_perms</span><span class="p">(</span><span class="n">new_size</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">do_perms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for the information concerning the number of ups, tickets, sheets,</span>
+<span class="sd">    and permutations</span>
+
+<span class="sd">    :param new_size: is this the new sheet size</span>
+<span class="sd">    :type new_size: bool</span>
+<span class="sd">    :param do_perms: are multiple perms required</span>
+<span class="sd">    :type do_perms: bool</span>
+<span class="sd">    :return: [ups, permutations, sheets, sheet capacity, perm reset]</span>
+<span class="sd">    :rtype: list[int | list[int]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Let the user know that &#39;x&#39; will end the input process and exit at any prompt</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter parameters for this game. Entering &#39;X&#39; for any value will exit the program.&quot;</span><span class="p">)</span>
+    <span class="c1"># Get the WINDOW STRUCTURE from the user.</span>
+    <span class="n">structure</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Basic Window Structure (1, 3, 3-1, 4, 4-1, 5, 7, S, NS, C, BC, NC): &quot;</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">structure</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;3-1&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;4-1&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;7&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;NS&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;BC&#39;</span><span class="p">,</span> <span class="s1">&#39;NC&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You must enter an acceptable value for the window structure. Look at the list.&#39;</span><span class="p">)</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Basic Window Structure (1, 3, 3-1, 4, 4-1, 5, 7, S, NS, C, BC, NC): &quot;</span><span class="p">)</span>
+    <span class="c1"># If this is the NEW SHEET SIZE, prepend &#39;N&#39; to structure.</span>
+    <span class="k">if</span> <span class="n">new_size</span><span class="p">:</span>
+        <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span> <span class="o">+</span> <span class="n">structure</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+    <span class="c1"># Get the SHEET CAPACITY from the window structure.</span>
+    <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="n">apply_sheet_capacity</span><span class="p">(</span><span class="n">structure</span><span class="p">)</span>
+    <span class="c1"># Get the number of UPS from the user.</span>
+    <span class="n">ups</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">ups</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ups</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">ups</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Ups (&lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ups</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">ups</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">ups</span><span class="p">)</span>
+    <span class="n">q_ups</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ups</span><span class="p">)</span>
+    <span class="c1"># If the number of ups is incompatible with the sheet capacity,</span>
+    <span class="c1"># harass the user until they input a proper value.</span>
+    <span class="k">while</span> <span class="n">q_sheet_capacity</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">%</span> <span class="n">q_ups</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sheet capacity (</span><span class="si">{</span><span class="n">q_sheet_capacity</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) is not evenly divisible by the number of ups (</span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That won&#39;t work. Try again.&quot;</span><span class="p">)</span>
+        <span class="n">ups</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">ups</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ups</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">ups</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Ups: &#39;</span><span class="p">)</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">ups</span><span class="p">)</span>
+        <span class="n">q_ups</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ups</span><span class="p">)</span>
+    <span class="c1"># Get the number of PERMUTATIONS, if requested; otherwise, set the</span>
+    <span class="c1"># number to one. Make sure the number of ups is evenly divisible by</span>
+    <span class="c1"># the number of permutations.</span>
+    <span class="n">p_reset</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">do_perms</span><span class="p">:</span>
+        <span class="n">perms</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Permutations (&lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">perms</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">perms</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+        <span class="n">q_permutations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+        <span class="c1"># If the number of perms doesn&#39;t fit the number of ups, bug the user</span>
+        <span class="c1"># to enter a new number until they get it right.</span>
+        <span class="k">while</span> <span class="n">q_ups</span> <span class="o">%</span> <span class="n">q_permutations</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Number of permutations (</span><span class="si">{</span><span class="n">q_permutations</span><span class="si">}</span><span class="s2">) does not divide equally into the number of ups (</span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Those parameters would create a bloodbath. Try again.&#39;</span><span class="p">)</span>
+            <span class="n">perms</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Permutations (&lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">perms</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">perms</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="n">check_for_exit</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+            <span class="n">q_permutations</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">perms</span><span class="p">)</span>
+        <span class="c1"># This is set to true if the permutations cannot have duplicates</span>
+        <span class="c1"># across the entire collection of tickets.</span>
+        <span class="k">if</span> <span class="n">q_permutations</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Will permutations be played simultaneously? (y/n) (&lt;enter&gt; = &#39;Y&#39;) &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span>
+                <span class="n">p_reset</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q_permutations</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="c1"># Get the TOTAL SHEETS from the user.</span>
+    <span class="n">linens</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">linens</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">linens</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">linens</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Sheets: &#39;</span><span class="p">)</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">linens</span><span class="p">)</span>
+    <span class="n">q_sheets</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">linens</span><span class="p">)</span>
+    <span class="c1"># Return all the pertinents.</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">q_ups</span><span class="p">,</span> <span class="n">q_permutations</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">p_reset</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="get_part_and_file_names">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_part_and_file_names">[docs]</a>
+<span class="k">def</span> <span class="nf">get_part_and_file_names</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user to input the game part number and base file name string to be</span>
+<span class="sd">    used to construct actual csv file names to output game related data. The</span>
+<span class="sd">    part name is used only when there are cds associated with the game.</span>
+
+<span class="sd">    :return: [base part number, base file name]</span>
+<span class="sd">    :rtype: list[str]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the PART NAME from the user.</span>
+    <span class="n">bn</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Base Part Name: &#39;</span><span class="p">)</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
+    <span class="c1"># Get the FILE NAME from the user.</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Base File Name: &#39;</span><span class="p">)</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="c1"># return part name, base file name</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">bn</span><span class="p">,</span> <span class="n">fn</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="check_for_exit">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.check_for_exit">[docs]</a>
+<span class="k">def</span> <span class="nf">check_for_exit</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Check if the passed value is &#39;X&#39; and abort if is.</span>
+
+<span class="sd">    :param value: string that was entered by the user</span>
+<span class="sd">    :type value: str</span>
+<span class="sd">    :return: None</span>
+<span class="sd">    :rtype: None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Good! I didn&#39;t want to interact with you anyway!!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Don&#39;t let the screen door hit you on the way out!&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="apply_sheet_capacity">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.apply_sheet_capacity">[docs]</a>
+<span class="k">def</span> <span class="nf">apply_sheet_capacity</span><span class="p">(</span><span class="n">structure</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set the sheet capacity variables based on the window structure, and whether this</span>
+<span class="sd">    is the new sheet size or old.</span>
+
+<span class="sd">    :param structure: Window structure to be used</span>
+<span class="sd">    :type structure: str</span>
+<span class="sd">    :return: [bottom in capacity, bottom out capacity]</span>
+<span class="sd">    :rtype: list[int]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Set the sheet capacity according to window structure</span>
+    <span class="k">match</span> <span class="n">structure</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span>
+        <span class="k">case</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">96</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">96</span><span class="p">,</span> <span class="mi">96</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;3&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O3&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;3-1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O3-1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">80</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;4&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O4&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">256</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;4-1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O4-1&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O5&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;7&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;O7&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">42</span><span class="p">,</span> <span class="mi">42</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">240</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;OS&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">240</span><span class="p">,</span> <span class="mi">240</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;NS&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">396</span><span class="p">,</span> <span class="mi">396</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">113</span><span class="p">,</span> <span class="mi">113</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;OC&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">113</span><span class="p">,</span> <span class="mi">113</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;BC&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;OBC&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">33</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+        <span class="k">case</span> <span class="s1">&#39;NC&#39;</span><span class="p">:</span>
+            <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="p">[</span><span class="mi">189</span><span class="p">,</span> <span class="mi">189</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">q_sheet_capacity</span></div>
+
+
+
+<div class="viewcode-block" id="get_nonwinner_image_info">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_nonwinner_image_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_nonwinner_image_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for nonwinner image information and return the values in a list.</span>
+
+<span class="sd">    :return: [number of nonwinners, size of image pool, images per ticket]</span>
+<span class="sd">    :rtype: list[int]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the NUMBER OF NONWINNERS from the users.</span>
+    <span class="n">nws</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">nws</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">nws</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">nws</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Nonwinners (&lt;enter&gt; = 0): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nws</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">nws</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">nws</span><span class="p">)</span>
+    <span class="c1"># This will probably always be true, as the user must set the flag to call this function.</span>
+    <span class="c1"># However, this is just for the &#39;rare&#39; occasion that I&#39;m an idiot.</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">nws</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Get the SIZE OF THE NONWINNER IMAGE POOL from the user.</span>
+        <span class="c1"># Nine is the default value.</span>
+        <span class="n">pool</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">pool</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">pool</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">pool</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Size of Nonwinner-image Pool (&lt;enter&gt; = 9): &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pool</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">pool</span> <span class="o">=</span> <span class="s1">&#39;9&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">pool</span><span class="p">)</span>
+        <span class="c1"># Get the nonwinner IMAGES PER TICKET from the user.</span>
+        <span class="n">ipt</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">ipt</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ipt</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">ipt</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of images on each nonwinning ticket ((1 or 3) &lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ipt</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">ipt</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+            <span class="k">elif</span> <span class="n">ipt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;9&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are only three choices: 1, 3, or 9.&quot;</span><span class="p">)</span>
+                <span class="n">ipt</span> <span class="o">=</span> <span class="s1">&#39;crap&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">ipt</span><span class="p">)</span>
+    <span class="c1"># If there are no nonwinners, just set the pool size to 15 and the number of images</span>
+    <span class="c1"># per ticket to 1. They&#39;re superfluous but keep the list values non-None.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pool</span> <span class="o">=</span> <span class="s1">&#39;15&#39;</span>
+        <span class="n">ipt</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">nws</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">pool</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">ipt</span><span class="p">)]</span></div>
+
+
+
+<div class="viewcode-block" id="get_instant_winner_info">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_instant_winner_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_instant_winner_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask user for instant winner information and return it in a list.</span>
+
+<span class="sd">    :return: [number of winners, cd tier level, are there subimages]</span>
+<span class="sd">    :rtype: list[int | bool]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Number of instant winners</span>
+    <span class="n">inst</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">inst</span><span class="p">)</span> <span class="ow">and</span> <span class="n">inst</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">inst</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Instant Winners (separate tiers with commas: 1,5,20 (&lt;enter&gt; = 0)): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">inst</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+
+    <span class="c1"># CD tier level and subimage presence</span>
+    <span class="n">subs</span> <span class="o">=</span> <span class="s1">&#39;H&#39;</span>
+    <span class="n">ins_cd_tier</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">inst</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">ins_cd_tier</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">ins_cd_tier</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">ins_cd_tier</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Instant CD Tier Level (&lt;enter&gt; or &#39;0&#39; = none): &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ins_cd_tier</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">ins_cd_tier</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">ins_cd_tier</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[YNXynx]&#39;</span><span class="p">,</span> <span class="n">subs</span><span class="p">):</span>
+            <span class="n">subs</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do tiers have subimages? ((Y/N) &lt;enter&gt; = &#39;N&#39;): &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">subs</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">subs</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">subs</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">subs</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="n">ins_cd_tier</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">instants</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">insta</span> <span class="ow">in</span> <span class="n">inst</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">instants</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">insta</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">instants</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ins_cd_tier</span><span class="p">),</span> <span class="n">subs</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="get_single_window_hold_info">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_single_window_hold_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_single_window_hold_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a list of information about a single window hold that can include</span>
+<span class="sd">    number of tickets, type, number of digits, and parameters for creating</span>
+<span class="sd">    a list of winners and nonwinners from a specified number range.</span>
+
+<span class="sd">    :return: [number of holds, type, digits on ticket, number range]</span>
+<span class="sd">    :rtype: list[list[int] | str | int | dict[str, [list[int | str | bool]]]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">holdem</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">holdem</span><span class="p">)</span> <span class="ow">and</span> <span class="n">holdem</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">holdem</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Number of hold tickets (&lt;enter&gt; or &#39;0&#39;): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">holdem</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">holdem</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">holdem</span><span class="p">)</span>
+
+    <span class="n">teepee</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[INXinx]&#39;</span><span class="p">,</span> <span class="n">teepee</span><span class="p">):</span>
+        <span class="n">teepee</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Are the holds [N]umbers or [I]mages? (&lt;enter&gt; = &#39;I&#39;): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">teepee</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">teepee</span> <span class="o">=</span> <span class="s1">&#39;I&#39;</span>
+    <span class="n">teepee</span> <span class="o">=</span> <span class="n">teepee</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">teepee</span><span class="p">)</span>
+
+    <span class="n">numbness</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span>
+    <span class="n">nws</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span>
+    <span class="n">digits</span> <span class="o">=</span> <span class="s1">&#39;P&#39;</span>
+    <span class="k">if</span> <span class="n">teepee</span> <span class="o">==</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">digits</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">digits</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">digits</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the total number of integers that will be on each ticket (&lt;enter&gt; = 3): &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">digits</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">digits</span> <span class="o">=</span> <span class="s1">&#39;3&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">numbness</span><span class="p">)</span> <span class="ow">and</span> <span class="n">numbness</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">numbness</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the first and last elements in this number range (&lt;enter&gt; = &#39;0,9999&#39;): &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">numbness</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">numbness</span> <span class="o">=</span> <span class="s1">&#39;0,9999&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">numbness</span><span class="p">)</span>
+
+        <span class="n">numbness</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">numbness</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)))</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="n">get_suffix_hold_information_enhanced</span><span class="p">()</span>
+        <span class="n">numbness</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">nws</span><span class="p">)</span> <span class="ow">and</span> <span class="n">nws</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="n">nws</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter the lowest and highest nonwinning integer (&lt;enter&gt; = &#39;101,9999&#39;): &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">nws</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">nws</span> <span class="o">=</span> <span class="s1">&#39;101,9999&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">nws</span><span class="p">)</span>
+        <span class="n">nws</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">nws</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)))</span>
+        <span class="n">numbness</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nws</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">numbness</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">digits</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">holdem</span><span class="p">),</span> <span class="n">teepee</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">digits</span><span class="p">),</span> <span class="n">numbness</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="get_pick_tickets_info">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_pick_tickets_info">[docs]</a>
+<span class="k">def</span> <span class="nf">get_pick_tickets_info</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for pick tickets information and return it to the caller.</span>
+<span class="sd">    This can be a single integer or a list of integers, but either value</span>
+<span class="sd">    will be returned as a list.</span>
+
+<span class="sd">    :return: list of ints representing the number of pick tickets</span>
+<span class="sd">    :rtype: list[int]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">picket</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">picket</span><span class="p">)</span> <span class="ow">and</span> <span class="n">picket</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">picket</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Pick Winners (separate tiers with commas: 1,5,20&#39;</span>
+                       <span class="s1">&#39; (or a single number if tiers are irrelevant)): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">picket</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">picket</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">picket</span><span class="p">)</span>
+    <span class="n">q_picks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">numbs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">picket</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">numbs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="n">q_picks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numbs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">numbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">i_type</span> <span class="o">=</span> <span class="s1">&#39;E&#39;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[YNXynx]&#39;</span><span class="p">,</span> <span class="n">i_type</span><span class="p">):</span>
+            <span class="n">i_type</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Does each image have a unique name? (&lt;enter&gt; = &#39;N&#39;) &quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i_type</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">i_type</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">i_type</span><span class="p">)</span>
+        <span class="n">q_picks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i_type</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q_picks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">q_picks</span></div>
+
+
+
+<div class="viewcode-block" id="get_single_integer">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_single_integer">[docs]</a>
+<span class="k">def</span> <span class="nf">get_single_integer</span><span class="p">(</span><span class="n">ticket_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">preset</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for a single integer for ticket count and set it</span>
+<span class="sd">    to a default value if &lt;enter&gt; is pressed without an entry.</span>
+
+<span class="sd">    :param ticket_type: name of the ticket type</span>
+<span class="sd">    :type ticket_type: str</span>
+<span class="sd">    :param preset: default value</span>
+<span class="sd">    :type preset: int</span>
+<span class="sd">    :return: user provided integer value</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">val</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of </span><span class="si">{</span><span class="n">ticket_type</span><span class="si">}</span><span class="s2"> (&lt;enter&gt; = </span><span class="si">{</span><span class="n">preset</span><span class="si">}</span><span class="s2">): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">preset</span><span class="p">)</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_integer_list">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_integer_list">[docs]</a>
+<span class="k">def</span> <span class="nf">get_integer_list</span><span class="p">(</span><span class="n">ticket_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">deafen</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for a list of integers to be used for ticket counts. Set</span>
+<span class="sd">    the list to a default value if &lt;enter&gt; is pressed without an entry.</span>
+
+<span class="sd">    :param ticket_type: name of the ticket type</span>
+<span class="sd">    :type ticket_type: str</span>
+<span class="sd">    :param deafen: default value for the list</span>
+<span class="sd">    :return: user provided list of integers</span>
+<span class="sd">    :rtype: list[int]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">and</span> <span class="n">val</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Number of </span><span class="si">{</span><span class="n">ticket_type</span><span class="si">}</span><span class="s1"> (separate tiers with commas: 1,5,20: &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">deafen</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+    <span class="n">q_picks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">val</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">q_picks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">q_picks</span></div>
+
+
+
+<div class="viewcode-block" id="get_suffix_hold_information">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_suffix_hold_information">[docs]</a>
+<span class="k">def</span> <span class="nf">get_suffix_hold_information</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user to enter the pertinent information for the numbers game that uses</span>
+<span class="sd">    suffixes to create a list of winning integers and another list with (almost) all</span>
+<span class="sd">    the numbers not contained in the list of winners.</span>
+
+<span class="sd">    :return: [starting number, ending number, suffixes, smallest winning integer, largest winning integer, \</span>
+<span class="sd">    text of DesignMerge tag (without the &lt;@&gt;), color all characters in the winning numbers?]</span>
+<span class="sd">    :rtype: list[int | list[str] | str | bool]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Input the lowest number in the entire integer range</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">first</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">first</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;First number in entire range (&lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">first</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+    <span class="n">q_first</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">first</span><span class="p">)</span>
+    <span class="c1"># Input the highest number in the entire integer range</span>
+    <span class="n">last</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">last</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">last</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Last number in entire range (&lt;enter&gt; = 9999): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">last</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">last</span> <span class="o">=</span> <span class="s1">&#39;9999&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+    <span class="n">q_last</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">last</span><span class="p">)</span>
+    <span class="c1"># Input a list of suffixes to be used to indicate winners separated by a comma</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter any suffix(es) to be segregated (separate by commas: 00, 10, 33 (&lt;enter&gt; = 00)): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;00&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+    <span class="n">suffixes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">suff</span> <span class="ow">in</span> <span class="n">suffix</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">suffixes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">suff</span><span class="p">)</span>
+    <span class="c1"># Input the smallest winning number</span>
+    <span class="n">smallest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">smallest</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">smallest</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">smallest</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter the smallest winner in hold range (&lt;enter&gt; = 1): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">smallest</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">smallest</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">smallest</span><span class="p">)</span>
+    <span class="n">q_smallest</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">smallest</span><span class="p">)</span>
+    <span class="c1"># Input the largest winning number</span>
+    <span class="n">largest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">largest</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">()</span> <span class="ow">and</span> <span class="n">largest</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">largest</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter the largest winner in hold range (&lt;enter&gt; = 1500): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">largest</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">largest</span> <span class="o">=</span> <span class="s1">&#39;1500&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">largest</span><span class="p">)</span>
+    <span class="n">q_largest</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">largest</span><span class="p">)</span>
+
+    <span class="n">dm_tag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">dm_tag</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dm_tag</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter the DesignMerge tag for the holds (&lt;enter&gt; = REDFONT): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dm_tag</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">dm_tag</span> <span class="o">=</span> <span class="s1">&#39;REDFONT&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">dm_tag</span><span class="p">)</span>
+
+    <span class="n">all_chars</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_chars</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">all_chars</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Apply DesignMerge tag to suffix only? Y/N (&lt;enter&gt; = Y): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">all_chars</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">all_chars</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span>
+    <span class="n">color_all_chars</span> <span class="o">=</span> <span class="n">all_chars</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;Y&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">all_chars</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">q_first</span><span class="p">,</span> <span class="n">q_last</span><span class="p">,</span> <span class="n">suffixes</span><span class="p">,</span> <span class="n">q_smallest</span><span class="p">,</span> <span class="n">q_largest</span><span class="p">,</span> <span class="n">dm_tag</span><span class="p">,</span> <span class="n">color_all_chars</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="check_game_parameters">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.check_game_parameters">[docs]</a>
+<span class="k">def</span> <span class="nf">check_game_parameters</span><span class="p">(</span><span class="n">sheet</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span><span class="p">],</span> <span class="n">nws</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">inst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">],</span>
+                          <span class="n">pick</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">],</span> <span class="n">holds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">],</span>
+                          <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">gui</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verify the number of tickets expected equals the number that would be generated</span>
+<span class="sd">    given the passed parameters.</span>
+
+<span class="sd">    :param sheet: list containing sheet layout/quantity information</span>
+<span class="sd">    :type sheet: list[list[int] | int]</span>
+<span class="sd">    :param nws: list containing nonwinner info (quantity in field 0)</span>
+<span class="sd">    :type nws: list[int]</span>
+<span class="sd">    :param inst: list containing instant winner info (quantity list in field 0)</span>
+<span class="sd">    :type inst: list[list[int] | int | bool]</span>
+<span class="sd">    :param pick: list containing pick quantities</span>
+<span class="sd">    :type pick: list[int]</span>
+<span class="sd">    :param holds: number of hold ticket</span>
+<span class="sd">    :type holds: int | list[list[int] | str | bool]</span>
+<span class="sd">    :param verbose: should debug/reporting information be displayed to the screen</span>
+<span class="sd">    :type verbose: bool</span>
+<span class="sd">    :param gui: is this being called from a GUI?</span>
+<span class="sd">    :type gui: bool</span>
+<span class="sd">    :return: True if the math checks out, False otherwise</span>
+<span class="sd">    :rtype: bool</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Break up the sheet parameters and subdivide the sheet capacity to</span>
+    <span class="c1"># use the ticket count</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sheet</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="n">q_ups</span><span class="p">,</span> <span class="n">q_permutations</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">p_reset</span> <span class="o">=</span> <span class="n">sheet</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q_ups</span><span class="p">,</span> <span class="n">q_permutations</span><span class="p">,</span> <span class="n">q_sheets</span><span class="p">,</span> <span class="n">q_sheet_capacity</span><span class="p">,</span> <span class="n">p_reset</span><span class="p">,</span> <span class="n">subflats</span> <span class="o">=</span> <span class="n">sheet</span>
+    <span class="n">q_sheet_capacity</span> <span class="o">=</span> <span class="n">q_sheet_capacity</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Get quantities from nonwinner and instant lists</span>
+    <span class="n">q_nonwinners</span> <span class="o">=</span> <span class="n">nws</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">q_instants</span> <span class="o">=</span> <span class="n">inst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">q_picks</span> <span class="o">=</span> <span class="n">pick</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">holds</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">q_holds</span> <span class="o">=</span> <span class="n">holds</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">q_holds</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+            <span class="n">q_holds</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">holds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">q_holds</span> <span class="o">+=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">holds</span><span class="p">[</span><span class="mi">4</span><span class="p">]))[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">ticket_total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Cycle through instant and pick lists to add their values</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">q_instants</span><span class="p">:</span>
+        <span class="n">ticket_total</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">q_picks</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">ticket_total</span> <span class="o">+=</span> <span class="n">val</span>
+    <span class="c1"># Add the rest of the tickets and multiply by the number of ups</span>
+    <span class="n">ticket_total</span> <span class="o">+=</span> <span class="n">q_nonwinners</span>
+    <span class="n">ticket_total</span> <span class="o">+=</span> <span class="n">q_holds</span>
+    <span class="n">ticket_total</span> <span class="o">*=</span> <span class="n">q_ups</span>
+
+    <span class="n">running_total</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">ticket_total</span><span class="p">)</span>
+    <span class="c1"># Multiply the number of sheets by sheet capacity</span>
+    <span class="n">expected_total</span> <span class="o">=</span> <span class="n">q_sheets</span> <span class="o">*</span> <span class="n">q_sheet_capacity</span>
+
+    <span class="c1"># The two totals should match.</span>
+    <span class="k">if</span> <span class="n">ticket_total</span> <span class="o">!=</span> <span class="n">expected_total</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">output_string</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;!!!!!  TICKET TOTAL ERROR  !!!!!</span><span class="se">\n</span><span class="s1">&#39;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_total</span><span class="si">}</span><span class="s2"> tickets, &quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;but </span><span class="si">{</span><span class="n">ticket_total</span><span class="si">}</span><span class="s2"> would be produced with current parameters:</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Ups: </span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Non-winners: </span><span class="si">{</span><span class="n">q_nonwinners</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Instants: </span><span class="si">{</span><span class="n">q_instants</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Picks: </span><span class="si">{</span><span class="n">q_picks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Holds: </span><span class="si">{</span><span class="n">q_holds</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Tickets per Up Expected: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">expected_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">q_ups</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Total Tickets per Up from Input Parameters: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">running_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">q_ups</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">gui</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="n">output_string</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">output_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">output_string</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The math works out!</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Ups: </span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of permutations: </span><span class="si">{</span><span class="n">q_permutations</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Non-winners: </span><span class="si">{</span><span class="n">q_nonwinners</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Instants: </span><span class="si">{</span><span class="n">q_instants</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Picks: </span><span class="si">{</span><span class="n">q_picks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot;Number of Holds: </span><span class="si">{</span><span class="n">q_holds</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Number of Non-staggered, Double-line Holds: </span><span class="si">{</span><span class="n">holds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;    Number of Staggered, Double-line Holds: </span><span class="si">{</span><span class="n">holds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;    Number of Non-staggered, Single-line Holds: </span><span class="si">{</span><span class="n">holds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;    Number of Staggered, Single-line Holds:&quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">holds</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">q_holds</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                             <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Total tickets per up: </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">running_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">q_ups</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="o">+</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total tickets per permutation: &quot;</span>
+                                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">expected_total</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">q_permutations</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">q_permutations</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+                             <span class="o">+</span> <span class="s2">&quot;Verified the &#39;number of sheets multiplied by tickets per sheet&#39; &quot;</span>
+                               <span class="s2">&quot;equals &#39;number of ups multiplied by ticket count&#39; . . .</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Expected </span><span class="si">{</span><span class="n">expected_total</span><span class="si">}</span><span class="s2"> tickets, producing </span><span class="si">{</span><span class="n">ticket_total</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+                             <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;Creating </span><span class="si">{</span><span class="n">q_sheets</span><span class="si">}</span><span class="s2"> sheets with </span><span class="si">{</span><span class="n">q_ups</span><span class="si">}</span><span class="s2"> ups and &quot;</span>
+                               <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">q_sheet_capacity</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">q_ups</span><span class="p">)</span><span class="si">}</span><span class="s2"> tickets per up on each sheet.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">gui</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="n">output_string</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">output_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+
+<div class="viewcode-block" id="get_suffix_hold_information_enhanced">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_suffix_hold_information_enhanced">[docs]</a>
+<span class="k">def</span> <span class="nf">get_suffix_hold_information_enhanced</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user to enter the pertinent information for the numbers game that uses</span>
+<span class="sd">    suffixes to create a list of winning integers and another list with (almost) all</span>
+<span class="sd">    the numbers not contained in the list of winners.</span>
+
+<span class="sd">    :return: [starting number, ending number, suffixes, smallest winning integer, largest winning integer, \</span>
+<span class="sd">    text of DesignMerge tag (without the &lt;@&gt;), color all characters in the winning numbers?]</span>
+<span class="sd">    :rtype: dict[str, list[int | str | bool]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enter suffixes in the following format: Suffix, First, Last, Tag, All Digits (T/F)&#39;</span><span class="p">)</span>
+        <span class="n">suffix</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Separate multiple suffixes with semicolons: &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">suffix</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">suffix</span> <span class="o">=</span> <span class="s1">&#39;00,100,1500,REDFONT,T&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+    <span class="c1"># suffixes = parse_suffix_entries(suffix)</span>
+    <span class="n">suffixes</span> <span class="o">=</span> <span class="n">parse_suffixes</span><span class="p">(</span><span class="n">suffix</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">suffixes</span></div>
+
+
+
+<div class="viewcode-block" id="parse_suffix_entries">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.parse_suffix_entries">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_suffix_entries</span><span class="p">(</span><span class="n">suffix_entries</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    :param suffix_entries:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">stuffix</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">suffix_entries</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected 5 entries, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ent</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Suffix</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+            <span class="n">stuffix</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># first, last</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+                <span class="n">stuffix</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="c1"># DM tag; no way to check this.</span>
+        <span class="n">ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="c1"># all letters</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]:</span>
+            <span class="n">stuffix</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span><span class="p">:</span>
+                <span class="n">ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ent</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">stuffix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ent</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">stuffix</span></div>
+
+
+
+<div class="viewcode-block" id="parse_suffixes">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.parse_suffixes">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_suffixes</span><span class="p">(</span><span class="n">suffixes</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">stuffix</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="n">suffixes</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected 5 entries, got </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Set index to suffix</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Add first and last suffixed entries</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected integer but got &#39;</span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+        <span class="c1"># Add DesignMerge tag--no way I can check its validity.</span>
+        <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+        <span class="c1"># Add whether the DM tag will affect the whole number (T) or just the suffix (F).</span>
+        <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected &#39;T&#39; or &#39;F&#39; but got &#39;</span><span class="si">{</span><span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span> <span class="k">if</span> <span class="n">temp</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;T&#39;</span> <span class="k">else</span> <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">stuffix</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="n">stuffix</span></div>
+
+
+
+<span class="c1"># ========================================================================================#</span>
+
+<div class="viewcode-block" id="get_bingo_number_parameters">
+<a class="viewcode-back" href="../../docs/ticketing.html#ticketing.game_info.get_bingo_number_parameters">[docs]</a>
+<span class="k">def</span> <span class="nf">get_bingo_number_parameters</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">|</span> <span class="nb">bool</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get the count of the various types of bingo combinations and return the values in a list to the user. Each type will</span>
+<span class="sd">    consist of a list of integers whose index value represents the number of free spots in the bingo line. For example,</span>
+<span class="sd">    a list of 50, 25, 10 would represent 50 lines with zero free-spots, 25 lines with one free-spot, and 10 lines with</span>
+<span class="sd">    two free-spots. For the double-line tickets, there is a choice of &#39;staggered&#39; and &#39;non-staggered.&#39; This refers to</span>
+<span class="sd">    how the free-spaces are handled: in a non-staggered ticket, the free-spaces for both rows occur in the same column;</span>
+<span class="sd">    in a staggered ticket, the free-spaces for each row occur in different columns. As for single columns, I don&#39;t</span>
+<span class="sd">    remember the reason why the staggered vs. non-staggered options exist. I think it&#39;s necessary for naming conventions</span>
+<span class="sd">    when used in combination with staggered double-lines: the two staggered rows each have a list of images indicating</span>
+<span class="sd">    their positions, and the single staggered row has a third list. In the case where non-staggered double-lines are</span>
+<span class="sd">    used, both tickets use the same free images. I haven&#39;t encountered this situation in quite some time, so I&#39;ll update</span>
+<span class="sd">    this documentation if I&#39;m wrong about that. The user also provides whether leading zeroes are to be used, as well as</span>
+<span class="sd">    the type of free space used: images, text, or both. Both come into play when the image for the spot has to be</span>
+<span class="sd">    changed (or added) to the column along with the text for a free spot. The final information provided by the user is</span>
+<span class="sd">    which verification list is to be used: the standard (with 9,000 faces) or the extended (with 27,000 faces).</span>
+
+<span class="sd">    :return: [[non-staggered doubles], [staggered doubles], [non-staggered singles], [staggered singles],</span>
+<span class="sd">              [[single either-ors]], zeroes, free type, verification file size, csv rows]</span>
+<span class="sd">    :rtype: [list[list[int] | list[list[int]] | bool | str | int]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">bingo_parameters</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">columns_needed</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span>
+    <span class="c1">#  Non-staggered double-holds (top and bottom free spots appear in the same column)</span>
+    <span class="n">non_staggered_double_holds</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">non_staggered_double_holds</span><span class="p">)</span> <span class="ow">and</span> <span class="n">non_staggered_double_holds</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">non_staggered_double_holds</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Non-staggered, Double-line hold tickets &#39;</span>
+                                           <span class="s1">&#39;(separate free spots with commas: 84,42,14) (&lt;enter&gt; = [0]): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">non_staggered_double_holds</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">non_staggered_double_holds</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">non_staggered_double_holds</span><span class="p">)</span>
+    <span class="n">q_nonstaggered_double_holds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">non_staggered_double_holds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">q_nonstaggered_double_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_nonstaggered_double_holds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">q_nonstaggered_double_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q_nonstaggered_double_holds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">columns_needed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_nonstaggered_double_holds</span><span class="p">)</span>
+
+    <span class="c1"># Staggered double-holds (top and bottom free spots appear in different columns)</span>
+    <span class="n">staggered_double_holds</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">staggered_double_holds</span><span class="p">)</span> <span class="ow">and</span> <span class="n">staggered_double_holds</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">staggered_double_holds</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Staggered, Double-line hold tickets &#39;</span>
+                                       <span class="s1">&#39;(separate free spots with commas: 84,42,14 (&lt;enter&gt; = [0])): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">staggered_double_holds</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">staggered_double_holds</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">staggered_double_holds</span><span class="p">)</span>
+    <span class="n">q_staggered_double_holds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">staggered_double_holds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">q_staggered_double_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_staggered_double_holds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">q_staggered_double_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q_staggered_double_holds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">columns_needed</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_staggered_double_holds</span><span class="p">)</span>
+
+    <span class="c1"># Non-staggered single-holds (I&#39;m not sure of the difference between non_staggered_single holds and</span>
+    <span class="c1"># staggered_single_holds. I believe staggered has something to do with the names of the images used</span>
+    <span class="c1"># when dealing with games that have double and single line combinations mixed together.)</span>
+    <span class="n">non_staggered_single_holds</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">non_staggered_single_holds</span><span class="p">)</span> <span class="ow">and</span> <span class="n">non_staggered_single_holds</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">non_staggered_single_holds</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Non-staggered, Single-line hold tickets &#39;</span>
+                                           <span class="s1">&#39;(separate free spots with commas: 84,42,14) (&lt;enter&gt; = [0]): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">non_staggered_single_holds</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">non_staggered_single_holds</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">non_staggered_single_holds</span><span class="p">)</span>
+    <span class="n">q_non_staggered_single_holds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">non_staggered_single_holds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">q_non_staggered_single_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_non_staggered_single_holds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">q_non_staggered_single_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q_non_staggered_single_holds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">columns_needed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_non_staggered_single_holds</span><span class="p">)</span>
+
+    <span class="c1"># See above non-staggered single hold</span>
+    <span class="n">staggered_single_holds</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,]+$&#39;</span><span class="p">,</span> <span class="n">staggered_single_holds</span><span class="p">)</span> <span class="ow">and</span> <span class="n">staggered_single_holds</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+        <span class="n">staggered_single_holds</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Number of Staggered, Single-line hold tickets &#39;</span>
+                                       <span class="s1">&#39;(separate free spots with commas: 84,42,14) (&lt;enter&gt; = [0]): &#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">staggered_single_holds</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">staggered_single_holds</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">staggered_single_holds</span><span class="p">)</span>
+    <span class="n">q_staggered_single_holds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">staggered_single_holds</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+        <span class="n">q_staggered_single_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">q_staggered_single_holds</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="n">q_staggered_single_holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">q_staggered_single_holds</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">columns_needed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_staggered_single_holds</span><span class="p">)</span>
+
+    <span class="c1"># Single-line bingos with either/or spots</span>
+    <span class="n">single_with_either_or_spots</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">q_single_with_either_or_spots</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">go_again</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">while</span> <span class="n">go_again</span><span class="p">:</span>
+        <span class="n">go_again</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;[0-9,;]+$&#39;</span><span class="p">,</span> <span class="n">single_with_either_or_spots</span><span class="p">)</span> <span class="ow">and</span> <span class="n">single_with_either_or_spots</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;X&#39;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Number of single line, double-spot hold tickets (format: amount,free-spots,double-spots)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Separate parameters with colon and type with semicolon.&#39;</span><span class="p">)</span>
+            <span class="n">single_with_either_or_spots</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Example: 100,0,1;50,1,1;30,2,0 (&lt;enter&gt; = [0]): &#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">single_with_either_or_spots</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">single_with_either_or_spots</span> <span class="o">=</span> <span class="s1">&#39;0,0,0&#39;</span>
+            <span class="n">check_for_exit</span><span class="p">(</span><span class="n">single_with_either_or_spots</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+        <span class="n">q_single_with_either_or_spots</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">stuff</span> <span class="ow">in</span> <span class="n">single_with_either_or_spots</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">):</span>
+            <span class="n">vals</span> <span class="o">=</span> <span class="n">stuff</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Wrong number of parameters for single-line, either/or hold tickets: </span><span class="si">{</span><span class="n">vals</span><span class="si">}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">single_with_either_or_spots</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="n">go_again</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+            <span class="n">q_single_with_either_or_spots</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">go_again</span><span class="p">:</span>
+            <span class="n">q_single_with_either_or_spots</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">q_single_with_either_or_spots</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">columns_needed</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">q_single_with_either_or_spots</span><span class="p">)</span>
+
+    <span class="c1"># Are leading zeroes needed for single digit numbers?</span>
+    <span class="n">zeroes</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">while</span> <span class="n">zeroes</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+        <span class="n">zeroes</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Do there need to be leading zeroes? ((Y/N) &lt;enter&gt; = &#39;N&#39;) &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">zeroes</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">zeroes</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">zeroes</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="n">leaders</span> <span class="o">=</span> <span class="n">zeroes</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s1">&#39;N&#39;</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">leaders</span><span class="p">)</span>
+
+    <span class="c1"># Are free spots composed of images, text, or both?</span>
+    <span class="n">freetype</span> <span class="o">=</span> <span class="s1">&#39;L&#39;</span>
+    <span class="k">while</span> <span class="n">freetype</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+        <span class="n">freetype</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Are free spots (I)mages, (T)ext, (B)oth, or (N)either? (&lt;enter&gt; = &#39;N&#39;): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">freetype</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">freetype</span> <span class="o">=</span> <span class="s1">&#39;N&#39;</span>
+    <span class="n">check_for_exit</span><span class="p">(</span><span class="n">freetype</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">freetype</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+    <span class="c1"># Will the verifiable faces come from the short or extended csv?</span>
+    <span class="n">verifiers</span> <span class="o">=</span> <span class="s1">&#39;W&#39;</span>
+    <span class="k">while</span> <span class="n">verifiers</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">]:</span>
+        <span class="n">verifiers</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Which verification list should be used? &quot;</span>
+                          <span class="s2">&quot;(S)tandard (9000), (E)xtended (27000) (&lt;enter&gt; = &#39;S&#39;): &quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verifiers</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">verifiers</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
+        <span class="n">check_for_exit</span><span class="p">(</span><span class="n">verifiers</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">verifiers</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">columns_needed</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">or</span> <span class="p">(</span><span class="n">columns_needed</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">columns_needed</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">elif</span> <span class="n">columns_needed</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">columns_needed</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">columns</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of columns needed is not defined. Not sure what to do, so I&#39;m bailing.&quot;</span><span class="p">)</span>
+        <span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">bingo_parameters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">bingo_parameters</span></div>
+
+</pre></div>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By John Gibbons
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024, John Gibbons.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
