@@ -48,6 +48,38 @@ def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bo
     return image_list
 
 
+def create_tiered_image_list_augmented(amt_list: list[list[int, bool]], prefix: str) -> list[list[str | int]]:
+    image_list = []
+    for index, amt in enumerate(amt_list):
+        count = 1
+        num, add_subimages = amt
+        for _ in range(num):
+            if add_subimages:
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(count).zfill(2)}.ai"
+            else:
+                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+            image_list.append([imagine, index + 1])
+            count += 1
+    return image_list
+
+
+def create_discrete_tiered_image_sets(amt_list: list[list[int, bool | str]], prefix: str) -> list[list[str|int]]:
+    image_list = []
+    for index, amt in enumerate(amt_list):
+        add_subimages = amt[1]
+        for i in range(amt[0]):
+            if isinstance(add_subimages, str) and add_subimages == 'True':
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}.ai"
+            elif isinstance(add_subimages, str) and add_subimages == 'False':
+                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+            elif add_subimages:
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}.ai"
+            else:
+                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+            image_list.append([imagine, index + 1])
+    return image_list
+
+
 def create_image_pool(first: int, last: int, prefix: str, mix: bool = True) -> list[str]:
     """
     Create a pool of images to be used to randomly generate image spreads on tickets.
@@ -157,7 +189,51 @@ def create_image_lists_from_pool_perms(first: int, last: int, prefix: str,
     return images_lists
 
 
-def create_bingo_ball_image_list(amt: int, bpt: int, prefix: str):
+def create_bingo_ball_image_permutations(amt: int, bpt: int, permits: int, prefix: str,
+                                         sortie: bool = True) -> list[list[list[str]]]:
+    perms = []
+    tookens = set()
+    attempts = 0
+    while len(perms) < permits:
+        attempts += 1
+        perm, tookens = create_single_bingo_ball_perm(amt, bpt, prefix, sortie, tookens)
+        if attempts % 500 == 0:
+            print(f'Attempted {attempts} permutations...')
+        if perm is not None:
+            perms.append(perm)
+    print(f'Created {len(perms)} permutations after {attempts} attempts.')
+    return perms
+
+
+def create_single_bingo_ball_perm(amt: int, bpt: int, prefix: str, sortie: bool = True,
+                                  tookens: set = None) -> [list[list[str]], set]:
+    image_lists = []
+    bb_pool = []
+    taken = set()
+    while len(image_lists) < amt:
+        if sum(len(sublist) for sublist in bb_pool) < bpt:
+            bb_pool = create_bingo_ball_hold_images(True, True, prefix)
+        bb_pool.sort(key=lambda xyz: len(xyz), reverse=True)
+        imgs = []
+        for i in range(bpt):
+            imgs.append(bb_pool[i].pop(0))
+        temp = copy.deepcopy(imgs)
+        temp.sort()
+        if (tuple(temp)) not in tookens and (tuple(temp)) not in taken:
+            taken.add(tuple(temp))
+            if sortie:
+                image_lists.append(copy.deepcopy(temp))
+            else:
+                image_lists.append(copy.deepcopy(imgs))
+        else:
+            # print(', '.join(temp), 'has already been taken.')
+            return [None, tookens]
+    for took in taken:
+        tookens.add(took)
+    return [image_lists, tookens]
+
+
+def create_bingo_ball_image_list(amt: int, bpt: int, prefix: str) -> list[list[str]]:
     image_lists = []
     bb_pool = []
     taken = set()

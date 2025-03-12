@@ -112,7 +112,7 @@ def input_game_parameters():
 
 
 if __name__ == '__main__':
-    sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, names = input_game_parameters()
+    sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs = input_game_parameters()
     # sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, names = set_game_parameters()
 
     gi.check_game_parameters(sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs)
@@ -122,9 +122,9 @@ if __name__ == '__main__':
     tickets = create_instant_winners(*inst_specs)
     tickets += create_holds(hold_specs, nw_specs[1], len(tickets))
     tickets += create_nonwinner_tickets(*nw_specs)
-    tio.write_tickets_to_file(names[1], tickets)
+    tio.write_tickets_to_file(name_specs[1], tickets)
     game_stacks = tio.create_game_stacks(sheet_specs[0], tickets, sheet_specs[2], sheet_specs[3][1])
-    cd_tickets, sheets = tio.write_game_stacks_to_file(names[1], game_stacks, sheet_specs[2],
+    cd_tickets, sheets = tio.write_game_stacks_to_file(name_specs[1], game_stacks, sheet_specs[2],
                                                        sheet_specs[3][1], sheet_specs[0])
-    tio.write_multi_spot_cd_positions_to_file(names[0], names[1], cd_tickets, inst_specs[1], 3)
+    tio.write_multi_spot_cd_positions_to_file(name_specs[0], name_specs[1], cd_tickets, inst_specs[1], 3)
     print('whatevers')

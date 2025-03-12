@@ -1,6 +1,16 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 
+from game_n_c_i_ca import create_game as ncica_create_game
+from game_n_s_i_sh import create_game as nsish_create_game
+from game_n_i_i_im import create_game as niiim_create_game
+from game_i_i_i_im import create_game as iiiim_create_game
+from game_i_i_i_ba import create_game as iiiba_create_game
+from game_i_i_i_ma import create_game as iiima_create_game
+from game_n_i_i_fl import create_game as niifl_create_game
+from game_i_i_i_bi import create_game as iiibi_create_game
+from game_i_i_i_bb import create_game as iiibb_create_game
+
 
 def create_label_and_field(label_text, input_field, row, column, parent_frame,
                            default_text=None, input_span: int = 1):
@@ -35,3 +45,34 @@ def create_label_and_field(label_text, input_field, row, column, parent_frame,
         input_field.insert(0, default_text)  # Set default text if provided
     # Return the label and widget
     return label, input_field
+
+
+def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: str):
+    full_type = nw_type + inst_type + pick_type + hold_type
+    # NW - Instant - Pick - Hold
+    # Image - Image - Image - Image
+    if full_type in ["IIIIM"]:
+        return iiiim_create_game
+    # Numbers - Cannons - Image - Cannons
+    elif full_type in ["NCICA"]:
+        return ncica_create_game
+    # Numbers - Shaded - Image - Shaded
+    elif full_type in ["NSISH", "NIISH"]:
+        return nsish_create_game
+    # Numbers - Image - Image - Image
+    elif full_type in ['NIIIM']:
+        return niiim_create_game
+    # Numbers - Shaded - Image - Balls
+    elif full_type in ['NSIBA', 'IIIBA']:
+        return iiiba_create_game
+    # Image - Image - Image - Matrix
+    elif full_type in ['IIIMA']:
+        return iiima_create_game
+    elif full_type in ['NIIFL']:
+        return niifl_create_game
+    elif full_type in ['IIIBI']:
+        return iiibi_create_game
+    elif full_type in ['IIIBB']:
+        return iiibb_create_game
+    else:
+        return None

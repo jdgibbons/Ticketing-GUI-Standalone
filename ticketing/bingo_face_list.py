@@ -372,16 +372,26 @@ class BingoFaceList(object):
         return False
 
     @staticmethod
-    def create_winning_combinations(paths: list[list[str]]) -> set[tuple[Any, ...]]:
+    def create_winning_combinations(paths: list[list[str]], sorta: bool = False) -> set[tuple[Any, ...]]:
         """
         Create every possible five-number combination from the passed list(s).
 
         :param paths: Five arrays of bingo space numbers
         :type paths: list[list[str]]
+        :param sorta: Do the combinations need to be sorted?
+        :type sorta: bool
         :return: possible winning combinations using the provided numbers
         :type paths: set[tuple[str]]
         """
-        return set(product(*paths))
+        combos = set(product(*paths))
+        if sorta:
+            sortees = []
+            for combo in combos:
+                lobo = list(combo)
+                lobo.sort()
+                sortees.append(tuple(lobo))
+            combos = set(sortees)
+        return combos
 
     @staticmethod
     def fisher_yates_shuffle(arr):

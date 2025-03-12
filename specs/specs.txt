@@ -1,0 +1,78 @@
+Bingo Ball Holds
+Quantity: total number of tickets per up
+Bingos per Ticket: number of bingo balls on the ticket
+Spots per Ticket: total number of images on the ticket
+Downlines: Do the bingo balls for each ticket need to be contained by a single downline?
+Sort Bingo Balls: Should the ball values be sorted
+Shazams: These are regular bingo ball tickets that contain an additional image/indication
+         that makes them eligible for an additional jackpot. A large, rollover jackpot is
+         added to every time one of the 'normal' bingo tickets wins. When one of the shazam
+         types is called, the player wins this jackpot in addition to the regular prize
+         associated with this game. Enter how many of the total tickets will contain this
+         special designation.
+Free Spots: total number of tickets for each free spot: box one should contain the number of
+         tickets with one free space, box two the number with two free spaces, etc. The most
+         I've ever seen is three free spots on a five image ticket.
+
+'Additional Holds' allow for additional image holds and should be entered as 'image prefix, quantity' pairs
+    separated by semicolons.
+    So,
+        'hold,15' would produce the set:
+            hold01.ai - hold15.ai.
+
+        'holda-,15;holdb-,15' would produce two set of images:
+            holda-01.ai - holda-15.ai
+            holdb-01.ai - holdb-15.ai
+
+        'red,15;white,15;blue,15' would produce three sets of images:
+            red01.ai - red15.ai
+            white01.ai - white15.ai
+            blue01.ai - blue15.ai
+
+    Any alphanumeric string can be used as the image prefix. (See 53691, Tripe Diamond Slots for reference.)
+
+
+Shaded Holds
+PI checkbox probably stands for 'Plus Image', which will add an image on the spot where the shaded
+number is placed.
+
+The shaded information:
+    Tiers allow for different shaded suffixes.
+        The Numbers box collects all the numbers that will be shaded for that tier.
+
+        The Suffix is the two-digit number at the end of the integers that indicate it's a hold.
+
+        The Color is the string to be added to the MPS tag to trigger the DesignMerge rule:
+            i.e., 'RED' will become <@REDFONT>, 'BLUE' will become <@BLUEFONT>, etc.
+
+        'Base' allows the user to specify the name of a base image to be used with each set of numbers.
+
+        The Full checkbox indicates if the font change will apply to the entire integer:
+            False indicates that only the suffix will be affected;
+            True indicates the entire number's font will be changed.
+
+        PI indicates whether an image needs to be added to the shaded number (I think this stands for
+            'Plus Image', but who the hell knows what goes on in my head. (See 31891, Stars for reference))
+
+    First and Last indicate the lowest and highest nonwinning numbers, respectively.
+
+    Exclusions is a list of suffixes, NOT ALREADY LISTED IN THE HOLD FRAME'S SUFFIX BOXES, that need
+        to be excluded from the nonwinner list. This is most likely needed if there are instant winners
+        that also use suffixes to indicate a winning ticket.
+
+'Addl. Holds' allow for additional image holds and should be entered as 'image prefix, quantity' pairs
+    separated by semicolons.
+    So,
+        'hold,15' would produce the set:
+            hold01.ai - hold15.ai.
+
+        'holda-,15;holdb-,15' would produce two set of images:
+            holda-01.ai - holda-15.ai
+            holdb-01.ai - holdb-15.ai
+
+        'red,15;white,15;blue,15' would produce three sets of images:
+            red01.ai - red15.ai
+            white01.ai - white15.ai
+            blue01.ai - blue15.ai
+
+    Any alphanumeric string can be used as the image prefix. (See 53691, Tripe Diamond Slots for reference.)
