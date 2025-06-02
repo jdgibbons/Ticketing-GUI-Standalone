@@ -1,9 +1,8 @@
 import re
-
 import ttkbootstrap as ttk
-from ticketing__notebook_tab import TicketingNotebookTab
 
-from helpers import create_label_and_field
+from .ticketing__notebook_tab import TicketingNotebookTab
+from .helpers import create_label_and_field
 
 
 class HoldsBingosTab(TicketingNotebookTab):
@@ -62,7 +61,7 @@ class HoldsBingosTab(TicketingNotebookTab):
         label.grid(row=4, column=0, padx=5, pady=5)
         entry = ttk.Entry(self, width=60)
         entry.grid(row=4, column=1, columnspan=6, padx=5, pady=5)
-        entry.insert(0, '0')
+        entry.insert(0, '')
         self.populate_data_collections_with_text(entry, 'Either-Ors')
 
         # Add Leading Zeroes checkbox and add it to the collections.
@@ -75,7 +74,8 @@ class HoldsBingosTab(TicketingNotebookTab):
                                                     1, 5, self)
         self.populate_data_collections_with_label(input_field, label)
 
-        # Add Bingo Balls checkbox and add it to the collections.
+        # Add Bingo Balls checkbox and add it to the collections. This allows the production
+        # of bingo ball style tickets with verified bingo paths.
         label, input_field = create_label_and_field("Bingo Balls", ttk.Checkbutton(self),
                                                     2, 5, self)
         self.populate_data_collections_with_label(input_field, label)
@@ -111,13 +111,38 @@ class HoldsBingosTab(TicketingNotebookTab):
             if re.search(bingo_match, key):
                 if (self.data_dictionary[key] == '' or not self.data_dictionary[key].isdigit()
                         or int(self.data_dictionary[key]) < 0):
-                    messages.append(f"Holds -> Bingo: '{key.upper()}' must contain a non-negative integer.")
+                    messages.append(f"Holds -> Bingos: '{key.upper()}' must contain a non-negative integer.")
             # If this is the Either-Or field, make sure there are no unrecognized characters. It's not a
             # complete validation, but ain't nobody got time for that right now.
             if key in ['Either-Ors']:
-                if (self.data_dictionary[key] != ''
+                if ((self.data_dictionary[key]) != ''
                         and not re.match(r'^[a-zA-Z0-9,;]*$', self.data_dictionary[key])):
-                    messages.append(f"Holds -> Bingo: '{key}' must contain only letters, numbers, and semicolons.")
+                    messages.append(f"Holds -> Bingos: '{key}' must contain only letters, numbers, and semicolons.")
+        first_text = ("Holds -> Bingo: Only nonstaggered, single values may be"
+                      " used if the Bingo Balls option is selected.")
+        first_time = True
+        if self.data_dictionary['Bingo Balls']:
+            for i in range(1, 5):
+                if self.data_dictionary[f'dns{i}'] != '0':
+                    if first_time:
+                        messages.append(first_text)
+                        first_time = False
+                    messages.append(f"--> Holds -> Bingos: 'dns{i}' must be zero if Bingo Balls option is selected.")
+                if self.data_dictionary[f'ds{i}'] != '0':
+                    if first_time:
+                        messages.append(first_text)
+                        first_time = False
+                    messages.append(f"--> Holds -> Bingos: 'ds{i}' must be zero if Bingo Balls option is selected.")
+                if self.data_dictionary[f'ss{i}'] != '0':
+                    if first_time:
+                        messages.append(first_text)
+                        first_time = False
+                    messages.append(f"--> Holds -> Bingos: 'ss{i}' must be zero if Bingo Balls option is selected.")
+            if self.data_dictionary['Either-Ors'] != '':
+                if first_time:
+                    messages.append(first_text)
+                    messages.append(f"--> Holds -> Bingos: 'Either-Ors' must be "
+                                    f"blank if Bingo Balls option is selected.")
         return messages
 
     def create_data_dictionary(self):
@@ -141,29 +166,24 @@ class HoldsBingosTab(TicketingNotebookTab):
 
         This method is currently a placeholder and does not implement any functionality.
         """
-        pass
+        self.defaults = {'Either-Ors': ''}
+        for i in range(1, 5):
+            self.defaults[f'dns{i}'] = '0'
+            self.defaults[f'ds{i}'] = '0'
+            self.defaults[f'sns{i}'] = '0'
+            self.defaults[f'ss{i}'] = '0'
 
     def clear_fields(self):
         """
-        Clears all input fields in the tab and resets them to their default values ('0' for entries,
+        Clears all input fields in the tab and resets them to their default values ('0' for
+        bingo entries,
         unchecked for checkbuttons, and 'Images' for the combobox).
         """
-        # Reset the bingo boxes
-        for i in range(4):
-            key = f'dns{i + 1}'
+        # Reset the entry boxes
+        for key, value in self.defaults.items():
             self.field_dictionary[key].delete(0, ttk.END)
-            self.field_dictionary[key].insert(0, '0')
-            key = f'ds{i + 1}'
-            self.field_dictionary[key].delete(0, ttk.END)
-            self.field_dictionary[key].insert(0, '0')
-            key = f'sns{i + 1}'
-            self.field_dictionary[key].delete(0, ttk.END)
-            self.field_dictionary[key].insert(0, '0')
-            key = f'ss{i + 1}'
-            self.field_dictionary[key].delete(0, ttk.END)
-            self.field_dictionary[key].insert(0, '0')
-        # Reset Either-Ors
-        self.field_dictionary['Either-Ors'].delete(0, ttk.END)
+            self.field_dictionary[key].insert(0, value)
+
         # Reset checkboxes
         self.field_dictionary['Leading Zeroes'].state(['!selected'])
         self.field_dictionary['Extended CSV'].state(['!selected'])

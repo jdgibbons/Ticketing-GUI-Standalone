@@ -1,15 +1,15 @@
-import tkinter as tk
 import ttkbootstrap as ttk
 
-from game_n_c_i_ca import create_game as ncica_create_game
-from game_n_s_i_sh import create_game as nsish_create_game
-from game_n_i_i_im import create_game as niiim_create_game
-from game_i_i_i_im import create_game as iiiim_create_game
-from game_i_i_i_ba import create_game as iiiba_create_game
-from game_i_i_i_ma import create_game as iiima_create_game
-from game_n_i_i_fl import create_game as niifl_create_game
-from game_i_i_i_bi import create_game as iiibi_create_game
-from game_i_i_i_bb import create_game as iiibb_create_game
+from ticketing.games.game_n_c_i_ca import create_game as ncica_create_game
+from ticketing.games.game_n_s_i_sh import create_game as nsish_create_game
+from ticketing.games.game_n_i_i_im import create_game as niiim_create_game
+from ticketing.games.game_i_i_i_im import create_game as iiiim_create_game
+from ticketing.games.game_i_i_i_ba import create_game as iiiba_create_game
+from ticketing.games.game_i_i_i_ma import create_game as iiima_create_game
+from ticketing.games.game_n_i_i_fl import create_game as niifl_create_game
+from ticketing.games.game_i_i_i_bi import create_game as iiibi_create_game
+from ticketing.games.game_i_i_i_bb import create_game as iiibb_create_game
+from ticketing.games.game_i_i_i_bn import create_game as iiibn_create_game
 
 
 def create_label_and_field(label_text, input_field, row, column, parent_frame,
@@ -47,6 +47,18 @@ def create_label_and_field(label_text, input_field, row, column, parent_frame,
     return label, input_field
 
 
+def extract_ticket_types(game_spex):
+    """
+    Remove the first element of the ticket types for nonwinners, instants,
+    picks, and holds and return them as a list.
+
+    :param game_spex: a list of specs for a ticketed game, elemets 1 - 4 correspond to
+                      ticket types nonwinners, instants, picks, and holds respectively.
+    :return:
+    """
+    return [game_spex[1].pop(0), game_spex[2].pop(0), game_spex[3].pop(0), game_spex[4].pop(0)]
+
+
 def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: str):
     full_type = nw_type + inst_type + pick_type + hold_type
     # NW - Instant - Pick - Hold
@@ -74,5 +86,7 @@ def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: 
         return iiibi_create_game
     elif full_type in ['IIIBB']:
         return iiibb_create_game
+    elif full_type in ['IIIBN']:
+        return iiibn_create_game
     else:
         return None

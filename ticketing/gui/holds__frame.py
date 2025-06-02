@@ -1,13 +1,13 @@
 import ttkbootstrap as ttk
 
-from holds_balls_tab import HoldsBallsTab
-from holds_bingos_tab import HoldsBingosTab
-from holds_cannons_tab import HoldsCannonsTab
-from holds_flashboard_tab import HoldsFlashboardTab
-from holds_images_tab import HoldsImagesTab
-from holds_matrix import HoldsMatrixTab
-from holds_shaded_tab import HoldsShadedTab
-from ticketing__frame import TicketingFrame
+from .holds_balls_tab import HoldsBallsTab
+from .holds_bingos_tab import HoldsBingosTab
+from .holds_cannons_tab import HoldsCannonsTab
+from .holds_flashboard_tab import HoldsFlashboardTab
+from .holds_images_tab import HoldsImagesTab
+from .holds_matrix import HoldsMatrixTab
+from .holds_shaded_tab import HoldsShadedTab
+from .ticketing__frame import TicketingFrame
 
 
 class HoldsFrame(TicketingFrame):

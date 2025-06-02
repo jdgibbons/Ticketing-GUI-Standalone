@@ -126,5 +126,5 @@ if __name__ == '__main__':
     game_stacks = tio.create_game_stacks(sheet_specs[0], tickets, sheet_specs[2], sheet_specs[3][1])
     cd_tickets, sheets = tio.write_game_stacks_to_file(name_specs[1], game_stacks, sheet_specs[2],
                                                        sheet_specs[3][1], sheet_specs[0])
-    tio.write_multi_spot_cd_positions_to_file(name_specs[0], name_specs[1], cd_tickets, inst_specs[1], 3)
+    tio.write_cd_multi_spot_positions_to_file(name_specs[0], name_specs[1], cd_tickets, inst_specs[1], 3)
     print('whatevers')

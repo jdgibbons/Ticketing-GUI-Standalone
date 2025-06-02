@@ -4,16 +4,16 @@ import ttkbootstrap as ttk
 
 from ticketing import game_info as gi
 
-from result_message_box import ResultMessageBox
+from .result_message_box import ResultMessageBox
 
-from game__info_frame import GameInfoFrame
-from holds__frame import HoldsFrame
-from instants__frame import InstantsFrame
-from names__frame import NamesFrame
-from nonwinners__frame import NonwinnersFrame
-from picks__frame import PicksFrame
-from helpers import select_game_method
-from shaded_spread_gui import create_gui as shaded_gui
+from .game__info_frame import GameInfoFrame
+from .holds__frame import HoldsFrame
+from .instants__frame import InstantsFrame
+from .names__frame import NamesFrame
+from .nonwinners__frame import NonwinnersFrame
+from .picks__frame import PicksFrame
+from .helpers import select_game_method
+from .shaded_spread_gui import create_gui as shaded_gui
 
 gui_frames = {}
 gui_frame_labels = []
@@ -127,9 +127,20 @@ def submit_data(root):
         nw_specs.insert(0, nw_type[:1])
         pick_specs.insert(0, pick_type[:1])
         hold_specs.insert(0, hold_type[:1])
+        # If the holds are bingos but the representation will be bingo ball images,
+        # set the hold type to BBalls and remove the 'BB' list element. (The hold
+        # type for actual bingo balls is "Balls". This is confusing and I should find
+        # another way to represent this type of situation.)
         if hold_type == "Bingos" and 'BB' in hold_specs:
             hold_type = "BBalls"
             hold_specs.remove('BB')
+        # If the holds are bingo balls, check if the images or the numbers will be used.
+        # Change the hold type if it's numbers (indicated by a True in the last element
+        # of the third list). Either way, delete the last element of the third list.
+        elif hold_type == "Balls":
+            if hold_specs[2][4]:
+                hold_type = "BNumbers"
+            hold_specs[2].pop()
         create_method = select_game_method(nw_type[:1].upper(), inst_type[:1].upper(),
                                            pick_type[:1].upper(), hold_type[:2].upper())
         if create_method is None:

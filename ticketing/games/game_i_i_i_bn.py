@@ -1,9 +1,10 @@
 import copy
 
-from ticketing.universal_ticket import UniversalTicket as uTick
-from ticketing import image_generator as ig
 from ticketing import game_info as gi
+from ticketing import image_generator as ig
+from ticketing import number_generator as ng
 from ticketing import ticket_io as tio
+from ticketing.universal_ticket import UniversalTicket as uTick
 
 import random as rn
 import itertools as it
@@ -96,8 +97,8 @@ def create_instant_winners(amt: list[list[int, bool]], cd_tier: int, tkt: int | 
     return ticks
 
 
-def create_pick_winners(amt_list: list[int], tkt: int, addl_imgs: list[gi.AddImages], nummies: int,
-                        first: bool = False, uniq: bool = False) -> list[uTick]:
+def create_pick_winners(amt_list: list[list[int, bool]], tkt: int | str, addl_imgs: list[gi.AddImages], nummies: int,
+                        first: bool = False, permit: int = 1) -> list[uTick]:
     """
     Create a list of pick winner tickets consisting of one image and set the ticket's cd
     tier value to its accompanying tier level if the level. Pick's always have CDs (at
@@ -113,8 +114,8 @@ def create_pick_winners(amt_list: list[int], tkt: int, addl_imgs: list[gi.AddIma
     :type nummies: int
     :param first: Does the first ticket need to set the csv fields?
     :type first: bool
-    :param uniq: Does each tier level have unique images?
-    :type uniq: bool
+    :param permit: permutation number
+    :type permit: int
     :return: A list of pick winner tickets
     :rtype: list[UniversalTicket]
     """
@@ -125,24 +126,26 @@ def create_pick_winners(amt_list: list[int], tkt: int, addl_imgs: list[gi.AddIma
     # If there's only one dimension to the list, then create this as if it were a normal hold.
     # Otherwise, create a tiered image list, even though all tickets will receive CDs.
     if len(amt_list) == 1:
-        imgs = ig.create_prefixed_images(1, amt_list[0], 'pick', uniq)
+        imgs = ig.create_prefixed_images(1, amt_list[0][0], 'pick', amt_list[0][1])
         for img in imgs:
             img_list.append([img, 1])
     else:
-        img_list = ig.create_tiered_image_list(amt_list, 'pick', False)
+        # for amt in amt_list:
+        img_list.extend(ig.create_tiered_image_list_augmented(amt_list, 'pick'))
     cull_ticket = first
     # Cycle through the images list. Use each image name (img[0]) and
     # ticket tier level (img[1]) to create a new ticket.
     for img in img_list:
-        # Add additional slots to account for other images in the csv file
+        # Create a list that contains the image and any additional image slots needed.
+        # (This is used to reserve slots for three-image nonwinner tickets, if necessary.)
         pics = [img[0]]
         for add in addl_imgs:
             pics = ig.add_additional_image_slots(add, pics)
         # Create a new ticket with ticket number, image (and empty slots), number placeholder,
         # perm, up,  and whether to create the csv fields.
-        ticket = uTick(tkt, pics, nums, 1, 1, cull_ticket)
+        ticket = uTick(tkt, pics, nums, permit, 1, cull_ticket)
         cull_ticket = False
-        if tkt != '' and isinstance(tkt, int):
+        if isinstance(tkt, int):
             tkt += 1
         ticket.reset_cd_type('P')
         ticket.reset_cd_tier(img[1])
@@ -150,31 +153,9 @@ def create_pick_winners(amt_list: list[int], tkt: int, addl_imgs: list[gi.AddIma
     return ticks
 
 
-def create_downline_image_lists(amt: int, bpt: int) -> list[list[str]] | None:
-    """
-    Create bingo downlines comprised of the specified number of spots, shuffle
-    them, then cull any excess from the end of the list.
-
-    :param amt: number of downlines needed
-    :type amt: int
-    :param bpt: number of bingo spots per ticket
-    :type bpt: int
-    :return: list of bingo image downlines
-    :rtype: list[list[str]]
-    """
-    # Get a list of all downlines of the desired number of spots
-    bingos = ig.create_bingo_downlines(bpt)
-    # If there aren't enough downlines, return None.
-    if len(bingos) < amt:
-        return None
-    # Shuffle the list and return the number of downlines needed.
-    for _ in range(rn.randint(5, 10)):
-        rn.shuffle(bingos)
-    return bingos[0: amt]
-
-
-def create_hold_tickets(bb_options: list[int], bool_options: list[bool | str], sup_holds: list[int | list[list[str | int]]],
-                        tkt: int | str, addl_bb_imgs: list[gi.AddImages], addl_sup_imgs: list[gi.AddImages],
+def create_hold_tickets(bb_options: list[int], bool_options: list[bool | str],
+                        sup_holds: list[int | list[list[str | int]]],
+                        tkt: int | str, addl_sup_imgs: list[gi.AddImages],
                         permits: int, first: bool) -> list[list[uTick]] | None | str:
     """
     Create bingo ball and supplemental hold tickets.
@@ -187,8 +168,6 @@ def create_hold_tickets(bb_options: list[int], bool_options: list[bool | str], s
     :type sup_holds: list[int | list[list[str | int]]]
     :param tkt: First ticket number.
     :type tkt: int
-    :param addl_bb_imgs: Additional image slots required to pad the csv output for bingo ball holds.
-    :type addl_bb_imgs: list[gi.AddImages]
     :param addl_sup_imgs: Additional image slots required to pad the csv output for supplemental holds.
     :type addl_sup_imgs: list[gi.AddImages]
     :param permits: number of perms needed
@@ -204,12 +183,12 @@ def create_hold_tickets(bb_options: list[int], bool_options: list[bool | str], s
     perms = []
     # If there are needed bingo ball type holds, create them.
     if bb_amt > 0:
-        perms = create_bingo_ball_tickets(bb_amt, bpt, spt, downs, permits, first, 0, fill_pool,
-                                          addl_bb_imgs, tkt, shazams, base, sortie)
+        perms = create_bball_number_tickets(bb_amt, bpt, spt, downs, permits, first, 0, fill_pool,
+                                            addl_sup_imgs, tkt, base, sortie)
         first = False
     # If there are supplemental holds needed, create those.
     if sup_holds[0] > 0:
-        ticks = create_single_image_downline_holds(sup_holds[1], addl_sup_imgs, first)
+        ticks = create_single_image_holds(sup_holds[1], addl_sup_imgs, first)
         first = False
         for index, perm in perms:
             for tick in ticks:
@@ -218,9 +197,9 @@ def create_hold_tickets(bb_options: list[int], bool_options: list[bool | str], s
     return perms
 
 
-def create_single_image_downline_holds(suppers: list[list[str | int]], addl_imgs: list[gi.AddImages], first: bool):
+def create_single_image_holds(suppers: list[list[str | int]], addl_imgs: list[gi.AddImages], first: bool):
     """
-    Create a list of single-image, downline hold-tickets from a list containing pairs of
+    Create a list of single-image hold-tickets from a list containing pairs of
     prefix parts and quantities.
 
     :param suppers: list of lists containing prefix parts and quantities
@@ -251,8 +230,8 @@ def create_single_image_downline_holds(suppers: list[list[str | int]], addl_imgs
     return ticks
 
 
-def create_bingo_ball_tickets(bb_amt, bpt, spt, downs, permits: int, first, nums, nw_pool,
-                              addl_bb_imgs, tkt, shazams: int, basic: str, sortie: bool = True):
+def create_bball_number_tickets(bb_amt, bpt, spt, downs, permits: int, first, nums, nw_pool,
+                                addl_bb_imgs, tkt, basic: str, sortie: bool = True):
     """
     Create a list of bingo-ball-type hold-tickets (either random or downline).
 
@@ -276,8 +255,6 @@ def create_bingo_ball_tickets(bb_amt, bpt, spt, downs, permits: int, first, nums
     :type addl_bb_imgs: list[gi.AddImages]
     :param tkt: First ticket number.
     :type tkt: int | str
-    :param shazams: number of tickets containing shazam-style images
-    :type shazams: int
     :param basic: string containing the name of the base file
     :type basic: str
     :param sortie: sort bingo balls in ascending order?
@@ -286,48 +263,46 @@ def create_bingo_ball_tickets(bb_amt, bpt, spt, downs, permits: int, first, nums
     :rtype: list[uTick]
     """
     perms = []
-    numbs = [''] * nums
-    positions = list(range(1, spt + 1))
-    for _ in range(rn.randint(2, 5)):
-        rn.shuffle(positions)
-    pos_cycle = it.cycle(positions)
+    # Create a list to represent the position of all the tickets created for a single permutation.
+    # This list will be used to randomly select which tickets receive shazam images (if any).
     tick_places = list(range(bb_amt))
     if downs:
-        bangles = [create_downline_image_lists(bb_amt, bpt)]
+        bangles = [create_downline_number_lists(bb_amt, bpt)]
     else:
         # bangles = ig.create_bingo_ball_image_list(bb_amt, bpt, 'hold')
         bangles = ig.create_bingo_ball_image_permutations(bb_amt, bpt, permits, 'hold', sortie)
     for index, bingos in enumerate(bangles):
+        # Shuffle the ticket position list, then take a slice of the list equal to the
+        # number of Shazams needed. Sort the list and use it to flag which tickets
+        # will receive a shazam image (again, only if there are any).
         for _ in range(rn.randint(2, 5)):
             rn.shuffle(tick_places)
-        places = tick_places[0: spt]
-        places.sort(reverse=True)
-        shizzle = copy.deepcopy(shazams)
         ticks = []
-        if bpt != spt:
-            nw_imgs = ig.create_image_pool(1, nw_pool, 'nonwinner')
-            for _ in range(rn.randint(2, 5)):
-                rn.shuffle(nw_imgs)
-            nw_cycle = it.cycle(nw_imgs)
-            for bingo in bingos:
-                while len(bingo) < spt:
-                    bingo.insert(rn.randint(0, len(bingo) + 1), next(nw_cycle))
+        # THIS REALLY DOESN'T NEED TO BE HERE
+        # If there are other images besides the bingo balls, add them here.
+        # if bpt != spt:
+        #     # Create the extra images, most likely from a nonwinner pool.
+        #     nw_imgs = ig.create_image_pool(1, nw_pool, 'nonwinner')
+        #     # Shuffle the extra image pool and create a cycle iterator.
+        #     for _ in range(rn.randint(2, 5)):
+        #         rn.shuffle(nw_imgs)
+        #     nw_cycle = it.cycle(nw_imgs)
+        #     # Cycle through the image lists and add the needed images at random
+        #     # spots in the list. Use the next image in the cycle to populate the
+        #     # new list images.
+        #     for bingo in bingos:
+        #         while len(bingo) < spt:
+        #             bingo.insert(rn.randint(0, len(bingo) + 1), next(nw_cycle))
+
         tick_no = tkt
+        # Cycle through the image lists and create tickets with them.
         for innie, bingo in enumerate(bingos):
-            pics = [basic]
-            if shazams > 0:
-                if shizzle > 0:
-                    if innie == places[shizzle - 1]:
-                        pics.append(f'shazam{str(next(pos_cycle)).zfill(2)}.ai')
-                        shizzle -= 1
-                    else:
-                        pics.append('')
-                else:
-                    pics.append('')
-            pics.extend(bingo)
-            for add in addl_bb_imgs:
-                pics = ig.add_additional_image_slots(add, pics)
-            ticks.append(uTick(tick_no, pics, numbs, index + 1, 1, first))
+            # Create the pics list using the base image as the first element.
+            pics = [''] if basic in ['none.ai', 'blank.ai', '0.ai', '000.ai'] else [basic]
+            for addl in addl_bb_imgs:
+                pics = ig.add_additional_image_slots(addl, pics)
+            # Create the ticket and add it to the ticket list.
+            ticks.append(uTick(tick_no, pics, bingo, index + 1, 1, first))
             if tick_no != '' and isinstance(tick_no, int):
                 tick_no += 1
             first = False
@@ -335,71 +310,41 @@ def create_bingo_ball_tickets(bb_amt, bpt, spt, downs, permits: int, first, nums
     return perms
 
 
-def calculate_image_slots(nws, holds):
+def create_downline_number_lists(amt: int, bpt: int) -> list[list[str]] | None:
     """
-    Calculate additional image slots needed for each ticket type.
+    Create bingo downlines comprised of the specified number of spots, shuffle
+    them, then cull any excess from the end of the list.
 
-    :param nws: nonwinner game specs
-    :type nws: list[any]
-    :param holds: hold game specs
-    :type holds: list[any]
-    :return: pre- and post-image list slots values
-    :rtype: list[list[gi.AddImages]]
+    :param amt: number of downlines needed
+    :type amt: int
+    :param bpt: number of bingo spots per ticket
+    :type bpt: int
+    :return: list of bingo image downlines
+    :rtype: list[list[str]]
     """
-    # Get the number of images for nonwinners and holds and set all
-    # pre- and post-values.
-    nws_needed = nws[2]
-    holds_needed = holds[0][2]
-    holds_supplemental = 0
-    if holds[1][1] > 0:
-        holds_supplemental += 1
-    nw_pre = 0
-    nw_post = 0
-    hold_pre = 0
-    hold_post = 0
-    inst_pre = 0
-    inst_post = 0
-    # if the nonwinners contain more than one image
-    if nws_needed != 1:
-        # If holds and nonwinners fill the same spaces, set the pre-nonwinners and
-        # pre-holds to -1, and set the post instants to the number of hold spaces.
-        if holds_needed == nws_needed:
-            nw_pre = -1
-            inst_post = holds_needed
-            if holds_supplemental > 0:
-                nw_pre -= 1
-                inst_post += 1
-        # If the number of holds equals one, then set post-instants and post-holds
-        # the number of nonwinners, and set pre-nonwinners to -1.
-        elif holds_needed == 1:
-            inst_post = nws_needed
-            hold_post = nws_needed
-            nw_pre = -1
-        # The holds and nonwinners are different, so they'll each need their own slots.
-        # Set the pre-nonwinners to the number of holds plus one (for instant/base), and
-        # the post-holds to the number of nonwinners.
-        else:
-            nw_pre = -(holds_needed + 1)
-            hold_post = nws_needed
-            inst_post = holds_needed + nws_needed
-            if holds_supplemental > 0:
-                nw_pre -= 1
-                inst_post += 1
-    # if nonwinners are 1 image and the holds contain more than 1
-    elif holds_needed != 1:
-        nw_post = holds_needed
-        inst_post = holds_needed
-        if holds_supplemental > 0:
-            nw_post -= 1
-            inst_post += 1
-    add_nw = [gi.add_images_lookup(nw_pre), gi.add_images_lookup(nw_post)]
-    add_hold = [gi.add_images_lookup(hold_pre), gi.add_images_lookup(hold_post)]
-    add_inst = [gi.add_images_lookup(inst_pre), gi.add_images_lookup(inst_post)]
-    return [add_nw, add_hold, add_inst]
+    # Get a list of all downlines of the desired number of spots
+    bingos = ng.create_bingo_downlines(bpt, False, False, False)
+    # If there aren't enough downlines, return None.
+    if len(bingos) < amt:
+        return None
+    # Shuffle the list and return the number of downlines needed.
+    for _ in range(rn.randint(5, 10)):
+        rn.shuffle(bingos)
+    return bingos[0: amt]
 
 
 def extract_ticket_types(game_specs):
     return [game_specs[1].pop(0), game_specs[2].pop(0), game_specs[3].pop(0), game_specs[4].pop(0)]
+
+
+def calculate_image_slots(nws):
+    print(nws)
+    other_adds = gi.add_images_lookup(0)
+    addl_nws = gi.add_images_lookup(0)
+    if nws[2] != 1:
+        other_adds = gi.add_images_lookup(nws[2])
+        addl_nws = gi.add_images_lookup(-1)
+    return other_adds, addl_nws
 
 
 def create_game(game_specs: list):
@@ -430,14 +375,27 @@ def create_game(game_specs: list):
     first_timer = True
     mix_flat = True
     tickets = []
+    # Extract the separate spec types and place them in their own variables.
     sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
-    part_name, file_name = name_specs
-    addl_nw, addl_hold, addl_inst = calculate_image_slots(nw_specs, hold_specs)
+    # Extract the high-level game information from the sheet_specs
     ups, perms, sheets, capacities, reset_perms, subflats, schisms = sheet_specs
+    # Get file and part names from name_specs
+    part_name, file_name = name_specs
+    # Get additional image slots needed for the various ticket types to maintain
+    # a consistent csv.
+    addls, addls_nw = calculate_image_slots(nw_specs)
+    digits = hold_specs[0][2]
+    # Do these ticket types need to contain a number field. This may eventually be
+    # set by passed parameters.
     inst_tkt_int = False
     pick_tkt_int = False
     hold_tkt_int = True
     tkt_no = 'unassigned'
+
+    nws = []
+    if nw_specs[0] > 0:
+        nw_specs.extend([[addls_nw], first_timer, digits])
+        nws = create_imaged_nonwinner_tickets(*nw_specs)
 
     instants = []
     if inst_specs[0][0][0] > 0:
@@ -445,9 +403,10 @@ def create_game(game_specs: list):
             tkt_no = len(tickets) + 1
         else:
             tkt_no = ''
-        inst_specs.extend([tkt_no, addl_inst, 0, first_timer])
+        inst_specs.extend([tkt_no, [addls], digits, first_timer])
         instants.extend(create_instant_winners(*inst_specs))
         first_timer = False
+
     picks = []
     if pick_specs[0][0][0] > 0:
         if pick_tkt_int:
@@ -457,9 +416,10 @@ def create_game(game_specs: list):
                 tkt_no = 1
         else:
             tkt_no = ''
-        picks.extend(create_pick_winners(pick_specs[0], tkt_no, addl_inst,
-                                         0, first_timer, pick_specs[1]))
+        pick_specs.extend([tkt_no, [addls], digits, first_timer])
+        picks.extend(create_pick_winners(*pick_specs))
         first_timer = False
+
     holds = []
     if hold_specs[0][0] > 0 or hold_specs[2][0] > 0:
         if hold_tkt_int:
@@ -471,15 +431,10 @@ def create_game(game_specs: list):
                 tkt_no = len(instants) + 1
             else:
                 tkt_no = 1
-        hold_specs.extend([tkt_no, addl_hold, addl_inst, perms, first_timer])
+        hold_specs.extend([tkt_no, [addls], perms, first_timer])
         holds = create_hold_tickets(*hold_specs)
         if isinstance(holds, str) or holds is None:
             return holds
-        first_timer = False
-    nonwinners = []
-    if nw_specs[0] > 0:
-        nw_specs.extend([addl_nw, first_timer])
-        nonwinners = create_imaged_nonwinner_tickets(*nw_specs)
         first_timer = False
 
     for index, hold in enumerate(holds):
@@ -491,10 +446,10 @@ def create_game(game_specs: list):
             for snap in picks:
                 snap.reset_permutation(index + 1)
             hold.extend(copy.deepcopy(picks))
-        if len(nonwinners) > 0:
-            for snap in nonwinners:
+        if len(nws) > 0:
+            for snap in nws:
                 snap.reset_permutation(index + 1)
-            hold.extend(copy.deepcopy(nonwinners))
+            hold.extend(copy.deepcopy(nws))
 
     if len(holds) == 1:
         tio.write_tickets_to_file(file_name, holds[0], output_folder)
@@ -512,46 +467,16 @@ def create_game(game_specs: list):
     return "CSVs created without incident! Let's shout both 'Whoo!' and 'Hoo!'"
 
 
+
 if __name__ == '__main__':
-    holy_k_fun = [
-        [40, 4, 83, [80, 80], False, 0, 0],
-        ['I', 0, 9, 1],
-        ['I', [[0, False]], 0],
-        ['I', [[0, False]]],
-        ['B', [121, 3, 3, 75, ['0', '0', '0', '0', '0']], [False, False],
-         [45, [['red', 15], ['white', 15], ['blue', 15]]]],
-        ['000', 'test-10122'],
+    specs = [
+        [4, 1, 133, [56, 56], False, 0, 0],
+        ['I', 1609, 9, 3],
+        ['I', [[88, False]], 0],
+        ['I', [[15, True]]],
+        ['B', [150, 3, 3, 9, [0, 0, 0]], [True, 0, True, 'base01.ai'], [0, [['', 0]]]],
+        ['993-013', 'DragonFortune-53713'],
         ''
     ]
 
-    holy_k = [
-        [40, 4, 83, [80, 80], False, 0, 0],
-        ['I', 0, 9, 1],
-        ['I', [[0, False]], 0],
-        ['I', [[0, False]]],
-        ['B', [166, 3, 3, 75, ['0', '0', '0', '0', '0']], [False, False], [0, [['', 0]]]],
-        ['000-135', 'HolyKielbasa-31681'],
-        ''
-    ]
-
-    holy_k_new = [
-        [40, 4, 83, [80, 80], False, 0, 0],
-        ['I', 0, 9, 1],
-        ['I', [[0, False]], 0],
-        ['I', [[0, False]]],
-        ['B', [166, 3, 3, 9, ['0', '0', '0']], [False, False], [0, [['', 0]]]],
-        ['000', 'test-000'],
-        ''
-    ]
-
-    shaz = [
-        [8, 8, 100, [56, 56], False, 0, 0],
-        ['I', 622, 10, 3],
-        ['I', [[1, False], [4, False], [48, False]], 0],
-        ['I', [[0, False]]],
-        ['B', [25, 3, 3, 10, [0, 0, 0]], [False, 3, False, 'base01.ai'], [0, [['', 0]]]],
-        ['006-171', 'ShazamBalls-52655'],
-        ''
-    ]
-
-    create_game(shaz)
+    create_game(specs)

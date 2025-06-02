@@ -71,7 +71,7 @@ def create_number_pools(first_number: int, last_number: int, winner_suffix: list
 
 def create_number_pools_from_suffix_list(first_nw: int, last_nw: int, flags: list[str], mixed: bool = True):
     """
-    Create a list of numbers to be used as nonwinners for shaded (or other number) games between the
+    Create a list of numbers to be used as nonwinners for shaded (or other number) ticketing_games between the
     first and last values. Throw out any numbers that contain significant suffixes or where all the
     digits are the same.
 

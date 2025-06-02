@@ -73,15 +73,15 @@ class AddImages(IntEnum):
 
 
 sheet_capacities = {
-    '1': [96, 96], 'O1': [96, 96], 'N1': [-1, -1],
-    '3': [240, 80], 'O3': [240, 80], 'N3': [-1, -1],
+    '1': [96, 96], 'O1': [96, 96], 'N1': [168, 168],
+    '3': [240, 80], 'O3': [240, 80], 'N3': [120, 120],
     '3-1': [80, 80], 'O3-1': [80, 80], 'N3-1': [-1, -1],
-    '4': [256, 64], 'O4': [256, 64], 'N4': [-1, -1],
+    '4': [256, 64], 'O4': [256, 64], 'N4': [96, 96],
     '4-1': [64, 64], 'O4-1': [64, 64], 'N4-1': [-1, -1],
-    '5': [56, 56], 'O5': [56, 56], 'N5': [-1, -1],
+    '5': [56, 56], 'O5': [56, 56], 'N5': [84, 84],
     '7': [42, 42], 'O7': [42, 42], 'N7': [-1, -1],
     'S': [240, 240], 'OS': [240, 240], 'NS': [300, 300],
-    'C': [113, 113], 'OC': [113, 113], 'NC': [-1, -1],
+    'C': [113, 113], 'OC': [113, 113], 'NC': [168, 168],
     'BC': [33, 33], 'OBC': [33, 33], 'NBC': [-1, -1]}
 
 sheet_columns = {
@@ -91,10 +91,22 @@ sheet_columns = {
 
 def add_images_lookup(val: int):
     """
+    Looks up an AddImages Enum member based on its integer value.
 
-    :param val:
-    :return:
+    This function serves as a reverse lookup mechanism for the AddImages Enum.
+    It takes an integer and returns the corresponding AddImages member.
+    If the provided integer does not match any of the values defined
+    in the AddImages Enum, it returns `AddImages.NoneAdded` as a safe default.
+
+    :param val: The integer value potentially corresponding to an AddImages member
+                (e.g., -100, 0, 5, -3).
+    :type val: int
+    :return: The matching AddImages Enum member if `val` is a defined value within
+             the Enum. Otherwise, returns `AddImages.NoneAdded`.
+    :rtype: AddImages
     """
+    # Create a mapping from integer values back to Enum members
+    # e.g., {-100: AddImages.PreBase, 100: AddImages.PostBase, 0: AddImages.NoneAdded, -1: AddImages.PreOne, ...}
     val_lookup = {ai.value: ai for ai in AddImages}
     return val_lookup.get(val, AddImages.NoneAdded)
 
@@ -962,7 +974,7 @@ def get_bingo_number_parameters() -> list[list[list[int] | list[list[int]]] | bo
 
     # Non-staggered single-holds (I'm not sure of the difference between non_staggered_single holds and
     # staggered_single_holds. I believe staggered has something to do with the names of the images used
-    # when dealing with games that have double and single line combinations mixed together.)
+    # when dealing with ticketing_games that have double and single line combinations mixed together.)
     non_staggered_single_holds = ''
     while not re.match('[0-9,]+$', non_staggered_single_holds) and non_staggered_single_holds.upper() != 'X':
         non_staggered_single_holds = input('Number of Non-staggered, Single-line hold tickets '

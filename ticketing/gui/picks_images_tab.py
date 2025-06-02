@@ -1,8 +1,7 @@
 import re
-
 import ttkbootstrap as ttk
-from ticketing__notebook_tab import TicketingNotebookTab
-from helpers import create_label_and_field
+
+from .ticketing__notebook_tab import TicketingNotebookTab
 
 
 class PicksImagesTab(TicketingNotebookTab):
@@ -39,7 +38,7 @@ class PicksImagesTab(TicketingNotebookTab):
         """
 
         # Create two columns of labels for tier, quantity, and uniqueness
-        for i in range(2):
+        for i in range(3):
             tier_label = ttk.Label(self, text=f"Tier")
             tier_label.grid(row=0, column=(i * 3) + 0, padx=5, pady=5)
             entry_label = ttk.Label(self, text=f"Quantity")
@@ -49,12 +48,12 @@ class PicksImagesTab(TicketingNotebookTab):
 
         # Create  tiers for instant images, including quantity and uniqueness
         # (maybe add more later on--I haven't seen picks heavily tiered).
-        for i in range(4):
+        for i in range(15):
             # Create the label for this tier, calculate its column and row positions,
             # then add it to the grid.
             row_label = ttk.Label(self, text=str(i + 1))
-            col = i // 2 * 3
-            row = i % 2
+            col = i // 5 * 3
+            row = i % 5
             row_label.grid(row=row + 1, column=col, padx=5, pady=5)
 
             # Add entry box for quantity and add it to the collections with
@@ -153,7 +152,7 @@ class PicksImagesTab(TicketingNotebookTab):
         # Add a tier list for every box that contains a non-zero value. The lists
         # consist of the [quantity, unique] values for the respective tiers. The list
         # ends after 4 tiers or a zero is encountered in the quantity box.
-        for i in range(4):
+        for i in range(15):
             if int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']) != 0:
                 tier_list.append([int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']),
                                   self.data_dictionary[f'unique{str(i + 1).zfill(2)}']])

@@ -1,9 +1,8 @@
 import re
-
-from ticketing__notebook_tab import TicketingNotebookTab
 import ttkbootstrap as ttk
 
-from helpers import create_label_and_field
+from .ticketing__notebook_tab import TicketingNotebookTab
+from .helpers import create_label_and_field
 
 
 class HoldsMatrixTab(TicketingNotebookTab):

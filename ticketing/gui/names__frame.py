@@ -1,7 +1,8 @@
 import ttkbootstrap as ttk
 import tkinter as tk
-from ticketing__frame import TicketingFrame
-from helpers import create_label_and_field
+
+from .ticketing__frame import TicketingFrame
+from .helpers import create_label_and_field
 
 
 class NamesFrame(TicketingFrame):

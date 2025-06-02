@@ -5,6 +5,7 @@ from ticketing.bingo_ticket import BingoTicket as bTick
 from ticketing import verified_bingo as vb
 from ticketing import image_generator as ig
 from ticketing import ticket_io as tio
+# from helpers import extract_ticket_types
 
 DEBUG = True
 
@@ -381,9 +382,9 @@ def extract_ticket_types(game_specs):
 
 def create_game(game_specs: list):
     """
-    Initializes and generates a bingo-ball style work order based on specifications from a gui-based form. This
-    function supports different types of tickets including pick and instant winners, shaded or imaged holds, and
-    imaged or shaded non-winners. Finally, it writes the generated tickets and game stacks to specified output files.
+    Initializes and generates a bingo-style work order based on specifications from a gui-based form. This
+    function supports different types of tickets including pick and instant winners, non-winners, and a
+    variety of bingo tickets. Finally, it writes the generated tickets and game stacks to specified output files.
 
     :param game_specs: A tuple containing specifications for creating the game. The tuple typically consists of:
                        - sheets_specs: Specifications related to sheet configurations.
@@ -417,25 +418,37 @@ def create_game(game_specs: list):
     bingrows = hold_specs[8]
     num_slots = 5 * bingrows
 
+    # Create the hold tickets (there is no quantity check; we wouldn't be
+    # here if there were no bingo holds).
     hold_specs.extend([hold_addls, perms, reset_perms])
     permits = create_hold_tickets(*hold_specs)
 
+    # If there are any instant winners needed, append the necessary data to
+    # the instant specs list and call the creation method.
     if inst_specs[0][0][0] > 0:
         inst_specs.extend([inst_addls, bingrows, perms])
         i_permits = create_instant_winners_refined(*inst_specs)
         for i in range(len(i_permits)):
             permits[i].extend(i_permits[i])
 
+    # If there are any nonwinners needed, append the necessary data to
+    # the nonwinners specs list and call the creation method.
     if nw_specs[0] > 0:
         nw_specs.extend([nw_addls, bingrows, perms])
         n_permits = create_nonwinning_ticket(*nw_specs)
         for i in range(len(n_permits)):
             permits[i].extend(n_permits[i])
 
+    # Write the permutations to csv files.
     tio.write_permutations_to_files(file_name, permits, False, output_folder)
+
+    # Create the needed game stacks from the permutations.
     game_stacks = tio.create_game_stacks_from_permutations(permits, ups, sheets, capacities[0], True)
+
+    # Write the ticketing_games stacks to csv files and receive cd position data for all cd tickets.
     cds, sheeters = tio.write_game_stacks_to_file(file_name, game_stacks, ups, sheets, capacities[0], output_folder)
 
+    # If any cds were returned, write out the position information to a csv file.
     if len(cds) > 0:
         tio.write_cd_positions_to_csv_file(part_name, file_name, cds, cd_tier, output_folder)
         tio.write_cd_positions_to_xml_file(part_name, file_name, cds, cd_tier, ups, output_folder)

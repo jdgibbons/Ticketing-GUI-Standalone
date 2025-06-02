@@ -1,7 +1,7 @@
 import ttkbootstrap as ttk
 
-from picks_images_tab import PicksImagesTab
-from ticketing__frame import TicketingFrame
+from .picks_images_tab import PicksImagesTab
+from .ticketing__frame import TicketingFrame
 
 
 class PicksFrame(TicketingFrame):

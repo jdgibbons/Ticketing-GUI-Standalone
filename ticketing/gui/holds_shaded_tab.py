@@ -1,9 +1,7 @@
 import re
 
 import ttkbootstrap as ttk
-from ticketing__notebook_tab import TicketingNotebookTab
-
-from helpers import create_label_and_field
+from .ticketing__notebook_tab import TicketingNotebookTab
 
 
 class HoldsShadedTab(TicketingNotebookTab):

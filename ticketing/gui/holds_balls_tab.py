@@ -1,9 +1,8 @@
 import re
-
 import ttkbootstrap as ttk
-from ticketing__notebook_tab import TicketingNotebookTab
 
-from helpers import create_label_and_field
+from .ticketing__notebook_tab import TicketingNotebookTab
+from .helpers import create_label_and_field
 
 
 class HoldsBallsTab(TicketingNotebookTab):
@@ -52,20 +51,27 @@ class HoldsBallsTab(TicketingNotebookTab):
                                                     0, 4, self, "0")
         self.populate_data_collections_with_text(input_field, 'spots')
 
+        # Add a frame to hold the checkboxes, so they don't appear janky.
+        check_layout_frame = ttk.Frame(self)
+        check_layout_frame.grid(row=1, column=0, columnspan=8, padx=25, pady=5)
+
         # Add 'Downlines' label and checkbox.
-        label, input_field = create_label_and_field("Downlines", ttk.Checkbutton(self),
-                                                    1, 0, self)
+        label, input_field = create_label_and_field("Downlines", ttk.Checkbutton(check_layout_frame),
+                                                    0, 0, check_layout_frame)
         self.populate_data_collections_with_label(input_field, label)
 
         # Add 'Sort Bingo Balls' checkbox and add it to the collections as 'sortie'.
-        label, input_field = create_label_and_field("Sort Bingo Balls", ttk.Checkbutton(self),
-                                                    1, 2, self)
+        label, input_field = create_label_and_field("Sort Bingo Balls", ttk.Checkbutton(check_layout_frame),
+                                                    0, 2, check_layout_frame)
         self.populate_data_collections_with_text(input_field, 'sortie')
 
-        # Add 'Base' image label and entry box and add it to the collections
-        label, input_field = create_label_and_field("Base", ttk.Entry(self, width=10),
-                                                    1, 4, self, "")
-        self.populate_data_collections_with_text(input_field, 'base')
+        # Add 'Non-Image' checkbox and add it to the collections as 'non-image'.
+        # This checkbox indicates the numbers are all that are required in the csv,
+        # because they will be placed into a base image. The bingo-ball logic is the
+        # same, but the representation doesn't require the images themselves.
+        label, input_field = create_label_and_field("Non-Image", ttk.Checkbutton(check_layout_frame),
+                                                    0, 4, check_layout_frame)
+        self.populate_data_collections_with_text(input_field, 'non-image')
 
         # Add 'Free Spots' label and five entry boxes for free quantities. Add to
         # collections as 'free1' - 'free5'.
@@ -85,6 +91,13 @@ class HoldsBallsTab(TicketingNotebookTab):
         label, input_field = create_label_and_field("Shazams", ttk.Entry(self, width=5),
                                                     3, 0, self, "0")
         self.populate_data_collections_with_text(input_field, 'shazams')
+
+        # Add 'Base' image label and entry box and add it to the collections
+        # Leaving the field blank will automatically generate the name 'base.ai'. If the user
+        # actually wants the field to be empty, they can enter 'none', 'blank', '0', or '000'.
+        label, input_field = create_label_and_field("Base", ttk.Entry(self, width=10),
+                                                    3, 4, self, "")
+        self.populate_data_collections_with_text(input_field, 'base')
 
         # Add 'Additional Holds' label and entry box across multiple columns.
         # Add to collections as 'additionals'.
@@ -133,7 +146,7 @@ class HoldsBallsTab(TicketingNotebookTab):
         """
         self.data_dictionary.clear()
         for key in self.field_dictionary:
-            if key in ['Downlines', 'sortie']:
+            if key in ['Downlines', 'sortie', 'non-image']:
                 self.data_dictionary[key] = self.field_dictionary[key].instate(['selected'])
             else:
                 self.data_dictionary[key] = (self.field_dictionary[key].get())
@@ -158,6 +171,7 @@ class HoldsBallsTab(TicketingNotebookTab):
         # Reset the checkboxes
         self.field_dictionary['Downlines'].state(['!selected'])
         self.field_dictionary['sortie'].state(['!selected'])
+        self.field_dictionary['non-image'].state(['!selected'])
 
     def retrieve_data(self) -> list:
         """
@@ -175,6 +189,7 @@ class HoldsBallsTab(TicketingNotebookTab):
         pool = int(self.data_dictionary['pool'])
         # Retrieve boolean values
         downlines = self.data_dictionary['Downlines']
+        non_image = self.data_dictionary['non-image']
         shazams = int(self.data_dictionary['shazams'])
         filename = self.data_dictionary['base']
         if len(filename) > 3:
@@ -212,7 +227,7 @@ class HoldsBallsTab(TicketingNotebookTab):
             addl_count += addl[1]
         # Place related information into lists
         ball_tickets = [quantity, bingos, spots, pool, frees]
-        bool_options = [downlines, shazams, sortie, filename]
+        bool_options = [downlines, shazams, sortie, filename, non_image]
         addl_holds = [addl_count, additionals]
         # Return the name of the tab and its related data.
         return [self.name, ball_tickets, bool_options, addl_holds]

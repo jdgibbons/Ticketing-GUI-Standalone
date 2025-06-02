@@ -1,11 +1,7 @@
 import re
-
 import ttkbootstrap as ttk
 
-from holds_shaded_tab import parse_image_holds
-from ticketing__notebook_tab import TicketingNotebookTab
-
-from helpers import create_label_and_field
+from .ticketing__notebook_tab import TicketingNotebookTab
 
 
 class InstantsShadedTab(TicketingNotebookTab):

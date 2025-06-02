@@ -5,6 +5,7 @@ from ticketing import number_generator as ng
 from ticketing import image_generator as ig
 from ticketing import game_info as gi
 from ticketing import ticket_io as tio
+# from helpers import extract_ticket_types
 
 import random as rn
 
@@ -76,8 +77,6 @@ def create_pick_winners(amt_list: list[list[int, bool]], tkt: int, addl_imgs: gi
     :type nummies: int
     :param first: Does the first ticket need to set the csv fields?
     :type first: bool
-    :param uniq: Does each tier level have unique images?
-    :type uniq: bool
     :param permit: permutation number
     :type permit: int
     :return: A list of pick winner tickets
@@ -94,8 +93,8 @@ def create_pick_winners(amt_list: list[list[int, bool]], tkt: int, addl_imgs: gi
         for img in imgs:
             img_list.append([img, 1])
     else:
-        for amt in amt_list:
-            img_list.extend(ig.create_tiered_image_list(amt[0], 'pick', amt[1]))
+        # for amt in amt_list:
+        img_list.extend(ig.create_tiered_image_list_augmented(amt_list, 'pick'))
     cull_ticket = first
     # Cycle through the images list. Use each image name (img[0]) and
     # ticket tier level (img[1]) to create a new ticket.

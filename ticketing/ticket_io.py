@@ -41,6 +41,7 @@ def write_tickets_to_file(filename: str, tickets: list[BonanzaTicket], output_fo
 def write_permutations_to_files(filename: str, perms: list[list[BonanzaTicket]],
                                 verbose=False, output_folder: str = '') -> None:
     """
+    Write all the permutations to separate csv files.
 
     :param filename:
     :param perms:
@@ -51,6 +52,7 @@ def write_permutations_to_files(filename: str, perms: list[list[BonanzaTicket]],
     if verbose:
         print(f"Writing {len(perms)} permutations to files . . .")
         print('    Perm: ', end='')
+    # If the output folder isn't blank, use it to set the output destination.
     if output_folder != '' and os.path.exists(output_folder):
         destination = f"{output_folder}/{filename}"
     else:
@@ -58,16 +60,21 @@ def write_permutations_to_files(filename: str, perms: list[list[BonanzaTicket]],
         if not os.path.exists('./results'):
             os.mkdir('./results')
         destination = f"./results/{filename}"
+    # Cycle through the perms
     for p, perm in enumerate(perms):
         if verbose:
             print(f'{p + 1}', end=' ')
+        # Create a file to write this permutation to.
         file = open(f"{destination}_perm{str(p + 1).zfill(2)}.csv", 'w')
+        # Write the csv field headers.
         file.write(f"{','.join(BonanzaTicket.csv_fields)}\n")
         cc = 1
+        # Cycle through this perm's tickets.
         for ticket in perm:
             if verbose:
                 print(f"{cc}, {ticket}\n")
                 cc += 1
+            # Write out this tickets information as csv.
             file.write(f"{ticket}\n")
     if verbose:
         print('\n')
@@ -75,6 +82,7 @@ def write_permutations_to_files(filename: str, perms: list[list[BonanzaTicket]],
 
 def write_permutations_to_debug(filename: str, perms: list[list[BonanzaTicket]], verbose=False) -> None:
     """
+    Write the permutations to the screen.
 
     :param filename:
     :param perms:
@@ -353,7 +361,7 @@ def prettify_xml(element: xml.etree.ElementTree.Element, indent: str = '   ') ->
         queue[0:0] = children  # prepend so children come before siblings
 
 
-def write_multi_spot_cd_positions_to_file(part: str, filename: str, cd_tickets: list[BonanzaTicket],
+def write_cd_multi_spot_positions_to_file(part: str, filename: str, cd_tickets: list[BonanzaTicket],
                                           cd_tier_level: int, spots_per_ticket: int, output_folder: str = '') -> None:
     """
     Take a list of cd tickets and write out the pertinent information to a csv file

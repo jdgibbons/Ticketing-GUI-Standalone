@@ -3,15 +3,15 @@ import ttkbootstrap as ttk
 
 from ticketing import game_info as gi
 
-from helpers import create_label_and_field
-from ticketing__frame import TicketingFrame
+from .helpers import create_label_and_field
+from .ticketing__frame import TicketingFrame
 
 
 class GameInfoFrame(TicketingFrame):
     """
     A specific ticketing frame for entering game information.
 
-    This class inherits from TicketingFrame and implements the abstract methods
+    This class inherits from TicketingFrame and implements its abstract methods
     to create a frame with input fields for various game parameters.
 
     Attributes:
@@ -23,7 +23,7 @@ class GameInfoFrame(TicketingFrame):
         create_data_dictionary(): Populates the data_dictionary with values from the input fields.
         clear_fields(): Clears all input fields and resets them to their default values.
         retrieve_data() -> list: Retrieves the data from the input fields as a list.
-        create_defaults(): Initializes the defaults dictionary with default values.
+        create_defaults(): Initializes the defaults' dictionary with default values.
     """
 
     def __init__(self, parent, *args, **kwargs):

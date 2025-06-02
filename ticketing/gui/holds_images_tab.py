@@ -1,5 +1,6 @@
 import ttkbootstrap as ttk
-from ticketing__notebook_tab import TicketingNotebookTab
+
+from .ticketing__notebook_tab import TicketingNotebookTab
 
 
 class HoldsImagesTab(TicketingNotebookTab):
@@ -8,7 +9,7 @@ class HoldsImagesTab(TicketingNotebookTab):
      (Holds -> Images)
 
     This tab allows users to input the quantity of different image tiers.
-    It provides 12 entry fields that allow the user to specify the quantity
+    It provides 16 entry fields that allow the user to specify the quantity
     of each tier.
 
     Attributes:
@@ -32,7 +33,7 @@ class HoldsImagesTab(TicketingNotebookTab):
 
         This method creates a grid of labels and entry fields for entering quantities
         for different image types. The grid consists of three rows of four columns, each
-        representing a specific image tier, for a total of 12 entries.
+        representing a specific image tier, for a total of 16 entries.
         """
         for i in range(4):
             # Add Type and Quantity labels
@@ -41,13 +42,13 @@ class HoldsImagesTab(TicketingNotebookTab):
             entry_label = ttk.Label(self, text=f"Quantity")
             entry_label.grid(row=0, column=(i * 3) + 1, padx=5, pady=5, sticky="w")
 
-        # Create 12 entries in three rows and four columns. The counting is done
+        # Create 16 entries in three rows and four columns. The counting is done
         # vertically, so types 1 - 3 are in column one, 4 - 6 are in column two, etc.
-        for i in range(12):
+        for i in range(16):
             # Create and add the tier label.
             row_label = ttk.Label(self, text=str(i + 1).zfill(2))
-            col = i // 3
-            row = i % 3
+            col = i // 4
+            row = i % 4
             row_label.grid(row=row + 1, column=col * 3, padx=5, pady=5)
 
             # Create and add the entry box.
@@ -67,7 +68,7 @@ class HoldsImagesTab(TicketingNotebookTab):
         """
         messages = []
         self.create_data_dictionary()
-        for i in range(12):
+        for i in range(16):
             key = f'type{str(i + 1).zfill(2)}'
             if (not self.data_dictionary[key].isdigit()
                     or int(self.data_dictionary[key]) < 0):
@@ -79,7 +80,7 @@ class HoldsImagesTab(TicketingNotebookTab):
        Populates the data_dictionary with the current values from the input fields.
        """
         self.data_dictionary.clear()
-        for i in range(12):
+        for i in range(16):
             key = f'type{str(i + 1).zfill(2)}'
             self.data_dictionary[key] = (
                 self.field_dictionary[key].get())

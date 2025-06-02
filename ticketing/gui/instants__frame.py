@@ -1,9 +1,9 @@
 import ttkbootstrap as ttk
 
-from instants_cannons_tab import InstantsCannonsTab
-from instants_images_tab import InstantsImagesTab
-from instants_shaded_tab import InstantsShadedTab
-from ticketing__frame import TicketingFrame
+from .instants_cannons_tab import InstantsCannonsTab
+from .instants_images_tab import InstantsImagesTab
+from .instants_shaded_tab import InstantsShadedTab
+from .ticketing__frame import TicketingFrame
 
 
 class InstantsFrame(TicketingFrame):
