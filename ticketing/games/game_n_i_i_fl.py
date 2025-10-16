@@ -6,6 +6,7 @@ from ticketing import game_info as gi
 
 
 nw_type, insta_type, pick_type, hold_type = '', '', '', ''
+suffix = ''
 DEBUG = True
 
 
@@ -36,7 +37,7 @@ def extract_ticket_types(game_specs):
 
 
 def create_game(game_specs):
-    global nw_type, insta_type, pick_type, hold_type
+    global nw_type, insta_type, pick_type, hold_type, suffix
     if DEBUG:
         print(game_specs)
     nw_type, insta_type, pick_type, hold_type = extract_ticket_types(game_specs)
@@ -47,6 +48,7 @@ def create_game(game_specs):
     mix_flat = True
     tickets = []
     sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
+    suffix = sheet_specs.pop()
     part_name, file_name = name_specs
 
 

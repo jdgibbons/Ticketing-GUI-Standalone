@@ -669,7 +669,8 @@ def apportion_game_stack(stack: list[BonanzaTicket], up: int, q_sheets: int,
     # Create the lists to hold the tickets for each spot of the up
     for _ in range(tickets_per_sheet):
         sub_stacks.append([])
-    # Create three pages worth of nonwinners to avoid crimping on the winning tickets
+    # Create three pages worth of nonwinners to avoid crimping on the winning tickets by
+    # pulling nonwinners from the end of the list.
     for _ in range(3):
         for ss in sub_stacks:
             ticket = stack.pop()

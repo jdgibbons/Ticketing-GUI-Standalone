@@ -76,3 +76,25 @@ The shaded information:
             blue01.ai - blue15.ai
 
     Any alphanumeric string can be used as the image prefix. (See 53691, Tripe Diamond Slots for reference.)
+
+
+Bingos
+    Either/Ors refer to tickets that can have either one or two spaces per spot. This differs from staggered,
+    double-line bingos with free spaces in one slot because the single digit columns are simply that: single
+    digit columns. They are not double-digit columns with one free space--they are single-digit columns
+    contained by a single 'bubble' that spans the entire column space.
+
+    Either/Or entries should be composed of three quantities: Tickets, Frees, Doubles. Different types of
+    either/ors (varying in free and/or double spaces) can be listed in the same entry by using a semicolon
+    between entries. So, if the user wanted a total of 200 tickets broken down into
+
+        100: 0 frees, 1 double
+         40: 1 free,  1 double
+         20: 2 frees, 1 double
+         15: 0 frees, 2 doubles
+         10: 1 free,  2 doubles
+          5: 2 frees, 2 doubles
+
+    they could be written out as:
+
+        100,0,1;40,1,1;20,2,1;15,0,2;10,1,2;5,2,2

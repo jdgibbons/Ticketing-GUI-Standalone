@@ -28,12 +28,15 @@ class GameInfoFrame(TicketingFrame):
 
     def __init__(self, parent, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
+        self.suffix_option = tk.IntVar()
+        self.suffixes = ['.ai', '.pdf']
+        self.suffixtry = '.ai'
         self.add_widgets()
         self.defaults = {}
         self.create_defaults()
 
     def add_widgets(self):
-        # Window Structure Combobox
+        # Window Structure: A combobox containing old and new sheet sizes as options.
         combo_struct = ttk.Combobox(self,
                                     values=['1', '3', '3-1', '4', '4-1', '5', '7', 'S', 'NS', 'C', 'BC', 'NC'],
                                     state="readonly",
@@ -41,35 +44,55 @@ class GameInfoFrame(TicketingFrame):
         label, input_field = create_label_and_field("Window Structure", combo_struct, 0, 0, self)
         self.populate_data_collections(input_field, label)
 
-        # Ups Text Entry Box
+        # Ups: A text-entry box requiring a positive integer representing the number of ups.
+        #      Default: 1
         label, input_field = create_label_and_field("Ups", ttk.Entry(self, width=5), 0, 2,
                                                     self, "1")
         self.populate_data_collections(input_field, label)
 
-        # Permutations Text Entry Box
+        # Permutations: A text-entry box requiring a positive integer representing the number of permutations.
+        #               Default: 1
         label, input_field = create_label_and_field("Permutations", ttk.Entry(self, width=5), 0, 4,
                                                     self, "1")
         self.populate_data_collections(input_field, label)
 
-        # Sheets Text Entry Box
+        # Sheets: A text-entry box requiring a positive integer representing the number of sheets.
+        #         Default: 1
         label, input_field = create_label_and_field("Sheets", ttk.Entry(self, width=5), 1, 0,
                                                     self, "1")
         self.populate_data_collections(input_field, label)
 
-        # Subflats Text Entry Box
+        # Subflats: A text-entry box requiring a non-negative integer representing the number of subflats.
+        #           Default: 0
         label, input_field = create_label_and_field("Subflats", ttk.Entry(self, width=5), 1, 2,
                                                     self, "0")
         self.populate_data_collections(input_field, label)
 
-        # Schisms Text Entry Box
+        # Schisms: A text-entry box requiring a non-negative integer representing the number of schisms.
+        #          Default: 0
         label, input_field = create_label_and_field("Schisms", ttk.Entry(self, width=5), 1, 4,
                                                     self, "0")
         self.populate_data_collections(input_field, label)
 
-        # Reset Checkbox
+        # Reset: A checkbox that indicates whether a group of tickets can be played at the same time. If checked,
+        #        the pool of objects used to compile holds can be reset for each permutation. That means that duplicates
+        #        only need to be avoided within a single perm. If unchecked, the pool must be used across all perms
+        #        and duplicates must be avoided within the entire perms collection.
+        #        Default: unchecked
         label, input_field = create_label_and_field("Reset", ttk.Checkbutton(self), 2, 4,
                                                     self)
         self.populate_data_collections(input_field, label)
+
+        # Image Suffix: A collection of radio buttons that represent all acceptable image suffixes--only one can be
+        #               selected at a time.
+        #               Default: '.ai'
+        label = ttk.Label(self, text="Image Suffix:")
+        label.grid(row=3, column=0, padx=5, pady=5)
+        ai_button = ttk.Radiobutton(self, text=".ai", variable=self.suffix_option, value=0)
+        pdf_button = ttk.Radiobutton(self, text=".pdf", variable=self.suffix_option, value=1)
+        self.suffix_option.set(0)
+        ai_button.grid(row=3, column=1, padx=10, pady=5)
+        pdf_button.grid(row=3, column=2, padx=10, pady=5)
 
     def validate_data(self) -> list[str]:
         """
@@ -87,18 +110,24 @@ class GameInfoFrame(TicketingFrame):
         if not self.data_dictionary["Window Structure"]:
             messages.append("Game Information: Window Structure cannot be empty. Please select a valid option.")
 
-        # Verify that all number entry fields contain valid integers
+        # Verify that all number entry fields contain valid integers.
         for label_text in self.labels:
+            # Ups, Permutations, and Sheets must contain positive integer values.
             if label_text in ['Ups', 'Permutations', 'Sheets']:
                 if not self.data_dictionary[label_text].isdigit() or int(self.data_dictionary[label_text]) < 1:
                     messages.append(f"Game Information: '{label_text}' must contain a positive integer.")
+            # Schisms and Subflats must contain non-negative integer values.
             elif label_text in ['Schisms', 'Subflats']:
                 if not self.data_dictionary[label_text].isdigit() or int(self.data_dictionary[label_text]) < 0:
                     messages.append(f"Game Information: '{label_text}' must contain a non-negative integer.")
 
-        # If there's already an error, pitch this back to the caller with the descriptions.
+        # If there's already an error, return the errors so the user can fix them. There's no point
+        # in continuing if these basic values aren't correct.
         if len(messages) > 0:
             return messages
+
+        # Cycle through the game information values. If an error is detected, report it immediately. Do not create
+        # a list on issues--just report them one at a time.
 
         # Validate that the window capacity is evenly divisible by the number of ups.
         win_capacity = gi.get_sheet_capacity(self.data_dictionary["Window Structure"])[1]
@@ -119,11 +148,20 @@ class GameInfoFrame(TicketingFrame):
         # the number of columns per up.
         schisms = int(self.data_dictionary["Schisms"])
         if schisms != 0:
+            # If schisms is non-zero, make sure that new snaps are selected. If not, report the error.
             if self.data_dictionary["Window Structure"] != "NS":
                 messages.append("Game Information: Schisms can only be used with window structure 'NS' right now.")
                 return messages
+
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+            # THIS IS GOING TO NEED REFINEMENT, BECAUSE I HAVE NO IDEA WHAT SCHISMS REPRESENT ANYMORE.
+            # THIS MIGHT INDICATE 'MR' (MULTIPLE RUNS).
+            # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+
+            # Calculate the number of columns per up, then make sure it's divisible by the number of schisms.
+            # If not, report the error.
             columns = gi.sheet_columns(self.data_dictionary["Window Structure"])
-            columns_per_up = win_capacity / ups
+            columns_per_up = columns / ups
             if columns_per_up % schisms != 0:
                 messages.append(f"Game Information: Schisms ({schisms}) must be evenly divisible by "
                                 f"the number of columns per up ({columns_per_up}).")
@@ -153,6 +191,7 @@ class GameInfoFrame(TicketingFrame):
                 self.data_dictionary[label_text] = self.field_dictionary[label_text].instate(['selected'])
             else:
                 self.data_dictionary[label_text] = self.field_dictionary[label_text].get()
+        self.data_dictionary["Suffix"] = self.suffixes[self.suffix_option.get()]
 
     def clear_fields(self):
         """
@@ -166,6 +205,7 @@ class GameInfoFrame(TicketingFrame):
             else:
                 self.field_dictionary[label_text].delete(0, tk.END)
                 self.field_dictionary[label_text].insert(0, self.defaults[label_text])
+        self.suffix_option.set(0)
 
     def retrieve_data(self) -> list:
         """
@@ -188,7 +228,8 @@ class GameInfoFrame(TicketingFrame):
             gi.get_sheet_capacity(self.data_dictionary["Window Structure"]),
             self.data_dictionary["Reset"],
             int(self.data_dictionary["Subflats"]),
-            int(self.data_dictionary["Schisms"])
+            int(self.data_dictionary["Schisms"]),
+            self.data_dictionary["Suffix"]
         ]
 
     def create_defaults(self):

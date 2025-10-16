@@ -1,4 +1,5 @@
 import re
+import os.path as osp
 import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
@@ -104,8 +105,16 @@ class HoldsBallsTab(TicketingNotebookTab):
         label = ttk.Label(self, text='Additional Holds')
         label.grid(row=4, column=0, padx=5, pady=5, sticky="w")
         entry = ttk.Entry(self, width=50)
-        entry.grid(row=4, column=1, columnspan=5, padx=5, pady=5, sticky='w')
+        entry.grid(row=4, column=1, columnspan=3, padx=5, pady=5, sticky='w')
         self.populate_data_collections_with_text(entry, 'additionals')
+
+        # Add 'Match BBs' checkbox and add it to the collections as 'match-bbs'.
+        # This checkbox indicates how the additional holds should be handled: if checked,
+        # the tickets should contain the same number of images as the bingo balls. If
+        # not, then treat the additional holds as single-image tickets.
+        label, input_field = create_label_and_field("Match BBs", ttk.Checkbutton(self),
+                                                    4, 4, self)
+        self.populate_data_collections_with_text(input_field, 'match-bbs')
 
     def validate_data(self) -> list:
         """
@@ -123,17 +132,18 @@ class HoldsBallsTab(TicketingNotebookTab):
                     messages.append(f"Holds -> Balls: '{key.title()}' must contain a non-negative integer.")
             elif key == "additionals":
                 if (self.data_dictionary[key] != ''
-                        and not re.fullmatch(r'^[a-zA-Z0-9,;]*$', self.data_dictionary[key])):
+                        and not re.fullmatch(r'^[a-zA-Z0-9,;-]*$', self.data_dictionary[key])):
                     messages.append(f"Holds -> Balls: 'Additional Holds' must be a list of hold names and quantities"
                                     f" separated by commas. Multiple entries must separated by semicolons.")
             elif key in ['base']:
+                illegal_char_patter = re.compile(r'[^a-zA-Z0-9.-_]')
                 if self.data_dictionary[key] != "":
-                    if re.search(r'[<>:"/\\|?*\x00-\x1F]', self.data_dictionary[key]):
-                        messages.append(f"Holds -> Matrix: '{key}' file name must not contain special characters.")
-                    elif self.data_dictionary[key] == '.ai':
+                    # if re.search(r'[<>:"/\\|?*\x00-\x1F]', self.data_dictionary[key]):
+                    if illegal_char_patter.search(self.data_dictionary[key]):
+                        messages.append(f"Holds -> Matrix: '{key}' file name contains illegal characters.")
+                    elif self.data_dictionary[key] in ['.ai', '.pdf']:
                         messages.append(f"Holds -> Matrix: '{key}' file name must"
-                                        f" contain more than its extension (.ai).")
-
+                                        f" contain more than an extension (.ai or .pdf).")
         if len(messages) == 0:
             if int(self.data_dictionary['bingos']) > int(self.data_dictionary['spots']):
                 messages.append("Holds -> Balls: 'Bingos per Ticket' must be less than or equal to 'Spots per Ticket'.")
@@ -146,7 +156,7 @@ class HoldsBallsTab(TicketingNotebookTab):
         """
         self.data_dictionary.clear()
         for key in self.field_dictionary:
-            if key in ['Downlines', 'sortie', 'non-image']:
+            if key in ['Downlines', 'sortie', 'non-image', 'match-bbs']:
                 self.data_dictionary[key] = self.field_dictionary[key].instate(['selected'])
             else:
                 self.data_dictionary[key] = (self.field_dictionary[key].get())
@@ -172,6 +182,7 @@ class HoldsBallsTab(TicketingNotebookTab):
         self.field_dictionary['Downlines'].state(['!selected'])
         self.field_dictionary['sortie'].state(['!selected'])
         self.field_dictionary['non-image'].state(['!selected'])
+        self.field_dictionary['match-bbs'].state(['!selected'])
 
     def retrieve_data(self) -> list:
         """
@@ -191,14 +202,10 @@ class HoldsBallsTab(TicketingNotebookTab):
         downlines = self.data_dictionary['Downlines']
         non_image = self.data_dictionary['non-image']
         shazams = int(self.data_dictionary['shazams'])
-        filename = self.data_dictionary['base']
-        if len(filename) > 3:
-            if filename[-3:] != '.ai':
-                filename += '.ai'
-        elif len(filename) == 0:
-            filename = 'base.ai'
-        else:
-            filename += '.ai'
+        matching_bbs = self.data_dictionary['match-bbs']
+        filename, extension = osp.splitext(self.data_dictionary['base'])
+        # if len(filename) == 0:
+        #     filename = 'base'
 
         # Retrieve tiered free space values
         frees = []
@@ -227,7 +234,8 @@ class HoldsBallsTab(TicketingNotebookTab):
             addl_count += addl[1]
         # Place related information into lists
         ball_tickets = [quantity, bingos, spots, pool, frees]
-        bool_options = [downlines, shazams, sortie, filename, non_image]
+        # The final element is checked then deleted in the submit data section of ticketing_gui.
+        bool_options = [downlines, shazams, sortie, filename, matching_bbs, non_image]
         addl_holds = [addl_count, additionals]
         # Return the name of the tab and its related data.
         return [self.name, ball_tickets, bool_options, addl_holds]

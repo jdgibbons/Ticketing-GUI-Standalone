@@ -395,7 +395,8 @@ def create_all_bingo_permutations_without_reset(bingo_amts: list[list[int] | lis
             if verbose:
                 print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[3]} staggered, single-line "
                       f"tickets with three free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[3], 3, 1, csv_rows, False)
+            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[3],
+                                            3, 1, csv_rows, False)
             if temp_list[0] is None:
                 return temp_list
             nonstaggered_single_holds[i][3].append(temp_list)
@@ -868,6 +869,18 @@ def create_all_bingo_permutations_with_reset(bingo_amts: list[list[int] | bool |
                       "tickets with three free spaces.")
             permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_double_holds[3],
                                                    3, 2, csv_rows, False)
+            if verbose:
+                print('    Done.')
+                print_usable_face_info_to_screen(face_list, 2)
+
+        # Two-line tickets with three staggered free spots (13,500)
+        if q_staggered_double_holds[3] > 0:
+            face_list.shuffle_usable_faces()
+            if verbose:
+                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[3]} staggered, double-line "
+                      "tickets with three free spaces.")
+            permutations[i] += create_pseudo_faces(face_list, q_staggered_double_holds[3],
+                                                   3, 2, csv_rows, True)
             if verbose:
                 print('    Done.')
                 print_usable_face_info_to_screen(face_list, 2)

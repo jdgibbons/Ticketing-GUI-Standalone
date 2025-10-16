@@ -1,3 +1,18 @@
+"""
+Nonwinners: images
+Instants: images
+Picks: images
+Holds: bingo balls (special case: verification numbers required)
+
+This module is called from the CSV Generator when the nonwinners, instants, and picks are composed of simple images,
+but the holds are composed of bingo balls. This script is called when the 'Bingo Balls' checkbox is selected on the
+Bingos' Hold tab.
+
+The create_game method is the main entry point for this module, and it is called with a list of game specs. That list
+contains other lists detailing the specifications for creating the game. The lists, in order, pertain to sheets,
+nonwinners, instants, picks, holds, and part and file name. There the final element is a string containing the
+output folder. It will be blank if files are to be placed in the default folder.
+"""
 import copy
 
 from ticketing import game_info as gi
@@ -5,11 +20,11 @@ from ticketing.universal_ticket import UniversalTicket as uTick
 from ticketing import verified_bingo as vb
 from ticketing import image_generator as ig
 from ticketing import ticket_io as tio
-# from helpers import extract_ticket_types
 
 DEBUG = True
 
 nw_type, insta_type, pick_type, hold_type = '', '', '', ''
+suffix = ''
 
 
 def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: list[int],
@@ -20,7 +35,7 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
     Create the various either/or bingo tickets required by the game. The lists consist of the number and type
     of bingo faces, and the index of each element reflects the number of free spaces required. The exception is
     'one_eeyores,' which describes the construction and number of single-line, either/or bingo tickets. It is a
-    list of three integer lists, comprised of [number of tickets, free spots, either/ors].
+    list of three integer lists: [number of tickets, free spots, either/ors].
 
     :param addl_imgs:
     :param non_twos: Number of nonstaggered, two-line tickets
@@ -50,6 +65,7 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
     :return: list of bingo tickets with various number combinations
     :rtype: list[list[BingoTicket]]
     """
+    global suffix
     needs = [non_twos, stag_twos, non_ones, stag_ones, one_eeyores]
     # Create the bingo path equivalents to the required bingo ball images. If there is only
     # one permutation or the list can be reset for each one, call the creation method with reset
@@ -64,12 +80,12 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
         if versions[0] is None:
             return versions
     # This will be the standard base for verified bingo ball tickets.
-    base = ['base01.ai']
+    base = f'base01{suffix}'
     is_first = True
     # Create a list for the permutations
     permies = []
     # Cycle through the bingo path permutations along with their indices to create
-    # a list of lists of bingo ball tickets.
+    # a list of lists containing bingo ball tickets.
     for index, verse in enumerate(versions):
         # Create a new ticket list for this permutation and
         # reset the ticket number count to one for each perm.
@@ -78,9 +94,8 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
         # Cycle through bingo face for this perm.
         for face in verse:
             # We're only interested in the first two elements of the list (the verification
-            # number and the bingo path) because there's  a lot of extra information here,
-            # since this method calls the same creation method that's used for single, double,
-            # and either/or bingos.
+            # number and the bingo path). There's a lot of extra information here, since this
+            # calls the same creation method used for single, double, and either/or bingos.
             verify = face[0]
             bingo = face[1][0]
             # Create the image list using the base image.
@@ -88,8 +103,11 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
             # Cycle through the elements of this bingo path. Use each
             # to create a hold image, then append it to the image list.
             for bing in bingo:
-                imgs.append(f'hold{str(bing).zfill(2)}.ai')
-            # Add an extra image slots needed to create a consistent csv
+                if bing == '':
+                    imgs.append(bing)
+                else:
+                    imgs.append(f'hold{str(bing).zfill(2)}{suffix}')
+            # Add any extra image slots needed to create a consistent csv
             # list across the different ticket types.
             pics = ig.add_additional_image_slots(addl_imgs, imgs)
             # Create a new ticket and add it to the list.
@@ -104,7 +122,7 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
     return permies
 
 
-def create_instant_winners_refined(amt: list[list[int, bool]], cd_level: int, addl_imgs: gi.AddImages,
+def create_instant_winners_refined(amt: list[list[int | bool]], cd_level: int, addl_imgs: gi.AddImages,
                                    permits: int) -> list[list[uTick]]:
     """
     Create a list of instant winner tickets consisting of one image. Also, set the
@@ -124,12 +142,13 @@ def create_instant_winners_refined(amt: list[list[int, bool]], cd_level: int, ad
     :return: A list of instant winner tickets
     :rtype: list[bTick]
     """
+    global suffix
     # Create a list for the permutations and the required number of bingo rows
     permies = []
     digits = ['']
 
     # Create a list of images for each tier
-    imgs = ig.create_tiered_image_list_augmented(amt, 'winner')
+    imgs = ig.create_tiered_image_list_augmented(amt, 'winner', suffix)
     ticks = []  # list to hold the tickets
     # Create a ticket for each image. Each element has an image and its relative cd tier
     for img in imgs:
@@ -187,7 +206,7 @@ def create_nonwinning_ticket(amt: int, pool_size: int, ipt: int, addl_imgs: list
     # Iterate for each permutation
     for j in range(permits):
         # Create a list of nonwinning image lists from the available image pool.
-        nws_perms = ig.create_image_lists_from_pool_perms(1, pool_size, 'nonwinner', amt, ipt)
+        nws_perms = ig.create_image_lists_from_pool_perms(1, pool_size, 'nonwinner', amt, ipt, suffix)
         # Create a list to contain created tickets.
         ticks = []
         # Cycle through the list of image lists
@@ -251,8 +270,8 @@ def calculate_image_slots(nwspec: list):
         nw_pre = -1
         insta_post = 5
     # If there are different nonwinner and hold image counts, then the holds need
-    # to account for the extra nonwinner columns, the nonwinners need to account for
-    # the five hold images plus the base, and the instants need to account for the
+    # to account for the extra nonwinner columns; the nonwinners need to account for
+    # the five hold images plus the base; and the instants need to account for the
     # extra nonwinner and hold columns.
     else:
         hold_post = nws
@@ -276,7 +295,7 @@ def extract_ticket_types(game_specs):
 def create_game(game_specs: list):
     """
     Initializes and generates a bingo-ball style work order based on specifications from a gui-based form. This
-    function supports different types of tickets including pick and instant winners, shaded or imaged holds, and
+    function supports different types of tickets, including pick and instant winners; shaded or imaged holds; and
     imaged or shaded non-winners. Finally, it writes the generated tickets and game stacks to specified output files.
 
     :param game_specs: A tuple containing specifications for creating the game. The tuple typically consists of:
@@ -291,7 +310,7 @@ def create_game(game_specs: list):
     :return: A status message indicating that all items have been successfully written to the files.
     :rtype: str
     """
-    global nw_type, insta_type, pick_type, hold_type
+    global nw_type, insta_type, pick_type, hold_type, suffix
     if DEBUG:
         print(game_specs)
     nw_type, insta_type, pick_type, hold_type = extract_ticket_types(game_specs)
@@ -302,6 +321,7 @@ def create_game(game_specs: list):
     mix_flat = True
     tickets = []
     sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
+    suffix = sheet_specs.pop()
     part_name, file_name = name_specs
     ups, perms, sheets, capacities, reset_perms, subflats, schisms = sheet_specs
 
@@ -349,7 +369,7 @@ def create_game(game_specs: list):
 
 if __name__ == '__main__':
     specs = [
-        [4, 1, 76, [56, 56], False, 0, 0],
+        [4, 1, 76, [56, 56], False, 0, 0, '.pdf'],
         ['I', 905, 9, 3],
         ['I', [[5, False]], 0],
         ['I', [[0, False]]],
@@ -357,4 +377,15 @@ if __name__ == '__main__':
         ['993-007', 'MegaBalls-53704'],
         ''
     ]
-    create_game(specs)
+
+    modified_megaballs = [
+        [4, 1, 76, [56, 56], False, 0, 0, '.pdf'],
+        ['I', 905, 9, 3],
+        ['I', [[5, False]], 0],
+        ['I', [[0, False]]],
+        ['B', [0, 0, 0, 0], [0, 0, 0, 0], [100, 50, 4, 0], [0, 0, 0, 0], [[0]], True, 'Images', 'S', 1],
+        ['993-007', 'MegaBalls-53704'],
+        ''
+    ]
+
+    create_game(modified_megaballs)

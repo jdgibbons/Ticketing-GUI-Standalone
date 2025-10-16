@@ -5,7 +5,8 @@ from ticketing.game_info import AddImages
 from .number_generator import create_bingo_positions
 
 
-def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bool) -> list[list[str | int]]:
+def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bool,
+                             coda: str = '.ai') -> list[list[str | int]]:
     """
     Create a list of images that reflect the number needed for each tier. Normally, this would
     entail creating a bunch of images that only reflect the tier level: i.e., all instant winner
@@ -23,6 +24,7 @@ def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bo
     :param amt_list: list of ticket totals for each tier
     :param prefix: String to add at the front of each ticket name
     :param add_subimages: Does each ticket in a tier have a discrete image?
+    :param coda: the file extension of the images, defaults to '.ai'
     :return: list of ticket names for each tier along with its corresponding tier \
     (so it doesn't need to be extracted by the caller).
     :rtype: list[str]
@@ -36,11 +38,15 @@ def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bo
         # Cycle through the image-name creation process
         for _ in range(amt_list[index]):
             # If there are subimages for this group, add the count number to the image name.
+            # If there is only one tier in the amount list, don't add the tier level to the image name.
             if add_subimages:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(count).zfill(2)}.ai"
+                if len(amt_list) > 1:
+                    imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(count).zfill(2)}{coda}"
+                else:
+                    imagine = f"{prefix}{str(count).zfill(2)}{coda}"
             # Otherwise, just use the index position (plus one) to create the image name
             else:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}{coda}"
             # Add the image name to the list and increment the image count.
             image_list.append([imagine, index + 1])
             count += 1
@@ -48,55 +54,65 @@ def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bo
     return image_list
 
 
-def create_tiered_image_list_augmented(amt_list: list[list[int, bool]], prefix: str) -> list[list[str | int]]:
+def create_tiered_image_list_augmented(amt_list: list[list[int | bool]], prefix: str,
+                                       coda: str = '.ai') -> list[list[str | int]]:
     image_list = []
     for index, amt in enumerate(amt_list):
         count = 1
         num, add_subimages = amt
         for _ in range(num):
             if add_subimages:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(count).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(count).zfill(2)}{coda}"
             else:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}{coda}"
             image_list.append([imagine, index + 1])
             count += 1
     return image_list
 
 
-def create_discrete_tiered_image_sets(amt_list: list[list[int, bool | str]], prefix: str) -> list[list[str|int]]:
+def create_discrete_tiered_image_sets(amt_list: list[list[int | bool]], prefix: str,
+                                      coda: str = '.ai') -> list[list[str | int]]:
     image_list = []
     for index, amt in enumerate(amt_list):
         add_subimages = amt[1]
         for i in range(amt[0]):
             if isinstance(add_subimages, str) and add_subimages == 'True':
-                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}{coda}"
             elif isinstance(add_subimages, str) and add_subimages == 'False':
-                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}{coda}"
             elif add_subimages:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}_{str(i + 1).zfill(2)}{coda}"
             else:
-                imagine = f"{prefix}{str(index + 1).zfill(2)}.ai"
+                imagine = f"{prefix}{str(index + 1).zfill(2)}{coda}"
             image_list.append([imagine, index + 1])
     return image_list
 
 
-def create_image_pool(first: int, last: int, prefix: str, mix: bool = True) -> list[str]:
+def create_image_pool(first: int, last: int, prefix: str, mix: bool, coda: str = '.ai') -> list[str]:
     """
     Create a pool of images to be used to randomly generate image spreads on tickets.
     The images will be added then shuffled a few times. This method is called
     whenever there are not enough images in the list to fill a ticket. Return the
-    list of images.
+    list of images. (The mix flag was originally set to default as True, but I've
+    removed that for now.
 
-    :param first: beginning of the range of image numbers
-    :param last: end of the range of image numbers
+    :param first: beginning number of the image range
+    :type first: int
+    :param last: end number of the image range
+    :type last: int
     :param prefix: String to add at the front of each image name
+    :type prefix: str
     :param mix: shuffle the resulting list?
+    :type mix: bool
+    :param coda: the file extension of the images; defaults to '.ai'
+    :type coda: str
     :return: list containing strings of image names for the pool
+    :rtype: list[str]
     """
     nw_image_pool = []
     # Create a list of images using the index + 1 to refer to the correct one.
     for i in range(first, last + 1):
-        nw_image_pool.append(f"{prefix}{str(i).zfill(2)}.ai")
+        nw_image_pool.append(f"{prefix}{str(i).zfill(2)}{coda}")
     # Shuffle the list between 4 and 25 times
     if mix:
         for x in range(rn.randint(4, 25)):
@@ -104,18 +120,27 @@ def create_image_pool(first: int, last: int, prefix: str, mix: bool = True) -> l
     return nw_image_pool
 
 
-def create_image_pool_permutations(first: int, last: int, prefix: str, spots: int) -> list[list[str]]:
+def create_image_list_of_same_image(amt: int, img_name: str, coda: str = '.ai') -> list[str]:
+    imgs = []
+    for _ in range(amt):
+        imgs.append(f"{img_name}{coda}")
+    return imgs
+
+
+def create_image_pool_permutations(first: int, last: int, prefix: str, spots: int,
+                                   coda: str = '.ai') -> list[list[str]]:
     """
     Create a pool of images to be used to randomly generate image spreads on tickets.
     :param first:
     :param last:
     :param prefix:
     :param spots:
+    :param coda:
     :return:
     """
     images = []
     for i in range(first, last + 1):
-        images.append(f"{prefix}{str(i).zfill(2)}.ai")
+        images.append(f"{prefix}{str(i).zfill(2)}{coda}")
     image_pool = permutations(images, spots)
     # x = len(list(image_pool))
     nw_image_pool = []
@@ -126,7 +151,8 @@ def create_image_pool_permutations(first: int, last: int, prefix: str, spots: in
     return nw_image_pool
 
 
-def create_image_lists_from_pool(first: int, last: int, prefix: str, amt: int, pics_per_tick: int) -> list[list[str]]:
+def create_image_lists_from_pool(first: int, last: int, prefix: str, amt: int,
+                                 pics_per_tick: int, coda: str = '.ai') -> list[list[str]]:
     """
     Create a list of lists containing image names gathered from a pool of shuffled and scattered images.
 
@@ -135,12 +161,13 @@ def create_image_lists_from_pool(first: int, last: int, prefix: str, amt: int, p
     :param prefix: string to add at the front of each image name
     :param amt: total number of image lists needed by the caller
     :param pics_per_tick: number of images per ticket
+    :param coda: the file extension of the images
     :return: list of lists containing images gathered from the pool
     """
     # Create a list to hold the lists of images
     image_lists = []
     # Create the initial pool of images to be used to create the image lists
-    nw_image_pool = create_image_pool(first, last, prefix)
+    nw_image_pool = create_image_pool(first, last, prefix, True, coda)
     # Loop until there are enough lists
     for _ in range(amt):
         # Create a list to hold the images
@@ -149,7 +176,7 @@ def create_image_lists_from_pool(first: int, last: int, prefix: str, amt: int, p
         # list, append the images that aren't already in the list, and
         # keep going until we have a full list.
         if len(nw_image_pool) < pics_per_tick:
-            temp_pool = create_image_pool(first, last, prefix)
+            temp_pool = create_image_pool(first, last, prefix, True, coda)
             for tempo in temp_pool:
                 if tempo not in nw_image_pool:
                     nw_image_pool.append(tempo)
@@ -164,8 +191,8 @@ def create_image_lists_from_pool(first: int, last: int, prefix: str, amt: int, p
     return image_lists
 
 
-def create_image_lists_from_pool_perms(first: int, last: int, prefix: str,
-                                       amt: int, pics_per_tick: int) -> list[list[str]]:
+def create_image_lists_from_pool_perms(first: int, last: int, prefix: str, amt: int, pics_per_tick: int,
+                                       coda: str = '.ai') -> list[list[str]]:
     """
     Create a list of lists containing image names gathered from a pool of images that have
     been dispersed using itertools permutations function.
@@ -177,26 +204,30 @@ def create_image_lists_from_pool_perms(first: int, last: int, prefix: str,
     :param prefix: the string to add at the front of each image name
     :type prefix: str
     :param amt: the total number of image lists needed in each permutation
+    :type amt: int
     :param pics_per_tick:
+    :type pics_per_tick: int
+    :param coda: the file extension of the images
+    :type coda: str
     :return:
     """
     images_lists = []
-    nw_image_perms = create_image_pool_permutations(first, last, prefix, pics_per_tick)
+    nw_image_perms = create_image_pool_permutations(first, last, prefix, pics_per_tick, coda)
     for _ in range(amt):
         if len(nw_image_perms) == 0:
-            nw_image_perms = create_image_pool_permutations(first, last, prefix, pics_per_tick)
+            nw_image_perms = create_image_pool_permutations(first, last, prefix, pics_per_tick, coda)
         images_lists.append(nw_image_perms.pop(0))
     return images_lists
 
 
 def create_bingo_ball_image_permutations(amt: int, bpt: int, permits: int, prefix: str,
-                                         sortie: bool = True) -> list[list[list[str]]]:
+                                         sortie: bool, coda: str = '.ai') -> list[list[list[str]]]:
     perms = []
     tookens = set()
     attempts = 0
     while len(perms) < permits:
         attempts += 1
-        perm, tookens = create_single_bingo_ball_perm(amt, bpt, prefix, sortie, tookens)
+        perm, tookens = create_single_bingo_ball_perm(amt, bpt, prefix, sortie, tookens, coda)
         if attempts % 500 == 0:
             print(f'Attempted {attempts} permutations...')
         if perm is not None:
@@ -205,14 +236,14 @@ def create_bingo_ball_image_permutations(amt: int, bpt: int, permits: int, prefi
     return perms
 
 
-def create_single_bingo_ball_perm(amt: int, bpt: int, prefix: str, sortie: bool = True,
-                                  tookens: set = None) -> [list[list[str]], set]:
+def create_single_bingo_ball_perm(amt: int, bpt: int, prefix: str, sortie: bool,
+                                  tookens: set, coda: str = '.ai') -> [list[list[str]], set]:
     image_lists = []
     bb_pool = []
     taken = set()
     while len(image_lists) < amt:
         if sum(len(sublist) for sublist in bb_pool) < bpt:
-            bb_pool = create_bingo_ball_hold_images(True, True, prefix)
+            bb_pool = create_bingo_ball_hold_images(True, True, prefix, coda)
         bb_pool.sort(key=lambda xyz: len(xyz), reverse=True)
         imgs = []
         for i in range(bpt):
@@ -261,8 +292,8 @@ def create_bingo_ball_image_list(amt: int, bpt: int, prefix: str) -> list[list[s
     return image_lists
 
 
-def create_bingo_ball_hold_images(multi: bool = True, mixed: bool = False,
-                                  name: str = 'hold') -> list[list[str] | str]:
+def create_bingo_ball_hold_images(multi: bool, mixed: bool,
+                                  name: str, coda: str = '.ai') -> list[list[str] | str]:
     """
     Create a list of images that represent bingo balls B-1 through O-75. This
     can take the form of a single list of 75 or five lists of 15. If the 'mixed'
@@ -275,6 +306,8 @@ def create_bingo_ball_hold_images(multi: bool = True, mixed: bool = False,
     :type mixed: bool
     :param name: Prefix for the image files.
     :type name: str
+    :param coda: the file extension of the images
+    :type coda: str
     :return: list of images representing bingo ball images
     :rtype: list[list[str] | str]
     """
@@ -285,7 +318,7 @@ def create_bingo_ball_hold_images(multi: bool = True, mixed: bool = False,
         # Add the value for every possible spot in this letter's column.
         for j in range(1, 16):
             # Create the string representing the image name.
-            imgs.append(f"{name}{str((i * 15) + j).zfill(2)}.ai")
+            imgs.append(f"{name}{str((i * 15) + j).zfill(2)}{coda}")
         # Add the images to the master list. If this is a multi-list, add the list
         # itself as an element. Otherwise, add each image individually to the list.
         if multi:
@@ -307,9 +340,9 @@ def create_bingo_ball_hold_images(multi: bool = True, mixed: bool = False,
     return balls
 
 
-def create_bingo_downlines(spots: int, prefix: str = 'hold', mixers: bool = False) -> list[list[str]]:
+def create_bingo_downlines(spots: int, prefix: str, mixers: bool, coda: str = '.ai') -> list[list[str]]:
     """
-    Creates image names for bingo downlines of given number of spots.
+    Creates image names for bingo downlines of the given number of spots.
 
     :param spots: number of spots in the downline
     :type spots: int
@@ -317,6 +350,8 @@ def create_bingo_downlines(spots: int, prefix: str = 'hold', mixers: bool = Fals
     :type prefix: str
     :param mixers: shuffle the downlines?
     :type mixers: bool
+    :param coda: the file extension of the images
+    :type coda: str
     :return: list of bingo downlines
     :rtype: list[list[str]]
     """
@@ -332,7 +367,7 @@ def create_bingo_downlines(spots: int, prefix: str = 'hold', mixers: bool = Fals
         for combo in combos:
             teepee = []
             for spot in combo:
-                teepee.append(f"{prefix}{str(spot).zfill(2)}.ai")
+                teepee.append(f"{prefix}{str(spot).zfill(2)}{coda}")
             downers.append(copy.deepcopy(teepee))
     if mixers:
         for _ in range(rn.randint(4, 11)):
@@ -340,12 +375,13 @@ def create_bingo_downlines(spots: int, prefix: str = 'hold', mixers: bool = Fals
     return downers
 
 
-def create_prefixed_images(first: int, last: int, prefix: str, uniq: bool = False) -> list[str]:
+def create_prefixed_images(first: int, last: int, prefix: str, uniq: bool, coda: str = '.ai') -> list[str]:
     """
     Create a list of images that uses the prefix and numbers in the range
     from first to last to create the file names. The 'uniq' flag indicates whether the
     images will all have the same name or not: true means they will be sequentially
-    named, false means they will all be named 'xxx01.ai'.
+    named, false means they will all be named 'xxx01.ai'. (uniq defaults to False, but
+    was changed.)
 
     :param first: the number of the first image in the pool
     :type first: int
@@ -355,24 +391,26 @@ def create_prefixed_images(first: int, last: int, prefix: str, uniq: bool = Fals
     :type prefix: str
     :param uniq: Is the name of each file unique?
     :type uniq: bool
+    :param coda: the file extension of the images
+    :type coda: str
     :return: list of strings comprising image names for the pool
     :rtype: list[str]
     """
     images = []
     for img in range(first, last + 1):
         if uniq:
-            images.append(f"{prefix}{str(img).zfill(2)}.ai")
+            images.append(f"{prefix}{str(img).zfill(2)}{coda}")
         else:
-            images.append(f"{prefix}01.ai")
+            images.append(f"{prefix}01{coda}")
     return images
 
 
-def add_additional_image_slots(addl_imgs: AddImages, line: list[str]) -> list[str]:
+def add_additional_image_slots(addl_imgs: AddImages, line: list[str], coda: str = '.ai') -> list[str]:
     if addl_imgs != AddImages.NoneAdded:
         if addl_imgs == AddImages.PreBase:
-            line.insert(0, 'base.ai')
+            line.insert(0, f'base{coda}')
         elif addl_imgs == AddImages.PostBase:
-            line.append('base.ai')
+            line.append(f'base{coda}')
         elif addl_imgs.value < 0:
             for _ in range(abs(addl_imgs.value)):
                 line.insert(0, '')
@@ -438,7 +476,7 @@ def create_tictactoe_instants(amts: list[int], q_nw_image_pool: int, default_win
             # Replenish the nonwinner image pool if there are fewer than the number
             # of nonwinner spaces required to fill out the grid.
             if len(nw_image_pool) < 5:
-                nw_image_pool = create_image_pool(1, q_nw_image_pool, 'nonwinner')
+                nw_image_pool = create_image_pool(1, q_nw_image_pool, 'nonwinner', True)
             # Create the list so the indexes can be used to fill the spots.
             spots = [''] * 9
             # Get the next winning path . . . plus
@@ -492,7 +530,7 @@ def create_tictactoe_one_row_image(amt, q_nw_image_pool, prefix, use_img_index=F
             if i != winning_row:
                 for rowdy in pick_rows[i]:
                     if len(nw_image_pool) == 0:
-                        nw_image_pool = create_image_pool(1, q_nw_image_pool, 'nonwinner')
+                        nw_image_pool = create_image_pool(1, q_nw_image_pool, 'nonwinner', True)
                     imgs[rowdy] = nw_image_pool.pop(0)
         images.append([imgs, picks, winning_row + 1])
         winning_row += 1

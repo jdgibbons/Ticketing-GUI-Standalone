@@ -1,3 +1,18 @@
+"""
+Nonwinners: Image
+Instants: Image
+Picks: Image
+Holds: Matrix
+
+This module is called from the CSV Generator when the nonwinners, instants, and picks are composed of simple images,
+but the holds are composed of five-row bingos. The number of spaces in each row is determined by a user-provided
+pattern.
+
+The create_game method is the main entry point for this module, and it is called with a list of game specs. That list
+contains other lists detailing the specifications for creating the game. The lists, in order, pertain to sheets,
+nonwinners, instants, picks, holds, and part and file name. There the final element is a string containing the
+output folder. It will be blank if files are to be placed in the default folder.
+"""
 import copy
 import random as rn
 
@@ -8,6 +23,7 @@ from ticketing import number_generator as ng
 DEBUG = True
 
 nw_type, insta_type, pick_type, hold_type = '', '', '', ''
+suffix = ''
 
 
 def extract_ticket_types(game_specs):
@@ -16,6 +32,7 @@ def extract_ticket_types(game_specs):
 
 def create_matrix_hold_tickets(amt: int, pattern: list[int], base: str, zeroes: bool, addl_imgs: gi.AddImages,
                                is_first: bool = False, permits: int = 1, tkt_no: int = 1):
+    global suffix
     bingo_values = []
     perms = []
     number_total = sum(pattern)
@@ -24,7 +41,7 @@ def create_matrix_hold_tickets(amt: int, pattern: list[int], base: str, zeroes: 
 
     paths_taken = set()
 
-    imgs = ig.add_additional_image_slots(addl_imgs, [base])
+    imgs = ig.add_additional_image_slots(addl_imgs, [f'{base}{suffix}'])
     first_one = is_first
     while len(perms) < permits:
         tkt = tkt_no
@@ -81,7 +98,7 @@ def create_game(game_specs):
     :return: A status message indicating that all items have been successfully written to the files.
     :rtype: str
     """
-    global nw_type, insta_type, pick_type, hold_type
+    global nw_type, insta_type, pick_type, hold_type, suffix
     if DEBUG:
         print(game_specs)
     nw_type, insta_type, pick_type, hold_type = extract_ticket_types(game_specs)
@@ -92,6 +109,7 @@ def create_game(game_specs):
     mix_flat = True
     tickets = []
     sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
+    suffix = sheet_specs.pop()
     part_name, file_name = name_specs
 
 
@@ -101,7 +119,7 @@ if __name__ == '__main__':
         ['I', 691, 9, 3],
         ['I', [[1, False], [2, False], [10, False], [90, False]], 0],
         ['I', [[0, False]]],
-        ['M', 130, [3, 2, 3, 2, 3], 'base01.ai', True],
+        ['M', 130, [3, 2, 3, 2, 3], 'base01', True],
         ['993-246', 'TripleDouble-53685'],
         ''
     ]

@@ -1,3 +1,17 @@
+"""
+Nonwinners: images
+Instants: images
+Picks: images
+Holds: verified bingos
+
+This module is called from the CSV Generator when the nonwinners, instants, and picks are composed of simple images,
+but the holds are composed of verified bingos.
+
+The create_game method is the main entry point for this module, and it is called with a list of game specs. That list
+contains other lists detailing the specifications for creating the game. The lists, in order, pertain to sheets,
+nonwinners, instants, picks, holds, and part and file name. There the final element is a string containing the
+output folder. It will be blank if files are to be placed in the default folder.
+"""
 import copy
 
 from ticketing import game_info as gi
@@ -5,11 +19,11 @@ from ticketing.bingo_ticket import BingoTicket as bTick
 from ticketing import verified_bingo as vb
 from ticketing import image_generator as ig
 from ticketing import ticket_io as tio
-# from helpers import extract_ticket_types
 
 DEBUG = True
 
 nw_type, insta_type, pick_type, hold_type = '', '', '', ''
+suffix = ''
 
 
 def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: list[int],
@@ -51,9 +65,8 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
     :rtype: list[list[BingoTicket]]
     """
     needs = [non_twos, stag_twos, non_ones, stag_ones, one_eeyores]
-    # If there is only one permutation or the list can be reset for each one, call
-    # the creation method with reset (refers to the usable faces list). Otherwise,
-    # call the method without reset.
+    # If there is only one permutation or the list can be reset for each one, call the creation
+    # method with reset (refers to the usable faces list). Otherwise, call the method without reset.
     if perm_reset or permits == 1:
         versions = vb.create_all_bingo_permutations_with_reset(needs, permits, csv_rows, v_size != 'S', True)
         if versions[0] is None:
@@ -96,9 +109,10 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
                     b_type = determine_b_type(face)
                     face[1].insert(0, ['', '', '', '', ''])
                     base = ['base02.ai']
-                # This is an either/or ticket. Assign the base--all three rows are
-                # already accounted for.
+                # This is an either/or ticket, since only those types will have all three rows
+                # populated. Assign the base, since all three rows are already accounted for.
                 elif len(face[1]) == 3:
+
                     base = ['base03.ai']
                     b_type = 'E'
             # This is a double-line bingo game. Assign the base.
@@ -380,7 +394,7 @@ def extract_ticket_types(game_specs):
     return [game_specs[1].pop(0), game_specs[2].pop(0), game_specs[3].pop(0), game_specs[4].pop(0)]
 
 
-def create_game(game_specs: list):
+def create_game(game_specs: list, bugging: bool = False):
     """
     Initializes and generates a bingo-style work order based on specifications from a gui-based form. This
     function supports different types of tickets including pick and instant winners, non-winners, and a
@@ -398,7 +412,7 @@ def create_game(game_specs: list):
     :return: A status message indicating that all items have been successfully written to the files.
     :rtype: str
     """
-    global nw_type, insta_type, pick_type, hold_type
+    global nw_type, insta_type, pick_type, hold_type, suffix
     if DEBUG:
         print(game_specs)
     nw_type, insta_type, pick_type, hold_type = extract_ticket_types(game_specs)
@@ -409,6 +423,7 @@ def create_game(game_specs: list):
     mix_flat = True
     tickets = []
     sheet_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
+    suffix = sheet_specs.pop()
     part_name, file_name = name_specs
     ups, perms, sheets, capacities, reset_perms, subflats, schisms = sheet_specs
 
@@ -487,4 +502,35 @@ if __name__ == '__main__':
         ''
     ]
 
-    create_game(more_stuff)
+    sucker = [
+        [4, 1, 75, [56, 56], False, 0, 0, '.ai'],
+        ['I', 776, 9, 3],
+        ['I', [[1, False], [1, False], [2, False], [70, False]], 0],
+        ['I', [[0, False]]],
+        ['B', [0, 0, 0, 0], [100, 50, 30, 20], [0, 0, 0, 0], [0, 0, 0, 0], [[0, 0, 0]], False, 'Images', 'E', 2],
+        ['000', 'testify'],
+        ''
+    ]
+
+    sucker_plus_eeyores = [
+        [4, 1, 75, [56, 56], False, 0, 0, '.ai'],
+        ['I', 676, 9, 3],
+        ['I', [[1, False], [1, False], [2, False], [70, False]], 0],
+        ['I', [[0, False]]],
+        ['B',
+         [0, 0, 0, 0],
+         [100, 50, 30, 20],  # Double-line, staggered bingos
+         [0, 0, 0, 0],
+         [0, 0, 0, 0],
+         [
+             [50, 0, 1],  # either/ors, 0 frees, 1 double
+             [20, 0, 2],  # either/ors, 0 frees, 2 doubles
+             [15, 1, 1],  # either/ors, 1 free,  1 double
+             [10, 1, 2],  # either/ors, 1 free,  2 doubles
+             [5, 2, 2]],  # either/ors, 2 frees, 2 doubles
+         False, 'Images', 'E', 3],
+        ['010-220', 'TestBingo-55443'],
+        ''
+    ]
+
+    create_game(sucker_plus_eeyores)

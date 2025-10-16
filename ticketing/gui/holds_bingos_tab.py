@@ -55,6 +55,8 @@ class HoldsBingosTab(TicketingNotebookTab):
                 entry = ttk.Entry(self, width=5, name=f'{value}{j + 1}')
                 entry.grid(row=index, column=(j + 1), padx=5, pady=5)
                 entry.insert(0, '0')
+                if value == 'ss':
+                    entry.config(state='readonly')
                 self.populate_data_collections_with_text(entry, f'{value}{j + 1}')
         # Add the Either-Or entry box and add it to collections.
         label = ttk.Label(self, text="Either-Ors")
@@ -64,17 +66,17 @@ class HoldsBingosTab(TicketingNotebookTab):
         entry.insert(0, '')
         self.populate_data_collections_with_text(entry, 'Either-Ors')
 
-        # Add Leading Zeroes checkbox and add it to the collections.
+        # Add the Leading Zeroes checkbox and add it to the collections.
         label, input_field = create_label_and_field("Leading Zeroes", ttk.Checkbutton(self),
                                                     0, 5, self)
         self.populate_data_collections_with_label(input_field, label)
 
-        # Add Extended CSV checkbox and add it to the collections.
+        # Add the Extended CSV checkbox and add it to the collections.
         label, input_field = create_label_and_field("Extended CSV", ttk.Checkbutton(self),
                                                     1, 5, self)
         self.populate_data_collections_with_label(input_field, label)
 
-        # Add Bingo Balls checkbox and add it to the collections. This allows the production
+        # Add the Bingo Balls checkbox and add it to the collections. This allows the production
         # of bingo ball style tickets with verified bingo paths.
         label, input_field = create_label_and_field("Bingo Balls", ttk.Checkbutton(self),
                                                     2, 5, self)
@@ -115,9 +117,23 @@ class HoldsBingosTab(TicketingNotebookTab):
             # If this is the Either-Or field, make sure there are no unrecognized characters. It's not a
             # complete validation, but ain't nobody got time for that right now.
             if key in ['Either-Ors']:
+                test_values = True
                 if ((self.data_dictionary[key]) != ''
-                        and not re.match(r'^[a-zA-Z0-9,;]*$', self.data_dictionary[key])):
-                    messages.append(f"Holds -> Bingos: '{key}' must contain only letters, numbers, and semicolons.")
+                        and not re.match(r"^\d+,\d+,\d+(;\d+,\d+,\d+)*$", self.data_dictionary[key])):
+                    messages.append(f"Holds -> Bingos: '{key}' must contain only sets of three comma-separated integers"
+                                    f" separated by semicolons.")
+                    test_values = False
+                elif self.data_dictionary[key] == '':
+                    test_values = False
+                if test_values:
+                    temps = self.data_dictionary[key].split(';')
+                    for temp in temps:
+                        pints = [int(pint.strip()) for pint in temp.split(',')]
+                        if pints[1] > 3 or (pints[1] + pints[2]) > 4:
+                            messages.append(f"Holds -> Bingos: '{key}' column totals violate specs. You cannot have "
+                                            f"more than three free columns or a total of four double-line "
+                                            f"plus free columns.")
+        # Bingo ball checkbox validation.
         first_text = ("Holds -> Bingo: Only nonstaggered, single values may be"
                       " used if the Bingo Balls option is selected.")
         first_time = True
@@ -213,8 +229,12 @@ class HoldsBingosTab(TicketingNotebookTab):
             values[2].append(int(self.data_dictionary[key]))
             key = f'ss{i + 1}'
             values[3].append(int(self.data_dictionary[key]))
-        # Parse the string in the Either-Ors box and create a list for
-        # each type present within the text.
+        # Parse the string in the Either-Ors box and create a list for each type present within the text.
+        # The list is expected to contain quantity, free spaces, and doubles. Multiple types can be entered
+        # if they are divided by semicolons. So, an entry of 100,0,1;50,1,1;30,0,2;20,1,2 would equal:
+        # a list of four elements representing 100 tickets with 0 free and 1 double column; 50 tickets with
+        # 1 free and 1 double columns; 30 tickets with 0 free and 2 double columns; and 20 tickets with
+        # 1 free and 2 double columns -----> [[100, 0, 1], [50, 1, 1], [30, 0, 2], [20, 1, 2]]
         bungee = []
         if len(self.data_dictionary['Either-Ors']) > 0:
             # Split each bingo spec, then cycle through them.
@@ -254,24 +274,24 @@ class HoldsBingosTab(TicketingNotebookTab):
         # [2] three rows are needed (either-ors).
         columns_needed = [False] * 3
         columns = 0
-        # Double-line nonstaggered
+        # Double-line nonstaggered; at least two lines needed
         if sum(values[1]) > 0:
             columns_needed[1] = True
-        # Double-line staggered
+        # Double-line staggered; at least two lines needed
         if sum(values[2]) > 0:
             columns_needed[1] = True
-        # Single-line nonstaggered
+        # Single-line nonstaggered; at least one line needed
         if sum(values[3]) > 0:
             columns_needed[0] = True
-        # Single-line staggered
+        # Single-line staggered; at least one line needed
         if sum(values[4]) > 0:
             columns_needed[0] = True
-        # Either-Ors
+        # Either-Ors; three lines needed
         if values[5][0][0] > 0:
-            columns_needed[1] = True
+            columns_needed[2] = True
         # If either-ors are present or both single- and double-line bingos
         # are present, set the columns needed to 3.
-        if columns_needed[2] or (columns_needed[0]) and columns_needed[1]:
+        if columns_needed[2] or (columns_needed[0] and columns_needed[1]):
             columns = 3
         # If only single-line bingos are present, set the columns needed to 1.
         elif columns_needed[0]:

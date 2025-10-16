@@ -51,6 +51,7 @@ class BingoFaceList(object):
         self.path_replacements = []
         self.populate_path_replacements()
         self.d_discards = 0
+        self.debug = False
 
     def import_usable_faces(self, extended: bool = False, reset_paths_taken: bool = False) -> None:
         """
@@ -462,6 +463,11 @@ class BingoFaceList(object):
                             for row in range(1, 3):
                                 face[row][spots_distribution[row - 1][0]] = free_marker
                                 spots_distribution[row - 1][1] += 1
+                        case 3:
+                            starter = rn.randint(0, 1)
+                            for row in range(1, 4):
+                                face[starter + 1][spots_distribution[row - 1][0]] = free_marker
+                                starter = 1 if starter == 0 else 0
                 else:
                     # For non-staggered free spaces, blank out the spots on both paths.
                     for free in range(frees):
@@ -469,6 +475,9 @@ class BingoFaceList(object):
                         face[2][spots_distribution[free][0]] = free_marker
                         spots_distribution[free][1] += 1
         return face
+
+    def set_debug(self, bugging):
+        self.debug = bugging
 
     # def import_usable_faces_csv(self, extended: bool = False, reset_paths_taken: bool = False) -> None:
     #     """

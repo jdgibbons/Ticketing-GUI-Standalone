@@ -15,11 +15,12 @@ class BingoTicket(BonanzaTicket):
     """
 
     def __init__(self, tick_no: str | int, ver: str | int, numbers: list[list[str | int]], imgs: list[str],
-                 zeroes: bool = False, p: int = 1, u: int = 1, is_first: bool = False, lottos: int = 0):
+                 zeroes: bool = False, p: int = 1, u: int = 1, is_first: bool = False, lottos: int = 0,
+                 coda: str = '.ai'):
         """
         Create a generic bingo ticket that can use (or not) any of the data\
         structures to allow for maximum flexibility. Bingo numbers and images
-        are both optional, but can also handle five separate arrays each. The
+        are both optional but can also handle five separate arrays each. The
         csv fields are created based on the number and size of the arrays.
         Permutations and ups aren't really set here at the moment. Maybe later.
 
@@ -39,6 +40,8 @@ class BingoTicket(BonanzaTicket):
         :type is_first: bool
         :param lottos: number of lotto slots--this will almost always be zero
         :type lottos: int
+        :param coda: file extension for images
+        :type coda: str
         """
         # Ticket number, permutation, and up are part of the superclass
         super().__init__(tick_no, p, u)
@@ -48,6 +51,7 @@ class BingoTicket(BonanzaTicket):
         self.zeroes = zeroes
         self.free_type = 'I'
         self.bingo_type = 'N'  # 'S'taggered, 'N'onstaggered, or 'O'ther (for non-bingo tickets)
+        self.coda = coda
         # Only set the csv_fields on the first pass. It is a static variable, so there is
         # no need to repeatedly set it. One and done.
         if is_first:
@@ -103,7 +107,7 @@ class BingoTicket(BonanzaTicket):
             for i in range(len(self.numbers[0])):
                 if self.free_type == 'I':
                     if self.numbers[check_line][i] == '':
-                        self.images[img_count] = f'free{str(i + 1).zfill(2)}.ai'
+                        self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
                         img_count += 1
                 for numb in self.numbers:
                     numbs.append(numb[i])
@@ -111,10 +115,10 @@ class BingoTicket(BonanzaTicket):
         elif self.bingo_type == 'E':
             for i in range(len(self.numbers[0])):
                 if not self.numbers[0][i].strip() and not self.numbers[1][i].strip() and not self.numbers[2][i].strip():
-                    self.images[img_count] = f'free{str(i + 1).zfill(2)}.ai'
+                    self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
                     img_count += 1
                 elif not self.numbers[0][i].strip() and self.numbers[1][i].strip() and self.numbers[2][i].strip():
-                    self.images[img_count] = f'eeyore{str(i + 1).zfill(2)}.ai'
+                    self.images[img_count] = f'eeyore{str(i + 1).zfill(2)}{self.coda}'
                     img_count += 1
                 numbs.extend([self.numbers[0][i], self.numbers[1][i], self.numbers[2][i]])
             if self.zeroes:
@@ -123,10 +127,10 @@ class BingoTicket(BonanzaTicket):
         elif self.bingo_type == 'S':
             for i in range(len(self.numbers[0])):
                 if not self.numbers[1][i].strip() and self.numbers[2][i].strip():
-                    self.images[img_count] = f'free{str(i + 1).zfill(2)}_a.ai'
+                    self.images[img_count] = f'free{str(i + 1).zfill(2)}_a{self.coda}'
                     img_count += 1
                 elif self.numbers[1][i].strip() and not self.numbers[2][i].strip():
-                    self.images[img_count] = f'free{str(i + 1).zfill(2)}_b.ai'
+                    self.images[img_count] = f'free{str(i + 1).zfill(2)}_b{self.coda}'
                     img_count += 1
                 numbs.extend([self.numbers[0][i], self.numbers[1][i], self.numbers[2][i]])
         elif self.bingo_type == 'O':
@@ -234,11 +238,11 @@ def check_list_lengths(items: list[list[str | int]], name: str, tkt: int) -> boo
 #     elif self.free_type == 'B' and indies[i] == '' and index == 0:
 #         numbs.append('FREE')
 #         if self.images[0].startswith('base'):
-#             self.images[img_count] = f'free{str(i + 1).zfill(2)}.ai'
+#             self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
 #             img_count += 1
 #     elif self.free_type == 'I' and indies[i] == '' and index == 0:
 #         if self.images[0].startswith('base'):
-#             self.images[img_count] = f'free{str(i + 1).zfill(2)}.ai'
+#             self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
 #             img_count += 1
 #         numbs.append(indies[i])
 #     elif self.zeroes and indies[i].isdigit():

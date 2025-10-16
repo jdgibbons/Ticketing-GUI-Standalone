@@ -10,6 +10,7 @@ from ticketing.games.game_n_i_i_fl import create_game as niifl_create_game
 from ticketing.games.game_i_i_i_bi import create_game as iiibi_create_game
 from ticketing.games.game_i_i_i_bb import create_game as iiibb_create_game
 from ticketing.games.game_i_i_i_bn import create_game as iiibn_create_game
+from ticketing.games.game_n_i_i_ba import create_game as niiba_create_game
 
 
 def create_label_and_field(label_text, input_field, row, column, parent_frame,
@@ -66,7 +67,7 @@ def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: 
     if full_type in ["IIIIM"]:
         return iiiim_create_game
     # Numbers - Cannons - Image - Cannons
-    elif full_type in ["NCICA"]:
+    elif full_type in ["NCICA", "NIICA"]:
         return ncica_create_game
     # Numbers - Shaded - Image - Shaded
     elif full_type in ["NSISH", "NIISH"]:
@@ -88,5 +89,7 @@ def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: 
         return iiibb_create_game
     elif full_type in ['IIIBN']:
         return iiibn_create_game
+    elif full_type in ['NIIBA']:
+        return niiba_create_game
     else:
         return None

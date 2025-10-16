@@ -72,18 +72,6 @@ class AddImages(IntEnum):
     PostTwenty = 20
 
 
-sheet_capacities = {
-    '1': [96, 96], 'O1': [96, 96], 'N1': [168, 168],
-    '3': [240, 80], 'O3': [240, 80], 'N3': [120, 120],
-    '3-1': [80, 80], 'O3-1': [80, 80], 'N3-1': [-1, -1],
-    '4': [256, 64], 'O4': [256, 64], 'N4': [96, 96],
-    '4-1': [64, 64], 'O4-1': [64, 64], 'N4-1': [-1, -1],
-    '5': [56, 56], 'O5': [56, 56], 'N5': [84, 84],
-    '7': [42, 42], 'O7': [42, 42], 'N7': [-1, -1],
-    'S': [240, 240], 'OS': [240, 240], 'NS': [300, 300],
-    'C': [113, 113], 'OC': [113, 113], 'NC': [168, 168],
-    'BC': [33, 33], 'OBC': [33, 33], 'NBC': [-1, -1]}
-
 sheet_columns = {
     'NS': 10
 }
@@ -299,10 +287,21 @@ def check_for_exit(value: str) -> None:
         exit(0)
 
 
-def get_sheet_capacities(structure: str) -> list[int] | None:
-    global sheet_capacities
+def get_sheet_capacities(structure: str) -> list[int] | int:
+    sheet_capacities = {
+        '1': [96, 96], 'O1': [96, 96], 'N1': [168, 168],
+        '3': [240, 80], 'O3': [240, 80], 'N3': [120, 120],
+        '3-1': [80, 80], 'O3-1': [80, 80], 'N3-1': [-1, -1],
+        '4': [256, 64], 'O4': [256, 64], 'N4': [96, 96],
+        '4-1': [64, 64], 'O4-1': [64, 64], 'N4-1': [-1, -1],
+        '5': [56, 56], 'O5': [56, 56], 'N5': [84, 84],
+        '7': [42, 42], 'O7': [42, 42], 'N7': [-1, -1],
+        'S': [240, 240], 'OS': [240, 240], 'NS': [396, 396],
+        'C': [113, 113], 'OC': [113, 113], 'NC': [168, 168],
+        'BC': [33, 33], 'OBC': [33, 33], 'NBC': [-1, -1]}
+
     if structure not in sheet_capacities.keys():
-        return None
+        return 0
     else:
         return sheet_capacities[structure]
 
@@ -367,7 +366,7 @@ def get_sheet_capacity(structure: str) -> list[int]:
         case 'OS':
             q_sheet_capacity = [240, 240]
         case 'NS':
-            q_sheet_capacity = [300, 300]
+            q_sheet_capacity = [396, 396]
         case 'C':
             q_sheet_capacity = [113, 113]
         case 'OC':
@@ -702,7 +701,7 @@ def check_game_parameters(sheet: list[list[int] | int], nws: list[int], insts: l
     if len(sheet) == 5:
         q_ups, q_permutations, q_sheets, q_sheet_capacity, p_reset = sheet
     else:
-        q_ups, q_permutations, q_sheets, q_sheet_capacity, p_reset, subflats, schisms = sheet
+        q_ups, q_permutations, q_sheets, q_sheet_capacity, p_reset, subflats, schisms, suffix = sheet
     q_sheet_capacity = q_sheet_capacity[1]
 
     q_nonwinners, q_instants, q_picks, q_holds, ticket_total = get_ticket_total(nws, insts, picks, holds)
