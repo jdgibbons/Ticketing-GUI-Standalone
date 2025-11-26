@@ -320,7 +320,7 @@ def create_bball_number_tickets(bb_amt, bpt, spt, downs, permits: int, first, nu
         # Cycle through the image lists and create tickets with them.
         for innie, bingo in enumerate(bingos):
             # Create the pics list using the base image as the first element.
-            pics = [''] if basic in ['none.ai', 'blank.ai', '0.ai', '000.ai'] else [f'{basic}{suffix}']
+            pics = [''] if basic in ['none', 'blank', '0', '000', ''] else [f'{basic}{suffix}']
             for addl in addl_bb_imgs:
                 pics = ig.add_additional_image_slots(addl, pics)
             # Create the ticket and add it to the ticket list.

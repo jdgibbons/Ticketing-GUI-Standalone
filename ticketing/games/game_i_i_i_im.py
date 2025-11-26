@@ -267,11 +267,11 @@ def create_game(game_specs):
         tickets.extend(nw_ticks)
         first_time = False
 
-    tio.write_tickets_to_file(filename, tickets)
+    tio.write_tickets_to_file(filename, tickets, output_folder)
     mixer = True
-    if sheet_specs[3][1] in [113, 396]:
+    if sheet_specs[3][1] in [113, 240, 396]:
         mixer = False
-    game_stacks = tio.create_game_stacks(tickets, ups, sheets, capacities[1], mixer, 0)
+    game_stacks = tio.create_game_stacks(tickets, ups, sheets, capacities[1], mixer, subflats)
 
     cd_positions, cd_sheets = tio.write_game_stacks_to_file(filename, game_stacks, ups, sheets,
                                                             capacities[1], output_folder)

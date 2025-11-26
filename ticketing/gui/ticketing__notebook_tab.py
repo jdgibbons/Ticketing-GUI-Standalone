@@ -3,7 +3,7 @@ import ttkbootstrap as ttk
 from abc import ABC, abstractmethod
 
 
-class TicketingNotebookTab(ttk.Frame):
+class TicketingNotebookTab(ttk.Frame, ABC):
     """
     Abstract base class for tabs within a ticketing notebook.
 
