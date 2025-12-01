@@ -2,8 +2,10 @@ import re
 import os.path as osp
 import ttkbootstrap as ttk
 
+from ticket_models import HoldBallsTicket
 from .ticketing__notebook_tab import TicketingNotebookTab
 from .helpers import create_label_and_field
+from ticketing.ticket_models import HoldBallsTicket
 
 
 class HoldsBallsTab(TicketingNotebookTab):
@@ -184,61 +186,58 @@ class HoldsBallsTab(TicketingNotebookTab):
         self.field_dictionary['non-image'].state(['!selected'])
         self.field_dictionary['match-bbs'].state(['!selected'])
 
-    def retrieve_data(self) -> list:
+    def retrieve_data(self) -> HoldBallsTicket:
         """
-        Retrieves the data from the tab.
-
-        Returns:
-            list: A list containing the retrieved data.
-                  [self.name, ball_tickets, bool_options, addl_holds]
-        """
+                Retrieves the data from the tab and returns a HoldBallsTicket object.
+                """
         # Retrieve unique integer fields
         quantity = int(self.data_dictionary['Quantity'])
         bingos = int(self.data_dictionary['bingos'])
         spots = int(self.data_dictionary['spots'])
-        sortie = self.data_dictionary['sortie']
         pool = int(self.data_dictionary['pool'])
+        shazams = int(self.data_dictionary['shazams'])
+
+        # Retrieve tiered free space values
+        frees = [int(self.data_dictionary[f'free{i}']) for i in range(1, 4)]
+
         # Retrieve boolean values
         downlines = self.data_dictionary['Downlines']
         non_image = self.data_dictionary['non-image']
-        shazams = int(self.data_dictionary['shazams'])
-        matching_bbs = self.data_dictionary['match-bbs']
-        filename, extension = osp.splitext(self.data_dictionary['base'])
-        # if len(filename) == 0:
-        #     filename = 'base'
+        match_bbs = self.data_dictionary['match-bbs']
+        sortie = self.data_dictionary['sortie']
 
-        # Retrieve tiered free space values
-        frees = []
-        for i in range(1, 4):
-            frees.append(int(self.data_dictionary[f'free{i}']))
-        # Retrieve and parse additional holds.
+        # Handle filename
+        filename, extension = osp.splitext(self.data_dictionary['base'])
+        # (Optional: Logic to ensure the extension is correct could go here or in validation)
+
+        # Retrieve and parse additional holds
         additionals = []
         temp = self.data_dictionary['additionals']
-        # Split multiple hold instances.
-        adds = temp.split(';')
-        # If the 'additionals' entry box is empty, add a list with zero and an empty string.
-        if len(adds) == 1 and adds[0] == '':
-            additionals.append(['', 0])
-        # Otherwise, split each instance into its color and quantity values and append
-        # them as a list to the adds list.
-        else:
+
+        if temp:
+            adds = temp.split(';')
             for addl in adds:
-                hold = addl.split(',')
-                color = hold[0]
-                amt = int(hold[1])
-                additionals.append([color, amt])
-        # Create a variable that contains the total number of additional holds. It will
-        # be used to make verifying the total ticket count easier.
-        addl_count = 0
-        for addl in additionals:
-            addl_count += addl[1]
-        # Place related information into lists
-        ball_tickets = [quantity, bingos, spots, pool, frees]
-        # The final element is checked then deleted in the submit data section of ticketing_gui.
-        bool_options = [downlines, shazams, sortie, filename, matching_bbs, non_image]
-        addl_holds = [addl_count, additionals]
-        # Return the name of the tab and its related data.
-        return [self.name, ball_tickets, bool_options, addl_holds]
+                if addl.strip():  # Check if not empty string
+                    hold_parts = addl.split(',')
+                    if len(hold_parts) == 2:
+                        color = hold_parts[0].strip()
+                        amt = int(hold_parts[1].strip())
+                        additionals.append((color, amt))
+
+        return HoldBallsTicket(
+            quantity=quantity,
+            bingos_per_ticket=bingos,
+            spots_per_ticket=spots,
+            pool_size=pool,
+            free_spots=frees,
+            use_downlines=downlines,
+            shazams=shazams,
+            sort_balls=sortie,
+            base_image=filename,
+            match_bbs=match_bbs,
+            non_image_mode=non_image,
+            additional_holds=additionals
+        )
 
     def set_nw_pool(self, pool):
         """

@@ -14,7 +14,7 @@ output folder. It will be blank if files are to be placed in the default folder.
 """
 import copy
 
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
 from ticketing.bingo_ticket import BingoTicket as bTick
 from ticketing import verified_bingo as vb
 from ticketing import image_generator as ig
@@ -56,7 +56,7 @@ def create_hold_tickets(non_twos: list[int], stag_twos: list[int], non_ones: lis
     :param csv_rows: number of integer rows to be used in the csv file
     :type csv_rows: int
     :param addl_imgs: extra slots to be added to the image list
-    :type addl_imgs: game_info.AddImages
+    :type addl_imgs: game_info_gui.AddImages
     :param permits: number of permutations needed
     :type permits: int
     :param perm_reset: Should the bingo list be reset for each permutation?

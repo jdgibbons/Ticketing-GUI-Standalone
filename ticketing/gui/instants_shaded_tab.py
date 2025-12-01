@@ -2,6 +2,7 @@ import re
 import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import InstantShadedTicket, ShadedTier
 
 
 class InstantsShadedTab(TicketingNotebookTab):
@@ -258,45 +259,28 @@ class InstantsShadedTab(TicketingNotebookTab):
         self.field_dictionary["exclusions"].delete(0, ttk.END)
         self.field_dictionary["exclusions"].insert(0, "")
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
-
-        Returns:
-            list: A list containing the retrieved data in a specific format:
-                [
-                    self.name,
-                    tier_list,
-                    first,
-                    last,
-                    spots,
-                    cd_tier,
-                    exclusions
-                ]
-                where tier_list is a list of lists, each containing tier data.
-        """
-
+    def retrieve_data(self) -> InstantShadedTicket:
         tier_list = []
-        # Cycle through tier data and place each tier into its own list
-        # ([numbers,suffix,color,full,base]) and add it to the tiers' list.
         for i in range(1, 6):
-            if len(self.data_dictionary[f"numbers{i}"]) > 0:
-                tier_list.append([
-                    self.data_dictionary[f"numbers{i}"].split(","),
-                    self.data_dictionary[f"suffix{i}"],
-                    self.data_dictionary[f"color{i}"],
-                    self.data_dictionary[f"full{i}"],
-                    self.data_dictionary[f"base{i}"]
-                ])
-        return [
-            self.name,
-            tier_list,
-            int(self.data_dictionary["first"]),
-            int(self.data_dictionary["last"]),
-            int(self.data_dictionary["spots"]),
-            int(self.data_dictionary["cd_tier"]),
-            self.data_dictionary["exclusions"]
-        ]
+            num_str = self.data_dictionary[f"numbers{i}"]
+            if num_str:
+                tier_list.append(ShadedTier(
+                    numbers=[int(x) for x in num_str.split(",")],
+                    suffix=self.data_dictionary[f"suffix{i}"],
+                    color=self.data_dictionary[f"color{i}"],
+                    is_full=self.data_dictionary[f"full{i}"],
+                    base_image=self.data_dictionary[f"base{i}"],
+                    pi_enabled=False  # Not used in Instants
+                ))
+
+        return InstantShadedTicket(
+            tiers=tier_list,
+            first_num=int(self.data_dictionary["first"]),
+            last_num=int(self.data_dictionary["last"]),
+            spots=int(self.data_dictionary["spots"]),
+            cd_tier=int(self.data_dictionary["cd_tier"]),
+            exclusions=self.data_dictionary["exclusions"]
+        )
 
 
 def parse_suffixes(images_string):

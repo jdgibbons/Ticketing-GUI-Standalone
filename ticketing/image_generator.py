@@ -1,7 +1,7 @@
 import copy
 import random as rn
 from itertools import cycle, permutations, combinations
-from ticketing.game_info import AddImages
+from ticketing.game_info_gui import AddImages
 from .number_generator import create_bingo_positions
 
 

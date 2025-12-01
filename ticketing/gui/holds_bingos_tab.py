@@ -1,8 +1,10 @@
 import re
 import ttkbootstrap as ttk
 
+from ticket_models import HoldBingosTicket
 from .ticketing__notebook_tab import TicketingNotebookTab
 from .helpers import create_label_and_field
+from ticketing.ticket_models import HoldBingosTicket
 
 
 class HoldsBingosTab(TicketingNotebookTab):
@@ -207,101 +209,63 @@ class HoldsBingosTab(TicketingNotebookTab):
         # Reset combobox
         self.field_dictionary['Free Type'].set('Images')
 
-    def retrieve_data(self) -> list:
+    def retrieve_data(self) -> HoldBingosTicket:
         """
-        Retrieves and processes data from the input fields.
+        Retrieves data and returns a HoldBingosTicket object.
+        """
+        # 1. Gather Counts
+        dns_counts = [int(self.data_dictionary[f'dns{i+1}']) for i in range(4)]
+        ds_counts = [int(self.data_dictionary[f'ds{i+1}']) for i in range(4)]
+        sns_counts = [int(self.data_dictionary[f'sns{i+1}']) for i in range(4)]
+        ss_counts = [int(self.data_dictionary[f'ss{i+1}']) for i in range(4)]
 
-        Returns:
-            list: A list containing the retrieved data, including bingo values, either-or options,
-                  leading zeroes setting, free type, and extended CSV setting.
-        """
-        values = []
-        # Create four lists for the different standard bingos, then cycle through the
-        # entry boxes and append their data to their associated lists.
-        for i in range(4):
-            values.append([])
-        for i in range(4):
-            key = f'dns{i + 1}'
-            values[0].append(int(self.data_dictionary[key]))
-            key = f'ds{i + 1}'
-            values[1].append(int(self.data_dictionary[key]))
-            key = f'sns{i + 1}'
-            values[2].append(int(self.data_dictionary[key]))
-            key = f'ss{i + 1}'
-            values[3].append(int(self.data_dictionary[key]))
-        # Parse the string in the Either-Ors box and create a list for each type present within the text.
-        # The list is expected to contain quantity, free spaces, and doubles. Multiple types can be entered
-        # if they are divided by semicolons. So, an entry of 100,0,1;50,1,1;30,0,2;20,1,2 would equal:
-        # a list of four elements representing 100 tickets with 0 free and 1 double column; 50 tickets with
-        # 1 free and 1 double columns; 30 tickets with 0 free and 2 double columns; and 20 tickets with
-        # 1 free and 2 double columns -----> [[100, 0, 1], [50, 1, 1], [30, 0, 2], [20, 1, 2]]
-        bungee = []
-        if len(self.data_dictionary['Either-Ors']) > 0:
-            # Split each bingo spec, then cycle through them.
-            bings = self.data_dictionary['Either-Ors'].split(';')
+        # 2. Parse Either-Ors
+        either_ors = []
+        raw_eo = self.data_dictionary['Either-Ors']
+        if raw_eo:
+            bings = raw_eo.split(';')
             for bing in bings:
-                # Split the spec into its constituent parts, then
-                # append the int equivalent to a list.
-                binkie = bing.split(',')
-                bunk = []
-                for val in binkie:
-                    bunk.append(int(val))
-                # Add this bingo spec info to the
-                bungee.append(bunk)
+                parts = [int(val.strip()) for val in bing.split(',')]
+                either_ors.append(parts)
         else:
-            bungee.append([0, 0, 0])
-        # Append either-ors, leading zeroes, and how to handle free spaces (free type)
-        values.append(bungee)
-        values.append(self.data_dictionary['Leading Zeroes'])
-        values.append(self.data_dictionary['Free Type'])
-        # If the Bingo Balls value is True, add 'BB' to the values list.
-        # Otherwise, just ignore it.
-        if self.data_dictionary['Bingo Balls']:
-            values.append('BB')
-        # Append 'E' or 'S' to indicate whether to use the standard or
-        # extended version of the bingo lines csv.
-        if self.data_dictionary['Extended CSV']:
-            values.append('E')
-        else:
-            values.append('S')
-        values.insert(0, self.name)
+            # Default empty state logic from original code, though list is preferred empty
+            either_ors.append([0, 0, 0])
 
-        # Calculate the number of rows needed to accommodate the bingo styles used by the game.
-        # (Single-line, double-line, or a combination of the two. (If both single- and double-line
-        # bingos are present, three rows are needed (since the text frames will need to be different
-        # in DesignMerge).). Either-Ors require three rows for the same reason.)
-        # columns_needed indexes translate to: [0] single-line is needed, [1] double-line is needed,
-        # [2] three rows are needed (either-ors).
-        columns_needed = [False] * 3
-        columns = 0
-        # Double-line nonstaggered; at least two lines needed
-        if sum(values[1]) > 0:
-            columns_needed[1] = True
-        # Double-line staggered; at least two lines needed
-        if sum(values[2]) > 0:
-            columns_needed[1] = True
-        # Single-line nonstaggered; at least one line needed
-        if sum(values[3]) > 0:
-            columns_needed[0] = True
-        # Single-line staggered; at least one line needed
-        if sum(values[4]) > 0:
-            columns_needed[0] = True
-        # Either-Ors; three lines needed
-        if values[5][0][0] > 0:
-            columns_needed[2] = True
-        # If either-ors are present or both single- and double-line bingos
-        # are present, set the columns needed to 3.
-        if columns_needed[2] or (columns_needed[0] and columns_needed[1]):
-            columns = 3
-        # If only single-line bingos are present, set the columns needed to 1.
-        elif columns_needed[0]:
-            columns = 1
-        # If only double-line bingos are present, set the columns needed to 2.
-        elif columns_needed[1]:
-            columns = 2
-        values.append(columns)
-        return values
+        # 3. Calculate Columns Needed (Preserving original logic)
+        columns_needed = 0
+        has_single = False
+        has_double = False
+        has_triple = False # For Either-Ors
 
+        # Check Double-line
+        if sum(ds_counts) > 0 or sum(dns_counts) > 0:
+            has_double = True
+        # Check Single-line
+        if sum(sns_counts) > 0 or sum(ss_counts) > 0:
+            has_single = True
+        # Check Either-Ors
+        if either_ors[0][0] > 0:
+            has_triple = True
+
+        if has_triple or (has_single and has_double):
+            columns_needed = 3
+        elif has_double:
+            columns_needed = 2
+        elif has_single:
+            columns_needed = 1
+
+        return HoldBingosTicket(
+            dns_counts=dns_counts,
+            ds_counts=ds_counts,
+            sns_counts=sns_counts,
+            ss_counts=ss_counts,
+            either_ors=either_ors,
+            leading_zeroes=self.data_dictionary['Leading Zeroes'],
+            free_type=self.data_dictionary['Free Type'],
+            use_bingo_balls=self.data_dictionary['Bingo Balls'],
+            extended_csv=self.data_dictionary['Extended CSV'],
+            columns_needed=columns_needed
+        )
 
 def parse_either_ors(eeyore):
     value = []

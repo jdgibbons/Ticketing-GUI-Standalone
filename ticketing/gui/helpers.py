@@ -1,16 +1,16 @@
 import ttkbootstrap as ttk
 
-from ticketing.games.game_n_c_i_ca import create_game as ncica_create_game
-from ticketing.games.game_n_s_i_sh import create_game as nsish_create_game
-from ticketing.games.game_n_i_i_im import create_game as niiim_create_game
-from ticketing.games.game_i_i_i_im import create_game as iiiim_create_game
-from ticketing.games.game_i_i_i_ba import create_game as iiiba_create_game
-from ticketing.games.game_i_i_i_ma import create_game as iiima_create_game
-from ticketing.games.game_n_i_i_fl import create_game as niifl_create_game
-from ticketing.games.game_i_i_i_bi import create_game as iiibi_create_game
-from ticketing.games.game_i_i_i_bb import create_game as iiibb_create_game
-from ticketing.games.game_i_i_i_bn import create_game as iiibn_create_game
-from ticketing.games.game_n_i_i_ba import create_game as niiba_create_game
+from ticketing.games.game_numbs_cans_imgs_cans import create_game as game_numbs_cans_imgs_cans_cg
+from ticketing.games.game_numbs_shade_imgs_shade import create_game as game_numbs_shade_imgs_shade_cg
+from ticketing.games.game_numbs_imgs_imgs_imgs import create_game as game_numbs_imgs_imgs_imgs_cg
+from ticketing.games.game_imgs_imgs_imgs_imgs import create_game as game_imgs_imgs_imgs_imgs_cg
+from ticketing.games.game_imgs_imgs_imgs_balls import create_game as game_imgs_imgs_imgs_balls_cg
+from ticketing.games.game_imgs_imgs_imgs_matrix import create_game as game_imgs_imgs_imgs_matrix_cg
+from ticketing.games.game_numbs_imgs_imgs_flash import create_game as game_numbs_imgs_imgs_flash_cg
+from ticketing.games.game_imgs_imgs_imgs_bingos import create_game as game_imgs_imgs_imgs_bingos_cg
+from ticketing.games.game_imgs_imgs_imgs_vballs import create_game as game_imgs_imgs_imgs_vballs_cg
+from ticketing.games.game_imgs_imgs_imgs_bnumbs import create_game as game_imgs_imgs_imgs_bnumbs_cg
+from ticketing.games.game_numbs_imgs_imgs_balls import create_game as game_numbs_imgs_imgs_balls_cg
 
 
 def create_label_and_field(label_text, input_field, row, column, parent_frame,
@@ -46,50 +46,3 @@ def create_label_and_field(label_text, input_field, row, column, parent_frame,
         input_field.insert(0, default_text)  # Set default text if provided
     # Return the label and widget
     return label, input_field
-
-
-def extract_ticket_types(game_spex):
-    """
-    Remove the first element of the ticket types for nonwinners, instants,
-    picks, and holds and return them as a list.
-
-    :param game_spex: a list of specs for a ticketed game, elemets 1 - 4 correspond to
-                      ticket types nonwinners, instants, picks, and holds respectively.
-    :return:
-    """
-    return [game_spex[1].pop(0), game_spex[2].pop(0), game_spex[3].pop(0), game_spex[4].pop(0)]
-
-
-def select_game_method(nw_type: str, inst_type: str, pick_type: str, hold_type: str):
-    full_type = nw_type + inst_type + pick_type + hold_type
-    # NW - Instant - Pick - Hold
-    # Image - Image - Image - Image
-    if full_type in ["IIIIM"]:
-        return iiiim_create_game
-    # Numbers - Cannons - Image - Cannons
-    elif full_type in ["NCICA", "NIICA"]:
-        return ncica_create_game
-    # Numbers - Shaded - Image - Shaded
-    elif full_type in ["NSISH", "NIISH"]:
-        return nsish_create_game
-    # Numbers - Image - Image - Image
-    elif full_type in ['NIIIM']:
-        return niiim_create_game
-    # Numbers - Shaded - Image - Balls
-    elif full_type in ['NSIBA', 'IIIBA']:
-        return iiiba_create_game
-    # Image - Image - Image - Matrix
-    elif full_type in ['IIIMA']:
-        return iiima_create_game
-    elif full_type in ['NIIFL']:
-        return niifl_create_game
-    elif full_type in ['IIIBI']:
-        return iiibi_create_game
-    elif full_type in ['IIIBB']:
-        return iiibb_create_game
-    elif full_type in ['IIIBN']:
-        return iiibn_create_game
-    elif full_type in ['NIIBA']:
-        return niiba_create_game
-    else:
-        return None

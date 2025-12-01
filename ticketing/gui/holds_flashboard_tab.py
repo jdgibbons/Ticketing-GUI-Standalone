@@ -3,6 +3,7 @@ import ttkbootstrap as ttk
 
 from .helpers import create_label_and_field
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import HoldFlashboardTicket
 
 
 class HoldsFlashboardTab(TicketingNotebookTab):
@@ -122,13 +123,14 @@ class HoldsFlashboardTab(TicketingNotebookTab):
         self.field_dictionary['letters'].state(['!selected'])
         self.field_dictionary['hyphen'].state(['!selected'])
 
-    def retrieve_data(self):
-        quantity = int(self.data_dictionary['quantity'])
-        spots = int(self.data_dictionary['spots'])
-        zeroes = self.data_dictionary['zeroes']
-        letters = self.data_dictionary['letters']
-        hyphen = self.data_dictionary['hyphen']
-        colors = []
-        for i in range(1, 6):
-            colors.append(self.data_dictionary[f'color{i}'])
-        return [self.name, quantity, spots, zeroes, letters, hyphen, colors]
+    def retrieve_data(self)-> HoldFlashboardTicket:
+        colors_list = [self.data_dictionary[f'color{i}'] for i in range(1, 6) if self.data_dictionary[f'color{i}']]
+
+        return HoldFlashboardTicket(
+            quantity=int(self.data_dictionary['quantity']),
+            spots=int(self.data_dictionary['spots']),
+            leading_zeroes=self.data_dictionary['zeroes'],
+            use_letters=self.data_dictionary['letters'],
+            use_hyphen=self.data_dictionary['hyphen'],
+            colors=colors_list
+        )

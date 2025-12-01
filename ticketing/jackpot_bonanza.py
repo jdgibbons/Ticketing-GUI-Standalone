@@ -1,5 +1,5 @@
 from ticketing.universal_ticket import UniversalTicket as uTick
-import ticketing.game_info as gi
+import ticketing.game_info_gui as gi
 import ticketing.image_generator as ig
 import ticketing.ticket_io as tio
 

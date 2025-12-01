@@ -3,6 +3,7 @@ import tkinter as tk
 
 from .ticketing__frame import TicketingFrame
 from .helpers import create_label_and_field
+from ticketing.ticket_models import NamesData
 
 
 class NamesFrame(TicketingFrame):
@@ -69,17 +70,16 @@ class NamesFrame(TicketingFrame):
         for label, input_field in self.field_dictionary.items():
             input_field.delete(0, tk.END)
 
-    def retrieve_data(self) -> list:
+    def retrieve_data(self) -> NamesData:
         """
-        Retrieves and returns the current data from the form fields.
-
-        Returns:
-            A list containing the following data:
-            - Base Part (str)
-            - File Name (str)
+        Retrieves the data from the input fields and returns a NamesData object.
         """
         self.create_data_dictionary()
-        return [self.data_dictionary['Base Part'], self.data_dictionary['File Name']]
+
+        return NamesData(
+            base_part=self.data_dictionary['Base Part'],
+            file_name=self.data_dictionary['File Name']
+        )
 
     def create_data_dictionary(self):
         """

@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ticketing" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ticketing/gui" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
+      <excludeFolder url="file://$MODULE_DIR$/results" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.13" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

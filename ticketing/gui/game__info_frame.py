@@ -1,10 +1,11 @@
 import tkinter as tk
 import ttkbootstrap as ttk
 
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
 
 from .helpers import create_label_and_field
 from .ticketing__frame import TicketingFrame
+from ticketing.ticket_models import GameInfo
 
 
 class GameInfoFrame(TicketingFrame):
@@ -207,30 +208,27 @@ class GameInfoFrame(TicketingFrame):
                 self.field_dictionary[label_text].insert(0, self.defaults[label_text])
         self.suffix_option.set(0)
 
-    def retrieve_data(self) -> list:
+    def retrieve_data(self) -> GameInfo:
         """
-        Retrieves and returns the current data from the form fields.
+        Retrieves the data from the input fields and returns a GameInfo object.
+        """
+        # Ensure dict is populated
+        self.create_data_dictionary()
 
-        Returns:
-            A list containing the following data:
-            - Ups (int)
-            - Permutations (int)
-            - Sheets (int)
-            - Sheet capacity (tuple, from `gi.get_sheet_capacity`)
-            - Reset status (bool)
-            - Subflats (int)
-            - Schisms (int)
-        """
-        return [
-            int(self.data_dictionary["Ups"]),
-            int(self.data_dictionary["Permutations"]),
-            int(self.data_dictionary["Sheets"]),
-            gi.get_sheet_capacity(self.data_dictionary["Window Structure"]),
-            self.data_dictionary["Reset"],
-            int(self.data_dictionary["Subflats"]),
-            int(self.data_dictionary["Schisms"]),
-            self.data_dictionary["Suffix"]
-        ]
+        structure = self.data_dictionary["Window Structure"]
+
+        return GameInfo(
+            ups=int(self.data_dictionary["Ups"]),
+            permutations=int(self.data_dictionary["Permutations"]),
+            sheets=int(self.data_dictionary["Sheets"]),
+            window_structure=structure,
+            # Calculate capacity here so consumers don't need to import 'gi'
+            capacity = tuple(gi.get_sheet_capacity(structure)),
+            reset_pool=self.data_dictionary["Reset"],
+            subflats=int(self.data_dictionary["Subflats"]),
+            schisms=int(self.data_dictionary["Schisms"]),
+            image_suffix=self.data_dictionary["Suffix"]
+        )
 
     def create_defaults(self):
         """

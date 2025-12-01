@@ -1,7 +1,9 @@
 import re
 import ttkbootstrap as ttk
 
+from ticket_models import InstantImagesTicket
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import InstantImagesTicket, ImageTier
 
 
 class InstantsImagesTab(TicketingNotebookTab):
@@ -144,7 +146,7 @@ class InstantsImagesTab(TicketingNotebookTab):
                 self.field_dictionary[label].delete(0, ttk.END)
                 self.field_dictionary[label].insert(0, "0")
 
-    def retrieve_data(self) -> list:
+    def retrieve_data(self) -> InstantImagesTicket:
         """
         Retrieves and processes data from input fields.
 
@@ -158,22 +160,28 @@ class InstantsImagesTab(TicketingNotebookTab):
                 where tier_list is a list of lists, each containing tier
                 quantity and unique flag.
         """
-
         tier_list = []
-        # Add a tier list for every box that contains a non-zero value. The lists
-        # consist of the [quantity, unique] values for the respective tiers. The list
-        # ends after 12 tiers or a zero is encountered in the quantity box.
         for i in range(12):
-            if int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']) != 0:
-                tier_list.append([int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']),
-                                  self.data_dictionary[f'unique{str(i + 1).zfill(2)}']])
+            q_key = f'tier{str(i + 1).zfill(2)}'
+            u_key = f'unique{str(i + 1).zfill(2)}'
+            qty = int(self.data_dictionary[q_key])
+
+            if qty != 0:
+                tier_list.append(ImageTier(
+                    number=i + 1,
+                    quantity=qty,
+                    is_unique=self.data_dictionary[u_key]
+                ))
             else:
                 break
-        # If there aren't any instants to be added, add a zero-value list to the tier list.
-        if len(tier_list) == 0:
-            tier_list.append([0, False])
-        return [
-            self.name,
-            tier_list,
-            int(self.data_dictionary['CD Tier'])
-        ]
+
+        # If empty, add default zero entry logic if required, or keep list empty
+        if not tier_list:
+            # Based on previous logic: tier_list.append([0, False])
+            # We can represent this as a dummy tier if strictly needed by downstream logic
+            tier_list.append(ImageTier(0, 0, False))
+
+        return InstantImagesTicket(
+            tiers=tier_list,
+            cd_tier=int(self.data_dictionary['CD Tier'])
+        )

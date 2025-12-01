@@ -4,7 +4,7 @@ import re
 from ticketing.universal_ticket import UniversalTicket as uTick
 from ticketing import number_generator as ng
 from ticketing import image_generator as ig
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
 from ticketing import ticket_io as tio
 # from helpers import extract_ticket_types
 

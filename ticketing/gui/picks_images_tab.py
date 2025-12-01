@@ -2,6 +2,7 @@ import re
 import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import PickImagesTicket, ImageTier
 
 
 class PicksImagesTab(TicketingNotebookTab):
@@ -134,34 +135,23 @@ class PicksImagesTab(TicketingNotebookTab):
                 self.field_dictionary[label].delete(0, ttk.END)
                 self.field_dictionary[label].insert(0, "0")
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
-
-        Returns:
-            list: A list containing the retrieved data in a specific format:
-                [
-                    self.name,
-                    tier_list,
-                ]
-                where tier_list is a list of lists, each containing tier
-                quantity and unique flag.
-        """
-
+    def retrieve_data(self) -> PickImagesTicket:
         tier_list = []
-        # Add a tier list for every box that contains a non-zero value. The lists
-        # consist of the [quantity, unique] values for the respective tiers. The list
-        # ends after 4 tiers or a zero is encountered in the quantity box.
         for i in range(15):
-            if int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']) != 0:
-                tier_list.append([int(self.data_dictionary[f'tier{str(i + 1).zfill(2)}']),
-                                  self.data_dictionary[f'unique{str(i + 1).zfill(2)}']])
+            q_key = f'tier{str(i + 1).zfill(2)}'
+            u_key = f'unique{str(i + 1).zfill(2)}'
+            qty = int(self.data_dictionary[q_key])
+
+            if qty != 0:
+                tier_list.append(ImageTier(
+                    number=i + 1,
+                    quantity=qty,
+                    is_unique=self.data_dictionary[u_key]
+                ))
             else:
                 break
-        # If there aren't any instants to be added, add a zero-value list to the tier list.
-        if len(tier_list) == 0:
-            tier_list.append([0, False])
-        return [
-            self.name,
-            tier_list
-        ]
+
+        if not tier_list:
+            tier_list.append(ImageTier(0, 0, False))
+
+        return PickImagesTicket(tiers=tier_list)

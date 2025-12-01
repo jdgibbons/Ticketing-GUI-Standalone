@@ -2,7 +2,7 @@
 from ticketing.universal_ticket import UniversalTicket as uTick
 
 from ticketing import number_generator as ng
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
 
 
 nw_type, insta_type, pick_type, hold_type = '', '', '', ''

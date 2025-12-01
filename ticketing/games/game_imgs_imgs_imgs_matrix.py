@@ -16,7 +16,7 @@ output folder. It will be blank if files are to be placed in the default folder.
 import copy
 import random as rn
 
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
 from ticketing import image_generator as ig
 from ticketing import number_generator as ng
 

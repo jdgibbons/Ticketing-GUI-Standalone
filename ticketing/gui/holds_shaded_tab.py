@@ -2,6 +2,7 @@ import re
 
 import ttkbootstrap as ttk
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import HoldShadedTicket, ShadedTier
 
 
 class HoldsShadedTab(TicketingNotebookTab):
@@ -270,51 +271,40 @@ class HoldsShadedTab(TicketingNotebookTab):
         self.field_dictionary["images"].delete(0, ttk.END)
         self.field_dictionary["images"].insert(0, "")
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
-
-        Returns:
-            list: A list containing the retrieved data in a specific format:
-                [
-                    self.name,
-                    tier_list,
-                    first,
-                    last,
-                    spots,
-                    exclusions,
-                    image_holds
-                ]
-                where tier_list is a list of lists, each containing tier data:
-                numbers, suffix, color, full, base, pi.
-        """
-
-        # Create a list of shaded number values and their associated variables.
-        # Cycle through the entries and append the numbers information to the
-        # tier list until an empty numbers box is found.
+    def retrieve_data(self) -> HoldShadedTicket:
         tier_list = []
         for i in range(1, 6):
-            if len(self.data_dictionary[f"numbers{i}"]) > 0:
-                tier_list.append([
-                    self.data_dictionary[f"numbers{i}"].split(','),
-                    self.data_dictionary[f"suffix{i}"],
-                    self.data_dictionary[f"color{i}"],
-                    self.data_dictionary[f"full{i}"],
-                    self.data_dictionary[f"base{i}"],
-                    self.data_dictionary[f"pi{i}"]
-                ])
+            num_str = self.data_dictionary[f"numbers{i}"]
+            if num_str:
+                tier = ShadedTier(
+                    numbers=[int(n) for n in num_str.split(',')],
+                    suffix=self.data_dictionary[f"suffix{i}"],
+                    color=self.data_dictionary[f"color{i}"],
+                    is_full=self.data_dictionary[f"full{i}"],
+                    base_image=self.data_dictionary[f"base{i}"],
+                    pi_enabled=self.data_dictionary[f"pi{i}"]
+                )
+                tier_list.append(tier)
             else:
                 break
 
-        return [
-            self.name,
-            tier_list,
-            int(self.data_dictionary["first"]),
-            int(self.data_dictionary["last"]),
-            int(self.data_dictionary["spots"]),
-            self.data_dictionary["exclusions"],
-            parse_image_holds(self.data_dictionary["images"])
-        ]
+        # Parse Image Holds
+        img_holds_raw = self.data_dictionary["images"]
+        parsed_img_holds = []
+        if img_holds_raw:
+            groups = img_holds_raw.split(";")
+            for g in groups:
+                if g:
+                    parsed_img_holds.append(g.split(","))
+
+        return HoldShadedTicket(
+            tiers=tier_list,
+            first_num=int(self.data_dictionary["first"]),
+            last_num=int(self.data_dictionary["last"]),
+            spots=int(self.data_dictionary["spots"]),
+            exclusions=self.data_dictionary["exclusions"],
+            image_holds=parsed_img_holds
+        )
 
 
 def parse_image_holds(images_string):

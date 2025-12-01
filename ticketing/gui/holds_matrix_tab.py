@@ -3,6 +3,7 @@ import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
 from .helpers import create_label_and_field
+from ticketing.ticket_models import HoldMatrixTicket
 
 
 class HoldsMatrixTab(TicketingNotebookTab):
@@ -108,30 +109,22 @@ class HoldsMatrixTab(TicketingNotebookTab):
             self.field_dictionary[key].insert(0, value)
         self.field_dictionary['zeroes'].state(['!selected'])
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
+    def retrieve_data(self) -> HoldMatrixTicket:
+        pattern_str = self.data_dictionary['Pattern']
+        pattern_list = [int(x) for x in pattern_str.split(',')] if pattern_str else []
 
-        Returns:
-            list: A list containing the retrieved data in the format:
-                  [self.name, quantity, pattern]
-        """
-        pattern = [int(x) for x in self.data_dictionary['Pattern'].split(',')]
         filename = self.data_dictionary['Base']
-        if len(filename) > 3:
-            if filename[-3:] != '.ai':
-                filename += '.ai'
-        elif len(filename) == 0:
-            filename = 'base.ai'
-        else:
+        if filename and not filename.endswith('.ai'):
             filename += '.ai'
-        return [
-            self.name,
-            int(self.data_dictionary['Quantity']),
-            pattern,
-            filename,
-            self.data_dictionary['zeroes']
-        ]
+        elif not filename:
+            filename = 'base.ai'
+
+        return HoldMatrixTicket(
+            quantity=int(self.data_dictionary['Quantity']),
+            pattern=pattern_list,
+            base_image=filename,
+            leading_zeroes=self.data_dictionary['zeroes']
+        )
 
     def create_data_dictionary(self):
         """

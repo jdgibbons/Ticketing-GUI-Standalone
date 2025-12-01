@@ -3,6 +3,7 @@ import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
 from .helpers import create_label_and_field
+from ticketing.ticket_models import NonWinnerNumbersTicket
 
 
 class NonWinnersNumbersTab(TicketingNotebookTab):
@@ -139,29 +140,12 @@ class NonWinnersNumbersTab(TicketingNotebookTab):
             self.field_dictionary[key].delete(0, ttk.END)
             self.field_dictionary[key].insert(0, value)
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
-
-        Returns:
-            list: A list containing the retrieved data in the format:
-                  [
-                      self.name,
-                      quantity,
-                      spots,
-                      first,
-                      last,
-                      exclusions,
-                      base
-                  ]
-        """
-
-        return [
-            self.name,
-            int(self.data_dictionary['Quantity']),
-            int(self.data_dictionary['Spots']),
-            int(self.data_dictionary['First']),
-            int(self.data_dictionary['Last']),
-            self.data_dictionary['Exclusions'],
-            self.data_dictionary['Base']
-        ]
+    def retrieve_data(self) -> NonWinnerNumbersTicket:
+        return NonWinnerNumbersTicket(
+            quantity=int(self.data_dictionary['Quantity']),
+            spots=int(self.data_dictionary['Spots']),
+            first_num=int(self.data_dictionary['First']),
+            last_num=int(self.data_dictionary['Last']),
+            exclusions=self.data_dictionary['Exclusions'],
+            base_image=self.data_dictionary['Base']
+        )

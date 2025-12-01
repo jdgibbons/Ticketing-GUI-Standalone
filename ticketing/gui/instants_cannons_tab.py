@@ -2,6 +2,7 @@ import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
 from .helpers import create_label_and_field
+from ticketing.ticket_models import InstantCannonsTicket
 
 
 class InstantsCannonsTab(TicketingNotebookTab):
@@ -82,20 +83,11 @@ class InstantsCannonsTab(TicketingNotebookTab):
             self.field_dictionary[key].delete(0, ttk.END)
             self.field_dictionary[key].insert(0, value)
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields.
-
-        Returns:
-            list: A list containing the retrieved data in the format:
-                  [self.name, quantity, iterations]
-        """
-
-        return [
-            self.name,
-            int(self.data_dictionary['Quantity']),
-            int(self.data_dictionary['Iterations'])
-        ]
+    def retrieve_data(self) -> InstantCannonsTicket:
+        return InstantCannonsTicket(
+            quantity=int(self.data_dictionary['Quantity']),
+            iterations=int(self.data_dictionary['Iterations'])
+        )
 
     def create_data_dictionary(self):
         """

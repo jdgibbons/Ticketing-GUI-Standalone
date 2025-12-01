@@ -1,8 +1,11 @@
 import tkinter as tk
 from tkinter import filedialog
 import ttkbootstrap as ttk
+from typing import Optional
+from ticketing.ticket_models import GameInfo, Ticket, NamesData
 
-from ticketing import game_info as gi
+from ticketing import game_info_gui as gi
+from ticketing.game_registry import get_game_creator
 
 from .result_message_box import ResultMessageBox
 
@@ -12,17 +15,27 @@ from .instants__frame import InstantsFrame
 from .names__frame import NamesFrame
 from .nonwinners__frame import NonwinnersFrame
 from .picks__frame import PicksFrame
-from .helpers import select_game_method
+# from .helpers import select_game_method
 from .shaded_spread_gui import create_gui as shaded_gui
+from ticketing.ticket_models import (
+    # Categories
+    InstantImagesTicket, InstantCannonsTicket, InstantShadedTicket,
+    PickImagesTicket,
+    HoldImagesTicket, HoldCannonsTicket, HoldFlashboardTicket, HoldMatrixTicket,
+    HoldShadedTicket, HoldBallsTicket, HoldBingosTicket,
+    NonWinnerImagesTicket, NonWinnerNumbersTicket
+)
 
 gui_frames = {}
 gui_frame_labels = []
-game_specs = []
-nw_specs = []
-inst_specs = []
-pick_specs = []
-hold_specs = []
-name_specs = []
+
+game_specs: Optional[GameInfo] = None
+nw_specs: Optional[Ticket] = None
+inst_specs: Optional[Ticket] = None
+pick_specs: Optional[Ticket] = None
+hold_specs: Optional[Ticket] = None
+name_specs: Optional[NamesData] = None
+
 nw_type = ""
 inst_type = ""
 pick_type = ""
@@ -137,92 +150,105 @@ def create_frame(root, frame_type, frame_text, row, column):
     gui_frame_labels.append(frame_text)
 
 
+def get_type_from_object(obj) -> str:
+    """
+    Maps Ticket Objects to the string identifiers expected by select_game_method.
+    Returns strings like 'Images', 'Numbers', 'Cannons', 'Bingos', etc.
+    """
+    # NonWinners
+    if isinstance(obj, NonWinnerImagesTicket): return "Images"
+    if isinstance(obj, NonWinnerNumbersTicket): return "Numbers"
+
+    # Instants
+    if isinstance(obj, InstantImagesTicket): return "Images"
+    if isinstance(obj, InstantCannonsTicket): return "Cannons"
+    if isinstance(obj, InstantShadedTicket): return "Shaded"
+
+    # Picks
+    if isinstance(obj, PickImagesTicket): return "Images"
+
+    # Holds
+    if isinstance(obj, HoldImagesTicket): return "Images"
+    if isinstance(obj, HoldCannonsTicket): return "Cannons"
+    if isinstance(obj, HoldFlashboardTicket): return "Flashboard"
+    if isinstance(obj, HoldMatrixTicket): return "Matrix"
+    if isinstance(obj, HoldShadedTicket): return "Shaded"
+    if isinstance(obj, HoldBallsTicket): return "Balls"
+    if isinstance(obj, HoldBingosTicket): return "Bingos"
+
+    return "Unknown"
+
+
 def submit_data(root):
     """
-    Processes the provided root object to validate, manipulate, and manage game
-    specifications and run the appropriate game creation logic based on the provided
-    specifications.
-
-    :param root: The root object that provides the necessary initial data, usually
-        representing a GUI structure or a configuration source.
-    :return: None
-    :raises ValueError: May raise if data validation or processing encounters issues.
-
-    Detailed Steps:
-    1. Validates the input data through `validate_data`.
-    2. Retrieves game data if validation passes.
-    3. Extracts type specifications for game parameters like non-winners, instant
-       winners, picks, and holds.
-    4. Handles debugging to display initial information based on global DEBUG variable.
-    5. Performs verification on specifications and, if successful, re-inserts processed
-       type information into corresponding global lists.
-    6. Handles complex cases for "Bingos" and "Balls" hold types by adjusting types
-       based on additional specifications or flags.
-    7. Selects the appropriate game creation method dynamically based on game type
-       and calls it with processed specifications.
-    8. Displays results or error messages depending on the outcome.
+    Orchestrates the data collection and game generation.
     """
-    global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, \
-        nw_type, inst_type, pick_type, hold_type, output_folder
-    valley = validate_data(root)
-    game_data = []
-    if valley:
-        game_data = retrieve_data()
-    nw_type = nw_specs.pop(0)
-    inst_type = inst_specs.pop(0)
-    pick_type = pick_specs.pop(0)
-    hold_type = hold_specs.pop(0)
+    global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder, \
+        hold_type, inst_type, pick_type, nw_type
 
+    # 1. Validate Data
+    if not validate_data(root):
+        return  # validate_data handles the error popup
+
+    # 2. Retrieve Data (These are now Objects, not lists!)
+    # Note: retrieve_data() updates the global variables automatically,
+    # but we assign them here for clarity.
+    data_bundle = retrieve_data()
+    game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs = data_bundle
+
+    # 3. Debug Printing
+    # We use the helper to get readable strings because we can't just pop index 0 anymore.
     if DEBUG:
-        print_initial_data_gathering(game_data, hold_type, inst_type, nw_type, pick_type)
+        nw_type_str = get_type_from_object(nw_specs)
+        inst_type_str = get_type_from_object(inst_specs)
+        pick_type_str = get_type_from_object(pick_specs)
+        hold_type_str = get_type_from_object(hold_specs)
+        print_initial_data_gathering(data_bundle, hold_type_str, inst_type_str, nw_type_str, pick_type_str)
+
+    # 4. Verify Specifications (Math Checks)
     proceed, result = verify_all_specifications()
 
-    if proceed:
-        inst_specs.insert(0, inst_type[:1])
-        nw_specs.insert(0, nw_type[:1])
-        pick_specs.insert(0, pick_type[:1])
-        hold_specs.insert(0, hold_type[:1])
+    if not proceed:
+        ResultMessageBox(root, "Verification Failed", result)
+        return
 
-        # # # The following block of code is a little messy, but it's to account for
-        # # # special cases that require additional processing. There will probably
-        # # # be additional special cases in the future, so I'm leaving it in for now.
+    # 5. Select the Game Method
+    # We pass the full objects. The logic for "Bingos -> BBalls" is now handled inside this function.
+    # We also pass game_specs as requested for future logic (e.g. checking Window Structure).
+    create_method = get_game_creator(game_specs, nw_specs, inst_specs, pick_specs, hold_specs)
 
-        # If the holds are bingos but the representation will be bingo ball images,
-        # set the hold type to BBalls and remove the 'BB' list element. (The hold
-        # type for actual bingo balls is "Balls". This is confusing, and I should find
-        # another way to represent this type of situation.)
-        if hold_type == "Bingos" and 'BB' in hold_specs:
-            hold_type = "BBalls"
-            hold_specs.remove('BB')
-        # If the holds are bingo balls, check if the images or the numbers will be used.
-        # The gist of this is that the methods used to generate the winners are the same,
-        # but, if the 'non-image' checkbox was checked, the 'balls' will be represented
-        # as numbers rather than images. The hold type will be changed to reflect that.
-        # (The boolean value in the last element of the third list is the item of interest
-        # here.) Either way, delete the last element of the third list.
-        elif hold_type == "Balls":
-            if hold_specs[2][5]:
-                hold_type = "BNumbers"
-            hold_specs[2].pop()
+    if create_method is None:
+        # Generate a readable error message describing the configuration
+        config_desc = (f"NW: {type(nw_specs).__name__}\n"
+                       f"INST: {type(inst_specs).__name__}\n"
+                       f"PICK: {type(pick_specs).__name__}\n"
+                       f"HOLD: {type(hold_specs).__name__}")
 
-        # Call the select_game_method, which will return a reference to the appropriate
-        # create_game method from the various ticket creation modules. For the moment,
-        # this is determined with the ticket types, but it could be updated to take the
-        # window structure into account as well.
-        create_method = select_game_method(nw_type[:1].upper(), inst_type[:1].upper(),
-                                           pick_type[:1].upper(), hold_type[:2].upper())
-        # If the method is not found, display an error message.
-        if create_method is None:
-            error_message = "Invalid game type selected.\n"
-            error_message += (f"A game that uses nonwinner '{nw_type}', instant winners '{inst_type}',"
-                              f" pick '{pick_type}', and {hold_type} hold tickets is not yet supported."
-                              f" You need to tell John to add it to the program. Thanks! :-).")
-            ResultMessageBox(root, "Error", error_message)
-            return
+        ResultMessageBox(root, "Error", f"No game engine found for configuration:\n{config_desc}")
+        return
 
-        create_method([game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder])
+    # 7. Execute Creation
+    # CRITICAL NOTE: We are now passing OBJECTS, not LISTS.
+    # Your 'create_method' (the backend logic) must be updated to handle these objects,
+    # OR we need an adapter here to convert them back to lists.
+    # Assuming we are moving forward with Objects:
+    try:
+        result_msg = create_method([
+            game_specs,
+            nw_specs,
+            inst_specs,
+            pick_specs,
+            hold_specs,
+            name_specs,
+            output_folder
+        ])
 
-    ResultMessageBox(root, "Results", result)
+        ResultMessageBox(root, "Results", str(result_msg))
+    except Exception as e:
+        # Catch unexpected crashes (likely due to backend not expecting Objects yet)
+        if DEBUG:
+            raise e
+        ResultMessageBox(root, "Execution Error", f"An error occurred during generation:\n{str(e)}")
 
 
 def print_initial_data_gathering(gamey_data, holding_type, insta_type, now_type, picky_type):
@@ -252,61 +278,30 @@ def print_initial_data_gathering(gamey_data, holding_type, insta_type, now_type,
 
 def verify_all_specifications():
     """
-    Verifies all specifications for a gaming environment by checking instants, picks, and holds
-    based on their respective types and specifications. The method first processes various types
-    to ensure the correct number of tickets will be used to verify expected vs. actual ticket
-    counts. It utilizes global parameters and passes them to a validation method. Outputs the
-    results and whether the process should proceed.
-
-    :return: Tuple containing a boolean `proceed` flag and the result of the
-        parameter checks.
-    :rtype: Tuple[bool, Any]
+    Verifies all specifications for a gaming environment using Data Class objects.
     """
-    global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, \
-        inst_type, pick_type, hold_type, nw_type
-    # Check the instants' type, grab the appropriate number of tickets, and store it in a list.
-    inst_check = []
-    if inst_type == "Images":
-        for inst in inst_specs[0]:
-            inst_check.append(inst[0])
-    elif inst_type == "Cannons":
-        inst_check = [inst_specs[0]]
-    elif inst_type == "Shaded":
-        inst_check = []
-        for inst in inst_specs[0]:
-            inst_check.append(len(inst[0]))
-        if len(inst_check) == 0:
-            inst_check = [0]
-    # Check the picks' type, grab the appropriate number of tickets, and store it in a list.
-    pick_check = []
-    if pick_type == "Images":
-        for pick in pick_specs[0]:
-            pick_check.append(pick[0])
-    # Check the holds' type, grab the appropriate number of tickets, and store it in a list.'
-    hold_check = []
-    if hold_type in ["Images"]:
-        hold_check = sum(hold_specs[0])
-    elif hold_type in ["Cannons", "Flashboard", "Matrix"]:
-        hold_check = hold_specs[0]
-    elif hold_type == "Shaded":
-        hold_check = 0
-        for hold in hold_specs[0]:
-            hold_check += len(hold[0])
-        if len(hold_specs[5]) > 0:
-            for hold_spec in hold_specs[5]:
-                hold_check += int(hold_spec[1])
-    elif hold_type == "Balls":
-        hold_check = hold_specs[0][0] + hold_specs[2][0]
-    elif hold_type == "Bingos":
-        hold_check = 0
-        for i in range(4):
-            hold_check += sum(hold_specs[i])
-        for hold in hold_specs[4]:
-            hold_check += hold[0]
+    global game_specs, nw_specs, inst_specs, pick_specs, hold_specs
 
-    # Send the values off to the validation method to verify expected vs. actual ticket counts.
-    proceed, result = gi.check_game_parameters(game_specs, nw_specs, [inst_check], [pick_check],
-                                               hold_check, True, True)
+    # --- 1. CALCULATE TOTALS ---
+    # We simply ask the objects for their calculated totals.
+    # We wrap them in lists (e.g. [inst_total]) because that is
+    # what gi.check_game_parameters currently expects.
+
+    inst_check = [inst_specs.total_quantity]
+    pick_check = [pick_specs.total_quantity]
+    hold_check = hold_specs.total_quantity
+
+    # --- 2. VALIDATE ---
+    proceed, result = gi.check_game_parameters(
+        game_specs,
+        nw_specs,
+        [inst_check],
+        [pick_check],
+        hold_check,
+        True,
+        True
+    )
+
     print(result)
     print(proceed)
     return proceed, result

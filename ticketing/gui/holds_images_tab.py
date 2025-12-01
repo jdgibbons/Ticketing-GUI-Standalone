@@ -1,6 +1,7 @@
 import ttkbootstrap as ttk
 
 from .ticketing__notebook_tab import TicketingNotebookTab
+from ticketing.ticket_models import HoldImagesTicket
 
 
 class HoldsImagesTab(TicketingNotebookTab):
@@ -101,25 +102,17 @@ class HoldsImagesTab(TicketingNotebookTab):
             self.field_dictionary[label].delete(0, ttk.END)
             self.field_dictionary[label].insert(0, "0")
 
-    def retrieve_data(self) -> list:
-        """
-        Retrieves and processes data from input fields. It retrieves only non-zero
-        values and will stop processing when it encounters a zero.
-
-        Returns:
-            list: A list containing the retrieved data in the format:
-                  [self.name, type_list]
-                  where type_list is a list of quantities for each image type.
-        """
+    def retrieve_data(self) -> HoldImagesTicket:
         type_list = []
-        for label in self.labels:
-            if int(self.data_dictionary[label]) != 0:
-                type_list.append(int(self.data_dictionary[label]))
+        for i in range(16):
+            key = f'type{str(i + 1).zfill(2)}'
+            val = int(self.data_dictionary[key])
+            if val != 0:
+                type_list.append(val)
             else:
                 break
-        if len(type_list) == 0:
+
+        if not type_list:
             type_list.append(0)
-        return [
-            self.name,
-            type_list
-        ]
+
+        return HoldImagesTicket(quantities=type_list)
