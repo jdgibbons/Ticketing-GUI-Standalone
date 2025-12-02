@@ -42,7 +42,7 @@ pick_type = ""
 hold_type = ""
 
 output_folder = ''
-DEBUG = True
+DEBUG = False
 
 
 def create_gui():
@@ -206,10 +206,10 @@ def submit_data(root):
         print_initial_data_gathering(data_bundle, hold_type_str, inst_type_str, nw_type_str, pick_type_str)
 
     # 4. Verify Specifications (Math Checks)
-    proceed, result = verify_all_specifications()
+    proceed, verification_output = verify_all_specifications()
 
     if not proceed:
-        ResultMessageBox(root, "Verification Failed", result)
+        ResultMessageBox(root, "Verification Failed", verification_output)
         return
 
     # 5. Select the Game Method
@@ -233,7 +233,7 @@ def submit_data(root):
     # OR we need an adapter here to convert them back to lists.
     # Assuming we are moving forward with Objects:
     try:
-        result_msg = create_method([
+        creation_output = create_method([
             game_specs,
             nw_specs,
             inst_specs,
@@ -242,8 +242,8 @@ def submit_data(root):
             name_specs,
             output_folder
         ])
-
-        ResultMessageBox(root, "Results", str(result_msg))
+        final_message = f"{verification_output}\n\n{'-' * 30}\n\n{creation_output}"
+        ResultMessageBox(root, "Results", str(final_message))
     except Exception as e:
         # Catch unexpected crashes (likely due to backend not expecting Objects yet)
         if DEBUG:

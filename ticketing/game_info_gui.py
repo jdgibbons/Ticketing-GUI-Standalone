@@ -289,7 +289,7 @@ def check_game_parameters(sheet, nws, insts, picks, holds, verbose=False, gui=Fa
                 f"---------------------------\n"
                 f"Tickets Per Up: {tickets_per_up}\n"
                 f"Total Generated: {total_generated}\n"
-                f"Total Expected (Sheets * Cap): {total_expected}\n"
+                f"Total Expected (Sheets * Capacity): {total_expected}\n"
             )
         else:
             output_string = (

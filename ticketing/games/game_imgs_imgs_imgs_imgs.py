@@ -268,7 +268,7 @@ def create_game(data_bundle):
 
     mixer = True
     # Logic from original: disable mixer for specific capacities
-    if capacity in [113, 240, 396]:
+    if game_info.window_structure in ['C', 'NC', 'S', 'NS']:
         mixer = False
 
     game_stacks = tio.create_game_stacks(tickets, ups, sheets, capacity, mixer, subflats)
@@ -282,4 +282,4 @@ def create_game(data_bundle):
             partname, filename, cd_positions, inst_specs.cd_tier, output_folder
         )
 
-    return f"Successfully created {len(tickets)} tickets."
+    return f"Successfully created {len(tickets) * ups} tickets."
