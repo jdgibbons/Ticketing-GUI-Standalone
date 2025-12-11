@@ -5,6 +5,8 @@ import random as rn
 
 from .bingo_face_list import BingoFaceList
 
+total_rejects = 0
+
 
 def create_pseudo_faces(face_list: BingoFaceList, amt: int, frees: int, size: int, csv_rows: int,
                         staggered: bool = True) -> list[list[str | list[str]]]:
@@ -35,6 +37,7 @@ def create_pseudo_faces(face_list: BingoFaceList, amt: int, frees: int, size: in
     :return: list of pseudo bingo faces
     :rtype: list[list[str | list[str]]]
     """
+    global total_rejects
     d_rejects = 0  # List to hold created tickets
     temp_faces = []
     # KEEPING THIS BECAUSE I'LL NEED THE EXPLANATION LATER ON.
@@ -78,6 +81,7 @@ def create_pseudo_faces(face_list: BingoFaceList, amt: int, frees: int, size: in
         else:
             d_rejects += 1
     print('')
+    total_rejects += d_rejects
     return temp_faces
 
 
@@ -273,851 +277,449 @@ def print_usable_face_info_to_screen(faces: BingoFaceList, size=0):
     :type size: int
     :return: None
     """
+    global total_rejects
     indent = ''
     for i in range(size):
         indent += '  '
     print(f"{indent}Usable faces array contains {faces.length()} members.")
     print(f"{indent}There are {faces.calculate_remaining_bingo_lines()} discrete bingo lines remaining.")
-    print(f"{indent}{faces.number_of_paths_taken()} discrete winning paths have been taken.\n")
+    print(f"{indent}{faces.number_of_paths_taken()} discrete winning paths have been taken.")
+    print(f"{indent}{total_rejects} faces have been rejected due to duplicate winning paths.\n")
 
 
-def create_all_bingo_permutations_without_reset(bingo_amts: list[list[int] | list[list[int]] | bool | str],
-                                                perms, csv_rows: int, v_size=False,
-                                                verbose=False) -> list[list[str | list[str]]] | None:
+def create_all_bingo_permutations_without_reset(bingo_amts: list, perms: int, csv_rows: int,
+                                                v_size=False, verbose=False) -> list:
     """
-    This method creates the total number of tickets needed for all permutations for each ticket specification based on
-    the number of possible winning paths generated (by combining its free, double, and single spaces), before moving on
-    to the next most-demanding ticket type. This differs from the traditional method of creating all the tickets for a
-    given permutation before moving on to the next. Doing this makes it easier to find less demanding tickets as the
-    method progresses and has been shown to provide a better chance of generating all the desired tickets.
+    Generates bingo permutations WITHOUT resetting the face list.
 
-    :param bingo_amts: list containing the number of bingo faces needed for each type of face: lines and free spaces
-    :type bingo_amts: list[list[int] | | list[list[int]] | bool | str]
-    :param perms: the number of permutations needed
-    :type perms: int
-    :param csv_rows: number of rows needed for the csv file
-    :type csv_rows: int
-    :param v_size: Should the standard or extended usable faces be read?
-    :type v_size: bool
-    :param verbose: should status info be printed to the screen
-    :type verbose: bool
-    :return list of info for bingo faces
-    :rtype: list[list[str | list[str]]]
+    CONCEPT:
+    We have a single 'deck' of bingo faces (usable9000.csv). We must generate
+    multiple permutations of tickets without ever reusing a face across ANY
+    permutation.
+
+    STRATEGY:
+    1. Organize tickets by complexity (Highest winning paths -> Lowest).
+    2. Generate the specific ticket type for ALL permutations at once.
+    3. Store them in temporary bins.
+    4. Flatten the bins into the final list at the end.
     """
-    sloes = ['f2d2', 'f2d1', 'f1d2', 'f1d1', 'f0d2', 'f0d1', 'f0d3']
-    # Create and shuffle a new list of usable faces
+    global total_rejects
+
+    # --- 1. SETUP & INITIALIZATION ---
+
+    # Initialize the face list OUTSIDE the main loop.
+    # This state persists for the entire function execution.
+    # Once a face is used, it is gone forever.
     face_list = BingoFaceList(v_size)
     face_list.shuffle_usable_faces()
-    numbs = []
-    for i in range(5):
-        numbs.append(bingo_amts[i])
 
-    # Break up the bingo requirements by type (single- or double-lines staggered or not, plus either-ors)
-    [q_nonstaggered_double_holds, q_staggered_double_holds,
-     q_nonstaggered_single_holds, q_staggered_single_holds, q_single_line_either_ors] = numbs
+    # List Unpacking:
+    # 'bingo_amts' contains 5 sub-lists. We unpack them into named variables for clarity.
+    # Example: q_ns_double might be [90, 25, 10, 5] meaning:
+    # 90 tickets with 0 free spaces, 25 with 1 free, 10 with 2 free, etc.
+    [q_ns_double, q_stag_double, q_ns_single, q_stag_single, q_sloe] = bingo_amts[0:5]
+
     if verbose:
         print_usable_face_info_to_screen(face_list)
-        print(f"----------> Creating {perms} permutations without resetting the usable faces array. <----------")
+        print(f"----------> Creating {perms} perms without resetting faces. <----------")
 
-    # Create lists to hold the faces for each type and add a sublist for each permutation.
-    nonstaggered_double_holds = [[] for _ in range(perms)]
-    staggered_double_holds = [[] for _ in range(perms)]
-    nonstaggered_single_holds = [[] for _ in range(perms)]
-    staggered_single_holds = [[] for _ in range(perms)]
-    single_line_either_ors = [{} for _ in range(perms)]
+    # --- 2. STORAGE BINS (The "Buckets") ---
 
-    # Create a dictionary to hold faces for either/ors, using their parameters
-    # to create the keys: an either/or with 1 free space and 2 either/or spots
-    # would be referred to by the key 'sloef1d2'.
+    # We need a place to hold the tickets before we organize them.
+    # Since we generate "All Permutation 1 Double-Lines", then "All Permutation 2 Double-Lines",
+    # we need complex storage to keep them sorted until the end.
+
+    # This creates a list of empty lists, one for each permutation.
+    permutations = [[] for _ in range(perms)]
+
+    # 3D List Construction for Standard Tickets:
+    # Structure: [Permutation_Index] -> [Free_Space_Count_Index] -> [List_Of_Tickets]
+    # We need this because we need to know exactly where to put a ticket based on
+    # which permutation it belongs to and how many free spaces it has.
+    # We use list comprehensions to instantiate fresh lists for every slot.
+    ns_double_holds = [[[] for _ in range(4)] for _ in range(perms)]
+    stag_double_holds = [[[] for _ in range(4)] for _ in range(perms)]
+    ns_single_holds = [[[] for _ in range(4)] for _ in range(perms)]
+    stag_single_holds = [[[] for _ in range(4)] for _ in range(perms)]
+
+    # Dictionary Storage for Either-Or Tickets.
+    # Structure: [Permutation_Index][Key_String] -> List_of_Tickets
+    sloe_holds = [{} for _ in range(perms)]
     q_either_ors = {}
-    if q_single_line_either_ors[0][0] != 0:
-        for sloe in q_single_line_either_ors:
-            q_either_ors[f"sloef{sloe[1]}d{sloe[2]}"] = sloe
 
-    # Create the permutations list and a list for each permutation. Also, create a list in each
-    # for the number of possible free spots (0 - 3). The index represents the number of free spots,
-    # and the list will contain all the tickets for that slot.
-    permutations = []
+    # Pre-calculate the Either-Or keys.
+    # Example Key: "sloef2d2" (Single Line, Either-Or, Free:2, Doubles:2)
+    if q_sloe and q_sloe[0][0] != 0:
+        for sloe in q_sloe:
+            # sloe structure is [Quantity, Frees, Doubles]
+            key = f"sloef{sloe[1]}d{sloe[2]}"
+            q_either_ors[key] = sloe
+            # Initialize the list for this key in every permutation bucket
+            for i in range(perms):
+                sloe_holds[i][key] = []
+
+    # --- 3. THE PROCESSING QUEUE (The "Work Order") ---
+
+    # CRITICAL: Resource Management --> Processing Order Matters!
+    # We have a finite number of bingo lines. Tickets with the highest number of possible winning
+    # paths must be processed first. This means that tickets with free or double spaces will have
+    # higher priority than tickets with only single spaces, since free spots are the equivalent of
+    # having all 15 possible values in that position. The possibility of finding a ticket with that
+    # many winning paths becomes more remote as tickets are added to the list.
+
+    # There are some situations that with eithe/or tickets that should never be processed. Any
+    # ticket that doesn't contain both single and double spaces should be handled by one of the
+    # single or double, staggered or non-staggered tiers. I'm not checking for it yet, but I will
+    # add it in the future.
+
+    # TUPLE FORMAT:
+    # ('STD', Storage_Ref, Exact_Qty_Integer, Free_Spaces, Lines, Staggered_Bool, Description)
+    # ('SLOE', Exact_Qty_Integer, Key_String, Description)
+
+    # The index of the quantity lists indicates the number of free spaces, so we can use it to
+    # determine which tier to process this ticket in. We then pass the value at that index to the
+    # factory function to generate the tickets.
+    processing_queue = [
+        # --- TIER 1: Double-Line, 3 Free Spaces (13,500 winning paths) ---
+        # Note: 'q_ns_double[3]' extracts the specific integer count needed for 3 free spaces.
+        # We pass the integer, not the list, to the loop.
+        ('STD', ns_double_holds, q_ns_double[3], 3, 2, False, "non-staggered double"),
+        ('STD', stag_double_holds, q_stag_double[3], 3, 2, True, "staggered double"),
+
+        # --- TIER 2: Single-Line, 3 Free Spaces (3,375 winning paths) ---
+        ('STD', ns_single_holds, q_ns_single[3], 3, 1, False, "non-staggered single"),
+        ('STD', stag_single_holds, q_stag_single[3], 3, 1, True, "staggered single"),
+
+        # --- TIER 3: Double-Line, 2 Free Spaces (1,800 winning paths) ---
+        ('STD', ns_double_holds, q_ns_double[2], 2, 2, False, "non-staggered double"),
+        ('STD', stag_double_holds, q_stag_double[2], 2, 2, True, "staggered double"),
+
+        # TUPLE FORMAT FOR SLOE (Either-Or):
+        # ('SLOE', Quantity_Integer, Key_String, Description)
+
+        # --- TIER 4: Interleaved Either-Ors, 2 frees; 2 doubles (900 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef2d2', [0])[0], 'sloef2d2', "2 free, 2 either-or"),
+
+        # --- TIER 5: Interleaved Either-Ors, 2 frees; 1 double (450 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef2d1', [0])[0], 'sloef2d1', "2 free, 1 either-or"),
+
+        # --- TIER 6: Double-Line, 1 Free Space (240 winning paths) ---
+        ('STD', ns_double_holds, q_ns_double[1], 1, 2, False, "non-staggered double"),
+        ('STD', stag_double_holds, q_stag_double[1], 1, 2, True, "staggered double"),
+
+        # --- TIER 7: Single-Line, 2 Free Spaces (225 winning paths) ---
+        ('STD', ns_single_holds, q_ns_single[2], 2, 1, False, "non-staggered single"),
+        ('STD', stag_single_holds, q_stag_single[2], 2, 1, True, "staggered single"),  # Single line, 2 frees
+
+        # --- TIER 8: Interleaved Either-Ors, 1 free, 2 doubles (60 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef1d2', [0])[0], 'sloef1d2', "1 free, 2 either-or"),
+
+        # --- TIER 9: Double-Line, 0 Free Spaces (32 winning paths) ---
+        ('STD', ns_double_holds, q_ns_double[0], 0, 2, False, "non-staggered double"),
+        ('STD', stag_double_holds, q_stag_double[0], 0, 2, True, "staggered double"),
+
+        # --- TIER 10: Interleaved Either-Ors, 1 free, 1 double (30 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef1d1', [0])[0], 'sloef1d1', "1 free, 1 either-or"),
+
+        # --- TIER 11: Single-Line, 1 Free Space (15 winning paths) ---
+        ('STD', stag_single_holds, q_stag_single[1], 1, 1, True, "staggered single"),  # Single line, 1 free
+        ('STD', ns_single_holds, q_ns_single[1], 1, 1, False, "non-staggered single"),  # Single line, 1 free
+
+        # --- TIER 12: Interleaved Either-Ors, 0 frees, 3 doubles (8 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef0d3', [0])[0], 'sloef0d3', "0 free, 3 either-or"),
+
+        # --- TIER 13: Interleaved Either-Ors, 0 frees, 2 doubles (4 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef0d2', [0])[0], 'sloef0d2', "0 free, 2 either-or"),
+
+        # --- TIER 14: Interleaved Either-Ors, 0 frees, 1 double (2 winning paths) ---
+        ('SLOE', q_either_ors.get('sloef0d1', [0])[0], 'sloef0d1', "0 free, 1 either-or"),
+
+        # --- TIER 15: Single-Line, 0 Free Spaces (1 winning path) ---
+        ('STD', ns_single_holds, q_ns_single[0], 0, 1, False, "non-staggered single"),
+        ('STD', stag_single_holds, q_stag_single[0], 0, 1, True, "staggered single"),
+    ]
+
+    # --- 4. THE EXECUTION ENGINE ---
+
+    # We iterate through the job queue. Each 'job' represents a specific ticket type.
+    for job in processing_queue:
+        job_type = job[0]  # Identifies if this is 'STD' or 'SLOE'
+
+        # === HANDLER FOR STANDARD TICKETS ===
+        if job_type == 'STD':
+            # Unpack the tuple. 'target_store' is a reference to one of our big lists (e.g. ns_double_holds).
+            # 'qty_needed' is the value we extracted from the config list earlier.
+            _, target_store, qty_needed, free_space_idx, lines, staggered, desc = job
+
+            # Since qty_needed is an explicit integer (e.g., 90, 25, 5), we use it directly.
+            if qty_needed > 0:
+                if verbose:
+                    print(f"  Creating {perms} permutations of {desc} with {free_space_idx} free spaces.")
+
+                # Inner Loop: We must generate this specific ticket type for *every* permutation
+                # before moving to the next ticket type in the queue.
+                for i in range(perms):
+                    face_list.shuffle_usable_faces()
+                    if verbose: print(f"    Perm #{i + 1}: Creating {qty_needed} tickets.")
+
+                    # Call the Factory Function to get new faces
+                    temp_list = create_pseudo_faces(face_list, qty_needed, free_space_idx, lines, csv_rows, staggered)
+
+                    # Error Handling: The factory returns [None, ErrorMsg] if it runs out of faces.
+                    if temp_list[0] is None:
+                        return temp_list
+
+                    # Storage:
+                    # We access the specific bucket: [Permutation_i] -> [Free_Space_Count]
+                    target_store[i][free_space_idx].append(temp_list)
+
+                    if verbose:
+                        print('    Done.')
+                        print_usable_face_info_to_screen(face_list, 2)
+                if verbose: print('  Done.')
+
+        # === HANDLER FOR EITHER-OR TICKETS ===
+        elif job_type == 'SLOE':
+            # Handle Either-Or tickets (Same logic, different factory function)
+            _, qty_needed, key, desc = job
+
+            # Check if the quantity needed is greater than 0 and the key exists in the dictionary.
+            # I have no reason to believe that this will ever be false, but just in case ...
+            if qty_needed > 0 and key in q_either_ors:
+                params = q_either_ors[key]  # [qty, frees, doubles]
+
+                if verbose:
+                    print(f"  Creating {perms} permutations of {desc}.")
+
+                # Inner Loop: We must generate this specific ticket type for *every* permutation
+                # before moving to the next ticket type in the queue.
+                for i in range(perms):
+                    face_list.shuffle_usable_faces()
+                    if verbose:
+                        print(f"    Perm #{i + 1}: Creating {qty_needed} tickets.")
+
+                    # Call the Factory Function to get new faces
+                    temp_list = create_single_line_either_or_faces(face_list, params)
+
+                    if temp_list[0] is None: return temp_list
+
+                    # Storage: Use the dictionary key to access the specific bucket: [Permutation_i] -> [Key]
+                    sloe_holds[i][key] = temp_list
+
+                    if verbose:
+                        print('    Done.')
+                        print_usable_face_info_to_screen(face_list, 2)
+                if verbose: print('  Done.')
+
+    # --- 5. FLATTEN RESULTS ---
+    # At this point, our tickets are scattered across 'ns_double_holds', 'sloe_holds', etc.
+    # We need to gather them all into the single 'permutations' list, respecting the
+    # specific export order (usually the greatest number of free spaces first).
     for i in range(perms):
-        permutations.append([])
-        nonstaggered_double_holds[i] = [[] for _ in range(4)]
-        staggered_double_holds[i] = [[] for _ in range(4)]
-        nonstaggered_single_holds[i] = [[] for _ in range(4)]
-        staggered_single_holds[i] = [[] for _ in range(4)]
-        for eeyore in q_either_ors:
-            single_line_either_ors[i][eeyore] = []
+        # 1. Flatten Either-Ors
+        sloe_keys = ['sloef2d2', 'sloef2d1', 'sloef1d2', 'sloef1d1', 'sloef0d3', 'sloef0d2', 'sloef0d1']
+        for key in sloe_keys:
+            if key in sloe_holds[i] and sloe_holds[i][key]:
+                permutations[i].extend(sloe_holds[i][key])
 
-    # BEGIN TICKET GENERATION (in order of the number of possible winning paths)
-    # Two-line tickets with three-nonstaggered free spots (13500 winning paths)
-    if q_nonstaggered_double_holds[3] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, double-line hold with three free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[3]} non-staggered, "
-                      f"double-line holds with three free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_double_holds[3], 3, 2, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_double_holds[i][3].append(temp_list)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
+        # 2. Flatten Standard Tickets
+        # We group the storage lists...
+        groups = [ns_double_holds[i], stag_double_holds[i], ns_single_holds[i], stag_single_holds[i]]
+        for group in groups:
+            # ...and iterate them in Reverse.
+            # 'group' contains [[0_free], [1_free], [2_free], [3_free]].
+            # reversed() ensures we add the 3-free tickets to the final list before the 0-free tickets.
+            for free_space_list in reversed(group):
+                for batch in free_space_list:
+                    permutations[i].extend(batch)
 
-    # Two-line tickets with three-staggered free spots (13500 winning paths)
-    if q_staggered_double_holds[3] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, double-line hold with three free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[3]} staggered, double-line "
-                      f"holds with three free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_double_holds[3], 3, 2, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_double_holds[i][3].append(temp_list)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # One-line tickets with three-nonstaggered free spots (3375 winning paths)
-    if q_nonstaggered_single_holds[3] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, single-line hold with three free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[3]} staggered, single-line "
-                      f"tickets with three free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[3],
-                                            3, 1, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_single_holds[i][3].append(temp_list)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Two-line tickets with two-nonstaggered free spots (1800 winning paths)
-    if q_nonstaggered_double_holds[2] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, double line hold with two free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[2]} non-staggered, double-line "
-                      f"tickets with two free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_double_holds[2], 2, 2, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_double_holds[i][2].append(temp_list)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Two-line tickets with two-staggered free spots (1800 winning paths)
-    if q_staggered_double_holds[2] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, double line hold with two free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[2]} staggered, double-line "
-                      f"tickets with two free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_double_holds[2], 2, 2, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_double_holds[i][2].append(temp_list)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with two free spaces and two either/or spots (900 winning paths)
-    if 'sloef2d2' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with two free and two either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef2d2'][0]} single-line "
-                      f"tickets with two free spaces and two either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef2d2'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef2d2'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with two free spaces and two either/or spots (450 winning paths)
-    if 'sloef2d1' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with two free and one either/or space.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef2d1'][0]} single-line "
-                      f"tickets with two free spaces and two either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef2d1'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef2d1'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Two-line tickets with one nonstaggered free spot (240 winning paths)
-    if q_nonstaggered_double_holds[1] > 0:
-        face_list.shuffle_usable_faces()
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, double line hold with one free space.")
-        for i in range(perms):
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[1]} non-staggered, double-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_double_holds[1], 1, 2, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_double_holds[i][1].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Two-line tickets with one staggered free spot (240 winning paths)
-    if q_staggered_double_holds[1] > 0:
-        face_list.shuffle_usable_faces()
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, double line hold with one free space.")
-        for i in range(perms):
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[1]} non-staggered, double-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_double_holds[1], 1, 2, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_double_holds[i][1].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line tickets with two-nonstaggered free spots (225 winning paths)
-    if q_nonstaggered_single_holds[2] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of nonstaggered, single-line hold with two free space.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[2]} nonstaggered, single-line "
-                      f"tickets with two free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[2], 2, 1, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_single_holds[i][2].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line tickets with two staggered free spots (225 winning paths)
-    if q_staggered_single_holds[2] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, single-line hold with two free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[2]} staggered, single-line "
-                      f"tickets with two free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_single_holds[2], 2, 1, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_single_holds[i][2].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Double-line tickets with no free spaces. (Nonstaggered, but that's irrelevant.) (32 winning paths)
-    if q_nonstaggered_double_holds[0] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of nonstaggered, double-line hold with no free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[0]} nonstaggered, double-line "
-                      f"tickets with no free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_double_holds[0], 0, 2, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_double_holds[i][0].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with one free space and two either/or spot (60 winning paths)
-    if 'sloef1d2' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with one free and two either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef1d2'][0]} single-line "
-                      f"tickets with two free spaces and two either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef1d2'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef1d2'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Double-line tickets with no free spaces. (Staggered, but that's irrelevant.) (32 winning paths)
-    if q_staggered_double_holds[0] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, double-line hold with no free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[0]} staggered, double-line "
-                      f"tickets with no free spaces.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_double_holds[0], 0, 2, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_double_holds[i][0].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line tickets with one staggered free space. (15 winning paths)
-    if q_staggered_single_holds[1] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of staggered, single-line hold with one free space.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[1]} staggered, single-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_single_holds[1],
-                                            1, 1, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_single_holds[i][1].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line tickets with one nonstaggered free space. (15 winning paths)
-    if q_nonstaggered_single_holds[1] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, single-line hold with one free space.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[1]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[1], 1, 1, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_single_holds[i][1].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with one free space and one either/or spot (15 winning paths)
-    if 'sloef1d1' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with one free and one either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef1d1'][0]} single-line "
-                      f"tickets with no free spaces and one either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef1d1'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef1d1'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with zero free spaces and three either/or spot (8 winning paths)
-    if 'sloef0d3' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with zero free and two either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d3'][0]} single-line "
-                      f"tickets with no free spaces and one either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef0d3'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef0d3'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with zero free spaces and two either/or spot (4 winning paths)
-    if 'sloef0d2' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with zero free and two either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d2'][0]} single-line "
-                      f"tickets with no free spaces and one either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef0d2'])
-            if temp_list[0] is None:
-                return temp_list
-            single_line_either_ors[i]['sloef0d2'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line ticket with zero free spaces and one either/or spot (2 winning paths)
-    if 'sloef0d1' in q_either_ors:
-        if verbose:
-            print(f"  Creating {perms} permutations of single-line hold with one free and one either/or spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d1'][0]} single-line "
-                      f"tickets with no free spaces and one either-or spots.")
-            temp_list = create_single_line_either_or_faces(face_list, q_either_ors['sloef0d1'])
-            if temp_list is None:
-                return temp_list
-            single_line_either_ors[i]['sloef0d1'] = temp_list
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line nonstaggered tickets with no free spaces. (1 winning path)
-    if q_nonstaggered_single_holds[0] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, single-line hold with no free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[0]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_nonstaggered_single_holds[0], 0, 1, csv_rows, False)
-            if temp_list[0] is None:
-                return temp_list
-            nonstaggered_single_holds[i][0].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    # Single-line staggered tickets with no free spaces. (1 winning path)
-    if q_staggered_single_holds[0] > 0:
-        if verbose:
-            print(f"  Creating {perms} permutations of non-staggered, single-line hold with no free spaces.")
-        for i in range(perms):
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[0]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            temp_list = create_pseudo_faces(face_list, q_staggered_single_holds[0], 0, 1, csv_rows, True)
-            if temp_list[0] is None:
-                return temp_list
-            staggered_single_holds[i][0].append(temp_list)
-            if verbose:
-                print('  Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-        if verbose:
-            print('  Done.')
-
-    for i in range(perms):
-        for sloe in sloes:
-            if f'sloe{sloe}' in single_line_either_ors[i].keys():
-                for ticket in single_line_either_ors[i][f'sloe{sloe}']:
-                    permutations[i].append(ticket)
-
-        nonstaggered_double_holds[i].reverse()
-        for frees in nonstaggered_double_holds[i]:
-            for free in frees:
-                for ticket in free:
-                    permutations[i].append(ticket)
-
-        staggered_double_holds[i].reverse()
-        for frees in staggered_double_holds[i]:
-            for free in frees:
-                for ticket in free:
-                    permutations[i].append(ticket)
-
-        nonstaggered_single_holds[i].reverse()
-        for frees in nonstaggered_single_holds[i]:
-            for free in frees:
-                for ticket in free:
-                    permutations[i].append(ticket)
-
-        staggered_single_holds[i].reverse()
-        for frees in staggered_single_holds[i]:
-            for free in frees:
-                for ticket in free:
-                    permutations[i].append(ticket)
-
-    if verbose:
-        print('Done.')
+    if verbose: print('Done.')
+    total_rejects = 0
     return permutations
 
 
-def create_all_bingo_permutations_with_reset(bingo_amts: list[list[int] | bool | str],
-                                             perms: int, csv_rows: int, v_size=False, verbose=False):
+def create_all_bingo_permutations_with_reset(bingo_amts: list, perms: int, csv_rows: int,
+                                             v_size=False, verbose=False) -> list:
     """
-    This method creates each permutation of bingo numbers in its entirety and resets the usable faces list for
-    successive iterations. It creates the bingo faces in order of the greatest number of possible winning paths.
+    Generates permutations WITH a reset of the face list.
 
-    :param bingo_amts: list containing the number of bingo faces for each type of face: lines and free spaces
-    :type bingo_amts: list[list[int] | bool | str]
-    :param perms: the number of permutations needed
-    :type perms: int
-    :param csv_rows: number of rows needed for the csv file
-    :type csv_rows: int
-    :param v_size: Should the standard or extended usable faces be read?
-    :type v_size: bool
-    :param verbose: should status info be printed to the screen
-    :type verbose: bool
+    CONCEPT:
+    Unlike the previous function, this method treats every permutation as a fresh start.
+    Faces used in Permutation 1 ARE allowed to be used again in Permutation 2.
+
+    STRATEGY:
+    1. Loop through Permutations (1 to N).
+    2. Inside the loop, create a fresh 'BingoFaceList'.
+    3. Process the ticket queue for that permutation immediately.
+    4. Store results directly (no complex bins needed).
     """
-    # Create a list to hold the permutations
-    permutations = []
-    for i in range(perms):
-        permutations.append([])
+    global total_rejects
 
-    # I'LL PROBABLY TAKE THIS OUT. I'M JUST PARANOID. ----------------------------------------------------------------
-    # Take the first five
-    # numbs = []
-    # for i in range(5):
-    #     numbs.append(bingo_amts[i])
-    # Break up the bingo requirements by type (single- or double-lines staggered or not, plus either-ors)
-    # [q_nonstaggered_double_holds, q_staggered_double_holds,
-    #  q_nonstaggered_single_holds, q_staggered_single_holds, q_single_line_either_ors] = numbs
-    # ----------------------------------------------------------------------------------------------------------------
+    # --- 1. SETUP ---
 
-    # Break up the bingo requirements by type (single- or double-lines staggered or not, plus either-ors)
-    [q_nonstaggered_double_holds, q_staggered_double_holds,
-     q_nonstaggered_single_holds, q_staggered_single_holds, q_single_line_either_ors] = bingo_amts
-    # Create a dictionary to hold faces for either/ors, using their parameters
-    # to create the keys: an either/or with 1 free space and 2 either/or spots
-    # would be referred to by the key 'sloef1d2'.
-    q_either_ors = {}
-    if q_single_line_either_ors[0][0] != 0:
-        for sloe in q_single_line_either_ors:
-            q_either_ors[f"sloef{sloe[1]}d{sloe[2]}"] = sloe
+    # Unpack the config lists.
+    [q_ns_double, q_stag_double, q_ns_single, q_stag_single, q_sloe] = bingo_amts[0:5]
 
     if verbose:
-        print(f"==========> Creating {perms} permutations resetting the usable faces array for each one. <==========")
+        print(f"==========> Creating {perms} perms WITH RESET. <==========")
 
-    # Create the faces needed for each permutation, resetting the faces list with each iteration. Call
-    # create_pseudo_faces for regular bingos and create_single_line_either_or_faces for either/or tickets.
+    # Simplified Storage:
+    # Since we build Permutation 1 start-to-finish, we don't need the 3D storage arrays.
+    # We just need a list of lists: [Permutation_1_Tickets, Permutation_2_Tickets, ...]
+    permutations = [[] for _ in range(perms)]
+
+    # Setup Either-Or keys for lookup
+    # Example Key: "sloef2d2" (Single Line, Either-Or, Free:2, Doubles:2)
+    q_either_ors = {}
+    if q_sloe and q_sloe[0][0] != 0:
+        for sloe in q_sloe:
+            key = f"sloef{sloe[1]}d{sloe[2]}"
+            q_either_ors[key] = sloe
+
+    # --- 2. THE PROCESSING QUEUE ---
+    # Matches the 'Without Reset' queue exactly. We prioritize tickets with high-winning
+    # path counts (complexity) first to ensure we don't run out of valid bingo faces.
+    #
+    # Note: Even though we use the same processing order as seen in the previous method, we
+    # don't have to create the tickets for all permutations at every level of complexity.
+    # This is because the usable face list is reset for every permutation, so we can
+    # simply create the tickets for each level of complexity for the current permutation.
+    # The next permutation will have a fresh usable face list. This is generally done in
+    # cases where the different ups of a game will never be played at the same time, which
+    # eliminates the need to prevent winning paths from being reused across permutations.
+    #
+    # FORMAT CHANGE:
+    # Notice we removed 'Storage_Ref' from the Standard tuple. We don't need to know *where*
+    # to store it, as all tickets are stored in the list for the current permutation.
+    processing_queue = [
+        # === 13,500 Winning Paths ===
+        ('STD', q_ns_double[3], 3, 2, False, "non-staggered double (3 free)"),
+        ('STD', q_stag_double[3], 3, 2, True, "staggered double (3 free)"),
+
+        # === 3,375 Winning Paths ===
+        ('STD', q_ns_single[3], 3, 1, False, "non-staggered single (3 free)"),
+
+        # === 1,800 Winning Paths ===
+        ('STD', q_ns_double[2], 2, 2, False, "non-staggered double (2 free)"),
+        ('STD', q_stag_double[2], 2, 2, True, "staggered double (2 free)"),
+
+        # === 900 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef2d2', [0])[0], 'sloef2d2', "2 free, 2 either-or"),
+
+        # === 450 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef2d1', [0])[0], 'sloef2d1', "2 free, 1 either-or"),
+
+        # === 240 Winning Paths ===
+        # Note: These have 1 Free Space, but are MORE complex than Single lines with 2 Free Spaces
+        ('STD', q_ns_double[1], 1, 2, False, "non-staggered double (1 free)"),
+        ('STD', q_stag_double[1], 1, 2, True, "staggered double (1 free)"),
+
+        # === 225 Winning Paths ===
+        ('STD', q_ns_single[2], 2, 1, False, "non-staggered single (2 free)"),
+        ('STD', q_stag_single[2], 2, 1, True, "staggered single (2 free)"),
+
+        # === 60 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef1d2', [0])[0], 'sloef1d2', "1 free, 2 either-or"),
+
+        # === 32 Winning Paths ===
+        ('STD', q_ns_double[0], 0, 2, False, "non-staggered double (0 free)"),
+        ('STD', q_stag_double[0], 0, 2, True, "staggered double (0 free)"),
+
+        # === 30 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef1d1', [0])[0], 'sloef1d1', "1 free, 1 either-or"),
+
+        # === 15 Winning Paths ===
+        ('STD', q_stag_single[1], 1, 1, True, "staggered single (1 free)"),
+        ('STD', q_ns_single[1], 1, 1, False, "non-staggered single (1 free)"),
+
+        # === 8 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef0d3', [0])[0], 'sloef0d3', "0 free, 3 either-or"),
+
+        # === 4 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef0d2', [0])[0], 'sloef0d2', "0 free, 2 either-or"),
+
+        # === 2 Winning Paths ===
+        ('SLOE', q_either_ors.get('sloef0d1', [0])[0], 'sloef0d1', "0 free, 1 either-or"),
+
+        # === 1 Winning Path ===
+        ('STD', q_ns_single[0], 0, 1, False, "non-staggered single (0 free)"),
+        ('STD', q_stag_single[0], 0, 1, True, "staggered single (0 free)"),
+    ]
+
+    # --- 3. THE EXECUTION LOOP (Inverted Logic) ---
+
+    # OUTER LOOP: We iterate through Permutations (1 to N).
+    # This is the opposite of the previous function.
     for i in range(perms):
         if verbose:
             print(f"  Creating PERMUTATION #{i + 1}")
-            print("    Creating and shuffling usable faces list.")
-        # Create a new list of bingo faces.
+
+        # CRITICAL RESET STEP:
+        # We instantiate 'BingoFaceList' INSIDE the loop.
+        # This reloads the CSV and creates a fresh deck of faces.
         face_list = BingoFaceList(v_size)
         face_list.shuffle_usable_faces()
+
         if verbose:
             print_usable_face_info_to_screen(face_list, 2)
 
-        # Two-line tickets with three nonstaggered free spots (13,500) (let's hope it never happens)
-        if q_nonstaggered_double_holds[3] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[3]} non-staggered, double-line "
-                      "tickets with three free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_double_holds[3],
-                                                   3, 2, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+        # INNER LOOP: Process the entire Job Queue for THIS permutation.
+        for job in processing_queue:
+            job_type = job[0]
 
-        # Two-line tickets with three staggered free spots (13,500)
-        if q_staggered_double_holds[3] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[3]} staggered, double-line "
-                      "tickets with three free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_double_holds[3],
-                                                   3, 2, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+            # === HANDLER FOR STANDARD TICKETS ===
+            if job_type == 'STD':
+                # Unpack without 'target_store'
+                _, qty_needed, frees, lines, staggered, desc = job
 
-        # One-line tickets with three nonstaggered free spots (3375 winning paths)
-        if q_nonstaggered_single_holds[3] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[3]} non-staggered, double-line "
-                      f"tickets with three free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_single_holds[3],
-                                                   3, 1, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                if qty_needed > 0:
+                    if verbose:
+                        print(f"    Perm #{i + 1}: Creating {qty_needed} {desc}.")
 
-        # Two-line tickets with two-nonstaggered free spots (1800 winning paths)
-        if q_nonstaggered_double_holds[2] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[2]} non-staggered, double-line "
-                      f"tickets with two free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_double_holds[2],
-                                                   2, 2, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Call the Factory Function to get new faces
+                    temp_list = create_pseudo_faces(face_list, qty_needed, frees, lines, csv_rows, staggered)
 
-        # Two-line tickets with two-staggered free spots (1800 winning paths)
-        if q_staggered_double_holds[2] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[2]} staggered, double-line "
-                      f"tickets with two free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_double_holds[2],
-                                                   2, 2, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Fail fast on error
+                    if temp_list[0] is None:
+                        return temp_list
 
-        # Single-line ticket with two free spaces and two either/or spots (900 winning paths)
-        if 'sloef2d2' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef2d2'][0]} single-line "
-                      f"tickets with two free spaces and two either-or spots.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef2d2'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Direct Append:
+                    # We add the generated tickets immediately to the current permutation list.
+                    permutations[i].extend(temp_list)
 
-        # Single-line ticket with two free spaces and one either/or spot (450 winning paths)
-        if 'sloef2d1' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef2d1'][0]} single-line "
-                      f"tickets with two free spaces and one either-or spot.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef2d1'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    if verbose:
+                        print('    Done.')
+                        print_usable_face_info_to_screen(face_list, 2)
 
-        # Two-line tickets with one nonstaggered free spot (240 winning paths)
-        if q_nonstaggered_double_holds[1] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[1]} non-staggered, double-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_double_holds[1],
-                                                   1, 2, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+            # === HANDLER FOR EITHER-OR TICKETS ===
+            elif job_type == 'SLOE':
+                _, qty_needed, key, desc = job
 
-        # Two-line tickets with one staggered free spot (240 winning paths)
-        if q_staggered_double_holds[1] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[1]} non-staggered, double-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_double_holds[1],
-                                                   1, 2, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                if qty_needed > 0 and key in q_either_ors:
+                    params = q_either_ors[key]
 
-        # Single-line tickets with two staggered free spots (225 winning paths)
-        if q_staggered_single_holds[2] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[2]} staggered, single-line "
-                      f"tickets with two free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_single_holds[2],
-                                                   2, 1, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    if verbose:
+                        print(f"    Perm #{i + 1}: Creating {qty_needed} {desc}.")
 
-        # Single-line tickets with two-nonstaggered free spots (225 winning paths)
-        if q_nonstaggered_single_holds[2] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[2]} nonstaggered, single-line "
-                      f"tickets with two free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_single_holds[2],
-                                                   2, 1, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Call the Factory Function to get new faces
+                    temp_list = create_single_line_either_or_faces(face_list, params)
 
-        # Single-line ticket with one free space2 and two either/or spots (60 winning paths)
-        if 'sloef1d2' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef1d2'][0]} single-line "
-                      f"tickets with two free spaces and one either-or spot.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef1d2'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Fail fast on error
+                    if temp_list[0] is None:
+                        return temp_list
 
-        # Double-line tickets with no free spaces. (Nonstaggered, but that's irrelevant.) (32 winning paths)
-        if q_nonstaggered_double_holds[0] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_double_holds[0]} nonstaggered, double-line "
-                      f"tickets with no free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_double_holds[0],
-                                                   0, 2, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    # Direct Append:
+                    # We add the generated tickets immediately to the current permutation list.
+                    permutations[i].extend(temp_list)
 
-        # Double-line tickets with no free spaces. (Staggered, but that's irrelevant.) (32 winning paths)
-        if q_staggered_double_holds[0] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_double_holds[0]} staggered, double-line "
-                      f"tickets with no free spaces.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_double_holds[0],
-                                                   0, 2, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+                    if verbose:
+                        print('    Done.')
+                        print_usable_face_info_to_screen(face_list, 2)
 
-        # Single-line ticket with one free space and one either/or spot (15 winning paths)
-        if 'sloef1d1' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef1d1'][0]} single-line "
-                      f"tickets with one free space and one either-or spot.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef1d1'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
+        if verbose:
+            print('  Permutation Done.')
 
-        # Single-line tickets with one staggered free space. (15 winning paths)
-        if q_staggered_single_holds[1] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[1]} staggered, single-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_single_holds[1],
-                                                   1, 1, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line tickets with one nonstaggered free space. (15 winning paths)
-        if q_nonstaggered_single_holds[1] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[1]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_single_holds[1],
-                                                   1, 1, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line ticket with no free spaces and three either/or spots (8 winning paths)
-        if 'sloef0d3' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d3'][0]} single-line "
-                      f"tickets with no free space spaces and two either-or spots.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef0d3'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line ticket with no free spaces and two either/or spots (4 winning paths)
-        if 'sloef0d2' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d2'][0]} single-line "
-                      f"tickets with no free space spaces and two either-or spots.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef0d2'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line ticket with no free spaces and one either/or spot (2 winning paths)
-        if 'sloef0d1' in q_either_ors:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_either_ors['sloef0d1'][0]} single-line "
-                      f"tickets with no free space spaces and one either-or spot.")
-            permutations[i] += create_single_line_either_or_faces(face_list, q_either_ors['sloef0d1'])
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line nonstaggered tickets with no free spaces. (1 winning path)
-        if q_nonstaggered_single_holds[0] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_nonstaggered_single_holds[0]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_nonstaggered_single_holds[0],
-                                                   0, 1, csv_rows, False)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        # Single-line staggered tickets with no free spaces. (1 winning path)
-        if q_staggered_single_holds[0] > 0:
-            face_list.shuffle_usable_faces()
-            if verbose:
-                print(f"    Permutation #{i + 1}: Creating {q_staggered_single_holds[0]} non-staggered, single-line "
-                      f"tickets with one free space.")
-            permutations[i] += create_pseudo_faces(face_list, q_staggered_single_holds[0],
-                                                   0, 1, csv_rows, True)
-            if verbose:
-                print('    Done.')
-                print_usable_face_info_to_screen(face_list, 2)
-
-        print('  Done.')
-    print('Done.')
+    if verbose:
+        print('Done.')
+    total_rejects = 0
     return permutations

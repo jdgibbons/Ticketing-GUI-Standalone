@@ -15,8 +15,7 @@ class BingoTicket(BonanzaTicket):
     """
 
     def __init__(self, tick_no: str | int, ver: str | int, numbers: list[list[str | int]], imgs: list[str],
-                 zeroes: bool = False, p: int = 1, u: int = 1, is_first: bool = False, lottos: int = 0,
-                 coda: str = '.ai'):
+                 zeroes: bool = False, p: int = 1, u: int = 1, coda: str = '.ai'):
         """
         Create a generic bingo ticket that can use (or not) any of the data\
         structures to allow for maximum flexibility. Bingo numbers and images
@@ -52,32 +51,66 @@ class BingoTicket(BonanzaTicket):
         self.free_type = 'I'
         self.bingo_type = 'N'  # 'S'taggered, 'N'onstaggered, or 'O'ther (for non-bingo tickets)
         self.coda = coda
+        # Verify that the number lists are all the same length.
+        if not check_list_lengths(self.numbers, 'numbers', self.ticket_number):
+            raise ValueError(f"Data inconsistency found in Ticket {tick_no}")
+
         # Only set the csv_fields on the first pass. It is a static variable, so there is
         # no need to repeatedly set it. One and done.
-        if is_first:
-            # Create the csv field headings, starting with ticket number
-            slots = ['TKT', 'VER']
-            # Verify that the number lists are all the same length.
-            if not check_list_lengths(self.numbers, 'numbers', self.ticket_number):
-                exit(-1)
-            # Use letters to specify disparate lists in the csv by cycling through the spots and appending
-            # the letter associated with each list. For example, if there were three different number lists,
-            # the headings for the columns would look like:
-            # 'N1A', 'N1B', 'N1C', 'N2A', 'N2B', 'N2C', 'N3A', 'N3B', 'N3C', etc.
-            endings = ['A', 'B', 'C', 'D', 'E']
-            for j in range(len(self.numbers[0])):
-                # Add the corresponding letter for each location to the column header.
-                for i, numbs in enumerate(self.numbers):
-                    slots.append(f'N{j + 1}{endings[i]}')
-            # Add the necessary number of csv columns for images and lottos
-            for i in range(len(self.images)):
-                slots.append(f'I{i + 1}')
-            for i in range(lottos):
-                slots.append(f'L{i + 1}')
-            # Add 'P' and 'U' for permutation and up, respectively.
-            slots += ['P', 'U']
-            # Set the superclass's static csv_fields variable to the list we just created.
-            BonanzaTicket.csv_fields = slots
+        # if is_first:
+        #     # Create the csv field headings, starting with ticket number
+        #     slots = ['TKT', 'VER']
+        #     # Use letters to specify disparate lists in the csv by cycling through the spots and appending
+        #     # the letter associated with each list. For example, if there were three different number lists,
+        #     # the headings for the columns would look like:
+        #     # 'N1A', 'N1B', 'N1C', 'N2A', 'N2B', 'N2C', 'N3A', 'N3B', 'N3C', etc.
+        #     endings = ['A', 'B', 'C', 'D', 'E']
+        #     for j in range(len(self.numbers[0])):
+        #         # Add the corresponding letter for each location to the column header.
+        #         for i, numbs in enumerate(self.numbers):
+        #             slots.append(f'N{j + 1}{endings[i]}')
+        #     # Add the necessary number of csv columns for images and lottos
+        #     for i in range(len(self.images)):
+        #         slots.append(f'I{i + 1}')
+        #     for i in range(lottos):
+        #         slots.append(f'L{i + 1}')
+        #     # Add 'P' and 'U' for permutation and up, respectively.
+        #     slots += ['P', 'U']
+        #     # Set the superclass's static csv_fields variable to the list we just created.
+        #     BonanzaTicket.csv_fields = slots
+
+    @classmethod
+    def configure_csv_headers(cls, schema_depth: int, line_length: int, image_count: int, lotto_count: int) -> None:
+        """
+        Configures the CSV headers based on the game's total required text fields.
+
+        :param schema_depth: Number of rows per ticket (1, 2, or 3).
+        :param line_length:  Number of columns/spots per line (3 to 9).
+        :param image_count: Total image columns.
+        :param lotto_count: Total lotto columns.
+        """
+        slots = ['TKT', 'VER']
+        endings = ['A', 'B', 'C', 'D', 'E']
+
+        # Validation
+        if schema_depth > len(endings):
+            raise ValueError(f"Schema depth {schema_depth} exceeds max supported ({len(endings)}).")
+
+        # GENERATE Number Headers: N1A, N1B, N1C...
+        # We cycle for each of the items per line and then by the depth (A, B, C...)
+        # This matches the 'mix' logic: if depth is 3, we reserve space for A, B, and C.
+        for j in range(line_length):
+            for i in range(schema_depth):
+                slots.append(f'N{j + 1}{endings[i]}')
+
+        for i in range(image_count):
+            slots.append(f'I{i + 1}')
+
+        for i in range(lotto_count):
+            slots.append(f'L{i + 1}')
+
+        slots += ['P', 'U']
+        BonanzaTicket.csv_fields = slots
 
     def csv_line(self) -> str:
         """

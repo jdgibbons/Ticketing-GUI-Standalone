@@ -98,3 +98,6 @@ Bingos
     they could be written out as:
 
         100,0,1;40,1,1;20,2,1;15,0,2;10,1,2;5,2,2
+
+Cannons
+    The permutation's value must match the iterations value in the Cannon frames.

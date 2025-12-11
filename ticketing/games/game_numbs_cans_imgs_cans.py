@@ -1,18 +1,29 @@
 """
-Nonwinners: numbers
-Instants: cannons
-Picks: Image
-Holds: cannons
+Game Module: Numbers / Cannons Hybrid Configuration
+===================================================
 
-This module is called from the CSV Generator when the nonwinners, instants, and picks are composed of simple images,
-but the holds are composed of five-row bingos. The number of spaces in each row is determined by a user-provided
-pattern.
+Configuration:
+    - Nonwinners: Numbers (Randomized or Sequential from a Pool)
+    - Instants:   Cannons (Iterative) OR Images (Tiered)
+    - Picks:      Images (Not actively used in this logic but supported in signature)
+    - Holds:      Cannons (Iterative)
 
-The create_game method is the main entry point for this module, and it is called with a list of game specs. That list
-contains other lists detailing the specifications for creating the game. The lists, in order, pertain to sheets,
-nonwinners, instants, picks, holds, and part and file name. There the final element is a string containing the
-output folder. It will be blank if files are to be placed in the default folder.
+Description:
+    This module handles games where non-winning tickets are populated with numbers
+    (often derived from a specific suffix logic), and winning/hold tickets are generated
+    either as repeated "Cannons" (iterations of the same image/layout) or standard images.
+
+    It serves as the backend logic for games configured as "NCICA" or similar variants.
+
+Workflow:
+    1.  `create_game` is called with a bundle of Data Objects.
+    2.  It generates Non-Winner tickets populated with numbers (using `number_generator`).
+    3.  It generates Hold tickets using "Cannon" logic (repeating a base image for X iterations).
+    4.  It generates Instant tickets using either Cannon logic OR Tiered Image logic.
+    5.  It merges these separate lists into unified Permutations.
+    6.  It writes the permutations to CSV files and generates the layout stacks.
 """
+
 import copy
 
 from ticketing.universal_ticket import UniversalTicket as uTick
@@ -21,212 +32,327 @@ from ticketing import image_generator as ig
 from ticketing import game_info_gui as gi
 from ticketing import ticket_io as tio
 
+# NEW IMPORTS
+from ticketing.ticket_models import (
+    GameInfo, NamesData,
+    NonWinnerNumbersTicket, InstantCannonsTicket, InstantImagesTicket,
+    HoldCannonsTicket, PickImagesTicket
+)
+
 DEBUG = True
-nw_type, insta_type, pick_type, hold_type = '', '', '', ''
 img_suffix = ''
 
 
-def create_nonwinner_numbers(amt: int, spots: int, first: int, last: int, suffixes: str, base: str,
+def create_nonwinner_numbers(nw_ticket: NonWinnerNumbersTicket,
                              addl_imgs: gi.AddImages, is_first: bool = False):
+    """
+    Generates a list of Non-Winner tickets populated with numbers.
+
+    Logic:
+        Uses a 'Number Pool' derived from the ticket's configuration (First/Last number, Exclusions).
+        It draws 'spots' count of numbers from this pool for each ticket. If the pool is exhausted,
+        it regenerates/refills the pool.
+
+    Args:
+        nw_ticket (NonWinnerNumbersTicket): Configuration (Quantity, Spots, Range, Exclusions).
+        addl_imgs (gi.AddImages): Image padding instruction (usually NoneAdded here).
+        is_first (bool): CSV Header flag.
+
+    Returns:
+        list[uTick]: List of generated tickets.
+    """
     global img_suffix
-    if suffixes == '':
-        suffixes = ['00']
+
+    # Extract object attributes
+    amt = nw_ticket.quantity
+    spots = nw_ticket.spots
+    first = nw_ticket.first_num
+    last = nw_ticket.last_num
+    base = nw_ticket.base_image
+
+    # Parse exclusions (suffixes)
+    suffixes = nw_ticket.exclusions
+    if not suffixes:
+        suffixes_list = ['00']
     else:
-        suffixes = suffixes.split(',')
+        suffixes_list = suffixes.split(',')
+
     imgs = ig.add_additional_image_slots(addl_imgs, [''])
 
     ticks = []
     nw_pool = []
-    basic = '' if base == '' else f'{base}{img_suffix}'
-    suffixes.pop(0)
+    # Construct base image name if provided
+    basic = '' if not base else f'{base}{img_suffix}'
+
+    # Legacy behavior preservation: Remove first suffix from list?
+    if suffixes_list:
+        suffixes_list.pop(0)
+
     while len(ticks) < amt:
+        # Refill pool if needed
         if len(nw_pool) < spots:
-            nw_pool = ng.create_number_pools_from_suffix_list(first, last, suffixes, True)
+            nw_pool = ng.create_number_pools_from_suffix_list(
+                first, last, suffixes_list, True
+            )
+        # Draw numbers for this ticket
         numbs = []
         for _ in range(spots):
-            numbs.append(nw_pool.pop(0))
+            # Check pool isn't empty before popping
+            if nw_pool:
+                numbs.append(nw_pool.pop(0))
+            else:
+                numbs.append(0)  # Fallback safety
+
         tick = uTick(basic, imgs, numbs, 1, 1, is_first)
         is_first = False
         ticks.append(tick)
+
     return ticks
 
 
-def create_hold_images(amt: int, permits: int, addl_imgs: gi.AddImages, nums: int, is_first: bool = False):
+def create_hold_images(hold_ticket: HoldCannonsTicket, permits: int,
+                       addl_imgs: gi.AddImages, nums_count: int, is_first: bool = False):
+    """
+    Generates Hold tickets using 'Cannon' logic.
+
+    Cannon Logic:
+        Creates 'permits' (permutations) distinct batches.
+        In each batch, it generates 'quantity' tickets.
+        The image names are often prefixed sequentially per batch (e.g., hold01-, hold02-).
+
+    Args:
+        hold_ticket (HoldCannonsTicket): Configuration (Quantity).
+        permits (int): Number of permutations (iterations) to generate.
+        addl_imgs (gi.AddImages): Image padding.
+        nums_count (int): Number of empty number slots to reserve.
+        is_first (bool): CSV Header flag.
+
+    Returns:
+        list[list[uTick]]: A list of lists (one list per permutation).
+    """
     global img_suffix
+
+    amt = hold_ticket.quantity
+
+    # Reserve empty number slots
     perms = []
-    if nums != 0:
-        nums = [''] * nums
-    else:
-        nums = []
+    nums = [''] * nums_count if nums_count != 0 else []
 
     for i in range(permits):
         ticks = []
+        # Create prefixed images (e.g. hold01-, hold02-) for this batch
         imgs = ig.create_prefixed_images(1, amt, f'hold{str(i + 1).zfill(2)}-', True, img_suffix)
-        # imgs = ig.add_additional_image_slots(addl_imgs, imgs)
-        # ticks.append(uTick('', imgs, nums, i + 1, 1, is_first))
-        # perms.append(ticks)
-        for tick in imgs:
-            tick = ig.add_additional_image_slots(addl_imgs, [tick])
-            ticks.append(uTick('', tick, nums, i + 1, 1, is_first))
+
+        for tick_img in imgs:
+            # Wrap image in list for slot padding
+            padded_imgs = ig.add_additional_image_slots(addl_imgs, [tick_img])
+            ticks.append(uTick('', padded_imgs, nums, i + 1, 1, is_first))
+
         perms.append(ticks)
+
     return perms
 
 
-def create_instant_images(amt: int, permits: int, addl_imgs: gi.AddImages, nums: int, is_first: bool = False):
+def create_instant_cannons(inst_ticket: InstantCannonsTicket, permits: int,
+                           addl_imgs: gi.AddImages, nums_count: int, is_first: bool = False):
     """
+    Generates Instant tickets using 'Cannon' logic.
 
-    :param amt:
-    :param permits:
-    :param addl_imgs:
-    :param nums:
-    :param is_first:
-    :return:
+    Logic:
+        Similar to Hold Cannons, but typically repeats the SAME image ('winnerXX')
+        multiple times within a batch rather than a sequence of unique images.
+
+    Args:
+        inst_ticket (InstantCannonsTicket): Configuration.
+        permits (int): Number of permutations.
+        ...
+
+    Returns:
+        list[list[uTick]]: List of lists of tickets.
     """
     global img_suffix
     perms = []
-    if nums != 0:
-        nums = [''] * nums
-    else:
-        nums = []
+    nums = [''] * nums_count if nums_count != 0 else []
+
+    amt = inst_ticket.quantity
 
     for i in range(permits):
         ticks = []
+        # Create list of the SAME image repeated 'amt' times for this permutation
         imgs = ig.create_image_list_of_same_image(amt, f'winner{str(i + 1).zfill(2)}', img_suffix)
-        for tick in imgs:
-            tick = ig.add_additional_image_slots(addl_imgs, [tick])
-            ticks.append(uTick('', tick, nums, i + 1, 1, is_first))
+
+        for tick_img in imgs:
+            padded_imgs = ig.add_additional_image_slots(addl_imgs, [tick_img])
+            ticks.append(uTick('', padded_imgs, nums, i + 1, 1, is_first))
             is_first = False
+
         perms.append(ticks)
+
     return perms
 
 
-def create_instant_winners(amt: list[list[int | bool]], cd_tier: int, permits: int,
-                           addl_imgs: gi.AddImages, nummies: int, first=True) -> list[uTick]:
+def create_instant_winners_images(inst_ticket: InstantImagesTicket, permits: int,
+                                  addl_imgs: gi.AddImages, nummies: int, first=True) -> list[list[uTick]]:
     """
-    Create a list of instant winner tickets consisting of one image and set the ticket's
-    CD value equal to its tier level if the level is equal to or less than the cd_tier.
+    Generates Instant tickets using standard 'Tiered Image' logic.
 
-    :param amt: list containing the number of tickets for each ticket tier
-    :type amt: list[int]
-    :param cd_tier: tier level at which CDs are required (zero if none)
-    :type cd_tier: int
-    :param permits: number of permutations
-    :type permits: int
-    :param addl_imgs: Additional image slots required to pad the csv output.
-    :type addl_imgs: gi.AddImages
-    :param nummies: Number of number slots needed in the csv output.
-    :type nummies: int
-    :param first: Does the first ticket need to set the csv fields?
-    :type first: bool
-    :return: A list of instant winner tickets
-    :rtype: list[UniversalTicket]
+    Logic:
+        Used when Instants are defined by specific Tiers (e.g., Tier 1: 5 tickets, Tier 2: 10 tickets)
+        rather than simple repetition (Cannons).
+
+        It generates ONE master list of tickets and then duplicates it for every permutation.
+
+    Returns:
+        list[list[uTick]]: List of lists (duplicated perms).
     """
-    # Get a list of lists containing the image name and tier level for the winning tickets.
     global img_suffix
-    imgs = ig.create_tiered_image_list_augmented(amt, 'winner', img_suffix)
-    # Create a placeholder for the number slots
+
+    # Convert Object Data to list for generator
+    amt_list = [[tier.quantity, tier.is_unique] for tier in inst_ticket.tiers]
+    cd_tier = inst_ticket.cd_tier
+
+    imgs = ig.create_tiered_image_list_augmented(amt_list, 'winner', img_suffix)
     nums = [''] * nummies
     ticks = []
-    # Set a new variable to control the setting of the csv fields. This seems redundant,
-    # but the code wasn't fond of resetting the passed value. So, whatever.
+
     cull_ticket = first
-    tkt = ''
-    # Cycle through the list of image name/tier level lists and create a ticket for each one.
+    tkt = ''  # Original code had empty string for tkt number in uTick?
+
     for img in imgs:
-        # Create a list that contains the image and any additional image slots needed.
-        # (This is used to reserve slots for three-image nonwinner tickets, if necessary.)
         pics = ig.add_additional_image_slots(addl_imgs, [img[0]])
-        # Create a new ticket with ticket number, pics, number slots, perm, up, and whether to create the csv fields.
+
         tick = uTick(tkt, pics, nums, 1, 1, cull_ticket)
-        # Set the ticket's cd tier level if it's less than or equal to the passed cd tier.
+
         if img[1] <= cd_tier:
             tick.reset_cd_tier(img[1])
             tick.reset_cd_type('I')
-        # Add the ticket to the list and set the cull ticket flag to False.
+
         ticks.append(tick)
         cull_ticket = False
+
+    # Duplicate this batch for every permutation required
     perms = []
     for i in range(permits):
         perms.append(copy.deepcopy(ticks))
-    # Return the list of instant winner tickets.
+
     return perms
 
 
-def extract_ticket_types(game_specs):
-    return [game_specs[1].pop(0), game_specs[2].pop(0), game_specs[3].pop(0), game_specs[4].pop(0)]
+def create_game(data_bundle):
+    """
+    Main Entry Point (Controller).
 
+    Orchestrates the generation for 'Numbers/Cannons' hybrid games.
 
-def create_game(game_specs):
-    global nw_type, insta_type, pick_type, hold_type, img_suffix
+    Key Responsibilities:
+    1.  Determines which logic to use for Instants (Cannons vs Images) based on the input object type.
+    2.  Generates the distinct components (NW, Holds, Instants).
+    3.  Merges them into Permutation batches.
+        - Holds and Instants are already generated as lists-of-lists (by permutation).
+        - NonWinners are generated once and then Deep Copied into every permutation.
+    4.  Outputs the permutations to files.
+    """
+    global img_suffix
+
+    # 1. Unpack Objects
+    game_info = data_bundle[0]  # type: GameInfo
+    nw_specs = data_bundle[1]  # type: NonWinnerNumbersTicket
+    inst_specs = data_bundle[2]  # type: InstantCannonsTicket | InstantImagesTicket
+    pick_specs = data_bundle[3]  # type: PickImagesTicket
+    hold_specs = data_bundle[4]  # type: HoldCannonsTicket
+    name_specs = data_bundle[5]  # type: NamesData
+    output_folder = data_bundle[6]
+
+    if DEBUG:
+        print(f"Game: {name_specs.file_name}")
+
+    # 2. Extract Basic Info
+    img_suffix = game_info.image_suffix
+    filename = name_specs.file_name
+
+    ups = game_info.ups
+    perms = game_info.permutations
+    sheets = game_info.sheets
+    capacity = game_info.capacity[1]  # Bottom Out
+
     first_time = True
     permutations = []
-    if DEBUG:
-        print(game_specs)
-        for spec in game_specs:
-            print(spec)
-
-    nw_type, insta_type, pick_type, hold_type = extract_ticket_types(game_specs)
-    sheet_specs, nw_specs, insta_specs, pick_specs, hold_specs, name_specs, output_folder = game_specs
-    img_suffix = sheet_specs.pop()
-    ups, permies, sheets, capacities, reset, subflats, schisms = sheet_specs
-    partname = name_specs[0]
-    filename = name_specs[1]
-
     tickets = []
-    if nw_type == 'N':
-        nw_specs.extend([gi.AddImages.NoneAdded, first_time])
-        tickets = create_nonwinner_numbers(*nw_specs)
+
+    # 3. Create NonWinners (Numbers)
+    # Generated as a single flat list initially
+    if isinstance(nw_specs, NonWinnerNumbersTicket):
+        tickets = create_nonwinner_numbers(
+            nw_specs, gi.AddImages.NoneAdded, is_first=first_time
+        )
         first_time = False
 
+    # 4. Create Holds (Cannons)
+    # Generated as list of lists (per permutation)
     holders = []
-    if hold_specs[0] > 0:
-        hold_specs.extend([gi.AddImages.NoneAdded, nw_specs[1], first_time])
-        holders = create_hold_images(*hold_specs)
+    if hold_specs.quantity > 0:
+        # We pass nw_specs.spots (int) to reserve number slots on the hold tickets
+        holders = create_hold_images(
+            hold_specs, perms, gi.AddImages.NoneAdded, nw_specs.spots, is_first=first_time
+        )
 
+    # 5. Create Instants (Cannons OR Images)
     instants = []
-    if insta_type == 'C':
-        if insta_specs[0] > 0:
-            insta_specs.extend([gi.AddImages.NoneAdded, nw_specs[1], first_time])
-            instants = create_instant_images(*insta_specs)
+
+    # Case: Cannons (Iterative)
+    if isinstance(inst_specs, InstantCannonsTicket):
+        if inst_specs.quantity > 0:
+            instants = create_instant_cannons(
+                inst_specs, perms, gi.AddImages.NoneAdded, nw_specs.spots, is_first=first_time
+            )
             first_time = False
-    elif insta_type == 'I':
-        if insta_specs[0][0][0] > 0:
-            insta_specs.extend([hold_specs[1], gi.AddImages.NoneAdded, nw_specs[1], first_time])
-            instants = create_instant_winners(*insta_specs)
 
-    for i in range(len(holders)):
-        permutations.append(holders[i])
-        permutations[i].extend(instants[i])
-        nws = copy.deepcopy(tickets)
-        for tick in nws:
-            tick.reset_permutation(i + 1)
-        permutations[i].extend(nws)
+    # Case: Images (Tiered)
+    elif isinstance(inst_specs, InstantImagesTicket):
+        if inst_specs.total_quantity > 0:
+            instants = create_instant_winners_images(
+                inst_specs, perms, gi.AddImages.NoneAdded, nw_specs.spots, first=first_time
+            )
 
-    tio.write_permutations_to_files(filename, permutations)
-    game_stacks = tio.create_game_stacks_from_permutations(permutations, ups, sheets, capacities[1])
-    ceedees, teepees = tio.write_game_stacks_to_file(filename, game_stacks, ups, sheets, capacities[1])
+    # 6. Merge Lists into Permutations structure
+    # We iterate through 'perms' indices and build the final list for that permutation.
+    loop_range = len(holders) if holders else len(instants)
+    if not loop_range and perms > 0:
+        loop_range = perms  # Fallback if only NW?
 
-    print('whatevs')
+    for i in range(loop_range):
+        current_perm = []
 
+        # Add Holds for this perm
+        if i < len(holders):
+            current_perm.extend(holders[i])
 
-if __name__ == "__main__":
-    smackcams = [
-        [40, 1, 150, [80, 80], False, 0, 0, '.pdf'],
-        ['N', 274, 4, 1001, 9999, '00', ''],
-        ['C', 6, 10],
-        ['I', [[0, False]]],
-        ['C', 20, 10],
-        ['000', 'smackcans-10101'],
-        ''
-    ]
+        # Add Instants for this perm
+        if i < len(instants):
+            current_perm.extend(instants[i])
 
-    smackimgs = [
-        [40, 1, 150, [80, 80], False, 0, 0, '.pdf'],
-        ['N', 274, 4, 1001, 9999, '00', ''],
-        ['I', [[6, False]], 0],
-        ['I', [[0, False]]],
-        ['C', 20, 10], ['000', 'smackims-20202'],
-        ''
-    ]
+        # Add NonWinners (Copy base list and reset perm number)
+        if tickets:
+            nws = copy.deepcopy(tickets)
+            for tick in nws:
+                # Reset uTick permutation
+                tick.reset_permutation(i + 1)
+            current_perm.extend(nws)
 
-    create_game(smackimgs)
+        permutations.append(current_perm)
+
+    # 7. Output
+    # Write the permutation files (e.g. filename-01.csv, filename-02.csv)
+    tio.write_permutations_to_files(filename, permutations, False, output_folder)
+
+    # Calculate stacking layout
+    game_stacks = tio.create_game_stacks_from_permutations(
+        permutations, ups, sheets, capacity
+    )
+
+    # Write stacks to files
+    tio.write_game_stacks_to_file(
+        filename, game_stacks, ups, sheets, capacity, output_folder
+    )
+
+    return f"Created {len(permutations)} permutations."

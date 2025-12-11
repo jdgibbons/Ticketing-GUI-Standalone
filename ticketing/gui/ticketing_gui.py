@@ -1,22 +1,43 @@
+"""
+Ticketing GUI Application
+=========================
+
+This module serves as the primary graphical user interface (GUI) entry point for the
+Multi-Purpose CSV Generator. It orchestrates the entire ticket generation workflow:
+
+1.  **UI Construction:** Builds the main window with specialized frames for collecting user input.
+2.  **Data Retrieval:** Collects raw inputs from GUI fields and converts them into structured Data Objects (`Ticket` models).
+3.  **Validation:** Ensures all inputs are valid (integers are positive, strings are non-empty, etc.).
+4.  **Verification:** Performs mathematical checks to ensure the requested ticket quantities match the physical sheet capacity.
+5.  **Execution:** dynamically selects the appropriate backend generation module based on the ticket configuration and runs it.
+
+Dependencies:
+    - tkinter / ttkbootstrap: For the window and widgets.
+    - ticketing.ticket_models: For structured data transfer objects.
+    - ticketing.game_registry: For mapping ticket types to backend logic.
+"""
+
 import tkinter as tk
 from tkinter import filedialog
 import ttkbootstrap as ttk
-from typing import Optional
-from ticketing.ticket_models import GameInfo, Ticket, NamesData
+from typing import Optional, List, Tuple, Any
 
+# --- Internal Imports ---
+from ticketing.ticket_models import GameInfo, Ticket, NamesData
 from ticketing import game_info_gui as gi
 from ticketing.game_registry import get_game_creator
 
+# --- GUI Components ---
 from .result_message_box import ResultMessageBox
-
 from .game__info_frame import GameInfoFrame
 from .holds__frame import HoldsFrame
 from .instants__frame import InstantsFrame
 from .names__frame import NamesFrame
 from .nonwinners__frame import NonwinnersFrame
 from .picks__frame import PicksFrame
-# from .helpers import select_game_method
 from .shaded_spread_gui import create_gui as shaded_gui
+
+# --- Ticket Models for Type Hinting and Checks ---
 from ticketing.ticket_models import (
     # Categories
     InstantImagesTicket, InstantCannonsTicket, InstantShadedTicket,
@@ -26,9 +47,14 @@ from ticketing.ticket_models import (
     NonWinnerImagesTicket, NonWinnerNumbersTicket
 )
 
+# --- Global State ---
+# Stores references to the instantiated frames to allow data retrieval across functions.
 gui_frames = {}
 gui_frame_labels = []
 
+# --- Data Containers ---
+# These hold the structured data objects retrieved from the UI.
+# They are initialized to None and populated when the user clicks 'Submit'.
 game_specs: Optional[GameInfo] = None
 nw_specs: Optional[Ticket] = None
 inst_specs: Optional[Ticket] = None
@@ -36,46 +62,56 @@ pick_specs: Optional[Ticket] = None
 hold_specs: Optional[Ticket] = None
 name_specs: Optional[NamesData] = None
 
+# --- Configuration Strings ---
+# Used primarily for debugging to print the "Type" of game (e.g., "Images", "Cannons").
+# Probably going away soon.
 nw_type = ""
 inst_type = ""
 pick_type = ""
 hold_type = ""
 
 output_folder = ''
-DEBUG = False
+DEBUG = True
 
 
 def create_gui():
     """
-    Creates and initializes the graphical user interface (GUI) for the
-    Multi-Purpose CSV Generator application.
+    Initializes and launches the main application window.
 
-    This function sets up the main application window, applies global
-    default styles for the UI, initializes GUI frames, and adds buttons such
-    as Clear and Submit with appropriate commands and styling. It also
-    incorporates a menu bar and sets the main event loop to keep the
-    application running.
-
-    :return: None
+    This function performs the following setup steps:
+    1.  Initializes the `ttkbootstrap` Window with the 'superhero' theme.
+    2.  Configures global styles (e.g., font sizes).
+    3.  Builds the Menu Bar (File > Exit, etc.).
+    4.  Calls `add_frames()` to instantiate and grid the data input sections.
+    5.  Adds the persistent 'Clear' and 'Submit' buttons at the bottom.
+    6.  Starts the main event loop (`root.mainloop()`).
     """
     global gui_frames, gui_frame_labels
     root = ttk.Window(themename="superhero")
     root.title("Multi-Purpose CSV Generator")
+
     # Configure default styles to increase font size globally
     style = ttk.Style()
     style.configure('.', font=('Helvetica', 10))
 
     add_menubar(root)
 
-    # Create Gui Frames
+    # Create the specialized input frames
     add_frames(root)
 
-    # Create a Clear button with padding and styling
+    # --- Control Buttons ---
+
+    # CLEAR: Resets all fields in every frame to their default values.
     clear_button = ttk.Button(root, text="Clear", command=lambda: clear_fields(root))
     clear_button.grid(row=6, column=0, columnspan=2, pady=10)
 
-    # Create the Submit button with padding and styling
-    submit_button = ttk.Button(root, text="Submit", command=lambda: submit_data(root) if validate_data(root) else None)
+    # SUBMIT: Triggers the validation -> retrieval -> execution pipeline.
+    # Logic: It only calls `submit_data` if `validate_data` returns True.
+    submit_button = ttk.Button(
+        root,
+        text="Submit",
+        command=lambda: submit_data(root) if validate_data(root) else None
+    )
     submit_button.grid(row=7, column=0, columnspan=2, pady=10)
 
     root.mainloop()
@@ -83,12 +119,14 @@ def create_gui():
 
 def add_menubar(root):
     """
-    Adds a menu bar to the given tkinter root window. The menu bar includes various
-    file menu options such as selecting an output directory, opening the Shade Helper
-    tool, and exiting the application.
+    Attaches the top navigation menu to the main window.
 
-    :param root: The root tkinter window where the menu bar will be added.
-    :type root: tkinter.Tk
+    Menu Options:
+    - **Select Output Directory:** Opens a directory picker dialog.
+    - **Open Shade Helper:** Launches the standalone Shaded Spread utility.
+    - **Exit:** Closes the application.
+
+    :param root: The root tkinter window instance.
     """
 
     def select_output_directory():
@@ -114,15 +152,17 @@ def add_menubar(root):
 
 def add_frames(root):
     """
-    Adds multiple frames to the root widget using the `create_frame` function.
+    Instantiates and places the six primary input frames into the main grid.
 
-    This function is responsible for initializing and placing several specific
-    frames within the given root widget. Each frame represents a distinct section
-    or component in the application UI.
+    The frames are:
+    1.  **Game Information:** General settings (Ups, Sheets, Window Structure).
+    2.  **Nonwinners:** Configuration for non-winning tickets.
+    3.  **Instant Winners:** Configuration for instant win tickets.
+    4.  **Pick Tickets:** Configuration for pick-style tickets.
+    5.  **Hold Tickets:** Configuration for hold tickets (Bingos, Balls, etc.).
+    6.  **Names:** File output naming conventions.
 
-    :param root: The root widget where the frames will be added.
-    :type root: tkinter.Widget
-    :return: None
+    :param root: The parent widget to attach the frames to.
     """
     create_frame(root, GameInfoFrame, "Game Information", 0, 0)
     create_frame(root, NonwinnersFrame, "Nonwinners", 0, 1)
@@ -134,15 +174,17 @@ def add_frames(root):
 
 def create_frame(root, frame_type, frame_text, row, column):
     """
-  Creates and places a frame of the specified type in the grid.
+    Helper function to instantiate a specific frame class and place it on the grid.
 
-  Args:
-    root: The parent widget.
-    frame_type: The type of frame to create (e.g., GameInfoFrame, NonwinnersFrame).
-    frame_text: The text to display in the frame's label.
-    row: The grid row to place the frame in.
-    column: The grid column to place the frame in.
-  """
+    This function also registers the frame in the global `gui_frames` dictionary,
+    allowing other functions (like `retrieve_data` or `clear_fields`) to access it later.
+
+    :param root: The parent widget.
+    :param frame_type: The class reference of the frame to create (e.g., `GameInfoFrame`).
+    :param frame_text: The label text for the frame border.
+    :param row: Grid row index.
+    :param column: Grid column index.
+    """
     global gui_frames, gui_frame_labels
     frame = frame_type(root, text=frame_text, padding=10)
     frame.grid(row=row, column=column, padx=5, pady=5, sticky="nsew")
@@ -152,8 +194,13 @@ def create_frame(root, frame_type, frame_text, row, column):
 
 def get_type_from_object(obj) -> str:
     """
-    Maps Ticket Objects to the string identifiers expected by select_game_method.
-    Returns strings like 'Images', 'Numbers', 'Cannons', 'Bingos', etc.
+    Debug Utility: Converts a Ticket Object back into a readable string identifier.
+
+    This is primarily used for console logging to show the user (developer) what
+    kind of ticket configuration was detected (e.g., "Images", "Numbers", "Cannons").
+
+    :param obj: A Ticket Data Object (e.g., `InstantImagesTicket`).
+    :return: A string representing the ticket category (e.g., "Images").
     """
     # NonWinners
     if isinstance(obj, NonWinnerImagesTicket): return "Images"
@@ -181,23 +228,31 @@ def get_type_from_object(obj) -> str:
 
 def submit_data(root):
     """
-    Orchestrates the data collection and game generation.
+    The Core Workflow Function.
+
+    Triggered when the user clicks 'Submit'. It performs the following sequence:
+    1.  **Validation:** Checks fields for basic errors (empty fields, negative numbers).
+    2.  **Retrieval:** Pulls data from GUI frames into `Ticket` objects.
+    3.  **Debug Logging:** Prints the gathered configuration to the console.
+    4.  **Verification:** Calculates totals to ensure Ticket Count == Sheet Capacity.
+    5.  **Selection:** Uses the `Game Registry` to find the correct backend module for this configuration.
+    6.  **Execution:** Runs the selected game module to generate the files.
+    7.  **Reporting:** Displays the final results (success or error) in a popup.
+
+    :param root: The root window (used for parenting message boxes).
     """
     global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs, output_folder, \
         hold_type, inst_type, pick_type, nw_type
 
-    # 1. Validate Data
+    # 1. Validate Data (Basic field checks)
     if not validate_data(root):
-        return  # validate_data handles the error popup
+        return  # Stop if validation fails (popup already shown in `validate_data`)
 
-    # 2. Retrieve Data (These are now Objects, not lists!)
-    # Note: retrieve_data() updates the global variables automatically,
-    # but we assign them here for clarity.
+    # 2. Retrieve Data (Convert GUI inputs to Data Objects)
     data_bundle = retrieve_data()
     game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs = data_bundle
 
-    # 3. Debug Printing
-    # We use the helper to get readable strings because we can't just pop index 0 anymore.
+    # 3. Debug Printing (Console output)
     if DEBUG:
         nw_type_str = get_type_from_object(nw_specs)
         inst_type_str = get_type_from_object(inst_specs)
@@ -205,20 +260,21 @@ def submit_data(root):
         hold_type_str = get_type_from_object(hold_specs)
         print_initial_data_gathering(data_bundle, hold_type_str, inst_type_str, nw_type_str, pick_type_str)
 
-    # 4. Verify Specifications (Math Checks)
+    # 4. Verify Specifications (Math/Logic Checks)
+    # Checks if ticket quantities match sheet layouts and if Cannon iterations match permutations.
     proceed, verification_output = verify_all_specifications()
 
     if not proceed:
         ResultMessageBox(root, "Verification Failed", verification_output)
         return
 
-    # 5. Select the Game Method
-    # We pass the full objects. The logic for "Bingos -> BBalls" is now handled inside this function.
-    # We also pass game_specs as requested for future logic (e.g. checking Window Structure).
+    # 5. Select the Game Method (The Registry Lookup)
+    # This determines WHICH python module (e.g., game_imgs_imgs_imgs_imgs.py) handles this specific
+    # combination of ticket types.
     create_method = get_game_creator(game_specs, nw_specs, inst_specs, pick_specs, hold_specs)
 
     if create_method is None:
-        # Generate a readable error message describing the configuration
+        # If no matching module is found in the registry, warn the user.
         config_desc = (f"NW: {type(nw_specs).__name__}\n"
                        f"INST: {type(inst_specs).__name__}\n"
                        f"PICK: {type(pick_specs).__name__}\n"
@@ -228,11 +284,8 @@ def submit_data(root):
         return
 
     # 7. Execute Creation
-    # CRITICAL NOTE: We are now passing OBJECTS, not LISTS.
-    # Your 'create_method' (the backend logic) must be updated to handle these objects,
-    # OR we need an adapter here to convert them back to lists.
-    # Assuming we are moving forward with Objects:
     try:
+        # Pass the bundle of Objects + Output Folder to the backend logic.
         creation_output = create_method([
             game_specs,
             nw_specs,
@@ -242,10 +295,13 @@ def submit_data(root):
             name_specs,
             output_folder
         ])
+
+        # Combine the verification breakdown with the success message
         final_message = f"{verification_output}\n\n{'-' * 30}\n\n{creation_output}"
         ResultMessageBox(root, "Results", str(final_message))
     except Exception as e:
-        # Catch unexpected crashes (likely due to backend not expecting Objects yet)
+        # If DEBUG is True, crash so we can see the Traceback in the IDE.
+        # Otherwise, show a friendly error popup.
         if DEBUG:
             raise e
         ResultMessageBox(root, "Execution Error", f"An error occurred during generation:\n{str(e)}")
@@ -253,20 +309,7 @@ def submit_data(root):
 
 def print_initial_data_gathering(gamey_data, holding_type, insta_type, now_type, picky_type):
     """
-    Prints initial data gathering information including details about nonwinners,
-    instant winners, pick tickets, hold tickets, and iterates over game data to print each item.
-
-    :param gamey_data: A collection of data elements related to the game.
-    :type gamey_data: list
-    :param holding_type: The type of tickets that are on hold.
-    :type holding_type: str
-    :param insta_type: The type of instant winning tickets.
-    :type insta_type: str
-    :param now_type: The type of nonwinning tickets.
-    :type now_type: str
-    :param picky_type: The type of pick tickets.
-    :type picky_type: str
-    :return: None
+    Console Helper: Prints a summary of the collected data types.
     """
     print(f'Nonwinners: {now_type}')
     print(f'Instant Winners: {insta_type}')
@@ -278,20 +321,58 @@ def print_initial_data_gathering(gamey_data, holding_type, insta_type, now_type,
 
 def verify_all_specifications():
     """
-    Verifies all specifications for a gaming environment using Data Class objects.
+    The Mathematical Gatekeeper.
+
+    This function performs two critical checks:
+    1.  **Logical Consistency:** Ensures that if 'Cannons' are used, the number of iterations
+        matches the number of Game Permutations.
+    2.  **Capacity Verification:** Calculates the total number of tickets (NonWinners + Instants + Picks + Holds)
+        and multiplies by the number of Ups. It checks if this number equals the physical capacity
+        of the requested Sheets (Sheets * Tickets per Sheet).
+
+    :return: A tuple (Boolean, String).
+             - True + Success Message if checks pass.
+             - False + Error Message if checks fail.
     """
     global game_specs, nw_specs, inst_specs, pick_specs, hold_specs
 
-    # --- 1. CALCULATE TOTALS ---
-    # We simply ask the objects for their calculated totals.
-    # We wrap them in lists (e.g. [inst_total]) because that is
-    # what gi.check_game_parameters currently expects.
+    # Safety check
+    if not game_specs or not inst_specs or not pick_specs or not hold_specs:
+        return False, "Data has not been retrieved properly."
 
+    # === 1. LOGIC CHECK: CANNONS VS PERMUTATIONS ===
+    game_perms = game_specs.permutations
+
+    # Check Instant Cannons
+    if isinstance(inst_specs, InstantCannonsTicket):
+        if inst_specs.iterations != game_perms:
+            error_msg = (
+                "Configuration Error:\n"
+                f"Game Permutations: {game_perms}\n"
+                f"Instant Cannon Iterations: {inst_specs.iterations}\n\n"
+                "For Cannons, these values must be equal."
+            )
+            return False, error_msg
+
+    # Check Hold Cannons
+    if isinstance(hold_specs, HoldCannonsTicket):
+        if hold_specs.iterations != game_perms:
+            error_msg = (
+                "Configuration Error:\n"
+                f"Game Permutations: {game_perms}\n"
+                f"Hold Cannon Iterations: {hold_specs.iterations}\n\n"
+                "For Cannons, these values must be equal."
+            )
+            return False, error_msg
+
+    # === 2. CALCULATE TOTALS ===
+    # We ask the Ticket Objects to calculate their own total quantities now.
     inst_check = [inst_specs.total_quantity]
     pick_check = [pick_specs.total_quantity]
     hold_check = hold_specs.total_quantity
 
-    # --- 2. VALIDATE ---
+    # === 3. VALIDATE MATH (Capacity vs Quantity) ===
+    # Delegates the final math check to the logic in game_info_gui.py
     proceed, result = gi.check_game_parameters(
         game_specs,
         nw_specs,
@@ -309,15 +390,12 @@ def verify_all_specifications():
 
 def validate_data(root):
     """
-    Validates the data across multiple GUI frames and displays an error message
-    if validation fails. Each frame's individual `validate_data` method is called
-    to collect a list of errors. If any errors are found, they are compiled into a
-    message and displayed in a result message box.
+    Iterates through every active GUI Frame and calls its specific `validate_data` method.
 
-    :param root: The root window or widget where the result message box
-        will be displayed.
-    :return: A boolean indicating whether all frames' data passed validation
-        (`True`) or not (`False`).
+    If any frame reports an error (e.g., negative numbers, missing fields), this function
+    collects those errors into a single list and displays them in a popup window.
+
+    :return: True if NO errors were found, False otherwise.
     """
     global gui_frames, DEBUG
     errors = []
@@ -336,15 +414,7 @@ def validate_data(root):
 
 def clear_fields(root):
     """
-    Clears all fields within specific GUI frames.
-
-    This function iterates over specific frames in the graphical user
-    interface and clears all fields associated with them. Each frame,
-    identified by its respective key in the `gui_frames` dictionary,
-    is invoked with its `clear_fields` method.
-
-    :param root: Root element of the GUI application.
-    :return: None
+    Resets the interface. Calls `.clear_fields()` on every registered frame.
     """
     gui_frames["Game Information"].clear_fields()
     gui_frames["Nonwinners"].clear_fields()
@@ -356,15 +426,12 @@ def clear_fields(root):
 
 def retrieve_data():
     """
-    Retrieves data from multiple GUI frames and returns a consolidated list.
+    Collects the current state of the application.
 
-    Each piece of data is gathered from the respective GUI frame by invoking
-    their `retrieve_data()` method. The function globally updates specific
-    variables to hold the data from each frame, allowing later access and use.
+    Calls `.retrieve_data()` on every registered frame to get the latest `Ticket` objects.
+    Updates the global variables (game_specs, nw_specs, etc.) and returns them as a list.
 
-    :return: A list containing data retrieved from six specific GUI frames. The
-        data corresponds to different categories including game information,
-        nonwinners, instant winners, pick tickets, hold tickets, and names.
+    :return: A list of Data Objects [GameInfo, NW, Inst, Pick, Hold, Names].
     """
     global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs
     game_specs = gui_frames["Game Information"].retrieve_data()

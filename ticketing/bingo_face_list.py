@@ -1,12 +1,8 @@
-import csv
 import random as rn
 from typing import Set, Tuple, Any
 
-from numpy import matrix
 from itertools import product
-from itertools import cycle
-from itertools import permutations
-import time
+import os
 
 
 from .full_bingo_face import FullBingoFace
@@ -67,35 +63,46 @@ class BingoFaceList(object):
         :rtype: None
         """
         self.usable_faces = []
-        filename = 'usable9000.csv' if not extended else 'usable27000.csv'
-        # Open usable quotes file for reading
-        file = open(f'./ticketing/{filename}', 'r')
-        lines = file.readlines()
         temp_face = ''
         previous_line_id = ''
-        # Cycle through each line of the file
-        for line in lines:
-            # Split the line into a list. The first element contains the face id plus the
-            # location of the line on that face (i.e., 10.1 represents face 10, line 1).
-            # The face id is the only value we care about. The remaining elements represent
-            # the five bingo spots.
-            temp_array = line.strip().split(',')
-            temp_id = temp_array.pop(0).split('.')[0].replace('"', '')
-            # Check if this bingo line belongs to the same face as the previous line.
-            # If it does, add the line to the current face. Otherwise, create a new
-            # face with the new id and current line.
-            if temp_id != previous_line_id:
-                # Update the previous line id to the new id
-                previous_line_id = temp_id
-                # If this isn't the very first iteration and there are more than two
-                # lines on the previous face, append it to the list of usable faces.
+        filename = 'usable9000.csv' if not extended else 'usable27000.csv'
+        file_path = os.path.join('ticketing', filename)
+        try:
+            # Open usable quotes file for reading (use with to insure auto-closure)
+            with open(file_path, 'r') as file:
+                lines = file.readlines()
+                # Cycle through each line of the file
+                for line in lines:
+                    # Split the line into a list. The first element contains the face id plus the
+                    # location of the line on that face (i.e., 10.1 represents face 10, line 1).
+                    # The face id is the only value we care about. The remaining elements represent
+                    # the five bingo spots.
+                    temp_array = line.strip().split(',')
+                    temp_id = temp_array.pop(0).split('.')[0].replace('"', '')
+                    # Check if this bingo line belongs to the same face as the previous line.
+                    # If it does, add the line to the current face. Otherwise, create a new
+                    # face with the new id and current line.
+                    if temp_id != previous_line_id:
+                        # Update the previous line id to the new id
+                        previous_line_id = temp_id
+                        # If this isn't the very first iteration and there are more than two
+                        # lines on the previous face, append it to the list of usable faces.
+                        if temp_face != '' and temp_face.number_of_paths() >= 2:
+                            temp_face.shuffle_paths()
+                            self.usable_faces.append(temp_face)
+                        # This is a whole new face, so create it already.
+                        temp_face = FullBingoFace(temp_id, temp_array)
+                    else:
+                        temp_face.add_path(temp_array)
+
+                # Add the last face to the usable faces list.
                 if temp_face != '' and temp_face.number_of_paths() >= 2:
                     temp_face.shuffle_paths()
                     self.usable_faces.append(temp_face)
-                # This is a whole new face, so create it already.
-                temp_face = FullBingoFace(temp_id, temp_array)
-            else:
-                temp_face.add_path(temp_array)
+        except FileNotFoundError:
+            print(f"CRITICAL ERROR: Could not find bingo file at {file_path}")
+            # You might want to raise the error or handle it gracefully here
+        patty_cake = self.usable_faces[-1]
         if reset_paths_taken:
             self.paths_taken.clear()
 
@@ -105,7 +112,7 @@ class BingoFaceList(object):
         :return None
         :rtype: None
         """
-        shuffles = rn.randint(4, 25)
+        shuffles = rn.randint(2, 5)
         for x in range(shuffles):
             rn.shuffle(self.usable_faces)
 
@@ -205,7 +212,7 @@ class BingoFaceList(object):
 
     def create_verification_lists(self, pseudo_face: list[str | list[str]]) -> list[list[str]]:
         """
-        Take a pseudo-bingo face and transpose the paths from a one or two dimension
+        Take a pseudo-bingo face and transpose the paths from a one or two-dimension
         array into five dimensions. Replace any paths that contain an empty member
         with the full complement of numbers associated with that position. So, the
         pseudo-face \n
@@ -233,28 +240,31 @@ class BingoFaceList(object):
         :return: list containing all possible numbers for each column
         :rtype: list[list[str]]
         """
-        # Check for the number of paths on this face, then transpose the paths to five lists.
-        # A length of two means there's only one path on this face.
-        if len(pseudo_face) == 2:
-            spots_list = matrix(pseudo_face[1]).transpose().tolist()
-        elif len(pseudo_face) == 3:
-            spots_list = matrix([pseudo_face[1], pseudo_face[2]]).transpose().tolist()
-        # THE FOLLOWING AREN'T USED RIGHT NOW, BUT THEY MAY BE IN THE FUTURE.
-        elif len(pseudo_face) == 4:
-            spots_list = matrix([pseudo_face[1], pseudo_face[2], pseudo_face[3]]).transpose().tolist()
-        elif len(pseudo_face) == 5:
-            spots_list = matrix([pseudo_face[1], pseudo_face[2], pseudo_face[3], pseudo_face[4]]).transpose().tolist()
-        # THIS SITUATION ISN'T EVEN POSSIBLE GIVEN THE NATURE OF THE BINGO FACES (there are only four usable
-        # lines per face (the center face is missing a number (free space))), BUT I'M JUST KEEPING MY OPTIONS OPEN.
-        elif len(pseudo_face) == 6:
-            spots_list = matrix([pseudo_face[1], pseudo_face[2], pseudo_face[3],
-                                 pseudo_face[4], pseudo_face[5]]).transpose().tolist()
-        else:
-            spots_list = []
+        # We need to extract the rows containing numbers (skipping index 0 which is verification ID)
+        # If pseudo_face is ['123', ['1','2','3'], ['4','5','6']]
+        # we want rows = [['1','2','3'], ['4','5','6']]
+        rows = []
+
+        # Logic to grab only the lists, ignoring the verification string
+        # This replaces your 'if len == 2', 'elif len == 3' block
+        for item in pseudo_face:
+            if isinstance(item, list):
+                rows.append(item)
+
+        if not rows:
+            return []
+
+        # THE PYTHONIC TRANSPOSE
+        # zip(*rows) takes the lists and zips them together by index.
+        # list(...) converts the tuples back into lists.
+        # This replaces: spots_list = matrix(...).transpose().tolist()
+        spots_list = [list(x) for x in zip(*rows)]
+
         # Replace any free spaces with the full range of values for the associated columns.
         for i in range(len(spots_list)):
             if '' in spots_list[i]:
                 spots_list[i] = self.path_replacements[i]
+
         return spots_list
 
     def calculate_remaining_bingo_lines(self) -> int:
@@ -479,38 +489,3 @@ class BingoFaceList(object):
     def set_debug(self, bugging):
         self.debug = bugging
 
-    # def import_usable_faces_csv(self, extended: bool = False, reset_paths_taken: bool = False) -> None:
-    #     """
-    #     Import the usable bingo faces from a file and place them into a list. The data
-    #     includes the verification (face id) number and available bingo paths. Use the
-    #     csv library for code clarity.
-    #
-    #     :param extended: use extended (27,000) instead of the standard (9,000) face csv file
-    #     :type extended: bool
-    #     :param reset_paths_taken: Should the paths-taken set be cleared?
-    #     :type reset_paths_taken: bool
-    #     :return: None
-    #     :rtype: None
-    #     """
-    #     self.usable_faces = []
-    #     filename = 'usable9000.csv' if not extended else 'usable27000.csv'
-    #
-    #     with open(f'./ticketing/{filename}') as file:
-    #         reader = csv.reader(file)
-    #         temp_face = ''
-    #         previous_line_id = ''
-    #
-    #         for row in reader:
-    #             temp_id = row[0].split('.')[0].replace('"', '')  # Extract face id
-    #
-    #             if temp_id != previous_line_id:
-    #                 previous_line_id = temp_id
-    #                 if temp_face != '' and temp_face.number_of_paths() >= 2:
-    #                     temp_face.shuffle_paths()
-    #                     self.usable_faces.append(temp_face)
-    #                 temp_face = FullBingoFace(temp_id, row[1:])  # Pass remaining elements as bingo spots
-    #             else:
-    #                 temp_face.add_path(row[1:])
-    #
-    #     if reset_paths_taken:
-    #         self.paths_taken.clear()
