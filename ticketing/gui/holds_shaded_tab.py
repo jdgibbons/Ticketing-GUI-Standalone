@@ -29,6 +29,7 @@ class HoldsShadedTab(TicketingNotebookTab):
 
         super().__init__(parent)
         self.name = "Shaded"
+        self.game_perms = 1
         self.add_widgets()
         self.create_defaults()
 
@@ -115,6 +116,14 @@ class HoldsShadedTab(TicketingNotebookTab):
         first_entry.insert(0, "101")
         self.populate_data_collections_with_text(first_entry, "first")
 
+        # Permutations checkbox
+        lbl_split = ttk.Label(self, text="Perms?")
+        lbl_split.grid(row=1, column=9, sticky="e", padx=5, pady=5)
+
+        ck_split = ttk.Checkbutton(self)
+        ck_split.grid(row=1, column=10, sticky="w", padx=5, pady=5)
+        self.populate_data_collections_with_text(ck_split, "split_tiers")
+
         # Last (highest) nonwinner number
         last_label = ttk.Label(self, text="Last")
         last_label.grid(row=2, column=7, sticky="w", padx=5, pady=5)
@@ -122,6 +131,15 @@ class HoldsShadedTab(TicketingNotebookTab):
         last_entry.grid(row=2, column=8, sticky="w", padx=5, pady=5)
         last_entry.insert(0, "9999")
         self.populate_data_collections_with_text(last_entry, "last")
+
+        # Vertical Permutations checkbox
+        lbl_vert = ttk.Label(self, text="Vert?")
+        lbl_vert.grid(row=2, column=9, sticky="e", padx=5, pady=5)
+
+        ck_vert = ttk.Checkbutton(self)
+        ck_vert.grid(row=2, column=10, sticky="w", padx=5, pady=5)
+        ck_vert.state(['disabled'])
+        self.populate_data_collections_with_text(ck_vert, "vertical_layout")
 
         # Spots, number of, entry box
         spots_label = ttk.Label(self, text="Spots")
@@ -144,6 +162,24 @@ class HoldsShadedTab(TicketingNotebookTab):
         images_entry = ttk.Entry(self, width=15)
         images_entry.grid(row=5, column=8, sticky="w", padx=5, pady=5)
         self.populate_data_collections_with_text(images_entry, "images")
+
+        # === DYNAMIC LOGIC ===
+        def toggle_vert_state():
+            """
+            Enables ck_vert only if ck_split is selected.
+            If disabled, also unchecks ck_vert.
+            """
+            if ck_split.instate(['selected']):
+                ck_vert.state(['!disabled'])
+            else:
+                # If Split is unchecked, Vert must be Unchecked AND Disabled
+                ck_vert.state(['!selected', 'disabled'])
+
+        # Bind the command to the Split checkbox
+        ck_split.configure(command=toggle_vert_state)
+
+    def set_game_perms(self, count: int):
+        self.game_perms = count if count > 0 else 1
 
     def validate_data(self) -> list:
         """
@@ -211,7 +247,37 @@ class HoldsShadedTab(TicketingNotebookTab):
                         and not re.fullmatch(r'^[a-zA-Z0-9,;]*$', self.data_dictionary[key])):
                     messages.append(f"Holds -> Shaded: '{key.title()}' must be a list of hold names and quantities"
                                     f" separated by commas and multiple entries separated by semicolons.")
-        return messages
+
+            # --- NEW: VERTICAL MODE VALIDATION ---
+            # We access the boolean value directly from the data_dictionary.
+            if self.data_dictionary.get('ck_vert'):
+                baseline_numbers = None
+                baseline_tier_name = ""
+
+                # Check numbers1 through numbers4 explicitly
+                for i in range(1, 5):
+                    key = f"numbers{i}"
+
+                    # Retrieve value safely; default to empty string if missing
+                    current_val = self.data_dictionary.get(key, "")
+
+                    # Skip empty tiers
+                    if current_val == "":
+                        continue
+
+                    if baseline_numbers is None:
+                        # Establish the first active tier as the baseline to match against
+                        baseline_numbers = current_val
+                        baseline_tier_name = f"Numbers {i}"
+                    else:
+                        # Compare subsequent tiers to the baseline
+                        if current_val != baseline_numbers:
+                            messages.append(
+                                f"Holds -> Shaded: Vertical Mode Error - '{key.title()}' must match"
+                                f" '{baseline_tier_name}'. In Vertical mode, all active tiers must"
+                                f" have identical number lists.")
+
+            return messages
 
     def create_data_dictionary(self):
         """
@@ -219,12 +285,10 @@ class HoldsShadedTab(TicketingNotebookTab):
         """
 
         self.data_dictionary.clear()
-        main_boxes = r"(tier|suffix|color|base)\d+"
-        main_checks = r"(full|pi)\d+"
+        # main_boxes = r"(tier|suffix|color|base)\d+"
+        checkbox_pattern = r"((full|pi)\d+|split_tiers|vertical_layout)"
         for key in self.field_dictionary:
-            if re.match(main_boxes, key):
-                self.data_dictionary[key] = self.field_dictionary[key].get()
-            elif re.match(main_checks, key):
+            if re.match(checkbox_pattern, key):
                 self.data_dictionary[key] = self.field_dictionary[key].instate(['selected'])
             else:
                 self.data_dictionary[key] = self.field_dictionary[key].get()
@@ -240,6 +304,8 @@ class HoldsShadedTab(TicketingNotebookTab):
         """
         Clears all input fields in the tab and resets them to their initial values.
         """
+        self.field_dictionary["split_tiers"].state(['!selected'])
+        self.field_dictionary["vertical_layout"].state(['!selected', 'disabled'])
 
         # Cycle through the shaded numbers rows and reset the values to their defaults.
         for i in range(1, 6):
@@ -277,7 +343,7 @@ class HoldsShadedTab(TicketingNotebookTab):
             num_str = self.data_dictionary[f"numbers{i}"]
             if num_str:
                 tier = ShadedTier(
-                    numbers=[int(n) for n in num_str.split(',')],
+                    numbers=[n.strip() for n in num_str.split(',')],
                     suffix=self.data_dictionary[f"suffix{i}"],
                     color=self.data_dictionary[f"color{i}"],
                     is_full=self.data_dictionary[f"full{i}"],
@@ -303,7 +369,11 @@ class HoldsShadedTab(TicketingNotebookTab):
             last_num=int(self.data_dictionary["last"]),
             spots=int(self.data_dictionary["spots"]),
             exclusions=self.data_dictionary["exclusions"],
-            image_holds=parsed_img_holds
+            image_holds=parsed_img_holds,
+            # Inject new data
+            game_perms=self.game_perms,
+            split_tiers=self.data_dictionary["split_tiers"],
+            vertical_layout=self.data_dictionary["vertical_layout"]
         )
 
 
@@ -314,4 +384,3 @@ def parse_image_holds(images_string):
         if entry != "":
             image_list.append(entry.split(","))
     return image_list
-

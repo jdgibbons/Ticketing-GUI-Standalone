@@ -3,6 +3,7 @@ import random as rn
 from itertools import cycle, permutations, combinations
 from ticketing.game_info_gui import AddImages
 from .number_generator import create_bingo_positions
+import game_info_gui as gi
 
 
 def create_tiered_image_list(amt_list: list[int], prefix: str, add_subimages: bool,
@@ -417,6 +418,18 @@ def add_additional_image_slots(addl_imgs: AddImages, line: list[str], coda: str 
         elif addl_imgs.value > 0:
             for _ in range(abs(addl_imgs.value)):
                 line.append('')
+    return line
+
+
+def add_additional_image_slots_list(configs: list[gi.AddImages], line: list[str], coda: str = '.ai') -> list[str]:
+    """
+    Applies multiple AddImages configurations sequentially.
+    Wraps the original single-item method for backward compatibility.
+    """
+    for config in configs:
+        # Call the original method for each config in the list
+        line = add_additional_image_slots(config, line, coda)
+
     return line
 
 

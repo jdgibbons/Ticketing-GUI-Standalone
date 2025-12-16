@@ -435,6 +435,10 @@ def retrieve_data():
     """
     global game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs
     game_specs = gui_frames["Game Information"].retrieve_data()
+
+    if "Hold Tickets" in gui_frames:
+        gui_frames["Hold Tickets"].set_game_perms(game_specs.permutations)
+
     nw_specs = gui_frames["Nonwinners"].retrieve_data()
     inst_specs = gui_frames["Instant Winners"].retrieve_data()
     pick_specs = gui_frames["Pick Tickets"].retrieve_data()

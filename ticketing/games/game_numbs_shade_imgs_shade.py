@@ -51,7 +51,7 @@ def generate_balanced_positions(total_tickets: int, spots: int) -> list[int]:
     Example (spots=3):
         Chunk 1: [2, 0, 1]
         Chunk 2: [1, 2, 0]
-        Result:  [2, 0, 1, 1, 2, 0]
+        Result: [2, 0, 1, 1, 2, 0]
 
     This guarantees a maximum distance between identical positions.
     """
@@ -176,53 +176,142 @@ def create_instant_winner_shaded_tickets(inst_ticket: InstantShadedTicket,
     return ticks, nw_pool
 
 
+def chunks(lst, n):
+    """Yield successive n-sized chunks from lst."""
+    for i in range(0, len(lst), n):
+        yield lst[i:i + n]
+
+
+import random
+
+
 def create_hold_shaded_tickets(hold_ticket: HoldShadedTicket,
                                addl_imgs: gi.AddImages,
                                num_slots: int, is_first: bool = False):
     """
     Create Hold Tickets using Shaded Numbers logic.
+    Supports both Vertical (Stacked) and Standard (Horizontal) generation.
     """
     global suffix
-    ticks = []
     nw_pool = []
 
     addl_nums = num_slots - hold_ticket.spots
+    perms = hold_ticket.game_perms
 
-    # Parse exclusions
+    # Initialize Permutations List (List of Lists)
+    permutation_batches = [[] for _ in range(perms)]
+
+    # Parse exclusions (Common to all modes)
     exclusions = hold_ticket.exclusions.split(',') if hold_ticket.exclusions else []
-
     for tier in hold_ticket.tiers:
         if tier.suffix:
             exclusions.append(tier.suffix)
     exclusions = [x for x in exclusions if x]
 
-    # 1. Process Shaded Numbers
-    for tier in hold_ticket.tiers:
-        base = f"{tier.base_image}{suffix}" if tier.base_image else ""
-        color = tier.color
-        full = tier.is_full
-        is_pi_enabled = tier.pi_enabled  # Clear variable name
+    # ==========================================
+    # 1. PROCESS SHADED NUMBERS
+    # ==========================================
 
-        imgs = ig.add_additional_image_slots(addl_imgs, [base])
+    # --- BRANCH A: VERTICAL (STACKED) LAYOUT ---
+    if hold_ticket.vertical_layout and len(hold_ticket.tiers) > 0:
+        # In Vertical mode, all tiers have the same input numbers.
+        # We take the pool from Tier 1.
+        master_pool = list(hold_ticket.tiers[0].numbers)
+        num_tiers = len(hold_ticket.tiers)
 
-        # Generate Balanced Positions
-        total_tickets_in_tier = len(tier.numbers)
-        position_list = generate_balanced_positions(total_tickets_in_tier, hold_ticket.spots)
+        # Loop through each permutation independently
+        for perm_index in range(perms):
+            # A. Shuffle the master pool so distribution changes every perm
+            current_pool_shuffled = master_pool[:]
+            random.shuffle(current_pool_shuffled)
 
-        for i, shade in enumerate(tier.numbers):
-            pos = position_list[i]
+            # B. Calculate split size
+            # integer division: e.g. 15 numbers / 3 tiers = 5 per tier
+            chunk_size = len(current_pool_shuffled) // num_tiers
 
-            nw_pool, tick = create_shaded_ticket(
-                addl_nums, color, exclusions, hold_ticket.first_num, full, imgs, is_first,
-                hold_ticket.last_num, nw_pool, shade, hold_ticket.spots,
-                forced_position=pos,
-                pi=is_pi_enabled
-            )
-            is_first = False
-            ticks.append(tick)
+            # C. Split the pool into chunks for this permutation
+            # Result is a list of lists: [[nums_for_tier1], [nums_for_tier2]...]
+            tier_chunks = [current_pool_shuffled[i:i + chunk_size]
+                           for i in range(0, len(current_pool_shuffled), chunk_size)]
 
-    # 2. Process Additional Image Holds (if any)
-    # image_holds structure: List of [base_name, amount] strings
+            # D. Assign chunks to Tiers and Generate
+            for tier_idx, tier in enumerate(hold_ticket.tiers):
+                # Safety check: Stop if we run out of chunks (shouldn't happen if math is right)
+                if tier_idx >= len(tier_chunks):
+                    break
+
+                assigned_numbers = tier_chunks[tier_idx]
+
+                # Setup Tier attributes
+                base = f"{tier.base_image}{suffix}" if tier.base_image else ""
+                color = tier.color
+                full = tier.is_full
+                is_pi_enabled = tier.pi_enabled
+                imgs = ig.add_additional_image_slots(addl_imgs, [base])
+
+                # Generate balanced positions for this specific batch of numbers
+                position_list = generate_balanced_positions(len(assigned_numbers), hold_ticket.spots)
+
+                for i, shade in enumerate(assigned_numbers):
+                    pos = position_list[i]
+
+                    nw_pool, tick = create_shaded_ticket(
+                        addl_nums, color, exclusions, hold_ticket.first_num, full, imgs, is_first,
+                        hold_ticket.last_num, nw_pool, shade, hold_ticket.spots,
+                        forced_position=pos,
+                        pi=is_pi_enabled
+                    )
+
+                    permutation_batches[perm_index].append(tick)
+                    is_first = False
+
+    # --- BRANCH B: STANDARD (HORIZONTAL) LAYOUT ---
+    else:
+        for tier in hold_ticket.tiers:
+            base = f"{tier.base_image}{suffix}" if tier.base_image else ""
+            color = tier.color
+            full = tier.is_full
+            is_pi_enabled = tier.pi_enabled
+
+            imgs = ig.add_additional_image_slots(addl_imgs, [base])
+
+            # --- SPLIT LOGIC (HORIZONTAL) ---
+            all_numbers = tier.numbers
+
+            if hold_ticket.split_tiers:
+                # Split the 'all_numbers' list into 'perms' chunks
+                distributed_numbers = [[] for _ in range(perms)]
+                for i, num in enumerate(all_numbers):
+                    distributed_numbers[i % perms].append(num)
+            else:
+                # No split: Every permutation gets the FULL list
+                distributed_numbers = [all_numbers for _ in range(perms)]
+
+            # --- GENERATE TICKETS PER PERMUTATION ---
+            for perm_index in range(perms):
+                numbers_for_this_perm = distributed_numbers[perm_index]
+
+                # Balanced positions for THIS batch
+                position_list = generate_balanced_positions(len(numbers_for_this_perm), hold_ticket.spots)
+
+                for i, shade in enumerate(numbers_for_this_perm):
+                    pos = position_list[i]
+
+                    nw_pool, tick = create_shaded_ticket(
+                        addl_nums, color, exclusions, hold_ticket.first_num, full, imgs, is_first,
+                        hold_ticket.last_num, nw_pool, shade, hold_ticket.spots,
+                        forced_position=pos,
+                        pi=is_pi_enabled
+                    )
+
+                    # Append to the correct permutation list
+                    permutation_batches[perm_index].append(tick)
+                    is_first = False
+
+    # ==========================================
+    # 2. PROCESS ADDITIONAL IMAGE HOLDS
+    # ==========================================
+    # These are appended to EVERY permutation identically
     nummies = [''] * (addl_nums + hold_ticket.spots)
 
     for hold in hold_ticket.image_holds:
@@ -230,15 +319,16 @@ def create_hold_shaded_tickets(hold_ticket: HoldShadedTicket,
             base_name = hold[0]
             amt = int(hold[1])
 
-            for i in range(amt):
-                img_name = f'{base_name}{str(i + 1).zfill(2)}{suffix}'
-                imgs = ig.add_additional_image_slots(addl_imgs, [img_name])
+            for perm_index in range(perms):
+                for i in range(amt):
+                    img_name = f'{base_name}{str(i + 1).zfill(2)}{suffix}'
+                    imgs = ig.add_additional_image_slots(addl_imgs, [img_name])
 
-                tick = uTick('', imgs, nummies, 1, 1, is_first)
-                is_first = False
-                ticks.append(tick)
+                    tick = uTick('', imgs, nummies, 1, 1, is_first)
+                    permutation_batches[perm_index].append(tick)
+                    is_first = False
 
-    return ticks, nw_pool
+    return permutation_batches, nw_pool
 
 
 def create_shaded_ticket(addl_nums, color, exclusions, first, full, imgs, is_first,
@@ -374,7 +464,7 @@ def get_total_number_spots(nw_obj, inst_obj, pick_obj, hold_obj):
 def create_game(data_bundle):
     """
     Main Entry Point.
-    Refactored to use Data Objects.
+    Refactored to use Data Objects and support Permutations.
     """
     global suffix
 
@@ -409,42 +499,66 @@ def create_game(data_bundle):
     num_count = get_total_number_spots(nw_specs, inst_specs, pick_specs, hold_specs)
 
     # 3. Create Holds (Shaded)
+    # This now returns a LIST OF LISTS (Permutations)
     if isinstance(hold_specs, HoldShadedTicket):
         # Note: nons_pool is initialized here by the holds
-        tickles, nons_pool = create_hold_shaded_tickets(
+        final_permutations, nons_pool = create_hold_shaded_tickets(
             hold_specs, gi.AddImages.NoneAdded, num_count, is_first=first_time
         )
-        tickets.extend(tickles)
         first_time = False
+    else:
+        # Fallback if no holds (unlikely for this module)
+        final_permutations = [[] for _ in range(perms)]
 
     # 4. Create Instants (Shaded OR Images)
+    # These functions return flat lists (single batch). We need to copy them into perms.
+    insta_ticks = []
     if isinstance(inst_specs, InstantShadedTicket):
-        tickies, nons_pool = create_instant_winner_shaded_tickets(
+        insta_ticks, nons_pool = create_instant_winner_shaded_tickets(
             inst_specs, nons_pool, gi.AddImages.NoneAdded, num_count, is_first=first_time
         )
         ceedee_tier = inst_specs.cd_tier
-        tickets.extend(tickies)
         first_time = False
 
     elif isinstance(inst_specs, InstantImagesTicket):
         if inst_specs.total_quantity > 0:
-            tickets.extend(create_instant_winner_image_tickets(
+            insta_ticks = create_instant_winner_image_tickets(
                 inst_specs, gi.AddImages.NoneAdded, num_count, is_first=first_time
-            ))
+            )
             ceedee_tier = inst_specs.cd_tier
             first_time = False
 
     # 5. Create NonWinners (Numbers)
+    nw_ticks = []
     if isinstance(nw_specs, NonWinnerNumbersTicket):
-        tickets.extend(create_nonwinner_numbers(
+        nw_ticks = create_nonwinner_numbers(
             nw_specs, nons_pool, gi.AddImages.NoneAdded, num_count, is_first=first_time
-        ))
+        )
         first_time = False
 
-    # 6. Output
-    tio.write_tickets_to_file(filename, tickets, output_folder)
+    # 6. MERGE into Permutations
+    for i in range(len(final_permutations)):
+        # Append Instants (Copy for each perm)
+        if insta_ticks:
+            insts_copy = copy.deepcopy(insta_ticks)
+            for tick in insts_copy:
+                tick.reset_permutation(i + 1)
+            final_permutations[i].extend(insts_copy)
 
-    game_stacks = tio.create_game_stacks(tickets, ups, sheets, capacity, True, 0)
+        # Append NW (Copy for each perm)
+        if nw_ticks:
+            nws_copy = copy.deepcopy(nw_ticks)
+            for tick in nws_copy:
+                tick.reset_permutation(i + 1)
+            final_permutations[i].extend(nws_copy)
+
+    # 7. Output
+    # Use write_permutations_to_files to handle the list of lists
+    tio.write_permutations_to_files(filename, final_permutations, False, output_folder)
+
+    game_stacks = tio.create_game_stacks_from_permutations(
+        final_permutations, ups, sheets, capacity
+    )
 
     ceedees, blankets = tio.write_game_stacks_to_file(
         filename, game_stacks, ups, sheets, capacity, output_folder
@@ -455,10 +569,12 @@ def create_game(data_bundle):
             partname, filename, ceedees, ceedee_tier, output_folder
         )
 
-    return f"Successfully created {len(tickets) * ups} tickets."
+    return f"Successfully created {len(final_permutations)} permutations."
 
 
 if __name__ == "__main__":
+    from ticketing.ticket_models import ShadedTier
+
     # MOCK TEST DATA
     # Based on "Twice Fifty" config from original legacy code
     mock_game = GameInfo(
@@ -497,7 +613,8 @@ if __name__ == "__main__":
 
     mock_hold = HoldShadedTicket(
         tiers=[h1, h2],
-        first_num=101, last_num=999, spots=6, exclusions='33,22,11', image_holds=[]
+        first_num=101, last_num=999, spots=6, exclusions='33,22,11', image_holds=[],
+        game_perms=1, split_tiers=False
     )
 
     # Pick Tickets (Empty)

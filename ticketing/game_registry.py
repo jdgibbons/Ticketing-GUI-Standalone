@@ -34,6 +34,9 @@ GAME_REGISTRY = {
     # "NSISH" - Numbers, Shaded, Images, Shaded
     (NonWinnerNumbersTicket, InstantShadedTicket, PickImagesTicket, HoldShadedTicket): game_numbs_shade_imgs_shade_cg,
 
+    # "NIISH" - Numbers, Shaded, Images, Shaded
+    (NonWinnerNumbersTicket, InstantImagesTicket, PickImagesTicket, HoldShadedTicket): game_numbs_shade_imgs_shade_cg,
+
     # "NIIIM" - Numbers, Images, Images, Images
     (NonWinnerNumbersTicket, InstantImagesTicket, PickImagesTicket, HoldImagesTicket): game_numbs_imgs_imgs_imgs_cg,
 

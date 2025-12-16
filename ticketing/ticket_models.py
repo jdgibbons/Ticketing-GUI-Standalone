@@ -17,12 +17,12 @@ class ImageTier:
 @dataclass
 class ShadedTier:
     """Used for Shaded tabs (Holds and Instants)"""
-    numbers: List[int]
     suffix: str
     color: str
     is_full: bool
     base_image: str
     pi_enabled: bool = False  # Only used in Holds -> Shaded
+    numbers: List[str] = field(default_factory=list)
 
 
 # ==========================================
@@ -175,19 +175,40 @@ class HoldShadedTicket(HoldTicket):
     # List of lists for image holds
     image_holds: List[List[str]] = field(default_factory=list)
 
+    # Added for permutations
+    game_perms: int = 1  # From GameInfoFrame
+    split_tiers: bool = False  # New checkbox in HoldsShadedFrame
+    vertical_layout: bool = False
+
     @property
     def total_quantity(self) -> int:
         total = 0
-        # Add shaded numbers count
-        for tier in self.tiers:
-            total += len(tier.numbers)
 
-        # Add (Additional) Image Holds (e.g. [['Red', '5'], ...])
+        # Calculate quantity from Number Tiers
+        if self.tiers:
+            # --- PRIORITY 1: VERTICAL MODE ---
+            # Logic: In vertical mode, the total quantity equals the length of
+            # a single tier's number list (since the total pool is distributed).
+            if self.vertical_layout:
+                total = len(self.tiers[0].numbers)
+
+            # --- PRIORITY 2: PERMUTATIONS MODE (Split Tiers) ---
+            # Logic: Total values across all tiers divided by the number of permutations.
+            elif self.split_tiers and self.game_perms > 0:
+                total_numbers = sum(len(t.numbers) for t in self.tiers)
+                total = total_numbers / self.game_perms
+
+            # --- PRIORITY 3: STANDARD MODE ---
+            # Logic: Simple sum of all values across all tiers.
+            else:
+                total = sum(len(t.numbers) for t in self.tiers)
+
+        # Add Image Holds (Fixed quantities added on top)
         for img_hold in self.image_holds:
             if len(img_hold) > 1 and img_hold[1].isdigit():
                 total += int(img_hold[1])
-        return total
 
+        return int(total)
 
 # === INSTANT SUBCLASSES ===
 

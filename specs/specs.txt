@@ -59,6 +59,29 @@ The shaded information:
     Exclusions is a list of suffixes, NOT ALREADY LISTED IN THE HOLD FRAME'S SUFFIX BOXES, that need
         to be excluded from the nonwinner list. This is most likely needed if there are instant winners
         that also use suffixes to indicate a winning ticket.
+	
+	The added checkboxes Perm? and Vert? allow for permutations to be used in two different ways:
+		If only the Perm? checkbox is checked, the program will take whatever's in a tier's number
+		text box and scatter those values across perms. So, if we have the numbers 113 - 2013 and four
+		permutations, each permutation would get five numbers each from the pool. This would be the 
+		case for each tier--every tier is a discrete unit that is treated as though the other tiers
+		didn't exist.
+		
+		If both the Perm? and Vert? checkboxes are checked, then the numbers are scattered across the *tiers*.
+		The same numbers should be entered into the numbers boxes for every tier, and those values will be
+		scattered so that each tier receives an equal number. So, if we had the numbers 113 - 1513 and three
+		tiers (with each tier's number box containing the same values), each tier would receive five numbers
+		from the pool. This process would be repeated for each permutation, and the app will attempt to
+		distribute the numbers with as few dupes as possible.
+			tiers: 3
+			perms: 4
+			numbers : 113 - 1513
+				perm 1: tier 1: 113 - 513; tier 2: 613 - 1013; tier 3: 1113 - 1513
+				perm 2: tier 1: 613 - 1013; tier 2: 1113 - 1513; tier 3: 113 - 513
+				perm 3: tier 1: 1113 - 1513; tier 2: 113 - 513; tier 3: 613 - 1013
+				perm 4: tier 1: 313 - 713; tier 2: 813 - 1213; tier 3: 113, 213, 1313 - 1513
+		
+		These are just samples. The actual values will be shuffle. However, this should explain the concept.
 
 'Addl. Holds' allow for additional image holds and should be entered as 'image prefix, quantity' pairs
     separated by semicolons.

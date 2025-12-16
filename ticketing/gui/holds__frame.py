@@ -159,3 +159,7 @@ class HoldsFrame(TicketingFrame):
         """
         if self.tab_names[self.tab_selected_index] == 'Balls':
             self.tabs['Balls'].set_bb_nw_pool(pool)
+
+    def set_game_perms(self, count: int):
+        if self.holds_shaded_tab:
+            self.holds_shaded_tab.set_game_perms(count)
