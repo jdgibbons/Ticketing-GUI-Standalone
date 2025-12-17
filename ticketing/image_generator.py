@@ -1,6 +1,8 @@
 import copy
 import random as rn
 from itertools import cycle, permutations, combinations
+from typing import Union
+
 from ticketing.game_info_gui import AddImages
 from .number_generator import create_bingo_positions
 import game_info_gui as gi
@@ -406,7 +408,7 @@ def create_prefixed_images(first: int, last: int, prefix: str, uniq: bool, coda:
     return images
 
 
-def add_additional_image_slots(addl_imgs: AddImages, line: list[str], coda: str = '.ai') -> list[str]:
+def add_additional_image_slots_old(addl_imgs: AddImages, line: list[str], coda: str = '.ai') -> list[str]:
     if addl_imgs != AddImages.NoneAdded:
         if addl_imgs == AddImages.PreBase:
             line.insert(0, f'base{coda}')
@@ -418,6 +420,39 @@ def add_additional_image_slots(addl_imgs: AddImages, line: list[str], coda: str 
         elif addl_imgs.value > 0:
             for _ in range(abs(addl_imgs.value)):
                 line.append('')
+    return line
+
+
+def add_additional_image_slots(addl_imgs: Union[gi.AddImages, int], line: list[str], coda: str = '.ai') -> list[str]:
+    """
+    Adds padding slots. Handles both AddImages Enum AND raw integers.
+    """
+    # 1. Handle Enum specific cases
+    # We use hasattr to check if it's an Enum because raw ints don't have .name
+    if hasattr(addl_imgs, 'name'):
+        if addl_imgs == gi.AddImages.NoneAdded:
+            return line
+        elif addl_imgs == gi.AddImages.PreBase:
+            line.insert(0, f'base{coda}')
+            return line
+        elif addl_imgs == gi.AddImages.PostBase:
+            line.append(f'base{coda}')
+            return line
+
+        # If it's an Enum but not one of the above, use its value
+        val = addl_imgs.value
+    else:
+        # 2. Handle Raw Integers (e.g. from num_nw_images)
+        val = addl_imgs
+
+    # 3. Apply Numeric Padding
+    if val < 0:
+        for _ in range(abs(val)):
+            line.insert(0, '')
+    elif val > 0:
+        for _ in range(abs(val)):
+            line.append('')
+
     return line
 
 
