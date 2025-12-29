@@ -99,6 +99,10 @@ def create_gui():
     # Create the specialized input frames
     add_frames(root)
 
+    # Bind Ctrl+RightArrow and Ctrl+LeftArrow to the global handlers
+    root.bind('<Control-Right>', focus_next_frame)
+    root.bind('<Control-Left>', focus_previous_frame)
+
     # --- Control Buttons ---
 
     # CLEAR: Resets all fields in every frame to their default values.
@@ -445,6 +449,129 @@ def retrieve_data():
     hold_specs = gui_frames["Hold Tickets"].retrieve_data()
     name_specs = gui_frames["Names"].retrieve_data()
     return [game_specs, nw_specs, inst_specs, pick_specs, hold_specs, name_specs]
+
+
+def focus_next_frame(event):
+    """
+    Moves focus to the first input field of the next frame.
+    Handles both standard frames AND notebook-based frames.
+    """
+    global gui_frames, gui_frame_labels
+
+    # 1. Identify the currently focused widget
+    focused_widget = event.widget.focus_get()
+    current_index = -1
+
+    if focused_widget:
+        focused_id = str(focused_widget)
+        for index, label in enumerate(gui_frame_labels):
+            frame = gui_frames[label]
+            # Check if focused widget belongs to this frame (or its children)
+            if focused_id.startswith(str(frame)):
+                current_index = index
+                break
+
+    # 2. Calculate next index
+    start_index = (current_index + 1) % len(gui_frame_labels)
+    next_index = start_index
+
+    # 3. Loop to find the first valid input
+    while True:
+        target_label = gui_frame_labels[next_index]
+        target_frame = gui_frames[target_label]
+        target_widget = None
+
+        # --- PATH A: Notebook Frames (Holds, Instants, etc.) ---
+        if hasattr(target_frame, 'notebook') and target_frame.notebook:
+            # We need to find the CURRENTLY selected tab to focus the right fields
+            if hasattr(target_frame, 'tabs') and hasattr(target_frame, 'tab_names'):
+                # Get the index tracked by the frame class (defaults to 0)
+                selected_idx = getattr(target_frame, 'tab_selected_index', 0)
+
+                # Safety check
+                if 0 <= selected_idx < len(target_frame.tab_names):
+                    tab_name = target_frame.tab_names[selected_idx]
+                    active_tab = target_frame.tabs[tab_name]
+
+                    # Check if the tab has inputs
+                    if hasattr(active_tab, 'input_fields') and active_tab.input_fields:
+                        target_widget = active_tab.input_fields[0]
+
+        # --- PATH B: Standard Frames (Game Info, Names) ---
+        elif hasattr(target_frame, 'input_fields') and target_frame.input_fields:
+            target_widget = target_frame.input_fields[0]
+
+        # If we found a widget, focus it and stop
+        if target_widget:
+            target_widget.focus_set()
+            return
+
+        # If not, move to the next frame
+        next_index = (next_index + 1) % len(gui_frame_labels)
+
+        # Safety break if we've looped all the way around
+        if next_index == start_index:
+            break
+
+
+def focus_previous_frame(event):
+    """
+    Moves focus to the first input field of the PREVIOUS frame.
+    Triggered by Ctrl + Left Arrow.
+    """
+    global gui_frames, gui_frame_labels
+
+    # 1. Identify the currently focused widget
+    focused_widget = event.widget.focus_get()
+    current_index = -1
+
+    if focused_widget:
+        focused_id = str(focused_widget)
+        for index, label in enumerate(gui_frame_labels):
+            frame = gui_frames[label]
+            # Check if focused widget belongs to this frame
+            if focused_id.startswith(str(frame)):
+                current_index = index
+                break
+
+    # 2. Calculate previous index (Python's modulo handles negatives correctly: -1 % 5 = 4)
+    start_index = (current_index - 1) % len(gui_frame_labels)
+    prev_index = start_index
+
+    # 3. Loop backwards to find the first valid input
+    while True:
+        target_label = gui_frame_labels[prev_index]
+        target_frame = gui_frames[target_label]
+        target_widget = None
+
+        # --- PATH A: Notebook Frames ---
+        if hasattr(target_frame, 'notebook') and target_frame.notebook:
+            if hasattr(target_frame, 'tabs') and hasattr(target_frame, 'tab_names'):
+                # Get the index tracked by the frame class
+                selected_idx = getattr(target_frame, 'tab_selected_index', 0)
+
+                if 0 <= selected_idx < len(target_frame.tab_names):
+                    tab_name = target_frame.tab_names[selected_idx]
+                    active_tab = target_frame.tabs[tab_name]
+
+                    if hasattr(active_tab, 'input_fields') and active_tab.input_fields:
+                        target_widget = active_tab.input_fields[0]
+
+        # --- PATH B: Standard Frames ---
+        elif hasattr(target_frame, 'input_fields') and target_frame.input_fields:
+            target_widget = target_frame.input_fields[0]
+
+        # If we found a widget, focus it and stop
+        if target_widget:
+            target_widget.focus_set()
+            return
+
+        # Move to the previous frame
+        prev_index = (prev_index - 1) % len(gui_frame_labels)
+
+        # Safety break
+        if prev_index == start_index:
+            break
 
 
 if __name__ == "__main__":

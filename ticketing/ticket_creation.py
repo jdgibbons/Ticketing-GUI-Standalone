@@ -5,40 +5,55 @@ from typing import List, Tuple
 import ticketing.game_info_gui as gi
 import ticketing.image_generator as ig
 
-# Define the lightweight Ticket object (previously uTick)
-uTick = namedtuple('uTick', ['base', 'images', 'numbers', 'p_id', 's_id', 'is_first'])
+from ticketing.universal_ticket import UniversalTicket as uTick
+
+import random
+from typing import List
 
 
 def generate_balanced_positions(num_items: int, total_spots: int) -> List[int]:
     """
-    Generates a list of positions that are relatively balanced across the available spots.
-    Used to prevent all shaded numbers from bunching up at the start or end of a ticket.
+    Generates a list of positions ensuring equal distribution across available spots.
+    Solves the infinite loop issue by generating full sets of positions rather than
+    searching for unique ones.
+
+    Args:
+        num_items: Total number of tickets to generate positions for.
+        total_spots: Number of spots available on a ticket.
+
+    Returns:
+        List[int]: A shuffled list of positions (length = num_items).
     """
-    if num_items == 0:
+    if num_items == 0 or total_spots == 0:
         return []
 
-    # Calculate the ideal gap between items
-    step = total_spots / num_items
-    positions = []
+    # 1. Create the base list of all possible spots [0, 1, 2, ... N]
+    base_spots = list(range(total_spots))
 
-    current_pos = 0.0
-    for _ in range(num_items):
-        # Add a small random jitter so it doesn't look too perfect/robotic
-        jitter = random.uniform(-0.5, 0.5)
-        target = int(current_pos + jitter)
+    # 2. Calculate how many full sets we need
+    # e.g. 50 items / 5 spots = 10 full sets
+    full_sets = num_items // total_spots
+    remainder = num_items % total_spots
 
-        # Clamp to valid range (0 to total_spots - 1)
-        target = max(0, min(target, total_spots - 1))
+    final_positions = []
 
-        # Ensure we don't pick the same position twice (simple collision avoidance)
-        while target in positions:
-            target = (target + 1) % total_spots
+    # 3. Add Full Sets (Shuffled individually)
+    # Shuffling each chunk ensures local variety while maintaining global balance
+    for _ in range(full_sets):
+        chunk = base_spots[:]
+        random.shuffle(chunk)
+        final_positions.extend(chunk)
 
-        positions.append(target)
-        current_pos += step
+    # 4. Add Remainder (Random sample to maintain balance)
+    if remainder > 0:
+        chunk = random.sample(base_spots, remainder)
+        final_positions.extend(chunk)
 
-    # Sort them so they appear in order
-    return sorted(positions)
+    # 5. Final Shuffle (Optional but recommended)
+    # Ensures the "remainder" tickets aren't always at the very end
+    random.shuffle(final_positions)
+
+    return final_positions
 
 
 def create_shaded_ticket(addl_nums: int, color: str, exclusions: List[str],
@@ -123,11 +138,11 @@ def create_shaded_ticket(addl_nums: int, color: str, exclusions: List[str],
 
     # 6. Create the Ticket Object
     ticket = uTick(
-        base='',
-        images=imgs,
-        numbers=final_numbers,
-        p_id=1,
-        s_id=1,
+        tkt='',
+        imgs=imgs,
+        numbs=final_numbers,
+        p=1,
+        u=1,
         is_first=is_first
     )
 

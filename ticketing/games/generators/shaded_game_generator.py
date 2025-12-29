@@ -73,8 +73,11 @@ class ShadedGameGenerator(BaseGameGenerator):
             if tier.suffix:
                 self.exclusions.append(tier.suffix)
 
-        # Filter out empty strings
-        self.exclusions = [x for x in self.exclusions if x]
+        # Clean up the list ---
+        # 1. Filter empty strings (x for x in exclusions if x)
+        # 2. Convert to set to remove duplicates
+        # 3. Convert back to list (and sort for consistent debugging order)
+        self.exclusions = sorted(list(set(x for x in self.exclusions if x)))
 
     def _generate_vertical(self):
         """

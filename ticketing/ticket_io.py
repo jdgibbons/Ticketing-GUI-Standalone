@@ -8,6 +8,9 @@ import xml.etree.ElementTree as ET
 from .bonanza_ticket import BonanzaTicket
 
 
+non_shuffles = ['S', 'XS', 'NS', 'C', 'XC', 'NC']
+
+
 def write_tickets_to_file(filename: str, tickets: list[BonanzaTicket], output_folder: str = '') -> None:
     """
     Write the tickets out to a file in the order they were created. This file can help

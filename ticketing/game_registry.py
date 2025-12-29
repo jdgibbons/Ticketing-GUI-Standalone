@@ -19,6 +19,9 @@ from ticketing.games.game_imgs_imgs_imgs_vballs import create_game as game_imgs_
 from ticketing.games.game_imgs_imgs_imgs_bnumbs import create_game as game_imgs_imgs_imgs_bnumbs_cg
 from ticketing.games.game_numbs_imgs_imgs_balls import create_game as game_numbs_imgs_imgs_balls_cg
 
+from ticketing.games.orchestrators.numbers_shaded_orchestrator import create_game as create_ns_game
+from ticketing.games.orchestrators.all_images_orchestrator import create_game as create_images_game
+
 # ==============================================================================
 # THE REGISTRY
 # Keys are tuples of: (NonWinnerType, InstantType, PickType, HoldType)
@@ -32,16 +35,18 @@ GAME_REGISTRY = {
     (NonWinnerNumbersTicket, InstantCannonsTicket, PickImagesTicket, HoldCannonsTicket): game_numbs_cans_imgs_cans_cg,
 
     # "NSISH" - Numbers, Shaded, Images, Shaded
-    (NonWinnerNumbersTicket, InstantShadedTicket, PickImagesTicket, HoldShadedTicket): game_numbs_shade_imgs_shade_cg,
+    # (NonWinnerNumbersTicket, InstantShadedTicket, PickImagesTicket, HoldShadedTicket): game_numbs_shade_imgs_shade_cg,
+    (NonWinnerNumbersTicket, InstantShadedTicket, PickImagesTicket, HoldShadedTicket): create_ns_game,
 
-    # "NIISH" - Numbers, Shaded, Images, Shaded
-    (NonWinnerNumbersTicket, InstantImagesTicket, PickImagesTicket, HoldShadedTicket): game_numbs_shade_imgs_shade_cg,
+    # ADD THIS for NIISH (Number, Image, Image, Shaded)
+    (NonWinnerNumbersTicket, InstantImagesTicket, PickImagesTicket, HoldShadedTicket): create_ns_game,
 
     # "NIIIM" - Numbers, Images, Images, Images
     (NonWinnerNumbersTicket, InstantImagesTicket, PickImagesTicket, HoldImagesTicket): game_numbs_imgs_imgs_imgs_cg,
 
     # "IIIIM" - Images, Images, Images, Images
-    (NonWinnerImagesTicket, InstantImagesTicket, PickImagesTicket, HoldImagesTicket): game_imgs_imgs_imgs_imgs_cg,
+    # (NonWinnerImagesTicket, InstantImagesTicket, PickImagesTicket, HoldImagesTicket): game_imgs_imgs_imgs_imgs_cg,
+    (NonWinnerImagesTicket, InstantImagesTicket, PickImagesTicket, HoldImagesTicket): create_images_game,
 
     # "IIIBA" - Images, Images, Images, Balls
     (NonWinnerImagesTicket, InstantImagesTicket, PickImagesTicket, HoldBallsTicket): game_imgs_imgs_imgs_balls_cg,

@@ -91,7 +91,7 @@ class GameInfoFrame(TicketingFrame):
         label.grid(row=3, column=0, padx=5, pady=5)
         ai_button = ttk.Radiobutton(self, text=".ai", variable=self.suffix_option, value=0)
         pdf_button = ttk.Radiobutton(self, text=".pdf", variable=self.suffix_option, value=1)
-        self.suffix_option.set(0)
+        self.suffix_option.set(1)
         ai_button.grid(row=3, column=1, padx=10, pady=5)
         pdf_button.grid(row=3, column=2, padx=10, pady=5)
 
@@ -206,7 +206,7 @@ class GameInfoFrame(TicketingFrame):
             else:
                 self.field_dictionary[label_text].delete(0, tk.END)
                 self.field_dictionary[label_text].insert(0, self.defaults[label_text])
-        self.suffix_option.set(0)
+        self.suffix_option.set(1)
 
     def retrieve_data(self) -> GameInfo:
         """

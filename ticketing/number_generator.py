@@ -84,7 +84,7 @@ def create_number_pools_from_suffix_list(first_nw: int, last_nw: int, flags: lis
     :param mixed: does the list need to be shuffled
     :type mixed: bool
     :return: a list of nonwinning integers
-    :rtype: list[int]
+    :rtype: list[str]
     """
     nw_numbers = []
 
