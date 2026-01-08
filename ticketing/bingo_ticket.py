@@ -55,30 +55,6 @@ class BingoTicket(BonanzaTicket):
         if not check_list_lengths(self.numbers, 'numbers', self.ticket_number):
             raise ValueError(f"Data inconsistency found in Ticket {tick_no}")
 
-        # Only set the csv_fields on the first pass. It is a static variable, so there is
-        # no need to repeatedly set it. One and done.
-        # if is_first:
-        #     # Create the csv field headings, starting with ticket number
-        #     slots = ['TKT', 'VER']
-        #     # Use letters to specify disparate lists in the csv by cycling through the spots and appending
-        #     # the letter associated with each list. For example, if there were three different number lists,
-        #     # the headings for the columns would look like:
-        #     # 'N1A', 'N1B', 'N1C', 'N2A', 'N2B', 'N2C', 'N3A', 'N3B', 'N3C', etc.
-        #     endings = ['A', 'B', 'C', 'D', 'E']
-        #     for j in range(len(self.numbers[0])):
-        #         # Add the corresponding letter for each location to the column header.
-        #         for i, numbs in enumerate(self.numbers):
-        #             slots.append(f'N{j + 1}{endings[i]}')
-        #     # Add the necessary number of csv columns for images and lottos
-        #     for i in range(len(self.images)):
-        #         slots.append(f'I{i + 1}')
-        #     for i in range(lottos):
-        #         slots.append(f'L{i + 1}')
-        #     # Add 'P' and 'U' for permutation and up, respectively.
-        #     slots += ['P', 'U']
-        #     # Set the superclass's static csv_fields variable to the list we just created.
-        #     BonanzaTicket.csv_fields = slots
-
     @classmethod
     def configure_csv_headers(cls, schema_depth: int, line_length: int, image_count: int, lotto_count: int) -> None:
         """
@@ -120,6 +96,11 @@ class BingoTicket(BonanzaTicket):
         """
         numbs = []
         img_count = 1
+
+        # Free-type flags
+        use_free_images = self.free_type in ['I', 'B']
+        use_free_text = self.free_type in ['T', 'B']
+
         # Cycle through each bingo path and place it in its proper position for the csv file.
         # If the position is blank and free_type is required, add the appropriate image.
         # Add a check to account for leading zeroes and add them to the front of the number
@@ -138,25 +119,54 @@ class BingoTicket(BonanzaTicket):
             # relevant spots. If there are and images are needed, add them at the next
             # available image slots. Then add all three spaces to the numbs list.
             for i in range(len(self.numbers[0])):
-                if self.free_type == 'I':
-                    if self.numbers[check_line][i] == '':
-                        self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
-                        img_count += 1
+                # Is this a free spot?
+                is_free_spot = (self.numbers[check_line][i] == '')
+
+                # Handle free images
+                if is_free_spot and use_free_images:
+                    self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
+                    img_count += 1
+
+                # Handle numbers and free text
                 for numb in self.numbers:
-                    numbs.append(numb[i])
+                    val = numb[i]
+                    # If this is a free spot, it's empty, and we want text -> write 'FREE'
+                    if is_free_spot and val == '' and use_free_text:
+                        numbs.append('FREE')
+                    else:
+                        numbs.append(str(val))
+
         # This will use all three columns, so there is less logic to unravel.
         elif self.bingo_type == 'E':
             for i in range(len(self.numbers[0])):
-                if not self.numbers[0][i].strip() and not self.numbers[1][i].strip() and not self.numbers[2][i].strip():
+                # Get raw values for this column
+                r0 = self.numbers[0][i].strip()
+                r1 = self.numbers[1][i].strip()
+                r2 = self.numbers[2][i].strip()
+
+                # Detect Types
+                is_free = (not r0 and not r1 and not r2)
+                is_eeyore = (not r0 and r1 and r2)
+
+                # Handle free images
+                if is_free:
                     self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
                     img_count += 1
-                elif not self.numbers[0][i].strip() and self.numbers[1][i].strip() and self.numbers[2][i].strip():
+                elif is_eeyore:
                     self.images[img_count] = f'eeyore{str(i + 1).zfill(2)}{self.coda}'
                     img_count += 1
+
+                # if not self.numbers[0][i].strip() and not self.numbers[1][i].strip() and not self.numbers[2][i].strip():
+                #     self.images[img_count] = f'free{str(i + 1).zfill(2)}{self.coda}'
+                #     img_count += 1
+                # elif not self.numbers[0][i].strip() and self.numbers[1][i].strip() and self.numbers[2][i].strip():
+                #     self.images[img_count] = f'eeyore{str(i + 1).zfill(2)}{self.coda}'
+                #     img_count += 1
                 numbs.extend([self.numbers[0][i], self.numbers[1][i], self.numbers[2][i]])
             if self.zeroes:
                 for j in range(3):
-                    self.numbers[j][0] = self.numbers[j][0].zfill(2)
+                    if self.numbers[j][0]:
+                        self.numbers[j][0] = self.numbers[j][0].zfill(2)
         elif self.bingo_type == 'S':
             for i in range(len(self.numbers[0])):
                 if not self.numbers[1][i].strip() and self.numbers[2][i].strip():

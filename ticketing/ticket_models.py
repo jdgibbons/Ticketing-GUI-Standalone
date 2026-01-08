@@ -132,7 +132,10 @@ class HoldBingosTicket(HoldTicket):
 class HoldCannonsTicket(HoldTicket):
     iterations: int = 0
 
-    # Quantity returned by base class
+    @property
+    def total_quantity(self):
+        """Standardizes the interface so Orchestrators can treat all tickets the same."""
+        return self.quantity
 
 
 @dataclass
@@ -143,7 +146,10 @@ class HoldFlashboardTicket(HoldTicket):
     use_hyphen: bool = False
     colors: List[str] = field(default_factory=list)
 
-    # Quantity returned by base class
+    @property
+    def total_quantity(self):
+        """Standardizes the interface so Orchestrators can treat all tickets the same."""
+        return self.quantity
 
 
 @dataclass
@@ -216,7 +222,10 @@ class HoldShadedTicket(HoldTicket):
 class InstantCannonsTicket(InstantTicket):
     iterations: int = 0
 
-    # Quantity returned by base class
+    @property
+    def total_quantity(self):
+        """Standardizes the interface so Orchestrators can treat all tickets the same."""
+        return self.quantity
 
 
 @dataclass
@@ -261,6 +270,11 @@ class NonWinnerImagesTicket(NonWinnerTicket):
     pool_size: int = 0
     images_per_ticket: int = 0
 
+    @property
+    def total_quantity(self):
+        """Standardizes the interface so Orchestrators can treat all tickets the same."""
+        return self.quantity
+
 
 @dataclass
 class NonWinnerNumbersTicket(NonWinnerTicket):
@@ -269,6 +283,11 @@ class NonWinnerNumbersTicket(NonWinnerTicket):
     last_num: int = 0
     exclusions: str = ""
     base_image: str = ""
+
+    @property
+    def total_quantity(self):
+        """Standardizes the interface so Orchestrators can treat all tickets the same."""
+        return self.quantity
 
 
 # ==========================================

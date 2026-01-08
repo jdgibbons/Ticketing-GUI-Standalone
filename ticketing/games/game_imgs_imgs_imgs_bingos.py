@@ -64,6 +64,7 @@ def create_hold_tickets(hold_ticket: HoldBingosTicket,
         list[list[bTick]]: A list of permutations, where each permutation is a list of BingoTicket objects.
                            Returns None if generation fails.
     """
+    global suffix
     # Extract lists from the object for the generator
     needs = [
         hold_ticket.dns_counts,
@@ -111,7 +112,7 @@ def create_hold_tickets(hold_ticket: HoldBingosTicket,
         lotto_count=0
     )
 
-    base = ['base01.ai']
+    base = [f'base01{suffix}']
     permies = []
 
     # Convert Raw Face Data -> BingoTicket Objects
@@ -127,24 +128,24 @@ def create_hold_tickets(hold_ticket: HoldBingosTicket,
             if csv_rows == 3:
                 if len(face[1]) == 1:
                     face[1] += [['', '', '', '', ''], ['', '', '', '', '']]
-                    base = ['base01.ai']
+                    base = [f'base01{suffix}']
                 elif len(face[1]) == 2:
                     # Determine if Staggered or Non-Staggered
                     b_type = determine_bingo_type(face)
                     face[1].insert(0, ['', '', '', '', ''])
-                    base = ['base02.ai']
+                    base = [f'base02{suffix}']
                 elif len(face[1]) == 3:
-                    base = ['base03.ai']
+                    base = [f'base03{suffix}']
                     b_type = 'E'
             elif csv_rows == 2:
-                base = ['base02.ai']
+                base = [f'base02{suffix}']
             elif csv_rows == 1:
-                base = ['base01.ai']
+                base = [f'base01{suffix}']
 
             images = ig.add_additional_image_slots(addl_imgs, base)
 
-            tick = bTick(tkt, face[0], face[1], images, zeroes, index + 1, 1)
-            tick.set_free_type(free_type)
+            tick = bTick(tkt, face[0], face[1], images, zeroes, index + 1, 1, suffix)
+            tick.set_free_type(free_type[0].upper())
             tick.set_bingo_type(copy.deepcopy(b_type))
             ticks.append(tick)
 
@@ -205,7 +206,7 @@ def create_instant_winners_refined(inst_ticket: InstantImagesTicket, cd_level: i
 
         # Create as a BingoTicket (bTick) to match the file output format,
         # even though it's just an image.
-        tick = bTick('', '', digits, img_padded, False, 1, 1)
+        tick = bTick('', '', digits, img_padded, False, 1, 1, suffix)
 
         if img[1] <= cd_level and img[1] != 0:
             tick.reset_cd_tier(img[1])
@@ -318,7 +319,7 @@ def create_nonwinning_ticket(nw_ticket: NonWinnerImagesTicket, addl_imgs: gi.Add
             imgs = ig.add_additional_image_slots(addl_imgs, nws_perm)
 
             # Create as BingoTicket with empty digits
-            tick = bTick('', '', digits, imgs, False, j + 1, 1)
+            tick = bTick('', '', digits, imgs, False, j + 1, 1, suffix)
             tick.set_bingo_type('O')
             is_first = False
             ticks.append(tick)
