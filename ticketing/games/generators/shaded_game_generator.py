@@ -38,7 +38,7 @@ class ShadedGameGenerator(BaseGameGenerator):
         self.addl_nums = num_slots - ticket_data.spots
 
         # Suffix logic (Defaults to "13" or derived dynamically if needed)
-        self.suffix = "13"
+        self.suffix = getattr(game_info, 'image_suffix', '')
 
         self.exclusions = []
         self.initialize_batches()

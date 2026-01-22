@@ -86,7 +86,7 @@ class GameInfoFrame(TicketingFrame):
 
         # Image Suffix: A collection of radio buttons that represent all acceptable image suffixes--only one can be
         #               selected at a time.
-        #               Default: '.ai'
+        #               Default: '.pdf'
         label = ttk.Label(self, text="Image Suffix:")
         label.grid(row=3, column=0, padx=5, pady=5)
         ai_button = ttk.Radiobutton(self, text=".ai", variable=self.suffix_option, value=0)
@@ -128,7 +128,7 @@ class GameInfoFrame(TicketingFrame):
             return messages
 
         # Cycle through the game information values. If an error is detected, report it immediately. Do not create
-        # a list on issues--just report them one at a time.
+        # a list of issues--just report them one at a time.
 
         # Validate that the window capacity is evenly divisible by the number of ups.
         win_capacity = gi.get_sheet_capacity(self.data_dictionary["Window Structure"])[1]
@@ -157,6 +157,8 @@ class GameInfoFrame(TicketingFrame):
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
             # THIS IS GOING TO NEED REFINEMENT, BECAUSE I HAVE NO IDEA WHAT SCHISMS REPRESENT ANYMORE.
             # THIS MIGHT INDICATE 'MR' (MULTIPLE RUNS).
+            #
+            # I THINK THIS MIGHT BE SUBSETS.
             # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
 
             # Calculate the number of columns per up, then make sure it's divisible by the number of schisms.

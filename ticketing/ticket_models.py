@@ -87,13 +87,18 @@ class HoldBallsTicket(HoldTicket):
     non_image_mode: bool = False
     # List of tuples: (color, amount)
     additional_holds: List[Tuple[str, int]] = field(default_factory=list)
+    iterations: int = 1
 
     @property
     def total_quantity(self) -> int:
-        # Start with the main quantity
-        total = self.quantity
+        """
+        Calculates total tickets.
+        Logic: (Base Quantity * Iterations) + Sum(Additional Holds)
+        """
+        # Multiply the base quantity by the number of iterations
+        total = self.quantity * self.iterations
 
-        # Add the quantity of every additional hold
+        # Add the quantity of every additional hold (these are NOT multiplied by iterations)
         # item is a tuple: (name, quantity)
         for _, amount in self.additional_holds:
             total += amount

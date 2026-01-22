@@ -94,18 +94,21 @@ def create_gui():
     style = ttk.Style()
     style.configure('.', font=('Helvetica', 10))
 
+    # Add the main window menu bar
     add_menubar(root)
 
     # Create the specialized input frames
     add_frames(root)
 
     # Bind Ctrl+RightArrow and Ctrl+LeftArrow to the global handlers
+    # This will cause the cursor to move to the next/previous frame
+    # when the user presses Ctrl+Arrow.
     root.bind('<Control-Right>', focus_next_frame)
     root.bind('<Control-Left>', focus_previous_frame)
 
     # --- Control Buttons ---
 
-    # CLEAR: Resets all fields in every frame to their default values.
+    # CLEAR: Resets all fields in every frame and tab to their default values.
     clear_button = ttk.Button(root, text="Clear", command=lambda: clear_fields(root))
     clear_button.grid(row=6, column=0, columnspan=2, pady=10)
 
@@ -135,21 +138,27 @@ def add_menubar(root):
 
     def select_output_directory():
         global output_folder
+        # Open a file dialog to select a directory
         directory = filedialog.askdirectory()
         if directory:
-            # Do something with the selected directory, e.g., store it in a variable
+            # store the directory in a variable
             output_folder = directory
             print("Selected output directory:", directory)
         else:
+            # If the user cancels the dialog, reset the variable to an empty string
             output_folder = ''
 
     menubar = tk.Menu(root)
+    # Create the File menu
     file_menu = tk.Menu(menubar, tearoff=0)
+    # Add the file menu items with a separator above the exit item
     file_menu.add_command(label="Select Output Directory", command=select_output_directory)
     file_menu.add_command(label="Open Shade Helper", command=shaded_gui)
     file_menu.add_separator()
     file_menu.add_command(label="Exit", command=root.quit)
+    # Add the File menu to the menubar
     menubar.add_cascade(label="File", menu=file_menu)
+    # Add the menubar to the root window
     root.config(menu=menubar)
     # --- End of Menu Bar Creation ---
 
@@ -168,6 +177,7 @@ def add_frames(root):
 
     :param root: The parent widget to attach the frames to.
     """
+    # Call the method to create each frame with its type, name, and grid position
     create_frame(root, GameInfoFrame, "Game Information", 0, 0)
     create_frame(root, NonwinnersFrame, "Nonwinners", 0, 1)
     create_frame(root, InstantsFrame, "Instant Winners", 1, 0)
@@ -190,6 +200,7 @@ def create_frame(root, frame_type, frame_text, row, column):
     :param column: Grid column index.
     """
     global gui_frames, gui_frame_labels
+    # Create a frame according to the provided class reference
     frame = frame_type(root, text=frame_text, padding=10)
     frame.grid(row=row, column=column, padx=5, pady=5, sticky="nsew")
     gui_frames[frame_text] = frame

@@ -69,12 +69,15 @@ class HoldsBallsTab(TicketingNotebookTab):
         self.populate_data_collections_with_text(input_field, 'sortie')
 
         # Add 'Non-Image' checkbox and add it to the collections as 'non-image'.
-        # This checkbox indicates the numbers are all that are required in the csv,
-        # because they will be placed into a base image. The bingo-ball logic is the
-        # same, but the representation doesn't require the images themselves.
         label, input_field = create_label_and_field("Non-Image", ttk.Checkbutton(check_layout_frame),
                                                     0, 4, check_layout_frame)
         self.populate_data_collections_with_text(input_field, 'non-image')
+
+        # --- NEW FIELD: Iterations ---
+        # Add 'Iterations' label and text box. Default value is 1.
+        label, input_field = create_label_and_field("Iterations", ttk.Entry(check_layout_frame, width=5),
+                                                    0, 6, check_layout_frame, "1")
+        self.populate_data_collections_with_text(input_field, 'iterations')
 
         # Add 'Free Spots' label and five entry boxes for free quantities. Add to
         # collections as 'free1' - 'free5'.
@@ -95,25 +98,19 @@ class HoldsBallsTab(TicketingNotebookTab):
                                                     3, 0, self, "0")
         self.populate_data_collections_with_text(input_field, 'shazams')
 
-        # Add 'Base' image label and entry box and add it to the collections
-        # Leaving the field blank will automatically generate the name 'base.ai'. If the user
-        # actually wants the field to be empty, they can enter 'none', 'blank', '0', or '000'.
+        # Add 'Base' image label and entry box.
         label, input_field = create_label_and_field("Base", ttk.Entry(self, width=10),
                                                     3, 4, self, "")
         self.populate_data_collections_with_text(input_field, 'base')
 
         # Add 'Additional Holds' label and entry box across multiple columns.
-        # Add to collections as 'additionals'.
         label = ttk.Label(self, text='Additional Holds')
         label.grid(row=4, column=0, padx=5, pady=5, sticky="w")
         entry = ttk.Entry(self, width=50)
         entry.grid(row=4, column=1, columnspan=3, padx=5, pady=5, sticky='w')
         self.populate_data_collections_with_text(entry, 'additionals')
 
-        # Add 'Match BBs' checkbox and add it to the collections as 'match-bbs'.
-        # This checkbox indicates how the additional holds should be handled: if checked,
-        # the tickets should contain the same number of images as the bingo balls. If
-        # not, then treat the additional holds as single-image tickets.
+        # Add 'Match BBs' checkbox.
         label, input_field = create_label_and_field("Match BBs", ttk.Checkbutton(self),
                                                     4, 4, self)
         self.populate_data_collections_with_text(input_field, 'match-bbs')
@@ -123,12 +120,13 @@ class HoldsBallsTab(TicketingNotebookTab):
         Validates the data in the entry boxes of the "Balls" tab in the holds frame.
 
         Returns:
-            list: A list of error messages.  An empty list indicates no errors.
+            list: A list of error messages. An empty list indicates no errors.
         """
         self.create_data_dictionary()
         messages = []
         for key in self.field_dictionary:
-            if key in ['Quantity', 'bingos', 'spots', 'free1', 'free2', 'free3', 'pool', 'shazams']:
+            # Added 'iterations' to the integer validation list
+            if key in ['Quantity', 'bingos', 'spots', 'free1', 'free2', 'free3', 'pool', 'shazams', 'iterations']:
                 if (not self.data_dictionary[key].isdigit()
                         or int(self.data_dictionary[key]) < 0):
                     messages.append(f"Holds -> Balls: '{key.title()}' must contain a non-negative integer.")
@@ -140,7 +138,6 @@ class HoldsBallsTab(TicketingNotebookTab):
             elif key in ['base']:
                 illegal_char_patter = re.compile(r'[^a-zA-Z0-9.-_]')
                 if self.data_dictionary[key] != "":
-                    # if re.search(r'[<>:"/\\|?*\x00-\x1F]', self.data_dictionary[key]):
                     if illegal_char_patter.search(self.data_dictionary[key]):
                         messages.append(f"Holds -> Matrix: '{key}' file name contains illegal characters.")
                     elif self.data_dictionary[key] in ['.ai', '.pdf']:
@@ -167,8 +164,9 @@ class HoldsBallsTab(TicketingNotebookTab):
         """
         Populates the defaults dictionary with the default values for the input fields.
         """
+        # Added 'iterations': '1' to defaults
         self.defaults = {'Quantity': '0', 'bingos': '0', 'spots': '0', 'additionals': '',
-                         'pool': '0', 'shazams': '0', 'base': ''}
+                         'pool': '0', 'shazams': '0', 'base': '', 'iterations': '1'}
         for i in range(1, 4):
             self.defaults[f'free{i}'] = '0'
 
@@ -188,14 +186,16 @@ class HoldsBallsTab(TicketingNotebookTab):
 
     def retrieve_data(self) -> HoldBallsTicket:
         """
-                Retrieves the data from the tab and returns a HoldBallsTicket object.
-                """
+        Retrieves the data from the tab and returns a HoldBallsTicket object.
+        """
         # Retrieve unique integer fields
         quantity = int(self.data_dictionary['Quantity'])
         bingos = int(self.data_dictionary['bingos'])
         spots = int(self.data_dictionary['spots'])
         pool = int(self.data_dictionary['pool'])
         shazams = int(self.data_dictionary['shazams'])
+        # Retrieve iterations
+        iterations = int(self.data_dictionary['iterations'])
 
         # Retrieve tiered free space values
         frees = [int(self.data_dictionary[f'free{i}']) for i in range(1, 4)]
@@ -208,7 +208,6 @@ class HoldsBallsTab(TicketingNotebookTab):
 
         # Handle filename
         filename, extension = osp.splitext(self.data_dictionary['base'])
-        # (Optional: Logic to ensure the extension is correct could go here or in validation)
 
         # Retrieve and parse additional holds
         additionals = []
@@ -236,7 +235,8 @@ class HoldsBallsTab(TicketingNotebookTab):
             base_image=filename,
             match_bbs=match_bbs,
             non_image_mode=non_image,
-            additional_holds=additionals
+            additional_holds=additionals,
+            iterations=iterations  # Added iterations to the constructor
         )
 
     def set_nw_pool(self, pool):
@@ -246,4 +246,3 @@ class HoldsBallsTab(TicketingNotebookTab):
         :return:
         """
         self.nw_pool = pool
-
